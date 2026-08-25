@@ -342,6 +342,24 @@ nav.floating-nav {
    Buttons & Badges
    ========================================================================== */
 
+.btn-nav-cta {
+    background: var(--primary);
+    color: #ffffff !important;
+    padding: 0.45rem 1.15rem;
+    font-size: 0.825rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border-radius: 50px;
+    box-shadow: 0 2px 10px var(--primary-glow);
+    white-space: nowrap;
+    transition: all 0.25s ease;
+}
+
+.btn-nav-cta:hover {
+    background: var(--secondary);
+    transform: translateY(-1px);
+}
+
 .btn {
     background: var(--primary);
     color: #ffffff;

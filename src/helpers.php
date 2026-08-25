@@ -46,23 +46,28 @@ function current_lang(): string
 
 /**
  * Translates a key with dot-notation support and token replacements.
+ * Returns array if key references an array, or string if key references a string.
  * Example: t('hero.title', ['name' => 'ternis'])
  */
-function t(string $key, array $replacements = [], ?string $default = null): string
+function t(string $key, array $replacements = [], mixed $default = null): mixed
 {
     $data = $GLOBALS['_lang_data'] ?? [];
     $keys = explode('.', $key);
     $current = $data;
 
     foreach ($keys as $k) {
-        if (!is_array($current) || !isset($current[$k])) {
+        if (!is_array($current) || !array_key_exists($k, $current)) {
             return $default ?? $key;
         }
         $current = $current[$k];
     }
 
+    if (is_array($current)) {
+        return $current;
+    }
+
     if (!is_string($current)) {
-        return $default ?? $key;
+        return $default ?? (string) $current;
     }
 
     foreach ($replacements as $placeholder => $replacement) {
@@ -74,6 +79,15 @@ function t(string $key, array $replacements = [], ?string $default = null): stri
     }
 
     return $current;
+}
+
+/**
+ * Returns translation array safely, or empty array if not array.
+ */
+function t_array(string $key, array $default = []): array
+{
+    $val = t($key, [], $default);
+    return is_array($val) ? $val : $default;
 }
 
 /**
