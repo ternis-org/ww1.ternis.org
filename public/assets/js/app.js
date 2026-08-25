@@ -252,30 +252,40 @@ echo "Developer Name: " . htmlspecialchars($profile['data']['name']);
 
     // ── Smooth Scroll & Active Nav Spy ─────────────────────────────────────────
     function initScrollSpy() {
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+        const targets = document.querySelectorAll('section[id], footer[id]');
+        const navLinks = document.querySelectorAll('.nav-links a, .mobile-drawer a');
 
-        if (!sections.length || !navLinks.length) return;
+        if (!targets.length || !navLinks.length) return;
 
-        window.addEventListener('scroll', () => {
+        function updateActiveNav() {
             let current = '';
-            const scrollPos = window.pageYOffset + 120;
+            const scrollPos = (window.pageYOffset || document.documentElement.scrollTop) + 160;
 
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.offsetHeight;
-                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-                    current = section.getAttribute('id');
+            targets.forEach(target => {
+                const top = target.offsetTop;
+                const height = target.offsetHeight;
+                if (scrollPos >= top && scrollPos < top + height) {
+                    current = target.getAttribute('id');
                 }
             });
 
             navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
+                const href = link.getAttribute('href') || '';
+                const hashIndex = href.indexOf('#');
+                if (hashIndex !== -1) {
+                    const targetId = href.substring(hashIndex + 1);
+                    if (targetId && targetId === current) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
                 }
             });
-        }, { passive: true });
+        }
+
+        window.addEventListener('scroll', updateActiveNav, { passive: true });
+        window.addEventListener('resize', updateActiveNav, { passive: true });
+        updateActiveNav();
     }
 
     // ── Scroll To Top with Dynamic Circular Border Progress ───────────────────

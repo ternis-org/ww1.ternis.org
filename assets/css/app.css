@@ -187,7 +187,7 @@ nav.floating-nav:hover {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 1.75rem;
+    gap: 1.25rem;
     list-style: none;
 }
 
@@ -196,12 +196,23 @@ nav.floating-nav:hover {
     text-decoration: none;
     font-size: 0.925rem;
     font-weight: 500;
-    transition: color 0.2s ease;
-    padding: 0.25rem 0;
+    transition: color 0.2s ease, background-color 0.2s ease;
+    padding: 0.35rem 0.75rem;
+    border-radius: 50px;
 }
 
-.nav-links a:hover, .nav-links a.active {
+.nav-links a:hover {
     color: var(--primary);
+}
+
+.nav-links a.active {
+    color: var(--primary);
+    font-weight: 600;
+    background: rgba(74, 93, 35, 0.09);
+}
+
+[data-theme="dark"] .nav-links a.active {
+    background: rgba(148, 184, 88, 0.14);
 }
 
 .nav-actions {
@@ -296,10 +307,10 @@ nav.floating-nav:hover {
 }
 
 /* ==========================================================================
-   Buttons, Badges & Expanding SVG Arrow
+   Buttons, Badges & Expanding SVG Arrow (With Length Variations)
    ========================================================================== */
 
-/* Arrow svg in buttons */
+/* Arrow svg in buttons (Standard / Default) */
 .arrow-svg {
     width: 35px;
     height: 12px;
@@ -334,6 +345,47 @@ a:hover .arrow-svg {
 .btn-expanding:hover .arrow-svg .line,
 a:hover .arrow-svg .line {
     stroke-dashoffset: 58;
+}
+
+/* Length Variation: Small / Compact (Expands less for inline notices) */
+.arrow-svg.arrow-svg-sm,
+.arrow-svg-sm {
+    width: 26px;
+    height: 10px;
+    margin-left: -13px;
+}
+
+.arrow-svg.arrow-svg-sm .line,
+.arrow-svg-sm .line {
+    stroke-dasharray: 30;
+    stroke-dashoffset: 40;
+}
+
+.btn:focus-visible .arrow-svg-sm,
+.btn:hover .arrow-svg-sm,
+.btn-expanding:focus-visible .arrow-svg-sm,
+.btn-expanding:hover .arrow-svg-sm,
+a:hover .arrow-svg-sm,
+.btn:focus-visible .arrow-svg.arrow-svg-sm,
+.btn:hover .arrow-svg.arrow-svg-sm,
+.btn-expanding:focus-visible .arrow-svg.arrow-svg-sm,
+.btn-expanding:hover .arrow-svg.arrow-svg-sm,
+a:hover .arrow-svg.arrow-svg-sm {
+    width: 30px;
+    margin-left: 3px;
+}
+
+.btn:focus-visible .arrow-svg-sm .line,
+.btn:hover .arrow-svg-sm .line,
+.btn-expanding:focus-visible .arrow-svg-sm .line,
+.btn-expanding:hover .arrow-svg-sm .line,
+a:hover .arrow-svg-sm .line,
+.btn:focus-visible .arrow-svg.arrow-svg-sm .line,
+.btn:hover .arrow-svg.arrow-svg-sm .line,
+.btn-expanding:focus-visible .arrow-svg.arrow-svg-sm .line,
+.btn-expanding:hover .arrow-svg.arrow-svg-sm .line,
+a:hover .arrow-svg.arrow-svg-sm .line {
+    stroke-dashoffset: 49;
 }
 
 .btn:active,

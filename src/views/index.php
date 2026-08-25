@@ -374,7 +374,7 @@ $versionShort = app_version_hash(true);
                         </div>
                         <a href="https://dnbx.de" target="_blank" rel="noopener noreferrer" class="btn-expanding" style="font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; color: var(--primary); display: inline-flex; align-items: center; gap: 0.45rem;">
                             <span>dnbx.de</span>
-                            <svg class="arrow-svg" viewBox="0 0 35 12" fill="none">
+                            <svg class="arrow-svg arrow-svg-sm" viewBox="0 0 35 12" fill="none">
                                 <path d="M 28.833 1 L 33.244 5.411 C 33.57 5.736 33.57 6.264 33.244 6.589 L 28.833 11" stroke-width="1.5" stroke-linecap="round"/>
                                 <path d="M 1.5 6 L 32 6" stroke-width="1.5" stroke-linecap="round" class="line"/>
                             </svg>
