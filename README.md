@@ -62,30 +62,37 @@ ternis.org is dedicated to stewarding and scaling open-source developer tooling 
             └───────────────────────┘                                                  └───────────────────────┘
 ```
 
-### 1. [getmy.name](https://getmy.name) — Free Headless Portfolio API
-- **Status:** `Live & Production`
-- **License:** MIT
-- **API Documentation:** [getmy.name/api-docs](https://getmy.name/api-docs)
-- **Summary:** Eliminates the need to maintain static JSON files or complicated backends for personal websites. Exposes a clean, headless REST API delivering your bio, skills, project catalogue, and contact details with sub-40ms response times.
-- **Repository:** [`ternis-org/getmy-name`](https://github.com/ternis-org/getmy-name)
+> **Note:** All domains listed are managed by/through **[dnbx.de](https://dnbx.de)** (by [ternis.dev](https://ternis.dev)).
 
-### 2. [MTEX.dev](https://mtex.dev) — Developer-First Tooling Suite
-- **Status:** `Live & Production`
-- **License:** MIT
-- **Summary:** Lightweight UI components, Tailwind CSS design patterns, HTTP sandboxes, and developer utility microservices.
-- **Repository:** [`ternis-org/mtex-dev`](https://github.com/ternis-org/mtex-dev)
+### 1. [httpclient.de](https://httpclient.de) — Free HTTP Client for Web & Desktop
+- **Status:** `Work in Progress (WIP)`
+- **License:** Open Source & Free
+- **Summary:** Free and open-source HTTP client available both in the web browser and as a lightweight native desktop application.
 
-### 3. [mail-free.eu](https://mail-free.eu) / [mail-free.uk](https://mail-free.uk) — Privacy-First Sovereign Email
-- **Status:** `In Active Development`
-- **License:** AGPL-3.0
-- **Summary:** Privacy-focused European email relay, disposable developer test inboxes, and secure mailbox services free from big-tech scanning and advertising profiling.
-- **Repository:** [`ternis-org/mail-free`](https://github.com/ternis-org/mail-free)
+### 2. [api-sandbox.de](https://api-sandbox.de) — Simple API Viewer & Sandbox
+- **Status:** `Partly Functional / Beta`
+- **License:** Open Source & Free
+- **Summary:** Free and open-source, minimalist API viewer designed for inspecting REST endpoints and schemas without friction.
 
-### 4. [static.re](https://static.re) — Edge Static Delivery & Micro-CDN
-- **Status:** `In Development / Beta`
+### 3. [MTEX.dev](https://mtex.dev) — Developer Tools & Components
+- **Status:** `Active Ecosystem`
 - **License:** MIT
-- **Summary:** Incremental static regeneration (ISR) and ultra-low latency static asset CDN with developer shortlinks and global caching.
-- **Repository:** [`ternis-org/static-re`](https://github.com/ternis-org/static-re)
+- **Summary:** Suite of free and open-source developer utilities and sandboxes, maintaining **[getmy.name](https://getmy.name)** (Free Headless Portfolio API, docs: [getmy.name/api-docs](https://getmy.name/api-docs)).
+
+### 4. [web-search.org](https://web-search.org) — Self-Hostable Search Engine
+- **Status:** `Work in Progress (WIP)`
+- **License:** Open Source & Free
+- **Summary:** Lightweight, privacy-respecting, and simply self-hostable search engine focused on clean indexing without algorithmic bloat or tracking.
+
+### 5. [mail-free.eu](https://mail-free.eu) + [mail-free.uk](https://mail-free.uk) — Auto-Generated Inboxes & Online Privacy
+- **Status:** `In Development`
+- **License:** Open Source & Free
+- **Summary:** Free, open-source email generation and digital privacy relay platform protecting your personal inbox through auto-generated disposable email aliases.
+
+### 6. [static.re](https://static.re) — S3 & Cloudflare R2 Storage Platform
+- **Status:** `Platform & Open-Source Software`
+- **License:** Open Source Software (with dedicated commercial tiers)
+- **Summary:** Open-source software and managed distribution platform for interacting with S3-compatible object storage like Cloudflare R2.
 
 ---
 

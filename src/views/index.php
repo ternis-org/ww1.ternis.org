@@ -240,7 +240,8 @@ $versionShort = app_version_hash(true);
             "https://ternis.dev",
             "https://ternis-edv.de",
             "https://mtex.dev",
-            "https://getmy.name"
+            "https://getmy.name",
+            "https://dnbx.de"
         ]
     }
     </script>
@@ -274,16 +275,17 @@ $versionShort = app_version_hash(true);
             </a>
 
             <div class="nav-links">
-                <a href="#connect"><?= e(t('nav.ecosystem')) ?></a>
+                <a href="#projects"><?= e(t('nav.projects')) ?></a>
+                <a href="https://mtex.dev" target="_blank" rel="noopener noreferrer">MTEX.dev</a>
                 <a href="https://getmy.name" target="_blank" rel="noopener noreferrer">getmy.name</a>
                 <a href="https://getmy.name/api-docs" target="_blank" rel="noopener noreferrer">API Docs</a>
-                <a href="https://mtex.dev" target="_blank" rel="noopener noreferrer">MTEX.dev</a>
+                <a href="https://dnbx.de" target="_blank" rel="noopener noreferrer">dnbx.de</a>
                 <a href="https://ternis.dev" target="_blank" rel="noopener noreferrer">ternis.dev</a>
             </div>
 
             <div class="nav-actions">
                 <!-- Nav Action CTA Button -->
-                <a href="#connect" class="btn btn-sm btn-nav-cta">
+                <a href="#projects" class="btn btn-sm btn-nav-cta">
                     <?= e(t('nav.cta_explore')) ?>
                 </a>
 
@@ -319,10 +321,11 @@ $versionShort = app_version_hash(true);
 
     <!-- Mobile Drawer -->
     <div class="mobile-drawer">
-        <a href="#connect" class="nav-link"><?= e(t('nav.ecosystem')) ?></a>
+        <a href="#projects" class="nav-link"><?= e(t('nav.projects')) ?></a>
+        <a href="https://mtex.dev" target="_blank" rel="noopener noreferrer" class="nav-link">MTEX.dev</a>
         <a href="https://getmy.name" target="_blank" rel="noopener noreferrer" class="nav-link">getmy.name</a>
         <a href="https://getmy.name/api-docs" target="_blank" rel="noopener noreferrer" class="nav-link">API Docs</a>
-        <a href="https://mtex.dev" target="_blank" rel="noopener noreferrer" class="nav-link">MTEX.dev</a>
+        <a href="https://dnbx.de" target="_blank" rel="noopener noreferrer" class="nav-link">dnbx.de</a>
         <a href="https://ternis.dev" target="_blank" rel="noopener noreferrer" class="nav-link">ternis.dev</a>
         <a href="/<?= e($lang) ?>/legal/imprint" class="nav-link"><?= e(t('nav.imprint')) ?></a>
         <a href="/<?= e($lang) ?>/legal/privacy" class="nav-link"><?= e(t('nav.privacy')) ?></a>
@@ -334,10 +337,6 @@ $versionShort = app_version_hash(true);
             <!-- Hero Section -->
             <section id="hero">
                 <div class="container">
-                    <div class="section-badge">
-                        <span class="badge badge-primary"><?= e(t('hero.badge')) ?></span>
-                    </div>
-
                     <h1>
                         <?= e(t('hero.title_line1')) ?><br>
                         <strong><?= e(t('hero.title_line2')) ?></strong>
@@ -348,7 +347,7 @@ $versionShort = app_version_hash(true);
                     </p>
 
                     <div class="hero-actions">
-                        <a href="#connect" class="btn">
+                        <a href="#projects" class="btn">
                             <span><?= e(t('hero.cta_projects')) ?></span>
                             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width:16px;height:16px;">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -389,6 +388,184 @@ $versionShort = app_version_hash(true);
                     </div>
                 </div>
             </section>
+
+            <!-- Projects Showcase Section -->
+            <section id="projects" style="padding-top: 4rem;">
+                <div class="container">
+                    <div class="section-header" style="margin-bottom: 2.5rem;">
+                        <h2><?= e(t('projects.title')) ?></h2>
+                        <p class="section-subtitle"><?= e(t('projects.subtitle')) ?></p>
+                    </div>
+
+                    <!-- dnbx.de Domain Management Notice Bar -->
+                    <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1rem 1.75rem; margin-bottom: 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; box-shadow: var(--shadow-sm);">
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <span class="badge badge-primary" style="font-size:0.75rem;">DNS & Infrastructure</span>
+                            <span style="font-size: 0.95rem; color: var(--text-dark);"><?= e(t('projects.dnbx_note')) ?></span>
+                        </div>
+                        <a href="https://dnbx.de" target="_blank" rel="noopener noreferrer" style="font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; color: var(--primary); display: inline-flex; align-items: center; gap: 0.35rem;">
+                            dnbx.de →
+                        </a>
+                    </div>
+
+                    <div class="projects-grid">
+                        <!-- Project 1: httpclient.de -->
+                        <div class="project-card">
+                            <div>
+                                <div class="project-header">
+                                    <h3><?= e(t('projects.httpclient.title')) ?></h3>
+                                    <span class="badge badge-accent"><?= e(t('projects.httpclient.badge')) ?></span>
+                                </div>
+                                <div class="project-tagline"><?= e(t('projects.httpclient.tagline')) ?></div>
+                                <p class="project-desc"><?= e(t('projects.httpclient.description')) ?></p>
+                                <div class="project-tags">
+                                    <?php foreach (t_array('projects.httpclient.tags') as $tag): ?>
+                                        <span class="project-tag"><?= e($tag) ?></span>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                            <div class="project-actions">
+                                <a href="<?= e(t('projects.httpclient.url')) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm">
+                                    <span><?= e(t('projects.view_project')) ?></span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Project 2: api-sandbox.de -->
+                        <div class="project-card">
+                            <div>
+                                <div class="project-header">
+                                    <h3><?= e(t('projects.apisandbox.title')) ?></h3>
+                                    <span class="badge badge-secondary"><?= e(t('projects.apisandbox.badge')) ?></span>
+                                </div>
+                                <div class="project-tagline"><?= e(t('projects.apisandbox.tagline')) ?></div>
+                                <p class="project-desc"><?= e(t('projects.apisandbox.description')) ?></p>
+                                <div class="project-tags">
+                                    <?php foreach (t_array('projects.apisandbox.tags') as $tag): ?>
+                                        <span class="project-tag"><?= e($tag) ?></span>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                            <div class="project-actions">
+                                <a href="<?= e(t('projects.apisandbox.url')) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm">
+                                    <span><?= e(t('projects.view_project')) ?></span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Project 3: MTEX.dev (e.g. getmy.name) -->
+                        <div class="project-card">
+                            <div>
+                                <div class="project-header">
+                                    <h3><?= e(t('projects.mtex.title')) ?></h3>
+                                    <span class="badge badge-primary"><?= e(t('projects.mtex.badge')) ?></span>
+                                </div>
+                                <div class="project-tagline"><?= e(t('projects.mtex.tagline')) ?></div>
+                                <p class="project-desc"><?= e(t('projects.mtex.description')) ?></p>
+                                <div class="project-tags">
+                                    <?php foreach (t_array('projects.mtex.tags') as $tag): ?>
+                                        <span class="project-tag"><?= e($tag) ?></span>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                            <div class="project-actions">
+                                <a href="<?= e(t('projects.mtex.url')) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm">
+                                    <span><?= e(t('projects.view_project')) ?></span>
+                                </a>
+                                <a href="https://getmy.name" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                                    <span>getmy.name</span>
+                                </a>
+                                <a href="https://getmy.name/api-docs" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
+                                    <span><?= e(t('projects.view_docs')) ?></span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Project 4: web-search.org -->
+                        <div class="project-card">
+                            <div>
+                                <div class="project-header">
+                                    <h3><?= e(t('projects.websearch.title')) ?></h3>
+                                    <span class="badge badge-accent"><?= e(t('projects.websearch.badge')) ?></span>
+                                </div>
+                                <div class="project-tagline"><?= e(t('projects.websearch.tagline')) ?></div>
+                                <p class="project-desc"><?= e(t('projects.websearch.description')) ?></p>
+                                <div class="project-tags">
+                                    <?php foreach (t_array('projects.websearch.tags') as $tag): ?>
+                                        <span class="project-tag"><?= e($tag) ?></span>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                            <div class="project-actions">
+                                <a href="<?= e(t('projects.websearch.url')) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm">
+                                    <span><?= e(t('projects.view_project')) ?></span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Project 5: mail-free.eu + mail-free.uk -->
+                        <div class="project-card">
+                            <div>
+                                <div class="project-header">
+                                    <h3><?= e(t('projects.mailfree.title')) ?></h3>
+                                    <span class="badge badge-secondary"><?= e(t('projects.mailfree.badge')) ?></span>
+                                </div>
+                                <div class="project-tagline"><?= e(t('projects.mailfree.tagline')) ?></div>
+                                <p class="project-desc"><?= e(t('projects.mailfree.description')) ?></p>
+                                <div class="project-tags">
+                                    <?php foreach (t_array('projects.mailfree.tags') as $tag): ?>
+                                        <span class="project-tag"><?= e($tag) ?></span>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                            <div class="project-actions">
+                                <a href="<?= e(t('projects.mailfree.url_eu')) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                                    <span>mail-free.eu</span>
+                                </a>
+                                <a href="<?= e(t('projects.mailfree.url_uk')) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                                    <span>mail-free.uk</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Project 6: static.re -->
+                        <div class="project-card">
+                            <div>
+                                <div class="project-header">
+                                    <h3><?= e(t('projects.staticre.title')) ?></h3>
+                                    <span class="badge badge-accent"><?= e(t('projects.staticre.badge')) ?></span>
+                                </div>
+                                <div class="project-tagline"><?= e(t('projects.staticre.tagline')) ?></div>
+                                <p class="project-desc"><?= e(t('projects.staticre.description')) ?></p>
+                                <div class="project-tags">
+                                    <?php foreach (t_array('projects.staticre.tags') as $tag): ?>
+                                        <span class="project-tag"><?= e($tag) ?></span>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                            <div class="project-actions">
+                                <a href="<?= e(t('projects.staticre.url')) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                                    <span><?= e(t('projects.view_project')) ?></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- More Projects Indicator Card -->
+                    <div style="text-align: center; margin-top: 3.5rem; padding: 2.5rem; background: var(--bg-card); border: 1px dashed var(--border-highlight); border-radius: var(--radius-lg);">
+                        <h3 style="font-size: 1.5rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">... and more projects in active development</h3>
+                        <p style="color: var(--text-muted); max-width: 580px; margin: 0 auto 1.5rem; font-size: 0.975rem;">
+                            Discover our full suite of open-source utilities, repositories, and upcoming developer tools on the ternis-org GitHub organization.
+                        </p>
+                        <a href="https://github.com/ternis-org" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
+                            <svg fill="currentColor" viewBox="0 0 24 24" style="width:16px;height:16px;">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
+                            </svg>
+                            <span>Explore ternis-org on GitHub</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
         </main>
 
         <!-- Sticky Scroll-To-Top Tracker (Sticky inside sections-wrapper, but outside footer) -->
@@ -423,9 +600,11 @@ $versionShort = app_version_hash(true);
                     <div class="footer-col">
                         <h4><?= e(t('footer.col_projects')) ?></h4>
                         <ul>
-                            <li><a href="https://getmy.name" target="_blank" rel="noopener noreferrer">getmy.name</a></li>
-                            <li><a href="https://getmy.name/api-docs" target="_blank" rel="noopener noreferrer">API-Docs</a></li>
+                            <li><a href="https://httpclient.de" target="_blank" rel="noopener noreferrer">httpclient.de</a></li>
+                            <li><a href="https://api-sandbox.de" target="_blank" rel="noopener noreferrer">api-sandbox.de</a></li>
                             <li><a href="https://mtex.dev" target="_blank" rel="noopener noreferrer">MTEX.dev</a></li>
+                            <li><a href="https://getmy.name" target="_blank" rel="noopener noreferrer">getmy.name</a></li>
+                            <li><a href="https://web-search.org" target="_blank" rel="noopener noreferrer">web-search.org</a></li>
                             <li><a href="https://mail-free.eu" target="_blank" rel="noopener noreferrer">mail-free.eu</a></li>
                             <li><a href="https://static.re" target="_blank" rel="noopener noreferrer">static.re</a></li>
                         </ul>
@@ -434,6 +613,7 @@ $versionShort = app_version_hash(true);
                     <div class="footer-col">
                         <h4><?= e(t('footer.col_ecosystem')) ?></h4>
                         <ul>
+                            <li><a href="https://dnbx.de" target="_blank" rel="noopener noreferrer">dnbx.de (DNS)</a></li>
                             <li><a href="https://ternis.dev" target="_blank" rel="noopener noreferrer">ternis.dev</a></li>
                             <li><a href="https://ternis-edv.de" target="_blank" rel="noopener noreferrer">ternis-edv.de</a></li>
                             <li><a href="https://github.com/ternis-org" target="_blank" rel="noopener noreferrer">GitHub Org</a></li>
