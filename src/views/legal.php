@@ -47,12 +47,12 @@ $title = ($doc['title'] ?? 'Legal Notice') . ' — ternis.org';
             </a>
 
             <div class="nav-links">
-                <a href="/<?= e($lang) ?>#about"><?= e(t('nav.about')) ?></a>
                 <a href="/<?= e($lang) ?>#projects"><?= e(t('nav.projects')) ?></a>
-                <a href="/<?= e($lang) ?>#playground"><?= e(t('nav.playground')) ?></a>
-                <a href="/<?= e($lang) ?>#maintainer"><?= e(t('nav.ecosystem')) ?></a>
-                <a href="/<?= e($lang) ?>#roadmap"><?= e(t('nav.roadmap')) ?></a>
-                <a href="/<?= e($lang) ?>#faq"><?= e(t('nav.faq')) ?></a>
+                <a href="https://getmy.name" target="_blank" rel="noopener noreferrer">getmy.name</a>
+                <a href="https://getmy.name/api-docs" target="_blank" rel="noopener noreferrer">API Docs</a>
+                <a href="https://mtex.dev" target="_blank" rel="noopener noreferrer">MTEX.dev</a>
+                <a href="https://dnbx.de" target="_blank" rel="noopener noreferrer">dnbx.de</a>
+                <a href="/<?= e($lang) ?>#connect"><?= e(t('nav.ecosystem')) ?></a>
             </div>
 
             <div class="nav-actions">
@@ -104,9 +104,6 @@ $title = ($doc['title'] ?? 'Legal Notice') . ' — ternis.org';
 
             <div class="legal-card">
                 <div class="legal-header" style="margin-bottom:2.5rem;">
-                    <?php if (!empty($doc['badge'])): ?>
-                        <span class="badge badge-primary" style="margin-bottom:1rem;"><?= e($doc['badge']) ?></span>
-                    <?php endif; ?>
                     <h1 style="font-size:2.5rem;font-weight:600;color:var(--primary);line-height:1.15;margin-bottom:0.75rem;">
                         <?= e($doc['title'] ?? '') ?>
                     </h1>
