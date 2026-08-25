@@ -388,8 +388,7 @@ a:hover .arrow-svg.arrow-svg-sm .line {
     stroke-dashoffset: 49;
 }
 
-.btn:active,
-button:active {
+.btn:active {
     transform: scale(0.98);
 }
 
@@ -1290,6 +1289,7 @@ footer.sculpted-footer {
     position: relative;
     width: 44px;
     height: 44px;
+    margin-top: -3.5rem;
     border-radius: 50%;
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
@@ -1299,8 +1299,7 @@ footer.sculpted-footer {
     cursor: pointer;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-3rem);
-    transition: opacity 0.25s ease, visibility 0.25s ease, border-color 0.2s ease, background-color 0.2s ease;
+    transition: opacity 0.25s ease, visibility 0.25s ease, border-color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
 }
 
 .scroll-to-top.visible {
@@ -1311,6 +1310,10 @@ footer.sculpted-footer {
 .scroll-to-top:hover {
     border-color: var(--primary);
     background: var(--bg-surface);
+}
+
+.scroll-to-top:active {
+    transform: scale(0.94);
 }
 
 .progress-ring {
