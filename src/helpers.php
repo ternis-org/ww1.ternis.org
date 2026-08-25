@@ -266,3 +266,55 @@ function lang_url(string $targetLang, ?string $currentPath = null): string
 
     return '/' . $targetLang;
 }
+
+/**
+ * Retrieves configuration values by key with dot notation and default fallback.
+ */
+function config(?string $key = null, mixed $default = null): mixed
+{
+    static $config = null;
+    if ($config === null) {
+        $configFile = ROOT_PATH . '/src/config.php';
+        $config = file_exists($configFile) ? require $configFile : [];
+    }
+
+    if ($key === null) {
+        return $config;
+    }
+
+    $keys = explode('.', $key);
+    $current = $config;
+    foreach ($keys as $segment) {
+        if (!is_array($current) || !array_key_exists($segment, $current)) {
+            return $default;
+        }
+        $current = $current[$segment];
+    }
+
+    return $current;
+}
+
+/**
+ * Returns repository URL from configuration.
+ */
+function app_repo_url(): string
+{
+    return (string) config('repo_url', 'https://github.com/ternis-org/ww1.ternis.org');
+}
+
+/**
+ * Returns repository commit URL for a given hash.
+ */
+function app_repo_commit_url(?string $hash = null): string
+{
+    $repo = rtrim(app_repo_url(), '/');
+    if ($hash === null || $hash === '') {
+        $hash = app_version_hash(false);
+    }
+    // If hash is a fallback e.g. v1.0.2026..., link to the main repo page
+    if (str_starts_with($hash, 'v1.0.')) {
+        return $repo;
+    }
+    return $repo . '/commit/' . $hash;
+}
+

@@ -619,7 +619,7 @@ $versionShort = app_version_hash(true);
                     &copy; <?= date('Y') ?> ternis.org &bull; <?= e(t('footer.rights')) ?>
                 </div>
                 <div>
-                    <?= e(t('footer.version')) ?>: <strong style="font-family:var(--font-mono);">v<?= e($versionShort) ?></strong>
+                    <?= e(t('footer.version')) ?>: <a href="<?= e(app_repo_commit_url($versionShort)) ?>" target="_blank" rel="noopener noreferrer" class="footer-version-link" title="<?= e(t('footer.version')) ?> <?= e($versionShort) ?> on GitHub"><strong style="font-family:var(--font-mono);">v<?= e($versionShort) ?></strong></a>
                 </div>
             </div>
         </div>
