@@ -44,10 +44,7 @@ $title = ($doc['title'] ?? 'Legal Notice') . ' — ternis.org';
 
             <div class="nav-links">
                 <a href="/<?= e($lang) ?>#projects"><?= e(t('nav.projects')) ?></a>
-                <a href="https://getmy.name" target="_blank" rel="noopener noreferrer">getmy.name</a>
                 <a href="https://getmy.name/api-docs" target="_blank" rel="noopener noreferrer">API Docs</a>
-                <a href="https://mtex.dev" target="_blank" rel="noopener noreferrer">MTEX.dev</a>
-                <a href="https://dnbx.de" target="_blank" rel="noopener noreferrer">dnbx.de</a>
                 <a href="/<?= e($lang) ?>#connect"><?= e(t('nav.ecosystem')) ?></a>
             </div>
 

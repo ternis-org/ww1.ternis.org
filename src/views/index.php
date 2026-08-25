@@ -257,22 +257,11 @@ $versionShort = app_version_hash(true);
 
             <div class="nav-links">
                 <a href="#projects"><?= e(t('nav.projects')) ?></a>
-                <a href="https://getmy.name" target="_blank" rel="noopener noreferrer">getmy.name</a>
                 <a href="https://getmy.name/api-docs" target="_blank" rel="noopener noreferrer">API Docs</a>
-                <a href="https://mtex.dev" target="_blank" rel="noopener noreferrer">MTEX.dev</a>
-                <a href="https://dnbx.de" target="_blank" rel="noopener noreferrer">dnbx.de</a>
                 <a href="#connect"><?= e(t('nav.ecosystem')) ?></a>
             </div>
 
             <div class="nav-actions">
-                <!-- Nav Action CTA Button with Expanding Arrow -->
-                <a href="#projects" class="btn btn-sm btn-nav-cta btn-expanding">
-                    <span><?= e(t('nav.cta_explore')) ?></span>
-                    <svg class="expanding-arrow" viewBox="0 0 57 22">
-                        <path d="M0.5 9.35772H20.9956L14.2001 2.29941L16.4134 0L27 11L16.4134 22L14.2001 19.7006L20.9956 12.6423H0.5V9.35772Z"></path>
-                    </svg>
-                </a>
-
                 <!-- Language Switcher -->
                 <div class="lang-switcher">
                     <a href="/en" class="lang-btn <?= $lang === 'en' ? 'active' : '' ?>">EN</a>
@@ -306,10 +295,7 @@ $versionShort = app_version_hash(true);
     <!-- Mobile Drawer -->
     <div class="mobile-drawer">
         <a href="#projects" class="nav-link"><?= e(t('nav.projects')) ?></a>
-        <a href="https://getmy.name" target="_blank" rel="noopener noreferrer" class="nav-link">getmy.name</a>
         <a href="https://getmy.name/api-docs" target="_blank" rel="noopener noreferrer" class="nav-link">API Docs</a>
-        <a href="https://mtex.dev" target="_blank" rel="noopener noreferrer" class="nav-link">MTEX.dev</a>
-        <a href="https://dnbx.de" target="_blank" rel="noopener noreferrer" class="nav-link">dnbx.de</a>
         <a href="#connect" class="nav-link"><?= e(t('nav.ecosystem')) ?></a>
         <a href="/<?= e($lang) ?>/legal/imprint" class="nav-link"><?= e(t('nav.imprint')) ?></a>
         <a href="/<?= e($lang) ?>/legal/privacy" class="nav-link"><?= e(t('nav.privacy')) ?></a>
