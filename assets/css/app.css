@@ -299,36 +299,41 @@ nav.floating-nav:hover {
    Buttons, Badges & Expanding SVG Arrow
    ========================================================================== */
 
-/* Expanding SVG Arrow in buttons */
+/* Arrow svg in buttons */
 .arrow-svg {
-    width: 20px;
-    height: 10px;
+    width: 35px;
+    height: 12px;
     stroke: currentColor;
+    stroke-width: 1.5;
     fill: none;
-    display: inline-block;
+    margin-left: -20px;
     vertical-align: middle;
-    overflow: visible;
+    display: inline-block;
     flex-shrink: 0;
-    margin-left: 5px;
-    transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.2s ease-out;
 }
 
-.arrow-svg .arrow-line {
-    stroke-dasharray: 32;
-    stroke-dashoffset: 18;
-    transition: stroke-dashoffset 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+.arrow-svg .line {
+    stroke-dasharray: 30;
+    stroke-dashoffset: 40;
+    transition: all 0.2s ease-out;
 }
 
+.btn:focus-visible .arrow-svg,
 .btn:hover .arrow-svg,
-a:hover .arrow-svg,
-.btn-expanding:hover .arrow-svg {
-    width: 28px;
+.btn-expanding:focus-visible .arrow-svg,
+.btn-expanding:hover .arrow-svg,
+a:hover .arrow-svg {
+    width: 40px;
+    margin-left: 4px;
 }
 
-.btn:hover .arrow-svg .arrow-line,
-a:hover .arrow-svg .arrow-line,
-.btn-expanding:hover .arrow-svg .arrow-line {
-    stroke-dashoffset: 0;
+.btn:focus-visible .arrow-svg .line,
+.btn:hover .arrow-svg .line,
+.btn-expanding:focus-visible .arrow-svg .line,
+.btn-expanding:hover .arrow-svg .line,
+a:hover .arrow-svg .line {
+    stroke-dashoffset: 58;
 }
 
 .btn:active,
