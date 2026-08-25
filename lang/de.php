@@ -61,45 +61,6 @@ return [
         'card3_desc'  => 'Saubere REST-Schnittstellen, vorhersehbare Datenstrukturen, exzellente Dokumentation und blitzschnelle Integration ohne Konfigurationsaufwand.',
     ],
 
-    'bento' => [
-        'badge'           => 'Architektur & Ökosystem',
-        'title'           => 'Gebaut für Freiheit, Speed & Transparenz',
-        'subtitle'        => 'Ein Überblick über unsere Open-Source-Architektur, Datenschutzphilosophie und Entwickler-Standards.',
-
-        'card_foss_badge' => 'Open Source',
-        'card_foss_title' => '100% Frei & Open Source',
-        'card_foss_desc'  => 'Jede Software, Bibliothek und Codebasis unter dem Dach von ternis.org ist unter freien Lizenzen (MIT / Apache 2.0) veröffentlicht. Volle Transparenz ohne Vendor-Lock-in.',
-        'card_foss_status'=> 'Alle Repositories öffentlich',
-        'card_foss_action'=> 'Auf GitHub ansehen',
-
-        'card_privacy_badge' => 'Datenschutz',
-        'card_privacy_title' => 'Null Tracker & Keine Telemetrie',
-        'card_privacy_desc'  => 'Konsequente DSGVO-Konformität durch Systemarchitektur. Keine Tracking-Cookies, kein Google Analytics und keine Werbeprofile.',
-        'card_privacy_stat'  => '0 Tracker',
-        'card_privacy_sub'   => 'DSGVO-nativ',
-
-        'card_perf_badge' => 'Performance',
-        'card_perf_title' => 'Schlank & Blitzschnell',
-        'card_perf_desc'  => 'Schlanke Vanilla-Runtimes mit immutablem Caching und nativer Kompression für Antwortzeiten von unter 30ms.',
-        'card_perf_stat'  => '< 30ms',
-        'card_perf_sub'   => 'Edge-Latenz',
-
-        'card_api_badge' => 'Entwickler-APIs',
-        'card_api_title' => 'curl-Freundliche REST-Schnittstellen',
-        'card_api_desc'  => 'Saubere, deterministische JSON-Endpunkte und Micro-Tools — von der getmy.name Portfolio-API bis zu Sandbox-Inspectors.',
-        'card_api_action'=> 'Dokumentation öffnen',
-
-        'card_dns_badge' => 'Infrastruktur',
-        'card_dns_title' => 'Verwaltet via dnbx.de',
-        'card_dns_desc'  => 'Alle Domains, Anycast-DNS-Routings und TLS-Zertifikate werden automatisiert über dnbx.de (von ternis.dev) gesteuert.',
-        'card_dns_action'=> 'Zu dnbx.de',
-
-        'card_storage_badge' => 'Cloud & Storage',
-        'card_storage_title' => 'Objektspeicher mit static.re',
-        'card_storage_desc'  => 'S3-kompatible Speicher-Tools und schnelle Asset-Auslieferung für Cloudflare R2 und moderne Cloud-Pipelines.',
-        'card_storage_action'=> 'Mehr erfahren',
-    ],
-
     'projects' => [
         'title'          => 'Projekte, an denen ternis.org arbeitet',
         'subtitle'       => 'Open-Source-Entwicklertools, souveräne Infrastruktur und Privatsphäre-Plattformen unter dem Dach von ternis.org.',
