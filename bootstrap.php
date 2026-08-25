@@ -54,7 +54,7 @@ foreach (SUPPORTED_LANGS as $lang) {
             define('LANG', $lang);
         }
         load_lang($lang);
-        render('index', ['lang' => $lang]);
+        render('index', ['lang' => $lang], 'main');
     });
 }
 
@@ -91,7 +91,7 @@ foreach (SUPPORTED_LANGS as $lang) {
                 'lang'    => $lang,
                 'code'    => 404,
                 'message' => t('error.not_found'),
-            ]);
+            ], 'main');
             return;
         }
 
@@ -99,7 +99,8 @@ foreach (SUPPORTED_LANGS as $lang) {
             'lang' => $lang,
             'slug' => $slug,
             'doc'  => $langData['legal'][$slug],
-        ]);
+            'title' => ($langData['legal'][$slug]['title'] ?? 'Legal') . ' — ternis.org',
+        ], 'main');
     });
 }
 
@@ -195,5 +196,6 @@ $router->fallback(function () {
         'lang'    => $lang,
         'code'    => 404,
         'message' => t('error.not_found'),
-    ]);
+        'title'   => '404 — ' . t('error.not_found') . ' — ternis.org',
+    ], 'main');
 });

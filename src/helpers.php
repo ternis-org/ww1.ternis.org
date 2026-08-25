@@ -135,15 +135,55 @@ function redirect(string $url, int $statusCode = 302): void
 }
 
 /**
+ * Renders a reusable UI component with data extracted into scope.
+ */
+function component(string $name, array $data = []): void
+{
+    $componentFile = ROOT_PATH . '/src/views/components/' . $name . '.php';
+    if (!file_exists($componentFile)) {
+        echo '<!-- Component not found: ' . e($name) . ' -->';
+        return;
+    }
+
+    extract($data, EXTR_SKIP);
+    require $componentFile;
+}
+
+/**
+ * Renders content wrapped inside a layout template.
+ */
+function render_layout(string $layout, string $content, array $data = []): void
+{
+    $layoutFile = ROOT_PATH . '/src/views/layouts/' . $layout . '.php';
+    if (!file_exists($layoutFile)) {
+        echo $content;
+        return;
+    }
+
+    $data['slot'] = $content;
+    extract($data, EXTR_SKIP);
+    require $layoutFile;
+}
+
+/**
  * Renders a view file with data extracted into scope.
  */
-function render(string $view, array $data = []): void
+function render(string $view, array $data = [], ?string $layout = null): void
 {
     $viewFile = ROOT_PATH . '/src/views/' . $view . '.php';
     if (!file_exists($viewFile)) {
         http_response_code(500);
         echo 'View not found: ' . e($view);
         exit;
+    }
+
+    if ($layout !== null) {
+        ob_start();
+        extract($data, EXTR_SKIP);
+        require $viewFile;
+        $content = (string) ob_get_clean();
+        render_layout($layout, $content, $data);
+        return;
     }
 
     extract($data, EXTR_SKIP);
