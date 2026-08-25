@@ -916,6 +916,11 @@ section {
     flex-grow: 1;
 }
 
+.code-snippet .keyword { color: #c084fc; }
+.code-snippet .string { color: #34d399; }
+.code-snippet .function { color: #38bdf8; }
+.code-snippet .comment { color: #64748b; }
+
 .response-json {
     font-family: var(--font-mono);
     font-size: 0.825rem;

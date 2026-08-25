@@ -3,11 +3,11 @@
 declare(strict_types=1);
 
 /**
- * Front Controller for ternis.org
+ * Root entry point for ternis.org
  */
 
-define('ROOT_PATH', dirname(__DIR__));
-define('PUBLIC_PATH', __DIR__);
+define('ROOT_PATH', __DIR__);
+define('PUBLIC_PATH', __DIR__ . '/public');
 
 require ROOT_PATH . '/bootstrap.php';
 

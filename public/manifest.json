@@ -1,0 +1,16 @@
+{
+  "name": "ternis.org — Open Source Developer Infrastructure",
+  "short_name": "ternis.org",
+  "description": "Open-source developer tooling and sovereign infrastructure ecosystem by ternis.dev / ternis-edv.de",
+  "start_url": "/en",
+  "display": "standalone",
+  "background_color": "#08090d",
+  "theme_color": "#08090d",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}
