@@ -38,7 +38,6 @@ return [
     'app_url'       => getenv('APP_URL') ?: 'https://ternis.org',
     'repo_url'      => getenv('REPO_URL') ?: 'https://github.com/ternis-org/ww1.ternis.org',
     'org_github'    => getenv('ORG_GITHUB') ?: 'https://github.com/ternis-org',
-    'api_docs_url'  => getenv('API_DOCS_URL') ?: 'https://getmy.name/api-docs',
     'contact_email' => getenv('CONTACT_EMAIL') ?: 'contact@ternis.dev',
     'edv_email'     => getenv('EDV_EMAIL') ?: 'edv@ternismail.de',
 ];
