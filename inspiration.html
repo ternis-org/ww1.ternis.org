@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style id="loader-critical-css">
+        html.app-already-loaded #app-loader,
+        #app-loader.loader-suppressed {
+            display: none !important;
+        }
+        #app-loader {
+            position: fixed;
+            inset: 0;
+            z-index: 999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f7f6f2;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        visibility 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        #app-loader.loader-loaded .loader-bar {
+            left: 0 !important;
+            width: 100% !important;
+            animation: none !important;
+            background: #4a5d23 !important;
+            box-shadow: 0 0 20px rgba(74, 93, 35, 0.6) !important;
+            transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+        #app-loader.loader-hidden {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            transform: scale(1.03) translateY(-6px) !important;
+            filter: blur(6px) !important;
+            pointer-events: none !important;
+        }
+        .loader-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            max-width: 90vw;
+            padding: 2rem;
+        }
+        .loader-logo {
+            font-family: 'Outfit', system-ui, sans-serif;
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            font-weight: 600;
+            letter-spacing: 3px;
+            line-height: 1;
+            color: #4a5d23;
+        }
+        .loader-track {
+            width: min(340px, 78vw);
+            height: 3px;
+            background: rgba(74, 93, 35, 0.12);
+            border-radius: 99px;
+            overflow: hidden;
+            position: relative;
+            margin-top: 2.25rem;
+            margin-bottom: 1.25rem;
+        }
+        .loader-bar {
+            position: absolute;
+            top: 0;
+            left: -50%;
+            height: 100%;
+            width: 45%;
+            background: linear-gradient(90deg, transparent 0%, rgba(74, 93, 35, 0.3) 25%, #4a5d23 50%, rgba(74, 93, 35, 0.3) 75%, transparent 100%);
+            border-radius: 99px;
+            box-shadow: 0 0 14px rgba(74, 93, 35, 0.5);
+            animation: loaderSlide 1.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+        }
+        .loader-status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.65rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.25em;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #8c9c6f;
+        }
+        .loader-status-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #4a5d23;
+            opacity: 0.8;
+            animation: loaderPulse 1.2s ease-in-out infinite alternate;
+            box-shadow: 0 0 8px rgba(74, 93, 35, 0.6);
+        }
+        @keyframes loaderSlide {
+            0%   { left: -50%; width: 35%; }
+            50%  { width: 55%; }
+            100% { left: 110%; width: 35%; }
+        }
+        @keyframes loaderPulse {
+            0%   { opacity: 0.3; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .loader-bar { animation: none; left: 0; width: 100%; }
+            .loader-status-dot { animation: none; opacity: 1; }
+            #app-loader.loader-hidden { transform: none !important; filter: none !important; }
+        }
+    </style>
+    <noscript><style>#app-loader { display: none !important; }</style></noscript>
+    <script id="app-loader-js">
+        (function() {
+            try {
+                if (sessionStorage.getItem('wbbx_loaded')) {
+                    document.documentElement.classList.add('app-already-loaded');
+                    return;
+                }
+            } catch (e) {}
+
+            var start = performance.now();
+            var MIN_MS = 400;
+            var MAX_MS = 2500;
+            var isFinished = false;
+
+            function finish() {
+                if (isFinished) return;
+                isFinished = true;
+
+                try {
+                    sessionStorage.setItem('wbbx_loaded', '1');
+                } catch (e) {}
+
+                var loader = document.getElementById('app-loader');
+                if (!loader) return;
+                var elapsed = performance.now() - start;
+                var delay = Math.max(0, MIN_MS - elapsed);
+
+                setTimeout(function() {
+                    loader.classList.add('loader-loaded');
+                    setTimeout(function() {
+                        loader.classList.add('loader-hidden');
+                        function cleanup() {
+                            if (loader && loader.parentNode) {
+                                loader.parentNode.removeChild(loader);
+                            }
+                        }
+                        loader.addEventListener('transitionend', cleanup, { once: true });
+                        setTimeout(cleanup, 700);
+                    }, 180);
+                }, delay);
+            }
+
+            if (document.readyState === 'complete') {
+                finish();
+            } else {
+                window.addEventListener('load', finish, { once: true });
+            }
+            setTimeout(finish, MAX_MS);
+        })();
+    </script>
+    <title>WBBX | Organic Green Tech</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
+
+        :root {
+            --primary: #4a5d23;
+            --secondary: #8c9c6f;
+            --bg-color: #f7f6f2;
+            --text-dark: #2c3029;
+            --accent: #d4a373;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Noise Texture */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 1000px;
+            background: rgba(247, 246, 242, 0.8);
+            backdrop-filter: blur(12px);
+            border-radius: 100px;
+            padding: 1rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            border: 1px solid rgba(74, 93, 35, 0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--primary); }
+
+        .btn {
+            background: var(--primary);
+            color: #fff;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: var(--secondary);
+        }
+
+        /* Organic Blobs */
+        .blob {
+            position: absolute;
+            z-index: -1;
+            filter: blur(40px);
+            opacity: 0.4;
+        }
+        .blob-1 {
+            top: -10%; left: -5%;
+            width: 50vw; height: 50vw;
+            background: var(--secondary);
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            animation: morph 15s ease-in-out infinite alternate;
+        }
+        .blob-2 {
+            bottom: 20%; right: -10%;
+            width: 40vw; height: 40vw;
+            background: var(--accent);
+            border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
+            animation: morph 20s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes morph {
+            0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; transform: rotate(0deg); }
+            100% { border-radius: 60% 40% 30% 70% / 50% 30% 70% 50%; transform: rotate(45deg); }
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 8rem 10% 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Hero */
+        #hero {
+            align-items: center;
+            text-align: center;
+        }
+        h1 {
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+        h1 strong { font-weight: 600; }
+        .hero-p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin-bottom: 3rem;
+            color: var(--secondary);
+            line-height: 1.6;
+        }
+
+        /* Two Col Layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .text-col h2 {
+            font-size: 3rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        .text-col p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        .image-col {
+            height: 500px;
+            background: var(--secondary);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-style: italic;
+        }
+
+        /* Values Grid */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+        .value-card {
+            background: rgba(255,255,255,0.5);
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(74, 93, 35, 0.1);
+        }
+        .value-icon {
+            width: 80px; height: 80px;
+            background: var(--primary);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+        }
+        .value-card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary); }
+
+        /* Footer */
+        footer {
+            height: 100vh;
+            background: var(--primary);
+            color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 5rem 10% 2rem;
+            border-top-left-radius: 100px;
+            border-top-right-radius: 100px;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+        .footer-cta {
+            font-size: 4rem;
+            font-weight: 300;
+            line-height: 1.1;
+        }
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .footer-links a { color: var(--bg-color); text-decoration: none; font-size: 1.2rem; }
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(247, 246, 242, 0.2);
+            padding-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="app-loader" class="app-loader" aria-hidden="true">
+        <div class="loader-inner">
+            <div class="loader-logo">WBBX</div>
+            <div class="loader-track">
+                <div class="loader-bar"></div>
+            </div>
+            <div class="loader-status">
+                <span class="loader-status-dot"></span>
+                <span class="loader-status-text">INITIALIZING</span>
+            </div>
+        </div>
+    </div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <nav>
+        <a href="/" class="logo">WBBX</a>
+        <div class="nav-links">
+            <a href="#about">Philosophy</a>
+            <a href="#impact">Impact</a>
+            <a href="#connect">Connect</a>
+        </div>
+        <a href="#connect" class="btn">Plant a Seed</a>
+    </nav>
+
+    <section id="hero">
+        <h1>Technology that<br><strong>breathes.</strong></h1>
+        <p class="hero-p">We build sustainable digital ecosystems. Minimal energy consumption, organic design principles, and a commitment to a greener web.</p>
+        <a href="#about" class="btn" style="padding: 1rem 3rem; font-size: 1.1rem;">Discover Our Roots</a>
+    </section>
+
+    <section id="about">
+        <div class="two-col">
+            <div class="image-col">
+                Natural Imagery Placeholder
+            </div>
+            <div class="text-col">
+                <h2>Designed for<br>tomorrow.</h2>
+                <p>The internet consumes massive amounts of energy. At WBBX, we believe in digital sustainability. We write efficient code, use green hosting, and design interfaces that respect both the user and the planet.</p>
+                <p>Our organic approach to technology ensures that your digital footprint is as light as possible.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="impact">
+        <h2 style="text-align: center; font-size: 3rem; color: var(--primary); font-weight: 400;">Our Impact</h2>
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon"></div>
+                <h3>Carbon Neutral</h3>
+                <p>All our servers and digital products are powered by 100% renewable energy sources.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon" style="background: var(--secondary)"></div>
+                <h3>Efficient Code</h3>
+                <p>We strip away the bloat, delivering fast experiences that require less processing power.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon" style="background: var(--accent)"></div>
+                <h3>Organic Design</h3>
+                <p>Interfaces inspired by nature, promoting calm and focus over anxiety and distraction.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="connect">
+        <div class="footer-content">
+            <div class="footer-cta">
+                Let's grow<br>something<br>beautiful.
+                <div style="margin-top: 2rem;">
+                    <a href="#" class="btn" style="background: var(--bg-color); color: var(--primary);">Contact Us</a>
+                </div>
+            </div>
+            <div style="display: flex; gap: 4rem;">
+                <div class="footer-links">
+                    <p style="opacity: 0.7; margin-bottom: 1rem;">Social</p>
+                    <a href="#">Instagram</a>
+                    <a href="#">LinkedIn</a>
+                    <a href="#">Twitter</a>
+                </div>
+                <div class="footer-links">
+                    <p style="opacity: 0.7; margin-bottom: 1rem;">Office</p>
+                    <p>123 Forest Avenue<br>Berlin, Germany</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 WBBX Green Tech. Preserving the digital environment.</p>
+        </div>
+    </footer>
+</body>
+</html>

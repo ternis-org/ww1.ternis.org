@@ -15,7 +15,7 @@ $message = $message ?? t('error.not_found');
 $versionShort = app_version_hash(true);
 ?>
 <!DOCTYPE html>
-<html lang="<?= e($lang) ?>" data-theme="dark">
+<html lang="<?= e($lang) ?>" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,28 +23,20 @@ $versionShort = app_version_hash(true);
     <meta name="robots" content="noindex, nofollow">
 
     <!-- Fonts & Stylesheet -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="<?= e(asset_url('/assets/css/app.css')) ?>">
 </head>
 <body style="display:flex;flex-direction:column;min-height:100vh;justify-content:space-between;">
 
-    <!-- Ambient Glowing Blobs -->
-    <div class="ambient-glow" aria-hidden="true">
-        <div class="glow-orb-1"></div>
-        <div class="glow-orb-2"></div>
-    </div>
+    <!-- Organic Blobs -->
+    <div class="blob blob-1" aria-hidden="true"></div>
+    <div class="blob blob-2" aria-hidden="true"></div>
 
-    <!-- Header Navigation -->
-    <header class="site-header">
-        <div class="container nav-wrapper">
-            <a href="/<?= e($lang) ?>" class="nav-brand">
-                <span class="brand-icon">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-                    </svg>
-                </span>
+    <!-- Floating Pill Navigation -->
+    <div class="nav-container-fixed">
+        <nav class="floating-nav">
+            <a href="/<?= e($lang) ?>" class="logo">
                 <span>ternis.org</span>
+                <span class="logo-dot" title="Operational"></span>
             </a>
 
             <div class="nav-actions">
@@ -59,20 +51,20 @@ $versionShort = app_version_hash(true);
                     </svg>
                 </button>
             </div>
-        </div>
-    </header>
+        </nav>
+    </div>
 
-    <main style="padding:6rem 0;text-align:center;flex-grow:1;display:flex;align-items:center;">
+    <main style="padding:12rem 0 6rem;text-align:center;flex-grow:1;display:flex;align-items:center;">
         <div class="container" style="max-width:640px;">
-            <div style="font-size:clamp(4rem, 10vw, 7rem);font-weight:900;font-family:var(--font-mono);background:var(--gradient-hero);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;margin-bottom:1.5rem;">
+            <div style="font-size:clamp(4.5rem, 12vw, 8rem);font-weight:300;font-family:var(--font-mono);color:var(--primary);line-height:1;margin-bottom:1.5rem;">
                 <?= e($code) ?>
             </div>
-            <h1 style="font-size:2rem;font-weight:700;margin-bottom:1rem;"><?= e($message) ?></h1>
-            <p style="color:var(--text-secondary);font-size:1.1rem;margin-bottom:2.5rem;">
+            <h1 style="font-size:2rem;font-weight:600;color:var(--primary);margin-bottom:1rem;"><?= e($message) ?></h1>
+            <p style="color:var(--secondary);font-size:1.15rem;margin-bottom:2.5rem;">
                 <?= e(t('error.desc')) ?>
             </p>
-            <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;">
-                <a href="/<?= e($lang) ?>" class="btn btn-primary">
+            <div style="display:flex;justify-content:center;gap:1.25rem;flex-wrap:wrap;">
+                <a href="/<?= e($lang) ?>" class="btn">
                     &larr; <?= e(t('error.back_home')) ?>
                 </a>
                 <a href="/<?= e($lang) ?>#projects" class="btn btn-secondary">
@@ -82,14 +74,14 @@ $versionShort = app_version_hash(true);
         </div>
     </main>
 
-    <footer class="site-footer">
+    <footer class="sculpted-footer">
         <div class="container">
             <div class="footer-bottom">
                 <div>
-                    &copy; <?= date('Y') ?> ternis.org. <?= e(t('footer.rights')) ?>
+                    &copy; <?= date('Y') ?> ternis.org &bull; <?= e(t('footer.rights')) ?>
                 </div>
-                <div class="footer-meta">
-                    <span><?= e(t('footer.version')) ?>: <span class="version-badge">v<?= e($versionShort) ?></span></span>
+                <div>
+                    <?= e(t('footer.version')) ?>: <strong style="font-family:var(--font-mono);">v<?= e($versionShort) ?></strong>
                 </div>
             </div>
         </div>

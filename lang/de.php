@@ -84,6 +84,7 @@ return [
                 'Antwortzeiten unter 40ms durch Edge-Server',
             ],
             'url'         => 'https://getmy.name',
+            'docs_url'    => 'https://getmy.name/api-docs',
             'repo'        => 'https://github.com/ternis-org/getmy-name',
         ],
 

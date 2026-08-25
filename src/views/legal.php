@@ -17,7 +17,7 @@ $versionShort = app_version_hash(true);
 $title = ($doc['title'] ?? 'Legal Notice') . ' — ternis.org';
 ?>
 <!DOCTYPE html>
-<html lang="<?= e($lang) ?>" data-theme="dark">
+<html lang="<?= e($lang) ?>" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,43 +27,34 @@ $title = ($doc['title'] ?? 'Legal Notice') . ' — ternis.org';
     <link rel="alternate" hreflang="<?= e($altLang) ?>" href="<?= e($altUrl) ?>">
 
     <!-- Theme Color & PWA -->
-    <meta name="theme-color" content="#08090d">
+    <meta name="theme-color" content="#4a5d23">
     <link rel="icon" href="/favicon.ico" sizes="any">
 
     <!-- Fonts & Stylesheet -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="<?= e(asset_url('/assets/css/app.css')) ?>">
 </head>
 <body>
 
-    <!-- Ambient Glowing Blobs -->
-    <div class="ambient-glow" aria-hidden="true">
-        <div class="glow-orb-1"></div>
-        <div class="glow-orb-2"></div>
-    </div>
+    <!-- Organic Blobs -->
+    <div class="blob blob-1" aria-hidden="true"></div>
+    <div class="blob blob-2" aria-hidden="true"></div>
 
-    <!-- Header Navigation -->
-    <header class="site-header">
-        <div class="container nav-wrapper">
-            <a href="/<?= e($lang) ?>" class="nav-brand">
-                <span class="brand-icon">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-                    </svg>
-                </span>
+    <!-- Floating Pill Navigation -->
+    <div class="nav-container-fixed">
+        <nav class="floating-nav">
+            <a href="/<?= e($lang) ?>" class="logo">
                 <span>ternis.org</span>
-                <span class="status-dot" title="Operational"></span>
+                <span class="logo-dot" title="Operational"></span>
             </a>
 
-            <nav class="nav-links">
-                <a href="/<?= e($lang) ?>#about" class="nav-link"><?= e(t('nav.about')) ?></a>
-                <a href="/<?= e($lang) ?>#projects" class="nav-link"><?= e(t('nav.projects')) ?></a>
-                <a href="/<?= e($lang) ?>#playground" class="nav-link"><?= e(t('nav.playground')) ?></a>
-                <a href="/<?= e($lang) ?>#maintainer" class="nav-link"><?= e(t('nav.ecosystem')) ?></a>
-                <a href="/<?= e($lang) ?>#roadmap" class="nav-link"><?= e(t('nav.roadmap')) ?></a>
-                <a href="/<?= e($lang) ?>#opensource" class="nav-link"><?= e(t('nav.opensource')) ?></a>
-            </nav>
+            <div class="nav-links">
+                <a href="/<?= e($lang) ?>#about"><?= e(t('nav.about')) ?></a>
+                <a href="/<?= e($lang) ?>#projects"><?= e(t('nav.projects')) ?></a>
+                <a href="/<?= e($lang) ?>#playground"><?= e(t('nav.playground')) ?></a>
+                <a href="/<?= e($lang) ?>#maintainer"><?= e(t('nav.ecosystem')) ?></a>
+                <a href="/<?= e($lang) ?>#roadmap"><?= e(t('nav.roadmap')) ?></a>
+                <a href="/<?= e($lang) ?>#faq"><?= e(t('nav.faq')) ?></a>
+            </div>
 
             <div class="nav-actions">
                 <!-- Language Switcher -->
@@ -72,7 +63,7 @@ $title = ($doc['title'] ?? 'Legal Notice') . ' — ternis.org';
                     <a href="/de/legal/<?= e($slug) ?>" class="lang-btn <?= $lang === 'de' ? 'active' : '' ?>">DE</a>
                 </div>
 
-                <!-- Dark/Light Theme Toggle -->
+                <!-- Theme Toggle -->
                 <button type="button" class="btn-icon btn-theme-toggle" aria-label="Toggle theme">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
@@ -85,43 +76,43 @@ $title = ($doc['title'] ?? 'Legal Notice') . ' — ternis.org';
                     </svg>
                 </a>
             </div>
-        </div>
-    </header>
+        </nav>
+    </div>
 
     <main class="legal-section">
         <div class="container" style="max-width:880px;">
             <!-- Breadcrumbs -->
-            <div style="margin-bottom:2rem;display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;color:var(--text-muted);">
-                <a href="/<?= e($lang) ?>" style="color:var(--text-secondary);">&larr; <?= e(t('error.back_home')) ?></a>
+            <div style="margin-bottom:2rem;display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;color:var(--secondary);">
+                <a href="/<?= e($lang) ?>">&larr; <?= e(t('error.back_home')) ?></a>
                 <span>/</span>
                 <span><?= e(t('nav.legal')) ?></span>
                 <span>/</span>
-                <span style="color:var(--text-primary);"><?= e($doc['title'] ?? '') ?></span>
+                <span style="color:var(--primary);font-weight:600;"><?= e($doc['title'] ?? '') ?></span>
             </div>
 
             <!-- Legal Nav Tabs -->
-            <div style="display:flex;gap:0.75rem;margin-bottom:2rem;flex-wrap:wrap;">
-                <a href="/<?= e($lang) ?>/legal/imprint" class="btn <?= $slug === 'imprint' ? 'btn-primary' : 'btn-secondary' ?> btn-sm">
+            <div style="display:flex;gap:0.75rem;margin-bottom:2.5rem;flex-wrap:wrap;">
+                <a href="/<?= e($lang) ?>/legal/imprint" class="btn <?= $slug === 'imprint' ? '' : 'btn-secondary' ?> btn-sm">
                     <?= e(t('nav.imprint')) ?>
                 </a>
-                <a href="/<?= e($lang) ?>/legal/privacy" class="btn <?= $slug === 'privacy' ? 'btn-primary' : 'btn-secondary' ?> btn-sm">
+                <a href="/<?= e($lang) ?>/legal/privacy" class="btn <?= $slug === 'privacy' ? '' : 'btn-secondary' ?> btn-sm">
                     <?= e(t('nav.privacy')) ?>
                 </a>
-                <a href="/<?= e($lang) ?>/legal/license" class="btn <?= $slug === 'license' ? 'btn-primary' : 'btn-secondary' ?> btn-sm">
+                <a href="/<?= e($lang) ?>/legal/license" class="btn <?= $slug === 'license' ? '' : 'btn-secondary' ?> btn-sm">
                     <?= e(t('nav.license')) ?>
                 </a>
             </div>
 
             <div class="legal-card">
-                <div class="legal-header">
+                <div class="legal-header" style="margin-bottom:2.5rem;">
                     <?php if (!empty($doc['badge'])): ?>
-                        <span class="badge badge-cyan" style="margin-bottom:1rem;"><?= e($doc['badge']) ?></span>
+                        <span class="badge badge-primary" style="margin-bottom:1rem;"><?= e($doc['badge']) ?></span>
                     <?php endif; ?>
-                    <h1 style="font-size:2.4rem;font-weight:800;letter-spacing:-0.025em;margin-bottom:0.75rem;">
+                    <h1 style="font-size:2.5rem;font-weight:600;color:var(--primary);line-height:1.15;margin-bottom:0.75rem;">
                         <?= e($doc['title'] ?? '') ?>
                     </h1>
                     <?php if (!empty($doc['subtitle'])): ?>
-                        <p style="color:var(--text-secondary);font-size:1.1rem;"><?= e($doc['subtitle']) ?></p>
+                        <p style="color:var(--secondary);font-size:1.15rem;"><?= e($doc['subtitle']) ?></p>
                     <?php endif; ?>
                 </div>
 
@@ -175,7 +166,7 @@ $title = ($doc['title'] ?? 'Legal Notice') . ' — ternis.org';
                     <a href="/<?= e($lang) ?>" class="btn btn-secondary btn-sm">
                         &larr; <?= e(t('error.back_home')) ?>
                     </a>
-                    <span style="font-size:0.825rem;color:var(--text-muted);font-family:var(--font-mono);">
+                    <span style="font-size:0.85rem;color:var(--secondary);font-family:var(--font-mono);">
                         ternis.org legal disclosure &bull; <?= date('Y') ?>
                     </span>
                 </div>
@@ -183,15 +174,15 @@ $title = ($doc['title'] ?? 'Legal Notice') . ' — ternis.org';
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="site-footer">
+    <!-- Sculpted Footer -->
+    <footer class="sculpted-footer">
         <div class="container">
             <div class="footer-bottom">
                 <div>
-                    &copy; <?= date('Y') ?> ternis.org. <?= e(t('footer.rights')) ?>
+                    &copy; <?= date('Y') ?> ternis.org &bull; <?= e(t('footer.rights')) ?>
                 </div>
-                <div class="footer-meta">
-                    <span><?= e(t('footer.version')) ?>: <span class="version-badge">v<?= e($versionShort) ?></span></span>
+                <div>
+                    <?= e(t('footer.version')) ?>: <strong style="font-family:var(--font-mono);">v<?= e($versionShort) ?></strong>
                 </div>
             </div>
         </div>

@@ -65,6 +65,7 @@ ternis.org is dedicated to stewarding and scaling open-source developer tooling 
 ### 1. [getmy.name](https://getmy.name) — Free Headless Portfolio API
 - **Status:** `Live & Production`
 - **License:** MIT
+- **API Documentation:** [getmy.name/api-docs](https://getmy.name/api-docs)
 - **Summary:** Eliminates the need to maintain static JSON files or complicated backends for personal websites. Exposes a clean, headless REST API delivering your bio, skills, project catalogue, and contact details with sub-40ms response times.
 - **Repository:** [`ternis-org/getmy-name`](https://github.com/ternis-org/getmy-name)
 
@@ -90,14 +91,16 @@ ternis.org is dedicated to stewarding and scaling open-source developer tooling 
 
 ## 🛠️ Architecture & Features
 
-This website is designed for maximum speed, security, and developer ergonomics:
+This website is designed for maximum speed, digital sustainability, and developer ergonomics:
 
 - 🚀 **Zero Heavy Frameworks:** Ultra-fast custom PHP micro-router with sub-millisecond execution overhead.
 - 🌍 **Full Bilingual i18n:** Built-in English (`/en`) and German (`/de`) language matrices with automatic browser `Accept-Language` detection.
-- 🎨 **Luminous Modern Design System:**
-  - Dark Theme (Obsidian & Electric Cyan/Emerald accents) + Light Theme toggle.
-  - Frosted glassmorphic cards (`backdrop-filter: blur(16px)`).
-  - Fluid typography and responsive layout across mobile, tablet, and desktop.
+- 🌿 **Organic Green Tech Design System:**
+  - Distinctive organic olive & sage palette (`#4a5d23`, `#8c9c6f`, `#f7f6f2`, `#d4a373`) + dark mode companion.
+  - Floating pill navigation bar (`backdrop-filter: blur(16px)`).
+  - Morphing SVG ambient blobs and noise grain texture overlay.
+  - Initial micro-loader animation with `sessionStorage` caching.
+  - Sculpted curved organic footer.
 - ⚡ **Interactive API Playground:** Real-time test console for `getmy.name` with code generation for cURL, JavaScript (Fetch), Python (Requests), and PHP.
 - 🔒 **Security & Privacy by Default:**
   - Strict Content Security Headers (`X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`).
@@ -115,13 +118,12 @@ This website is designed for maximum speed, security, and developer ergonomics:
 
 ```
 ww1.ternis.org/
-├── assets/                  # Symlinked / Static assets (CSS, JS)
+├── assets/                  # Static assets (CSS, JS)
 │   ├── css/
-│   │   └── app.css          # Design system & theme engine
+│   │   └── app.css          # Organic tech design system
 │   └── js/
 │       └── app.js           # Interactive engine & playground
 ├── bootstrap.php            # Core application bootstrap & route definitions
-├── index.html               # Standalone client-side static edition
 ├── index.php                # Root front-controller delegate
 ├── lang/                    # Localization dictionaries
 │   ├── de.php               # German translations
