@@ -81,11 +81,31 @@
     font-family: var(--font-sans);
 }
 
+/* Custom Text Selection */
+::selection {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+::-moz-selection {
+    background: var(--primary);
+    color: #ffffff;
+}
+
 html {
     font-size: 16px;
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE / Edge */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+    width: 0;
+    height: 0;
 }
 
 body {
@@ -214,24 +234,8 @@ nav.floating-nav {
     color: var(--primary);
     text-decoration: none;
     letter-spacing: 1.5px;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-}
-
-.logo-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--primary);
-    box-shadow: 0 0 8px var(--primary);
-    display: inline-block;
-    animation: pulseDot 2s infinite ease-in-out;
-}
-
-@keyframes pulseDot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.8); }
 }
 
 .nav-links {
@@ -1221,6 +1225,91 @@ footer.sculpted-footer {
 }
 
 /* ==========================================================================
+   Sections Wrapper & Sticky Scroll-To-Top Progress
+   ========================================================================== */
+
+.sections-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.scroll-top-tracker {
+    position: sticky;
+    bottom: 2.25rem;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 2.5rem;
+    pointer-events: none;
+    z-index: 990;
+    margin-top: -4rem;
+    height: 0;
+    overflow: visible;
+}
+
+.scroll-to-top {
+    pointer-events: auto;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--bg-surface-trans);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-glow);
+    background: var(--bg-surface);
+}
+
+.progress-ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotate(-90deg);
+}
+
+.progress-ring-bg {
+    stroke: var(--border-subtle);
+}
+
+.progress-ring-circle {
+    stroke: var(--primary);
+    stroke-dasharray: 125.66;
+    stroke-dashoffset: 125.66;
+    transition: stroke-dashoffset 0.1s linear;
+}
+
+.scroll-to-top .arrow-icon {
+    color: var(--primary);
+    transition: transform 0.25s ease;
+    z-index: 2;
+}
+
+.scroll-to-top:hover .arrow-icon {
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
    Responsive Breakpoints
    ========================================================================== */
 
@@ -1251,4 +1340,5 @@ footer.sculpted-footer {
     footer.sculpted-footer { border-top-left-radius: 60px; border-top-right-radius: 60px; padding: 4.5rem 0 2.5rem; }
     .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
     .legal-card { padding: 2rem 1.5rem; }
+    .scroll-top-tracker { bottom: 1.25rem; padding-right: 1.25rem; }
 }

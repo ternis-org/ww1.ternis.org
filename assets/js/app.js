@@ -278,6 +278,45 @@ echo "Developer Name: " . htmlspecialchars($profile['data']['name']);
         }, { passive: true });
     }
 
+    // ── Scroll To Top with Dynamic Circular Border Progress ───────────────────
+    function initScrollToTop() {
+        const btn = document.getElementById('scroll-to-top');
+        const progressCircle = document.querySelector('.progress-ring-circle');
+        if (!btn || !progressCircle) return;
+
+        const radius = progressCircle.r.baseVal.value || 20;
+        const circumference = 2 * Math.PI * radius; // approx 125.66
+        progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+        progressCircle.style.strokeDashoffset = `${circumference}`;
+
+        function updateProgress() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercent = docHeight > 0 ? Math.min(1, Math.max(0, scrollTop / docHeight)) : 0;
+
+            const offset = circumference - (scrollPercent * circumference);
+            progressCircle.style.strokeDashoffset = `${offset}`;
+
+            if (scrollTop > 180) {
+                btn.classList.add('visible');
+            } else {
+                btn.classList.remove('visible');
+            }
+        }
+
+        window.addEventListener('scroll', updateProgress, { passive: true });
+        window.addEventListener('resize', updateProgress, { passive: true });
+        updateProgress();
+
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
     // ── Service Worker Registration ────────────────────────────────────────────
     function initServiceWorker() {
         if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
@@ -296,6 +335,7 @@ echo "Developer Name: " . htmlspecialchars($profile['data']['name']);
         initPlayground();
         initFAQ();
         initScrollSpy();
+        initScrollToTop();
         initServiceWorker();
 
         // Bind theme toggle buttons

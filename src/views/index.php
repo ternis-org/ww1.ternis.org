@@ -271,7 +271,6 @@ $versionShort = app_version_hash(true);
         <nav class="floating-nav">
             <a href="/<?= e($lang) ?>" class="logo">
                 <span>ternis.org</span>
-                <span class="logo-dot" title="Operational"></span>
             </a>
 
             <div class="nav-links">
@@ -331,9 +330,11 @@ $versionShort = app_version_hash(true);
         <a href="/<?= e($lang) ?>/legal/privacy" class="nav-link"><?= e(t('nav.privacy')) ?></a>
     </div>
 
-    <main>
-        <!-- Hero Section -->
-        <section id="hero">
+    <!-- Main Sections Wrapper (Sticky Boundary for Scroll-To-Top) -->
+    <div class="sections-wrapper">
+        <main>
+            <!-- Hero Section -->
+            <section id="hero">
             <div class="container">
                 <div class="section-badge">
                     <span class="badge badge-primary"><?= e(t('hero.badge')) ?></span>
@@ -864,8 +865,22 @@ $versionShort = app_version_hash(true);
         </section>
     </main>
 
-    <!-- Sculpted Organic Footer -->
-    <footer id="connect" class="sculpted-footer">
+    <!-- Sticky Scroll-To-Top Tracker (Sticky inside sections-wrapper, but outside footer) -->
+    <div class="scroll-top-tracker">
+        <button type="button" id="scroll-to-top" class="scroll-to-top" aria-label="Scroll to top">
+            <svg class="progress-ring" width="50" height="50" viewBox="0 0 50 50">
+                <circle class="progress-ring-bg" stroke-width="3" fill="transparent" r="20" cx="25" cy="25" />
+                <circle class="progress-ring-circle" stroke-width="3" stroke-linecap="round" fill="transparent" r="20" cx="25" cy="25" />
+            </svg>
+            <svg class="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+            </svg>
+        </button>
+    </div>
+</div><!-- /.sections-wrapper -->
+
+<!-- Sculpted Organic Footer -->
+<footer id="connect" class="sculpted-footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-cta">

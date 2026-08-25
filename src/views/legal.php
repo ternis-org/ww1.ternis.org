@@ -44,7 +44,6 @@ $title = ($doc['title'] ?? 'Legal Notice') . ' — ternis.org';
         <nav class="floating-nav">
             <a href="/<?= e($lang) ?>" class="logo">
                 <span>ternis.org</span>
-                <span class="logo-dot" title="Operational"></span>
             </a>
 
             <div class="nav-links">

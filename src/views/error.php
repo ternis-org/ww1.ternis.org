@@ -36,7 +36,6 @@ $versionShort = app_version_hash(true);
         <nav class="floating-nav">
             <a href="/<?= e($lang) ?>" class="logo">
                 <span>ternis.org</span>
-                <span class="logo-dot" title="Operational"></span>
             </a>
 
             <div class="nav-actions">
