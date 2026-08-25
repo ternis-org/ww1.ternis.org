@@ -27,10 +27,6 @@ $versionShort = app_version_hash(true);
 </head>
 <body style="display:flex;flex-direction:column;min-height:100vh;justify-content:space-between;">
 
-    <!-- Organic Blobs -->
-    <div class="blob blob-1" aria-hidden="true"></div>
-    <div class="blob blob-2" aria-hidden="true"></div>
-
     <!-- Floating Pill Navigation -->
     <div class="nav-container-fixed">
         <nav class="floating-nav">

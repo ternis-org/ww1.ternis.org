@@ -35,10 +35,6 @@ $title = ($doc['title'] ?? 'Legal Notice') . ' — ternis.org';
 </head>
 <body>
 
-    <!-- Organic Blobs -->
-    <div class="blob blob-1" aria-hidden="true"></div>
-    <div class="blob blob-2" aria-hidden="true"></div>
-
     <!-- Floating Pill Navigation -->
     <div class="nav-container-fixed">
         <nav class="floating-nav">

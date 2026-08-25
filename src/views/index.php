@@ -51,7 +51,6 @@ $versionShort = app_version_hash(true);
             width: 100% !important;
             animation: none !important;
             background: #4a5d23 !important;
-            box-shadow: 0 0 20px rgba(74, 93, 35, 0.6) !important;
             transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
         }
         #app-loader.loader-hidden {
@@ -97,10 +96,12 @@ $versionShort = app_version_hash(true);
             left: -50%;
             height: 100%;
             width: 45%;
-            background: linear-gradient(90deg, transparent 0%, rgba(74, 93, 35, 0.3) 25%, #4a5d23 50%, rgba(74, 93, 35, 0.3) 75%, transparent 100%);
+            background: #4a5d23;
             border-radius: 99px;
-            box-shadow: 0 0 14px rgba(74, 93, 35, 0.5);
             animation: loaderSlide 1.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+        }
+        [data-theme="dark"] .loader-bar {
+            background: #94b858;
         }
         .loader-status {
             display: flex;
@@ -121,7 +122,6 @@ $versionShort = app_version_hash(true);
             background: #4a5d23;
             opacity: 0.8;
             animation: loaderPulse 1.2s ease-in-out infinite alternate;
-            box-shadow: 0 0 8px rgba(74, 93, 35, 0.6);
         }
         @keyframes loaderSlide {
             0%   { left: -50%; width: 35%; }
@@ -248,25 +248,6 @@ $versionShort = app_version_hash(true);
 </head>
 <body>
 
-    <!-- Initial App Loader -->
-    <div id="app-loader" class="app-loader" aria-hidden="true">
-        <div class="loader-inner">
-            <div class="loader-logo">ternis.org</div>
-            <div class="loader-track">
-                <div class="loader-bar"></div>
-            </div>
-            <div class="loader-status">
-                <span class="loader-status-dot"></span>
-                <span class="loader-status-text">INITIALIZING</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Organic Morphing Blobs -->
-    <div class="blob blob-1" aria-hidden="true"></div>
-    <div class="blob blob-2" aria-hidden="true"></div>
-    <div class="blob blob-3" aria-hidden="true"></div>
-
     <!-- Floating Pill Navigation -->
     <div class="nav-container-fixed">
         <nav class="floating-nav">
@@ -284,12 +265,11 @@ $versionShort = app_version_hash(true);
             </div>
 
             <div class="nav-actions">
-                <!-- Nav Action CTA Button with Animated Arrow -->
-                <a href="#projects" class="btn btn-sm btn-nav-cta">
+                <!-- Nav Action CTA Button with Expanding Arrow -->
+                <a href="#projects" class="btn btn-sm btn-nav-cta btn-expanding">
                     <span><?= e(t('nav.cta_explore')) ?></span>
-                    <svg class="svg-arrow-anim" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <line class="arrow-stem" x1="5" y1="12" x2="19" y2="12" stroke-width="2.5" stroke-linecap="round"></line>
-                        <polyline class="arrow-head" points="12 5 19 12 12 19" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
+                    <svg class="expanding-arrow" viewBox="0 0 57 22">
+                        <path d="M0.5 9.35772H20.9956L14.2001 2.29941L16.4134 0L27 11L16.4134 22L14.2001 19.7006L20.9956 12.6423H0.5V9.35772Z"></path>
                     </svg>
                 </a>
 
@@ -351,17 +331,14 @@ $versionShort = app_version_hash(true);
                     </p>
 
                     <div class="hero-actions">
-                        <a href="#projects" class="btn">
+                        <!-- Main CTA with Expanding Arrow -->
+                        <a href="#projects" class="btn btn-expanding">
                             <span><?= e(t('hero.cta_projects')) ?></span>
-                            <svg class="svg-arrow-anim" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <line class="arrow-stem" x1="5" y1="12" x2="19" y2="12" stroke-width="2.5" stroke-linecap="round"></line>
-                                <polyline class="arrow-head" points="12 5 19 12 12 19" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
+                            <svg class="expanding-arrow" viewBox="0 0 57 22">
+                                <path d="M0.5 9.35772H20.9956L14.2001 2.29941L16.4134 0L27 11L16.4134 22L14.2001 19.7006L20.9956 12.6423H0.5V9.35772Z"></path>
                             </svg>
                         </a>
                         <a href="https://getmy.name/api-docs" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width:16px;height:16px;color:var(--primary);">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-                            </svg>
                             <span><?= e(t('hero.cta_playground')) ?></span>
                         </a>
                         <a href="https://github.com/ternis-org" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
@@ -369,10 +346,6 @@ $versionShort = app_version_hash(true);
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
                             </svg>
                             <span><?= e(t('hero.cta_github')) ?></span>
-                            <svg class="svg-arrow-anim" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <line class="arrow-stem" x1="5" y1="12" x2="19" y2="12" stroke-width="2.5" stroke-linecap="round"></line>
-                                <polyline class="arrow-head" points="12 5 19 12 12 19" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
-                            </svg>
                         </a>
                     </div>
 
@@ -412,11 +385,10 @@ $versionShort = app_version_hash(true);
                             <span class="badge badge-primary" style="font-size:0.75rem;">DNS & Infrastructure</span>
                             <span style="font-size: 0.95rem; color: var(--text-dark);"><?= e(t('projects.dnbx_note')) ?></span>
                         </div>
-                        <a href="https://dnbx.de" target="_blank" rel="noopener noreferrer" style="font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; color: var(--primary); display: inline-flex; align-items: center; gap: 0.45rem;">
+                        <a href="https://dnbx.de" target="_blank" rel="noopener noreferrer" class="btn-expanding" style="font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; color: var(--primary); display: inline-flex; align-items: center; gap: 0.45rem;">
                             <span>dnbx.de</span>
-                            <svg class="svg-arrow-anim" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <line class="arrow-stem" x1="5" y1="12" x2="19" y2="12" stroke-width="2.5" stroke-linecap="round"></line>
-                                <polyline class="arrow-head" points="12 5 19 12 12 19" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
+                            <svg class="expanding-arrow" viewBox="0 0 57 22">
+                                <path d="M0.5 9.35772H20.9956L14.2001 2.29941L16.4134 0L27 11L16.4134 22L14.2001 19.7006L20.9956 12.6423H0.5V9.35772Z"></path>
                             </svg>
                         </a>
                     </div>
@@ -440,10 +412,6 @@ $versionShort = app_version_hash(true);
                             <div class="project-actions">
                                 <a href="<?= e(t('projects.httpclient.url')) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm">
                                     <span><?= e(t('projects.view_project')) ?></span>
-                                    <svg class="svg-arrow-anim" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <line class="arrow-stem" x1="5" y1="12" x2="19" y2="12" stroke-width="2.5" stroke-linecap="round"></line>
-                                        <polyline class="arrow-head" points="12 5 19 12 12 19" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
-                                    </svg>
                                 </a>
                             </div>
                         </div>
@@ -466,10 +434,6 @@ $versionShort = app_version_hash(true);
                             <div class="project-actions">
                                 <a href="<?= e(t('projects.apisandbox.url')) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm">
                                     <span><?= e(t('projects.view_project')) ?></span>
-                                    <svg class="svg-arrow-anim" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <line class="arrow-stem" x1="5" y1="12" x2="19" y2="12" stroke-width="2.5" stroke-linecap="round"></line>
-                                        <polyline class="arrow-head" points="12 5 19 12 12 19" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
-                                    </svg>
                                 </a>
                             </div>
                         </div>
@@ -492,10 +456,6 @@ $versionShort = app_version_hash(true);
                             <div class="project-actions">
                                 <a href="<?= e(t('projects.mtex.url')) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm">
                                     <span><?= e(t('projects.view_project')) ?></span>
-                                    <svg class="svg-arrow-anim" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <line class="arrow-stem" x1="5" y1="12" x2="19" y2="12" stroke-width="2.5" stroke-linecap="round"></line>
-                                        <polyline class="arrow-head" points="12 5 19 12 12 19" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
-                                    </svg>
                                 </a>
                                 <a href="https://getmy.name" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
                                     <span>getmy.name</span>
@@ -524,10 +484,6 @@ $versionShort = app_version_hash(true);
                             <div class="project-actions">
                                 <a href="<?= e(t('projects.websearch.url')) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm">
                                     <span><?= e(t('projects.view_project')) ?></span>
-                                    <svg class="svg-arrow-anim" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <line class="arrow-stem" x1="5" y1="12" x2="19" y2="12" stroke-width="2.5" stroke-linecap="round"></line>
-                                        <polyline class="arrow-head" points="12 5 19 12 12 19" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
-                                    </svg>
                                 </a>
                             </div>
                         </div>
@@ -586,14 +542,13 @@ $versionShort = app_version_hash(true);
                         <p style="color: var(--text-muted); max-width: 580px; margin: 0 auto 1.5rem; font-size: 0.95rem;">
                             Discover our full suite of open-source utilities, repositories, and upcoming developer tools on the ternis-org GitHub organization.
                         </p>
-                        <a href="https://github.com/ternis-org" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
+                        <a href="https://github.com/ternis-org" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm btn-expanding">
                             <svg fill="currentColor" viewBox="0 0 24 24" style="width:16px;height:16px;">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
                             </svg>
                             <span>Explore ternis-org on GitHub</span>
-                            <svg class="svg-arrow-anim" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <line class="arrow-stem" x1="5" y1="12" x2="19" y2="12" stroke-width="2.5" stroke-linecap="round"></line>
-                                <polyline class="arrow-head" points="12 5 19 12 12 19" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
+                            <svg class="expanding-arrow" viewBox="0 0 57 22">
+                                <path d="M0.5 9.35772H20.9956L14.2001 2.29941L16.4134 0L27 11L16.4134 22L14.2001 19.7006L20.9956 12.6423H0.5V9.35772Z"></path>
                             </svg>
                         </a>
                     </div>
@@ -604,13 +559,12 @@ $versionShort = app_version_hash(true);
         <!-- Sticky Scroll-To-Top Tracker (Sticky inside sections-wrapper, but outside footer) -->
         <div class="scroll-top-tracker">
             <button type="button" id="scroll-to-top" class="scroll-to-top" aria-label="Scroll to top">
-                <svg class="progress-ring" width="48" height="48" viewBox="0 0 48 48">
-                    <circle class="progress-ring-bg" stroke-width="2.5" fill="transparent" r="20" cx="24" cy="24" />
-                    <circle class="progress-ring-circle" stroke-width="2.5" stroke-linecap="round" fill="transparent" r="20" cx="24" cy="24" />
+                <svg class="progress-ring" width="44" height="44" viewBox="0 0 44 44">
+                    <circle class="progress-ring-bg" stroke-width="2.5" fill="none" r="19" cx="22" cy="22" />
+                    <circle class="progress-ring-circle" stroke-width="2.5" stroke-linecap="round" fill="none" r="19" cx="22" cy="22" />
                 </svg>
-                <svg class="arrow-up-anim" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <line class="arrow-stem" x1="12" y1="19" x2="12" y2="5" stroke-width="2.5" stroke-linecap="round"></line>
-                    <polyline class="arrow-head" points="5 12 12 5 19 12" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
+                <svg class="scroll-arrow-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 19V5M5 12l7-7 7 7"/>
                 </svg>
             </button>
         </div>
@@ -624,11 +578,10 @@ $versionShort = app_version_hash(true);
                     Let's grow<br>
                     <strong>something beautiful.</strong>
                     <div style="margin-top:2.5rem;">
-                        <a href="https://ternis.dev" target="_blank" rel="noopener noreferrer" class="btn" style="background:var(--bg-color);color:var(--primary);box-shadow:none;">
+                        <a href="https://ternis.dev" target="_blank" rel="noopener noreferrer" class="btn btn-expanding" style="background:var(--bg-color);color:var(--primary);box-shadow:none;">
                             <span><?= e(t('cta.btn_contact')) ?></span>
-                            <svg class="svg-arrow-anim" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <line class="arrow-stem" x1="5" y1="12" x2="19" y2="12" stroke-width="2.5" stroke-linecap="round"></line>
-                                <polyline class="arrow-head" points="12 5 19 12 12 19" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
+                            <svg class="expanding-arrow" viewBox="0 0 57 22">
+                                <path d="M0.5 9.35772H20.9956L14.2001 2.29941L16.4134 0L27 11L16.4134 22L14.2001 19.7006L20.9956 12.6423H0.5V9.35772Z"></path>
                             </svg>
                         </a>
                     </div>

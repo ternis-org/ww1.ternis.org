@@ -114,70 +114,7 @@ body {
     overflow-x: hidden;
     position: relative;
     line-height: 1.6;
-    transition: background-color 0.4s ease, color 0.4s ease;
-}
-
-/* Noise Texture Overlay */
-body::after {
-    content: "";
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 9999;
-}
-
-/* ==========================================================================
-   Morphing Organic Blobs
-   ========================================================================== */
-
-.blob {
-    position: fixed;
-    z-index: -1;
-    filter: blur(50px);
-    opacity: 0.35;
-    pointer-events: none;
-}
-
-.blob-1 {
-    top: -10%;
-    left: -5%;
-    width: 48vw;
-    height: 48vw;
-    background: var(--secondary);
-    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-    animation: morph 16s ease-in-out infinite alternate;
-}
-
-.blob-2 {
-    bottom: 15%;
-    right: -10%;
-    width: 42vw;
-    height: 42vw;
-    background: var(--accent);
-    border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
-    animation: morph 22s ease-in-out infinite alternate-reverse;
-}
-
-.blob-3 {
-    top: 45%;
-    left: 20%;
-    width: 32vw;
-    height: 32vw;
-    background: var(--primary);
-    opacity: 0.15;
-    border-radius: 50% 50% 40% 60% / 60% 40% 60% 40%;
-    animation: morph 18s ease-in-out infinite alternate;
-}
-
-@keyframes morph {
-    0%   { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; transform: rotate(0deg) scale(1); }
-    50%  { transform: rotate(25deg) scale(1.05); }
-    100% { border-radius: 60% 40% 30% 70% / 50% 30% 70% 50%; transform: rotate(45deg) scale(0.95); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .blob-1, .blob-2, .blob-3 { animation: none; }
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* ==========================================================================
@@ -359,34 +296,29 @@ nav.floating-nav:hover {
 }
 
 /* ==========================================================================
-   Buttons, Badges & Animated SVGs (No translateY, crisp micro-interactions)
+   Buttons, Badges & Expanding SVG Arrow (Path Morphing)
    ========================================================================== */
 
-/* Animated SVG Arrow that lengthens on hover */
-.svg-arrow-anim {
+/* Expanding SVG Arrow using CSS path morphing */
+.expanding-arrow {
+    height: 12px;
+    width: 24px;
     display: inline-block;
     vertical-align: middle;
-    overflow: visible;
+    transition: 250ms all ease;
+    fill: currentColor;
     flex-shrink: 0;
 }
 
-.svg-arrow-anim .arrow-stem {
-    transform-origin: left center;
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.25s ease;
+.expanding-arrow path {
+    transition: 250ms all ease;
+    d: path("M0.5 9.35772H20.9956L14.2001 2.29941L16.4134 0L27 11L16.4134 22L14.2001 19.7006L20.9956 12.6423H0.5V9.35772Z");
 }
 
-.svg-arrow-anim .arrow-head {
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.25s ease;
-}
-
-.btn:hover .svg-arrow-anim .arrow-stem,
-a:hover .svg-arrow-anim .arrow-stem {
-    transform: scaleX(1.38);
-}
-
-.btn:hover .svg-arrow-anim .arrow-head,
-a:hover .svg-arrow-anim .arrow-head {
-    transform: translateX(3px);
+.btn:hover .expanding-arrow path,
+a:hover .expanding-arrow path,
+.btn-expanding:hover .expanding-arrow path {
+    d: path("M0 9.35772H50.9956L44.2001 2.29941L46.4134 0L57 11L46.4134 22L44.2001 19.7006L50.9956 12.6423H0V9.35772Z");
 }
 
 .btn-nav-cta {
@@ -1261,7 +1193,7 @@ footer.sculpted-footer {
 }
 
 /* ==========================================================================
-   Sections Wrapper & Sticky Scroll-To-Top Progress
+   Sections Wrapper & Sticky Scroll-To-Top Tracker (Clean & Precise)
    ========================================================================== */
 
 .sections-wrapper {
@@ -1271,38 +1203,33 @@ footer.sculpted-footer {
 
 .scroll-top-tracker {
     position: sticky;
-    bottom: 2.25rem;
+    bottom: 2rem;
     display: flex;
     justify-content: flex-end;
-    padding-right: 2.5rem;
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
     pointer-events: none;
     z-index: 990;
-    margin-top: -4rem;
     height: 0;
-    overflow: visible;
 }
 
 .scroll-to-top {
     pointer-events: auto;
     position: relative;
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    background: var(--bg-surface-trans);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: var(--shadow-sm);
-    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                visibility 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                background-color 0.25s ease,
-                border-color 0.25s ease;
     opacity: 0;
     visibility: hidden;
+    transform: translateY(-3rem);
+    transition: opacity 0.25s ease, visibility 0.25s ease, border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .scroll-to-top.visible {
@@ -1319,7 +1246,10 @@ footer.sculpted-footer {
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
     transform: rotate(-90deg);
+    pointer-events: none;
 }
 
 .progress-ring-bg {
@@ -1328,34 +1258,19 @@ footer.sculpted-footer {
 
 .progress-ring-circle {
     stroke: var(--primary);
-    stroke-dasharray: 125.66;
-    stroke-dashoffset: 125.66;
+    stroke-dasharray: 119.38;
+    stroke-dashoffset: 119.38;
     transition: stroke-dashoffset 0.1s linear;
 }
 
-/* Animated Scroll-To-Top Up Arrow (Lengthens on hover) */
-.scroll-to-top .arrow-up-anim {
+.scroll-to-top .scroll-arrow-icon {
+    width: 18px;
+    height: 18px;
     color: var(--primary);
+    position: relative;
     z-index: 2;
-    overflow: visible;
-    flex-shrink: 0;
-}
-
-.scroll-to-top .arrow-up-anim .arrow-stem {
-    transform-origin: center bottom;
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.25s ease;
-}
-
-.scroll-to-top .arrow-up-anim .arrow-head {
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.25s ease;
-}
-
-.scroll-to-top:hover .arrow-up-anim .arrow-stem {
-    transform: scaleY(1.35);
-}
-
-.scroll-to-top:hover .arrow-up-anim .arrow-head {
-    transform: translateY(-2px);
+    display: block;
+    transition: color 0.2s ease;
 }
 
 /* ==========================================================================
