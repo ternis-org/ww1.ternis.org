@@ -320,8 +320,9 @@ $versionShort = app_version_hash(true);
                         <!-- Main CTA with Expanding Arrow -->
                         <a href="#projects" class="btn btn-expanding">
                             <span><?= e(t('hero.cta_projects')) ?></span>
-                            <svg class="expanding-arrow" viewBox="0 0 57 22">
-                                <path d="M0.5 9.35772H20.9956L14.2001 2.29941L16.4134 0L27 11L16.4134 22L14.2001 19.7006L20.9956 12.6423H0.5V9.35772Z"></path>
+                            <svg class="arrow-svg" viewBox="0 0 35 12" fill="none">
+                                <path d="M 28.833 1 L 33.244 5.411 C 33.57 5.736 33.57 6.264 33.244 6.589 L 28.833 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M 1.5 6 L 32 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="arrow-line"/>
                             </svg>
                         </a>
                         <a href="https://getmy.name/api-docs" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
@@ -373,8 +374,9 @@ $versionShort = app_version_hash(true);
                         </div>
                         <a href="https://dnbx.de" target="_blank" rel="noopener noreferrer" class="btn-expanding" style="font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; color: var(--primary); display: inline-flex; align-items: center; gap: 0.45rem;">
                             <span>dnbx.de</span>
-                            <svg class="expanding-arrow" viewBox="0 0 57 22">
-                                <path d="M0.5 9.35772H20.9956L14.2001 2.29941L16.4134 0L27 11L16.4134 22L14.2001 19.7006L20.9956 12.6423H0.5V9.35772Z"></path>
+                            <svg class="arrow-svg" viewBox="0 0 35 12" fill="none">
+                                <path d="M 28.833 1 L 33.244 5.411 C 33.57 5.736 33.57 6.264 33.244 6.589 L 28.833 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M 1.5 6 L 32 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="arrow-line"/>
                             </svg>
                         </a>
                     </div>
@@ -533,8 +535,9 @@ $versionShort = app_version_hash(true);
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
                             </svg>
                             <span>Explore ternis-org on GitHub</span>
-                            <svg class="expanding-arrow" viewBox="0 0 57 22">
-                                <path d="M0.5 9.35772H20.9956L14.2001 2.29941L16.4134 0L27 11L16.4134 22L14.2001 19.7006L20.9956 12.6423H0.5V9.35772Z"></path>
+                            <svg class="arrow-svg" viewBox="0 0 35 12" fill="none">
+                                <path d="M 28.833 1 L 33.244 5.411 C 33.57 5.736 33.57 6.264 33.244 6.589 L 28.833 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M 1.5 6 L 32 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="arrow-line"/>
                             </svg>
                         </a>
                     </div>
@@ -566,8 +569,9 @@ $versionShort = app_version_hash(true);
                     <div style="margin-top:2.5rem;">
                         <a href="https://ternis.dev" target="_blank" rel="noopener noreferrer" class="btn btn-expanding" style="background:var(--bg-color);color:var(--primary);box-shadow:none;">
                             <span><?= e(t('cta.btn_contact')) ?></span>
-                            <svg class="expanding-arrow" viewBox="0 0 57 22">
-                                <path d="M0.5 9.35772H20.9956L14.2001 2.29941L16.4134 0L27 11L16.4134 22L14.2001 19.7006L20.9956 12.6423H0.5V9.35772Z"></path>
+                            <svg class="arrow-svg" viewBox="0 0 35 12" fill="none">
+                                <path d="M 28.833 1 L 33.244 5.411 C 33.57 5.736 33.57 6.264 33.244 6.589 L 28.833 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M 1.5 6 L 32 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="arrow-line"/>
                             </svg>
                         </a>
                     </div>

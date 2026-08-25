@@ -296,29 +296,44 @@ nav.floating-nav:hover {
 }
 
 /* ==========================================================================
-   Buttons, Badges & Expanding SVG Arrow (Path Morphing)
+   Buttons, Badges & Expanding SVG Arrow
    ========================================================================== */
 
-/* Expanding SVG Arrow using CSS path morphing */
-.expanding-arrow {
-    height: 12px;
-    width: 24px;
+/* Expanding SVG Arrow in buttons */
+.arrow-svg {
+    width: 20px;
+    height: 10px;
+    stroke: currentColor;
+    fill: none;
     display: inline-block;
     vertical-align: middle;
-    transition: 250ms all ease;
-    fill: currentColor;
+    overflow: visible;
     flex-shrink: 0;
+    margin-left: 5px;
+    transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.expanding-arrow path {
-    transition: 250ms all ease;
-    d: path("M0.5 9.35772H20.9956L14.2001 2.29941L16.4134 0L27 11L16.4134 22L14.2001 19.7006L20.9956 12.6423H0.5V9.35772Z");
+.arrow-svg .arrow-line {
+    stroke-dasharray: 32;
+    stroke-dashoffset: 18;
+    transition: stroke-dashoffset 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.btn:hover .expanding-arrow path,
-a:hover .expanding-arrow path,
-.btn-expanding:hover .expanding-arrow path {
-    d: path("M0 9.35772H50.9956L44.2001 2.29941L46.4134 0L57 11L46.4134 22L44.2001 19.7006L50.9956 12.6423H0V9.35772Z");
+.btn:hover .arrow-svg,
+a:hover .arrow-svg,
+.btn-expanding:hover .arrow-svg {
+    width: 28px;
+}
+
+.btn:hover .arrow-svg .arrow-line,
+a:hover .arrow-svg .arrow-line,
+.btn-expanding:hover .arrow-svg .arrow-line {
+    stroke-dashoffset: 0;
+}
+
+.btn:active,
+button:active {
+    transform: scale(0.98);
 }
 
 .btn-nav-cta {
