@@ -1206,9 +1206,8 @@ footer.sculpted-footer {
     bottom: 2rem;
     display: flex;
     justify-content: flex-end;
-    max-width: 1160px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
+    width: 100%;
+    padding-right: 2.5rem;
     pointer-events: none;
     z-index: 990;
     height: 0;
