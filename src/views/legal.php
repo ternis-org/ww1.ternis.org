@@ -56,8 +56,8 @@ $doc = $doc ?? [];
 
                     <h3><?= e($doc['contact_heading'] ?? 'Contact') ?></h3>
                     <p style="line-height: 1.8;">
-                        <strong>E-Mail:</strong> <a href="mailto:<?= e($doc['contact_email'] ?? 'legal@ternis.dev') ?>" style="color: var(--primary); text-decoration: underline;"><?= e($doc['contact_email'] ?? 'legal@ternis.dev') ?></a><br>
-                        <strong>Web:</strong> <a href="<?= e($doc['contact_web'] ?? 'https://ternis.dev') ?>" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: underline;"><?= e($doc['contact_web'] ?? 'https://ternis.dev') ?></a>
+                        <strong>E-Mail:</strong> <a href="mailto:contact@ternis.dev" style="color: var(--primary); text-decoration: underline;">contact@ternis.dev</a> &bull; <a href="mailto:edv@ternismail.de" style="color: var(--primary); text-decoration: underline;">edv@ternismail.de</a><br>
+                        <strong>Web:</strong> <a href="https://ternis.dev" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: underline;">ternis.dev</a> | <a href="https://ternis-edv.de" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: underline;">ternis-edv.de</a>
                     </p>
 
                     <h3><?= e($doc['disclaimer_heading'] ?? 'Disclaimer') ?></h3>

@@ -32,11 +32,13 @@ declare(strict_types=1);
 })();
 
 return [
-    'app_name'     => getenv('APP_NAME') ?: 'ternis.org',
-    'app_env'      => getenv('APP_ENV') ?: 'production',
-    'app_debug'    => filter_var(getenv('APP_DEBUG') ?: false, FILTER_VALIDATE_BOOLEAN),
-    'app_url'      => getenv('APP_URL') ?: 'https://ternis.org',
-    'repo_url'     => getenv('REPO_URL') ?: 'https://github.com/ternis-org/ww1.ternis.org',
-    'org_github'   => getenv('ORG_GITHUB') ?: 'https://github.com/ternis-org',
-    'api_docs_url' => getenv('API_DOCS_URL') ?: 'https://getmy.name/api-docs',
+    'app_name'      => getenv('APP_NAME') ?: 'ternis.org',
+    'app_env'       => getenv('APP_ENV') ?: 'production',
+    'app_debug'     => filter_var(getenv('APP_DEBUG') ?: false, FILTER_VALIDATE_BOOLEAN),
+    'app_url'       => getenv('APP_URL') ?: 'https://ternis.org',
+    'repo_url'      => getenv('REPO_URL') ?: 'https://github.com/ternis-org/ww1.ternis.org',
+    'org_github'    => getenv('ORG_GITHUB') ?: 'https://github.com/ternis-org',
+    'api_docs_url'  => getenv('API_DOCS_URL') ?: 'https://getmy.name/api-docs',
+    'contact_email' => getenv('CONTACT_EMAIL') ?: 'contact@ternis.dev',
+    'edv_email'     => getenv('EDV_EMAIL') ?: 'edv@ternismail.de',
 ];

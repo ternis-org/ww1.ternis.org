@@ -245,8 +245,8 @@ return [
             'operator_org'     => 'ternis-edv.de / ternis.dev',
             'operator_address' => 'Deutschland',
             'contact_heading'  => 'Kontaktmöglichkeiten',
-            'contact_email'    => 'E-Mail: contact@ternis.dev / info@ternis-edv.de',
-            'contact_web'      => 'Web: https://ternis.dev | https://ternis-edv.de | https://ternis.org',
+            'contact_email'    => 'contact@ternis.dev / edv@ternismail.de',
+            'contact_web'      => 'https://ternis.dev | https://ternis-edv.de | https://ternis.org',
             'disclaimer_heading'=> 'Haftungsausschluss & Gewährleistung',
             'disclaimer_text'  => 'Die Nutzung aller Open-Source-Tools, Repositories und Schnittstellen erfolgt ohne ausdrückliche oder stillschweigende Gewährleistung jeglicher Art. Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links.',
             'copyright_heading' => 'Urheberrecht & Lizenzierung',
@@ -265,7 +265,7 @@ return [
             'cookies_heading' => 'Cookies & Lokaler Speicher',
             'cookies_text'    => 'Diese Website nutzt den lokalen Browserspeicher (localStorage) ausschließlich zur Speicherung deiner Theme-Einstellung (Dark/Light) und Sprachauswahl. Tracking-Cookies kommen nicht zum Einsatz.',
             'rights_heading'  => 'Deine Rechte nach DSGVO',
-            'rights_text'     => 'Du hast gemäß DSGVO jederzeit das Recht auf unentgeltliche Auskunft über deine gespeicherten personenbezogenen Daten sowie ein Recht auf Berichtigung oder Löschung. Wende dich hierzu an privacy@ternis.dev.',
+            'rights_text'     => 'Du hast gemäß DSGVO jederzeit das Recht auf unentgeltliche Auskunft über deine gespeicherten personenbezogenen Daten sowie ein Recht auf Berichtigung oder Löschung. Wende dich hierzu an contact@ternis.dev oder edv@ternismail.de.',
         ],
 
         'license' => [

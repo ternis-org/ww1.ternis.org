@@ -245,8 +245,8 @@ return [
             'operator_org'     => 'ternis-edv.de / ternis.dev',
             'operator_address' => 'Germany',
             'contact_heading'  => 'Contact Information',
-            'contact_email'    => 'Email: contact@ternis.dev / info@ternis-edv.de',
-            'contact_web'      => 'Web: https://ternis.dev | https://ternis-edv.de | https://ternis.org',
+            'contact_email'    => 'contact@ternis.dev / edv@ternismail.de',
+            'contact_web'      => 'https://ternis.dev | https://ternis-edv.de | https://ternis.org',
             'disclaimer_heading'=> 'Disclaimer & Liability',
             'disclaimer_text'  => 'All open-source tools, code repositories, and APIs are provided "as is", without warranty of any kind, express or implied. Although we inspect third-party links carefully, we assume no liability for the content of external websites linked on this platform.',
             'copyright_heading' => 'Copyright & Licensing',
@@ -265,7 +265,7 @@ return [
             'cookies_heading' => 'Cookies & Local Storage',
             'cookies_text'    => 'This site uses local browser storage solely to remember your preferred UI theme (dark/light) and language preference. No tracking cookies are used.',
             'rights_heading'  => 'Your Rights under GDPR',
-            'rights_text'     => 'Under the European General Data Protection Regulation (GDPR), you have the right to access, rectify, or request deletion of any personal data stored about you. For inquiries, reach out to privacy@ternis.dev.',
+            'rights_text'     => 'Under the European General Data Protection Regulation (GDPR), you have the right to access, rectify, or request deletion of any personal data stored about you. For inquiries, reach out to contact@ternis.dev or edv@ternismail.de.',
         ],
 
         'license' => [
