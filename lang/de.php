@@ -64,7 +64,7 @@ return [
     'projects' => [
         'title'          => 'Projekte, an denen ternis.org arbeitet',
         'subtitle'       => 'Open-Source-Entwicklertools, souveräne Infrastruktur und Privatsphäre-Plattformen unter dem Dach von ternis.org.',
-        'dnbx_note'      => 'Alle aufgeführten Domains werden über dnbx.de (von ternis.dev) verwaltet.',
+        'dnbx_note'      => 'Alle Domains werden über dnbx.de (von ternis.dev) mit eigenen ternis.org-Nameservern verwaltet: one.ns.ternis.net (= example-dns.net) & two.ns.ternis.net (= example-dns.org).',
         'view_project'   => 'Projekt öffnen',
         'view_docs'      => 'API-Dokumentation',
         'view_repo'      => 'Quellcode',
@@ -123,6 +123,17 @@ return [
             'description' => 'Open-Source-Software und verwaltete Hosting-Plattform (mit kommerziellen Tarifen) zur einfachen Interaktion und Verteilung von Dateien auf S3-kompatiblem Objektspeicher wie Cloudflare R2.',
             'tags'        => ['S3-kompatibel', 'Cloudflare R2', 'Objektspeicher', 'Open-Source-Software', 'Plattform'],
             'url'         => 'https://static.re',
+        ],
+
+        'exampledns' => [
+            'title'       => 'example-dns',
+            'badge'       => 'Nameserver & DNS',
+            'tagline'     => 'Autoritative Nameserver & Open-Source DNS-Infrastruktur',
+            'description' => 'ternis.org betreibt eigene autoritative Nameserver (one.ns.ternis.net = example-dns.net und two.ns.ternis.net = example-dns.org) und besitzt example-dns.com, .net sowie .org für eine transparente und souveräne DNS-Infrastruktur.',
+            'tags'        => ['one.ns.ternis.net', 'two.ns.ternis.net', 'Autoritative Nameserver', 'DNS', 'Open Source'],
+            'url_github'  => 'https://github.com/example-dns/example-dns',
+            'url_codeberg'=> 'https://codeberg.org/example-dns/example-dns',
+            'url_web'     => 'https://example-dns.com',
         ],
     ],
 

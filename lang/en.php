@@ -64,7 +64,7 @@ return [
     'projects' => [
         'title'          => 'Projects ternis.org is Working On',
         'subtitle'       => 'Open-source developer tooling, sovereign infrastructure, and privacy platforms maintained under the ternis.org umbrella.',
-        'dnbx_note'      => 'All domains listed are managed through dnbx.de (by ternis.dev).',
+        'dnbx_note'      => 'All domains are managed through dnbx.de (by ternis.dev) with ternis.org authoritative nameservers: one.ns.ternis.net (= example-dns.net) & two.ns.ternis.net (= example-dns.org).',
         'view_project'   => 'Visit Project',
         'view_docs'      => 'API Docs',
         'view_repo'      => 'Source Code',
@@ -123,6 +123,17 @@ return [
             'description' => 'Open-source software and managed distribution platform (with dedicated commercial tiers) for interacting with S3-compatible object storage like Cloudflare R2.',
             'tags'        => ['S3 Compatible', 'Cloudflare R2', 'Object Storage', 'Open Source Software', 'Platform'],
             'url'         => 'https://static.re',
+        ],
+
+        'exampledns' => [
+            'title'       => 'example-dns',
+            'badge'       => 'Nameservers & DNS',
+            'tagline'     => 'Authoritative Nameservers & Open-Source DNS Infrastructure',
+            'description' => 'ternis.org operates its own authoritative nameservers (one.ns.ternis.net = example-dns.net and two.ns.ternis.net = example-dns.org) and owns example-dns.com, .net, and .org. Permissively licensed, sovereign DNS tooling.',
+            'tags'        => ['one.ns.ternis.net', 'two.ns.ternis.net', 'Authoritative Nameservers', 'DNS', 'Open Source'],
+            'url_github'  => 'https://github.com/example-dns/example-dns',
+            'url_codeberg'=> 'https://codeberg.org/example-dns/example-dns',
+            'url_web'     => 'https://example-dns.com',
         ],
     ],
 

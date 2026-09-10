@@ -71,19 +71,21 @@ $lang = $lang ?? current_lang();
             <p class="section-subtitle"><?= e(t('projects.subtitle')) ?></p>
         </div>
 
-        <!-- dnbx.de Domain Management Notice Bar -->
-        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1rem 1.75rem; margin-bottom: 2.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
-            <div style="display: flex; align-items: center; gap: 0.75rem;">
-                <span class="badge badge-primary" style="font-size:0.75rem;">DNS & Infrastructure</span>
-                <span style="font-size: 0.95rem; color: var(--text-dark);"><?= e(t('projects.dnbx_note')) ?></span>
+        <!-- DNS & Infrastructure Notice Bar -->
+        <div class="infra-notice-bar">
+            <div class="infra-notice-content">
+                <span class="infra-notice-prefix">DNS &amp; Nameservers</span>
+                <span class="infra-notice-text"><?= e(t('projects.dnbx_note')) ?></span>
             </div>
-            <a href="https://dnbx.de" target="_blank" rel="noopener noreferrer" class="btn-expanding" style="font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; color: var(--primary); display: inline-flex; align-items: center; gap: 0.45rem;">
-                <span>dnbx.de</span>
-                <svg class="arrow-svg arrow-svg-sm" viewBox="0 0 35 12" fill="none">
-                    <path d="M 28.833 1 L 33.244 5.411 C 33.57 5.736 33.57 6.264 33.244 6.589 L 28.833 11" stroke-width="1.5" stroke-linecap="round"/>
-                    <path d="M 1.5 6 L 32 6" stroke-width="1.5" stroke-linecap="round" class="line"/>
-                </svg>
-            </a>
+            <div class="infra-notice-links">
+                <a href="https://dnbx.de" target="_blank" rel="noopener noreferrer" class="infra-link">
+                    <span>dnbx.de</span>
+                    <svg class="arrow-svg arrow-svg-sm" viewBox="0 0 35 12" fill="none">
+                        <path d="M 28.833 1 L 33.244 5.411 C 33.57 5.736 33.57 6.264 33.244 6.589 L 28.833 11" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M 1.5 6 L 32 6" stroke-width="1.5" stroke-linecap="round" class="line"/>
+                    </svg>
+                </a>
+            </div>
         </div>
 
         <div class="projects-grid">
@@ -92,7 +94,6 @@ $lang = $lang ?? current_lang();
                 <div>
                     <div class="project-header">
                         <h3><?= e(t('projects.httpclient.title')) ?></h3>
-                        <span class="badge badge-accent"><?= e(t('projects.httpclient.badge')) ?></span>
                     </div>
                     <div class="project-tagline"><?= e(t('projects.httpclient.tagline')) ?></div>
                     <p class="project-desc"><?= e(t('projects.httpclient.description')) ?></p>
@@ -114,7 +115,6 @@ $lang = $lang ?? current_lang();
                 <div>
                     <div class="project-header">
                         <h3><?= e(t('projects.apisandbox.title')) ?></h3>
-                        <span class="badge badge-secondary"><?= e(t('projects.apisandbox.badge')) ?></span>
                     </div>
                     <div class="project-tagline"><?= e(t('projects.apisandbox.tagline')) ?></div>
                     <p class="project-desc"><?= e(t('projects.apisandbox.description')) ?></p>
@@ -136,7 +136,6 @@ $lang = $lang ?? current_lang();
                 <div>
                     <div class="project-header">
                         <h3><?= e(t('projects.mtex.title')) ?></h3>
-                        <span class="badge badge-primary"><?= e(t('projects.mtex.badge')) ?></span>
                     </div>
                     <div class="project-tagline"><?= e(t('projects.mtex.tagline')) ?></div>
                     <p class="project-desc"><?= e(t('projects.mtex.description')) ?></p>
@@ -153,9 +152,6 @@ $lang = $lang ?? current_lang();
                     <a href="https://getmy.name" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
                         <span>getmy.name</span>
                     </a>
-                    <a href="https://getmy.name/api-docs" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
-                        <span><?= e(t('projects.view_docs')) ?></span>
-                    </a>
                 </div>
             </div>
 
@@ -164,7 +160,6 @@ $lang = $lang ?? current_lang();
                 <div>
                     <div class="project-header">
                         <h3><?= e(t('projects.websearch.title')) ?></h3>
-                        <span class="badge badge-accent"><?= e(t('projects.websearch.badge')) ?></span>
                     </div>
                     <div class="project-tagline"><?= e(t('projects.websearch.tagline')) ?></div>
                     <p class="project-desc"><?= e(t('projects.websearch.description')) ?></p>
@@ -186,7 +181,6 @@ $lang = $lang ?? current_lang();
                 <div>
                     <div class="project-header">
                         <h3><?= e(t('projects.mailfree.title')) ?></h3>
-                        <span class="badge badge-secondary"><?= e(t('projects.mailfree.badge')) ?></span>
                     </div>
                     <div class="project-tagline"><?= e(t('projects.mailfree.tagline')) ?></div>
                     <p class="project-desc"><?= e(t('projects.mailfree.description')) ?></p>
@@ -211,7 +205,6 @@ $lang = $lang ?? current_lang();
                 <div>
                     <div class="project-header">
                         <h3><?= e(t('projects.staticre.title')) ?></h3>
-                        <span class="badge badge-accent"><?= e(t('projects.staticre.badge')) ?></span>
                     </div>
                     <div class="project-tagline"><?= e(t('projects.staticre.tagline')) ?></div>
                     <p class="project-desc"><?= e(t('projects.staticre.description')) ?></p>
@@ -224,6 +217,36 @@ $lang = $lang ?? current_lang();
                 <div class="project-actions">
                     <a href="<?= e(t('projects.staticre.url')) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
                         <span><?= e(t('projects.view_project')) ?></span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 7: example-dns -->
+            <div class="project-card project-card-full">
+                <div>
+                    <div class="project-header">
+                        <h3><?= e(t('projects.exampledns.title')) ?></h3>
+                    </div>
+                    <div class="project-tagline"><?= e(t('projects.exampledns.tagline')) ?></div>
+                    <p class="project-desc"><?= e(t('projects.exampledns.description')) ?></p>
+                    <div class="project-tags">
+                        <?php foreach (t_array('projects.exampledns.tags') as $tag): ?>
+                            <span class="project-tag"><?= e($tag) ?></span>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <div class="project-actions">
+                    <a href="<?= e(t('projects.exampledns.url_web')) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm">
+                        <span>example-dns.com</span>
+                    </a>
+                    <a href="<?= e(t('projects.exampledns.url_github')) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                        <svg fill="currentColor" viewBox="0 0 24 24" style="width:14px;height:14px;">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
+                        </svg>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="<?= e(t('projects.exampledns.url_codeberg')) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                        <span>Codeberg</span>
                     </a>
                 </div>
             </div>

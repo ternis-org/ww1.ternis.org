@@ -54,15 +54,15 @@ ternis.org is dedicated to stewarding and scaling open-source developer tooling 
                         ▼                                                                          ▼
             ┌───────────────────────┐                                                  ┌───────────────────────┐
             │   MTEX.dev Project    │                                                  │ Sovereign Infra & Web │
-            │  (Developer Tooling)  │                                                  │     (Cloud & Mail)    │
+            │  (Developer Tooling)  │                                                  │  (DNS, Cloud & Mail)  │
             ├───────────────────────┤                                                  ├───────────────────────┤
-            │ • getmy.name (API)    │                                                  │ • mail-free.eu / .uk  │
-            │ • API Sandbox Tools   │                                                  │ • static.re Pipeline  │
-            │ • Tailwind Components │                                                  │ • EU Privacy Services │
+            │ • getmy.name (API)    │                                                  │ • example-dns (NS)    │
+            │ • API Sandbox Tools   │                                                  │ • mail-free.eu / .uk  │
+            │ • Tailwind Components │                                                  │ • static.re Pipeline  │
             └───────────────────────┘                                                  └───────────────────────┘
 ```
 
-> **Note:** All domains listed are managed by/through **[dnbx.de](https://dnbx.de)** (by [ternis.dev](https://ternis.dev)).
+> **Note:** All domains listed are managed through **[dnbx.de](https://dnbx.de)** (by [ternis.dev](https://ternis.dev)) with ternis.org's own authoritative nameservers: `one.ns.ternis.net` (= `example-dns.net`) & `two.ns.ternis.net` (= `example-dns.org`). ternis.org owns `example-dns.com`, `example-dns.net`, and `example-dns.org`.
 
 ### 1. [httpclient.de](https://httpclient.de) — Free HTTP Client for Web & Desktop
 - **Status:** `Work in Progress (WIP)`
@@ -77,7 +77,7 @@ ternis.org is dedicated to stewarding and scaling open-source developer tooling 
 ### 3. [MTEX.dev](https://mtex.dev) — Developer Tools & Components
 - **Status:** `Active Ecosystem`
 - **License:** MIT
-- **Summary:** Suite of free and open-source developer utilities and sandboxes, maintaining **[getmy.name](https://getmy.name)** (Free Headless Portfolio API, docs: [getmy.name/api-docs](https://getmy.name/api-docs)).
+- **Summary:** Suite of free and open-source developer utilities and sandboxes, maintaining **[getmy.name](https://getmy.name)** (Free Headless Portfolio API).
 
 ### 4. [web-search.org](https://web-search.org) — Self-Hostable Search Engine
 - **Status:** `Work in Progress (WIP)`
@@ -93,6 +93,14 @@ ternis.org is dedicated to stewarding and scaling open-source developer tooling 
 - **Status:** `Platform & Open-Source Software`
 - **License:** Open Source Software (with dedicated commercial tiers)
 - **Summary:** Open-source software and managed distribution platform for interacting with S3-compatible object storage like Cloudflare R2.
+
+### 7. [example-dns](https://example-dns.com) — Authoritative Nameservers & Open-Source DNS Infrastructure
+- **Status:** `Active Infrastructure & Open-Source Project`
+- **License:** Open Source & Free
+- **Nameservers:** `one.ns.ternis.net` (= `example-dns.net`) & `two.ns.ternis.net` (= `example-dns.org`)
+- **Domains Owned:** `example-dns.com`, `example-dns.net`, `example-dns.org`
+- **Repositories:** [GitHub (github.com/example-dns/example-dns)](https://github.com/example-dns/example-dns) &bull; [Codeberg (codeberg.org/example-dns/example-dns)](https://codeberg.org/example-dns/example-dns)
+- **Summary:** Authoritative nameservers and open-source DNS infrastructure owned and operated directly by ternis.org for transparent, sovereign digital services.
 
 ---
 

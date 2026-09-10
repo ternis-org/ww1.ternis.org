@@ -256,7 +256,9 @@ $showScrollTop   = $showScrollTop ?? true;
             "https://ternis-edv.de",
             "https://mtex.dev",
             "https://getmy.name",
-            "https://dnbx.de"
+            "https://dnbx.de",
+            "https://example-dns.com",
+            "https://github.com/example-dns/example-dns"
         ]
     }
     </script>
