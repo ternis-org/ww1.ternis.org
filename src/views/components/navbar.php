@@ -24,6 +24,7 @@ $homePrefix = (str_contains($currentPath, '/legal') || str_contains($currentPath
 
         <div class="nav-links">
             <a href="<?= e($homePrefix) ?>#projects"><?= e(t('nav.projects')) ?></a>
+            <a href="<?= e($homePrefix) ?>#nameservers"><?= e(t('nav.nameservers')) ?></a>
             <a href="<?= e($homePrefix) ?>#connect"><?= e(t('nav.ecosystem')) ?></a>
         </div>
 
@@ -61,6 +62,7 @@ $homePrefix = (str_contains($currentPath, '/legal') || str_contains($currentPath
 <!-- Mobile Drawer -->
 <div class="mobile-drawer" role="dialog" aria-label="Mobile Navigation">
     <a href="<?= e($homePrefix) ?>#projects" class="nav-link"><?= e(t('nav.projects')) ?></a>
+    <a href="<?= e($homePrefix) ?>#nameservers" class="nav-link"><?= e(t('nav.nameservers')) ?></a>
     <a href="<?= e($homePrefix) ?>#connect" class="nav-link"><?= e(t('nav.ecosystem')) ?></a>
     <a href="/<?= e($lang) ?>/legal/imprint" class="nav-link"><?= e(t('nav.imprint')) ?></a>
     <a href="/<?= e($lang) ?>/legal/privacy" class="nav-link"><?= e(t('nav.privacy')) ?></a>

@@ -802,6 +802,253 @@ h2 strong {
 }
 
 /* ==========================================================================
+   Dedicated Nameservers Section Styles
+   ========================================================================== */
+
+.ns-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.ns-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(14px);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 2.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ns-card:hover {
+    border-color: var(--border-highlight);
+    background: var(--bg-card-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(74, 93, 35, 0.05);
+}
+
+.ns-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.ns-status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.ns-dot-live {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #52b788;
+    box-shadow: 0 0 8px rgba(82, 183, 136, 0.7);
+    display: inline-block;
+    animation: nsPulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes nsPulse {
+    0% { transform: scale(0.9); opacity: 0.7; }
+    100% { transform: scale(1.15); opacity: 1; }
+}
+
+.ns-node-badge {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--radius-sm);
+    background: rgba(74, 93, 35, 0.08);
+    color: var(--primary);
+    border: 1px solid var(--border-subtle);
+}
+
+[data-theme="dark"] .ns-node-badge {
+    background: rgba(148, 184, 88, 0.12);
+}
+
+.ns-hostname {
+    font-family: var(--font-mono);
+    font-size: 1.55rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin: 0 0 0.4rem 0;
+    letter-spacing: -0.01em;
+}
+
+.ns-alias {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--secondary);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.ns-alias code {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.ns-desc {
+    font-size: 0.94rem;
+    line-height: 1.65;
+    color: var(--text-dark);
+    margin-bottom: 1.35rem;
+}
+
+.ns-specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.5rem;
+}
+
+.ns-spec-chip {
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    padding: 0.2rem 0.55rem;
+    background: rgba(74, 93, 35, 0.05);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+}
+
+[data-theme="dark"] .ns-spec-chip {
+    background: rgba(148, 184, 88, 0.06);
+}
+
+.ns-meta-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 2.25rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    margin-bottom: 2.5rem;
+    align-items: center;
+}
+
+.ns-domains-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.75rem;
+}
+
+.ns-domains-header h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin: 0;
+}
+
+.ns-meta-desc {
+    font-size: 0.925rem;
+    line-height: 1.65;
+    color: var(--text-dark);
+    margin-bottom: 1.25rem;
+}
+
+.ns-domain-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.ns-domain-pill {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.35rem 0.85rem;
+    background: rgba(74, 93, 35, 0.06);
+    border: 1px solid var(--border-subtle);
+    border-radius: 50px;
+    color: var(--primary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+a.ns-domain-pill:hover {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+}
+
+.ns-terminal {
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.ns-terminal-header {
+    display: flex;
+    align-items: center;
+    padding: 0.65rem 1rem;
+    background: rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid var(--code-border);
+    gap: 6px;
+}
+
+.ns-terminal-title {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-left: auto;
+}
+
+.ns-terminal-code {
+    margin: 0;
+    padding: 1.15rem 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: #c9d1d9;
+    overflow-x: auto;
+}
+
+.term-prompt {
+    color: #8c9c6f;
+    user-select: none;
+}
+
+.ns-actions-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+    .ns-meta-card {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .ns-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================================
    Interactive API Playground
    ========================================================================== */
 
