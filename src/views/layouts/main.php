@@ -257,6 +257,7 @@ $showScrollTop   = $showScrollTop ?? true;
             "https://mtex.dev",
             "https://getmy.name",
             "https://dnbx.de",
+            "https://drophtml.de",
             "https://example-dns.com",
             "https://github.com/example-dns/example-dns"
         ]

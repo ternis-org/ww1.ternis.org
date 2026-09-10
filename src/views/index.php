@@ -228,8 +228,29 @@ $lang = $lang ?? current_lang();
                 </div>
             </div>
 
-            <!-- Project 7: example-dns -->
-            <div class="project-card project-card-full">
+            <!-- Project 7: drophtml.de -->
+            <div class="project-card">
+                <div>
+                    <div class="project-header">
+                        <h3><?= e(t('projects.drophtml.title')) ?></h3>
+                    </div>
+                    <div class="project-tagline"><?= e(t('projects.drophtml.tagline')) ?></div>
+                    <p class="project-desc"><?= e(t('projects.drophtml.description')) ?></p>
+                    <div class="project-tags">
+                        <?php foreach (t_array('projects.drophtml.tags') as $tag): ?>
+                            <span class="project-tag"><?= e($tag) ?></span>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <div class="project-actions">
+                    <a href="<?= e(t('projects.drophtml.url')) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm">
+                        <span><?= e(t('projects.view_project')) ?></span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 8: example-dns -->
+            <div class="project-card">
                 <div>
                     <div class="project-header">
                         <h3><?= e(t('projects.exampledns.title')) ?></h3>

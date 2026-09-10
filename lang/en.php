@@ -126,6 +126,14 @@ return [
             'url'         => 'https://static.re',
         ],
 
+        'drophtml' => [
+            'title'       => 'drophtml.de',
+            'tagline'     => 'Free Drag-and-Drop HTML & Website Host',
+            'description' => 'A free, lightweight, and zero-configuration web platform to publish static HTML files and websites instantly via drag-and-drop. Built for developers, students, and rapid prototyping.',
+            'tags'        => ['HTML Hosting', 'Drag & Drop', 'Static Sites', 'Instant Deploy', 'Free'],
+            'url'         => 'https://drophtml.de',
+        ],
+
         'exampledns' => [
             'title'       => 'example-dns',
             'badge'       => 'Nameservers & DNS',

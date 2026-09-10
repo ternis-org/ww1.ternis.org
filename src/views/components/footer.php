@@ -42,6 +42,7 @@ $commitUrl = app_repo_commit_url($versionShort);
                         <li><a href="https://web-search.org" target="_blank" rel="noopener noreferrer">web-search.org</a></li>
                         <li><a href="https://mail-free.eu" target="_blank" rel="noopener noreferrer">mail-free.eu</a></li>
                         <li><a href="https://static.re" target="_blank" rel="noopener noreferrer">static.re</a></li>
+                        <li><a href="https://drophtml.de" target="_blank" rel="noopener noreferrer">drophtml.de</a></li>
                     </ul>
                 </div>
 

@@ -57,8 +57,9 @@ ternis.org is dedicated to stewarding and scaling open-source developer tooling 
             │  (Developer Tooling)  │                                                  │  (DNS, Cloud & Mail)  │
             ├───────────────────────┤                                                  ├───────────────────────┤
             │ • getmy.name (API)    │                                                  │ • example-dns (NS)    │
-            │ • API Sandbox Tools   │                                                  │ • mail-free.eu / .uk  │
-            │ • Tailwind Components │                                                  │ • static.re Pipeline  │
+            │ • API Sandbox Tools   │                                                  │ • drophtml.de (Host)  │
+            │ • Tailwind Components │                                                  │ • mail-free.eu / .uk  │
+            │ • static.re Pipeline  │                                                  │ • EU Privacy Services │
             └───────────────────────┘                                                  └───────────────────────┘
 ```
 
@@ -94,7 +95,12 @@ ternis.org is dedicated to stewarding and scaling open-source developer tooling 
 - **License:** Open Source Software (with dedicated commercial tiers)
 - **Summary:** Open-source software and managed distribution platform for interacting with S3-compatible object storage like Cloudflare R2.
 
-### 7. [example-dns](https://example-dns.com) — Authoritative Nameservers & Open-Source DNS Infrastructure
+### 7. [drophtml.de](https://drophtml.de) — Free Drag-and-Drop HTML & Website Host
+- **Status:** `Free Developer Service`
+- **License:** Free & Open Source
+- **Summary:** Free and zero-configuration web platform to publish static HTML files and websites instantly via drag-and-drop.
+
+### 8. [example-dns](https://example-dns.com) — Authoritative Nameservers & Open-Source DNS Infrastructure
 - **Status:** `Active Infrastructure & Open-Source Project`
 - **License:** Open Source & Free
 - **Nameservers:** `one.ns.ternis.net` (= `example-dns.net`) & `two.ns.ternis.net` (= `example-dns.org`)
