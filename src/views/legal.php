@@ -51,7 +51,13 @@ $doc = $doc ?? [];
                 <?php if ($slug === 'imprint'): ?>
                     <h3><?= e($doc['operator_heading'] ?? 'Provider Information') ?></h3>
                     <p style="white-space: pre-line; line-height: 1.8;">
-                        <?= e($doc['operator_text'] ?? '') ?>
+                        <?php if (!empty($doc['operator_text'])): ?>
+                            <?= e($doc['operator_text']) ?>
+                        <?php else: ?>
+                            <strong><?= e($doc['operator_name'] ?? '') ?></strong><br>
+                            <?= e($doc['operator_org'] ?? '') ?><br>
+                            <?= e($doc['operator_address'] ?? '') ?>
+                        <?php endif; ?>
                     </p>
 
                     <h3><?= e($doc['contact_heading'] ?? 'Contact') ?></h3>
@@ -63,29 +69,32 @@ $doc = $doc ?? [];
                     <h3><?= e($doc['disclaimer_heading'] ?? 'Disclaimer') ?></h3>
                     <p><?= e($doc['disclaimer_text'] ?? '') ?></p>
 
+                    <?php if (!empty($doc['copyright_heading'])): ?>
+                        <h3><?= e($doc['copyright_heading']) ?></h3>
+                        <p><?= e($doc['copyright_text'] ?? '') ?></p>
+                    <?php endif; ?>
+
                 <?php elseif ($slug === 'privacy'): ?>
-                    <h3><?= e($doc['controller_heading'] ?? 'Data Controller') ?></h3>
-                    <p><?= e($doc['controller_text'] ?? '') ?></p>
+                    <h3><?= e($doc['summary_heading'] ?? $doc['principles_heading'] ?? 'Privacy at a Glance') ?></h3>
+                    <p><?= e($doc['summary_text'] ?? $doc['principles_text'] ?? '') ?></p>
 
-                    <h3><?= e($doc['principles_heading'] ?? 'Privacy Principles') ?></h3>
-                    <p><?= e($doc['principles_text'] ?? '') ?></p>
-
-                    <h3><?= e($doc['logging_heading'] ?? 'Server Logs & Infrastructure') ?></h3>
-                    <p><?= e($doc['logging_text'] ?? '') ?></p>
+                    <h3><?= e($doc['server_heading'] ?? $doc['logging_heading'] ?? 'Server Logs & Hosting') ?></h3>
+                    <p><?= e($doc['server_text'] ?? $doc['logging_text'] ?? '') ?></p>
 
                     <h3><?= e($doc['cookies_heading'] ?? 'Cookies & Local Storage') ?></h3>
                     <p><?= e($doc['cookies_text'] ?? '') ?></p>
 
-                    <h3><?= e($doc['rights_heading'] ?? 'Your Rights') ?></h3>
+                    <h3><?= e($doc['rights_heading'] ?? 'Your Rights under GDPR') ?></h3>
                     <p><?= e($doc['rights_text'] ?? '') ?></p>
 
                 <?php elseif ($slug === 'license'): ?>
-                    <h3><?= e($doc['mit_heading'] ?? 'MIT License') ?></h3>
-                    <p><?= e($doc['mit_desc'] ?? '') ?></p>
-                    <pre><?= e($doc['mit_license_text'] ?? '') ?></pre>
+                    <h3><?= e($doc['license_heading'] ?? $doc['mit_heading'] ?? 'The MIT License (MIT)') ?></h3>
+                    <pre style="white-space: pre-wrap; font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.6; background: var(--bg-card); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); margin: 1rem 0;"><?= e($doc['license_text'] ?? $doc['mit_license_text'] ?? '') ?></pre>
 
-                    <h3><?= e($doc['contributions_heading'] ?? 'Contributions') ?></h3>
-                    <p><?= e($doc['contributions_text'] ?? '') ?></p>
+                    <?php if (!empty($doc['values_heading']) || !empty($doc['contributions_heading'])): ?>
+                        <h3><?= e($doc['values_heading'] ?? $doc['contributions_heading'] ?? '') ?></h3>
+                        <p><?= e($doc['values_text'] ?? $doc['contributions_text'] ?? '') ?></p>
+                    <?php endif; ?>
 
                 <?php else: ?>
                     <p><?= e($doc['content'] ?? '') ?></p>

@@ -26,8 +26,7 @@ $homePrefix = (str_contains($currentPath, '/legal') || str_contains($currentPath
             <a href="<?= e($homePrefix) ?>#projects"><?= e(t('nav.projects')) ?></a>
             <a href="<?= e($homePrefix) ?>#nameservers"><?= e(t('nav.nameservers')) ?></a>
             <a href="<?= e($homePrefix) ?>#playground"><?= e(t('nav.playground')) ?></a>
-            <a href="<?= e($homePrefix) ?>#philosophy"><?= e(t('nav.about')) ?></a>
-            <a href="<?= e($homePrefix) ?>#faq"><?= e(t('nav.faq')) ?></a>
+            <a href="<?= e($homePrefix) ?>#about"><?= e(t('nav.about')) ?></a>
         </div>
 
         <div class="nav-actions">
@@ -66,8 +65,7 @@ $homePrefix = (str_contains($currentPath, '/legal') || str_contains($currentPath
     <a href="<?= e($homePrefix) ?>#projects" class="nav-link"><?= e(t('nav.projects')) ?></a>
     <a href="<?= e($homePrefix) ?>#nameservers" class="nav-link"><?= e(t('nav.nameservers')) ?></a>
     <a href="<?= e($homePrefix) ?>#playground" class="nav-link"><?= e(t('nav.playground')) ?></a>
-    <a href="<?= e($homePrefix) ?>#philosophy" class="nav-link"><?= e(t('nav.about')) ?></a>
-    <a href="<?= e($homePrefix) ?>#faq" class="nav-link"><?= e(t('nav.faq')) ?></a>
+    <a href="<?= e($homePrefix) ?>#about" class="nav-link"><?= e(t('nav.about')) ?></a>
     <a href="/<?= e($lang) ?>/legal/imprint" class="nav-link"><?= e(t('nav.imprint')) ?></a>
     <a href="/<?= e($lang) ?>/legal/privacy" class="nav-link"><?= e(t('nav.privacy')) ?></a>
     <a href="/<?= e($lang) ?>/legal/license" class="nav-link"><?= e(t('nav.license')) ?></a>
