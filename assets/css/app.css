@@ -1217,7 +1217,7 @@ a.ns-domain-pill:hover {
     backdrop-filter: blur(14px);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-lg);
-    padding: 2.75rem 2.25rem;
+    padding: 2.25rem 2rem;
     transition: all 0.25s ease;
     display: flex;
     flex-direction: column;
@@ -1230,9 +1230,17 @@ a.ns-domain-pill:hover {
     box-shadow: 0 10px 30px rgba(74, 93, 35, 0.08);
 }
 
+.pillar-header {
+    display: flex;
+    align-items: center;
+    gap: 1.15rem;
+    margin-bottom: 1.25rem;
+    min-height: 52px;
+}
+
 .pillar-icon {
-    width: 54px;
-    height: 54px;
+    width: 48px;
+    height: 48px;
     border-radius: var(--radius-md);
     background: rgba(74, 93, 35, 0.08);
     border: 1px solid var(--border-subtle);
@@ -1240,19 +1248,22 @@ a.ns-domain-pill:hover {
     align-items: center;
     justify-content: center;
     color: var(--primary);
-    margin-bottom: 1.5rem;
+    flex-shrink: 0;
+    margin-bottom: 0;
 }
 
 [data-theme="dark"] .pillar-icon {
     background: rgba(148, 184, 88, 0.12);
 }
 
+.pillar-header h3,
 .pillar-card h3 {
-    font-size: 1.35rem;
+    font-size: 1.25rem;
     font-weight: 600;
     color: var(--primary);
-    margin-bottom: 0.85rem;
+    margin: 0;
     letter-spacing: -0.01em;
+    line-height: 1.3;
 }
 
 .pillar-card p {
@@ -1264,6 +1275,9 @@ a.ns-domain-pill:hover {
 @media (max-width: 900px) {
     .pillars-grid {
         grid-template-columns: 1fr;
+    }
+    .pillar-header {
+        min-height: auto;
     }
 }
 
