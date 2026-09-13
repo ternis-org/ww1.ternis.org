@@ -12,16 +12,16 @@ $lang = $lang ?? current_lang();
 <!-- Hero Section -->
 <section id="hero">
     <div class="container">
-        <h1>
+        <h1 class="scroll-reveal">
             <?= e(t('hero.title_line1')) ?><br>
             <strong><?= e(t('hero.title_line2')) ?></strong>
         </h1>
 
-        <p class="hero-p">
+        <p class="hero-p scroll-reveal delay-1">
             <?= e(t('hero.description')) ?>
         </p>
 
-        <div class="hero-actions">
+        <div class="hero-actions scroll-reveal delay-2">
             <!-- Main CTA with Expanding Arrow -->
             <a href="#projects" class="btn btn-expanding">
                 <span><?= e(t('hero.cta_projects')) ?></span>
@@ -42,7 +42,7 @@ $lang = $lang ?? current_lang();
         </div>
 
         <!-- Hero Stats Bar -->
-        <div class="hero-stats">
+        <div class="hero-stats scroll-reveal delay-3 stagger-children">
             <div class="stat-item">
                 <div class="stat-value"><?= e(t('hero.stat_open_source')) ?></div>
                 <div class="stat-label"><?= e(t('hero.stat_open_source_sub')) ?></div>
@@ -66,13 +66,13 @@ $lang = $lang ?? current_lang();
 <!-- Projects Showcase Section -->
 <section id="projects" style="padding-top: 4rem;">
     <div class="container">
-        <div class="section-header" style="margin-bottom: 2.5rem;">
+        <div class="section-header scroll-reveal" style="margin-bottom: 2.5rem;">
             <h2><?= e(t('projects.title')) ?></h2>
             <p class="section-subtitle"><?= e(t('projects.subtitle')) ?></p>
         </div>
 
         <!-- DNS & Infrastructure Notice Bar -->
-        <div class="infra-notice-bar">
+        <div class="infra-notice-bar scroll-reveal delay-1">
             <div class="infra-notice-content">
                 <span class="infra-notice-prefix">DNS</span>
                 <span class="infra-notice-text"><?= e(t('projects.dnbx_note')) ?></span>
@@ -95,7 +95,7 @@ $lang = $lang ?? current_lang();
             </div>
         </div>
 
-        <div class="projects-grid">
+        <div class="projects-grid stagger-children">
             <!-- Project 1: httpclient.de -->
             <div class="project-card">
                 <div>
@@ -285,12 +285,12 @@ $lang = $lang ?? current_lang();
 <!-- Dedicated Nameservers & DNS Infrastructure Section -->
 <section id="nameservers" style="padding-top: 5rem; padding-bottom: 4rem;">
     <div class="container">
-        <div class="section-header" style="margin-bottom: 2.5rem;">
+        <div class="section-header scroll-reveal" style="margin-bottom: 2.5rem;">
             <h2><?= e(t('nameservers.title')) ?></h2>
             <p class="section-subtitle"><?= e(t('nameservers.subtitle')) ?></p>
         </div>
 
-        <div class="ns-grid">
+        <div class="ns-grid stagger-children">
             <!-- Node 1: Primary Nameserver -->
             <div class="ns-card">
                 <div>
@@ -343,7 +343,7 @@ $lang = $lang ?? current_lang();
         </div>
 
         <!-- Infrastructure Domains & Verification Terminal -->
-        <div class="ns-meta-card">
+        <div class="ns-meta-card scroll-reveal scroll-reveal-scale delay-1">
             <div class="ns-meta-left">
                 <div class="ns-domains-header">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width:20px;height:20px;color:var(--primary);flex-shrink:0;" aria-hidden="true">
@@ -376,7 +376,7 @@ ternis.org name server two.ns.ternis.net.</code></pre>
         </div>
 
         <!-- Infrastructure Action Links -->
-        <div class="ns-actions-bar">
+        <div class="ns-actions-bar scroll-reveal delay-2">
             <a href="https://example-dns.com" target="_blank" rel="noopener noreferrer" class="btn btn-sm">
                 <span><?= e(t('nameservers.btn_visit')) ?></span>
             </a>
@@ -403,13 +403,13 @@ ternis.org name server two.ns.ternis.net.</code></pre>
 <!-- Interactive API Playground Section -->
 <section id="playground" style="padding-top: 5rem; padding-bottom: 5rem;">
     <div class="container">
-        <div class="section-header" style="margin-bottom: 2.5rem;">
+        <div class="section-header scroll-reveal" style="margin-bottom: 2.5rem;">
             <span class="badge badge-primary section-badge"><?= e(t('playground.badge')) ?></span>
             <h2><?= e(t('playground.title')) ?></h2>
             <p class="section-subtitle"><?= e(t('playground.subtitle')) ?></p>
         </div>
 
-        <div class="playground-wrapper">
+        <div class="playground-wrapper scroll-reveal scroll-reveal-scale delay-1">
             <div class="terminal-header">
                 <div class="window-dots" aria-hidden="true">
                     <span class="dot red"></span>
@@ -487,13 +487,13 @@ ternis.org name server two.ns.ternis.net.</code></pre>
 <!-- About & Principles Section -->
 <section id="about" style="padding-top: 4rem; padding-bottom: 6rem;">
     <div class="container">
-        <div class="section-header" style="margin-bottom: 2.5rem;">
+        <div class="section-header scroll-reveal" style="margin-bottom: 2.5rem;">
             <span class="badge badge-secondary section-badge"><?= e(t('about.badge')) ?></span>
             <h2><?= e(t('about.title')) ?></h2>
             <p class="section-subtitle"><?= e(t('about.subtitle')) ?></p>
         </div>
 
-        <div class="pillars-grid">
+        <div class="pillars-grid stagger-children">
             <div class="pillar-card">
                 <div class="pillar-header">
                     <div class="pillar-icon">
@@ -531,7 +531,7 @@ ternis.org name server two.ns.ternis.net.</code></pre>
             </div>
         </div>
 
-        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:3rem;">
+        <div class="scroll-reveal delay-2" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:3rem;">
             <a href="https://ternis.dev" target="_blank" rel="noopener noreferrer" class="btn btn-sm">
                 <span><?= e(t('about.link_ternis_dev')) ?></span>
             </a>

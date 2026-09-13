@@ -361,6 +361,97 @@ echo "Developer Name: " . htmlspecialchars($profile['data']['name']);
         }
     }
 
+    // ── Scroll Motion & Animations Engine ──────────────────────────────────────
+    function initScrollAnimations() {
+        // Mark document as animation-ready
+        document.documentElement.classList.add('has-scroll-anim');
+
+        const progressBar = document.getElementById('scroll-progress');
+        const navContainer = document.querySelector('.nav-container-fixed');
+        const heroContainer = document.querySelector('#hero .container');
+
+        // High-performance scroll tracking via requestAnimationFrame
+        let ticking = false;
+        function onScrollTick() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = docHeight > 0 ? Math.min(1, Math.max(0, scrollTop / docHeight)) : 0;
+
+            if (progressBar) {
+                progressBar.style.transform = `scaleX(${progress})`;
+            }
+
+            if (navContainer) {
+                if (scrollTop > 40) {
+                    navContainer.classList.add('is-scrolled');
+                } else {
+                    navContainer.classList.remove('is-scrolled');
+                }
+            }
+
+            // Subtle Hero Parallax & Depth on Desktop
+            if (heroContainer && scrollTop < 600 && window.innerWidth > 768) {
+                const yOffset = scrollTop * 0.16;
+                const opacity = Math.max(0.1, 1 - (scrollTop / 500));
+                heroContainer.style.transform = `translate3d(0, ${yOffset}px, 0)`;
+                heroContainer.style.opacity = opacity.toFixed(2);
+            } else if (heroContainer && scrollTop === 0) {
+                heroContainer.style.transform = 'translate3d(0, 0, 0)';
+                heroContainer.style.opacity = '1';
+            }
+
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(onScrollTick);
+                ticking = true;
+            }
+        }, { passive: true });
+
+        // Run once on load
+        onScrollTick();
+
+        // IntersectionObserver for Reveal Animations
+        if ('IntersectionObserver' in window) {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -40px 0px',
+                threshold: 0.1
+            };
+
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = entry.target;
+                        target.classList.add('is-revealed');
+
+                        // Stagger children if present
+                        if (target.classList.contains('stagger-children')) {
+                            const children = Array.from(target.children);
+                            children.forEach((child, idx) => {
+                                child.style.transitionDelay = `${(idx + 1) * 0.08}s`;
+                                child.classList.add('is-revealed');
+                            });
+                        }
+
+                        observer.unobserve(target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.scroll-reveal, .stagger-children').forEach(el => {
+                revealObserver.observe(el);
+            });
+        } else {
+            // Fallback for older browsers
+            document.querySelectorAll('.scroll-reveal, .stagger-children').forEach(el => {
+                el.classList.add('is-revealed');
+            });
+        }
+    }
+
     // ── Bootstrap on DOM Ready ─────────────────────────────────────────────────
     document.addEventListener('DOMContentLoaded', () => {
         initTheme();
@@ -369,6 +460,7 @@ echo "Developer Name: " . htmlspecialchars($profile['data']['name']);
         initFAQ();
         initScrollSpy();
         initScrollToTop();
+        initScrollAnimations();
         initServiceWorker();
 
         // Bind theme toggle buttons

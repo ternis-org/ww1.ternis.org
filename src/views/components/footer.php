@@ -16,7 +16,7 @@ $commitUrl = app_repo_commit_url($versionShort);
 <footer id="connect" class="sculpted-footer">
     <div class="container">
         <div class="footer-content">
-            <div class="footer-cta">
+            <div class="footer-cta scroll-reveal scroll-reveal-left">
                 Let's grow<br>
                 <strong>something beautiful.</strong>
                 <div style="margin-top:2.5rem;">
@@ -30,7 +30,7 @@ $commitUrl = app_repo_commit_url($versionShort);
                 </div>
             </div>
 
-            <div class="footer-links-grid">
+            <div class="footer-links-grid stagger-children">
                 <div class="footer-col">
                     <h4><?= e(t('footer.col_projects')) ?></h4>
                     <ul>
@@ -71,7 +71,7 @@ $commitUrl = app_repo_commit_url($versionShort);
             </div>
         </div>
 
-        <div class="footer-bottom">
+        <div class="footer-bottom scroll-reveal delay-2">
             <div>
                 &copy; <?= date('Y') ?> ternis.org &bull; <?= e(t('footer.rights')) ?>
             </div>
