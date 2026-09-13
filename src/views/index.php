@@ -95,7 +95,7 @@ $lang = $lang ?? current_lang();
             </div>
         </div>
 
-        <div class="projects-grid stagger-children">
+        <div class="projects-grid">
             <!-- Project 1: httpclient.de -->
             <div class="project-card">
                 <div>

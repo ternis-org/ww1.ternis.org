@@ -413,18 +413,18 @@ echo "Developer Name: " . htmlspecialchars($profile['data']['name']);
         // Run once on load
         onScrollTick();
 
-        // IntersectionObserver for Reveal Animations
+        // Reversible Scroll-Driven Reveal Observer
         if ('IntersectionObserver' in window) {
             const observerOptions = {
                 root: null,
-                rootMargin: '0px 0px -40px 0px',
+                rootMargin: '0px 0px -35px 0px',
                 threshold: 0.1
             };
 
-            const revealObserver = new IntersectionObserver((entries, observer) => {
+            const revealObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
+                    const target = entry.target;
                     if (entry.isIntersecting) {
-                        const target = entry.target;
                         target.classList.add('is-revealed');
 
                         // Stagger children if present
@@ -435,18 +435,31 @@ echo "Developer Name: " . htmlspecialchars($profile['data']['name']);
                                 child.classList.add('is-revealed');
                             });
                         }
+                    } else {
+                        // Reverse transformation when scrolling up (element is below viewport)
+                        if (entry.boundingClientRect.top > 0) {
+                            target.classList.remove('is-revealed');
 
-                        observer.unobserve(target);
+                            if (target.classList.contains('stagger-children')) {
+                                const children = Array.from(target.children);
+                                children.forEach(child => {
+                                    child.classList.remove('is-revealed');
+                                });
+                            }
+                        }
                     }
                 });
             }, observerOptions);
 
-            document.querySelectorAll('.scroll-reveal, .stagger-children').forEach(el => {
-                revealObserver.observe(el);
-            });
+            const animTargets = document.querySelectorAll(
+                '.scroll-reveal, .stagger-children, .project-card, .pillar-card, .ns-card'
+            );
+            animTargets.forEach(el => revealObserver.observe(el));
         } else {
             // Fallback for older browsers
-            document.querySelectorAll('.scroll-reveal, .stagger-children').forEach(el => {
+            document.querySelectorAll(
+                '.scroll-reveal, .stagger-children, .project-card, .pillar-card, .ns-card'
+            ).forEach(el => {
                 el.classList.add('is-revealed');
             });
         }

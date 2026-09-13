@@ -1619,6 +1619,7 @@ footer.sculpted-footer {
 .sections-wrapper {
     position: relative;
     width: 100%;
+    overflow-x: clip;
 }
 
 .scroll-top-tracker {
@@ -1798,6 +1799,121 @@ html.has-scroll-anim .project-card.is-revealed,
 html.has-scroll-anim .pillar-card.is-revealed,
 html.has-scroll-anim .ns-card.is-revealed {
     animation: cardShimmer 1.2s ease-out 0.2s 1;
+}
+
+/* ==========================================================================
+   Step-by-Step Side Slide-In & Reversible Transformations
+   ========================================================================== */
+
+/* Project Cards: Odd cards slide from left, Even cards slide from right */
+html.has-scroll-anim .project-card {
+    opacity: 0;
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.25s ease,
+                background-color 0.25s ease,
+                box-shadow 0.25s ease;
+    will-change: opacity, transform;
+}
+
+html.has-scroll-anim .project-card:nth-child(odd) {
+    transform: translate3d(-75px, 0, 0);
+}
+
+html.has-scroll-anim .project-card:nth-child(even) {
+    transform: translate3d(75px, 0, 0);
+    transition-delay: 0.08s;
+}
+
+html.has-scroll-anim .project-card.is-revealed {
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) !important;
+}
+
+/* When reversing (scrolling up), instantly reset delay so exit is crisp */
+html.has-scroll-anim .project-card:not(.is-revealed) {
+    transition-delay: 0s !important;
+}
+
+/* Nameserver Nodes: Left and Right slide-in */
+html.has-scroll-anim .ns-card {
+    opacity: 0;
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+html.has-scroll-anim .ns-card:nth-child(1) {
+    transform: translate3d(-70px, 0, 0);
+}
+
+html.has-scroll-anim .ns-card:nth-child(2) {
+    transform: translate3d(70px, 0, 0);
+    transition-delay: 0.1s;
+}
+
+html.has-scroll-anim .ns-card.is-revealed {
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) !important;
+}
+
+html.has-scroll-anim .ns-card:not(.is-revealed) {
+    transition-delay: 0s !important;
+}
+
+/* Pillar Cards: Left, Center, Right slide-in */
+html.has-scroll-anim .pillar-card {
+    opacity: 0;
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.25s ease,
+                background-color 0.25s ease,
+                box-shadow 0.25s ease;
+    will-change: opacity, transform;
+}
+
+html.has-scroll-anim .pillar-card:nth-child(1) {
+    transform: translate3d(-60px, 0, 0);
+}
+
+html.has-scroll-anim .pillar-card:nth-child(2) {
+    transform: translate3d(0, 40px, 0);
+    transition-delay: 0.08s;
+}
+
+html.has-scroll-anim .pillar-card:nth-child(3) {
+    transform: translate3d(60px, 0, 0);
+    transition-delay: 0.16s;
+}
+
+html.has-scroll-anim .pillar-card.is-revealed {
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) !important;
+}
+
+html.has-scroll-anim .pillar-card:not(.is-revealed) {
+    transition-delay: 0s !important;
+}
+
+@media (max-width: 768px) {
+    html.has-scroll-anim .project-card:nth-child(odd) {
+        transform: translate3d(-45px, 0, 0);
+    }
+    html.has-scroll-anim .project-card:nth-child(even) {
+        transform: translate3d(45px, 0, 0);
+        transition-delay: 0.04s;
+    }
+    html.has-scroll-anim .ns-card:nth-child(1),
+    html.has-scroll-anim .ns-card:nth-child(2) {
+        transform: translate3d(0, 35px, 0);
+        transition-delay: 0s;
+    }
+    html.has-scroll-anim .pillar-card:nth-child(1),
+    html.has-scroll-anim .pillar-card:nth-child(2),
+    html.has-scroll-anim .pillar-card:nth-child(3) {
+        transform: translate3d(0, 35px, 0);
+        transition-delay: 0s;
+    }
 }
 
 /* Reduced Motion Override for Accessibility */
