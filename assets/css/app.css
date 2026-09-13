@@ -3,8 +3,7 @@
    Inspired by Organic Green Tech Aesthetics, Floating Pill Navigation & Morphing Blobs
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
-
+/* Fonts preconnected and loaded in HTML <head> for zero-render-blocking performance */
 :root {
     /* Organic Green Tech Palette (Light / Default) */
     --primary: #4a5d23;
@@ -79,6 +78,36 @@
     margin: 0;
     padding: 0;
     font-family: var(--font-sans);
+}
+
+/* Accessible focus rings */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+}
+
+/* Accessibility: Skip to Main Content link */
+.skip-to-content {
+    position: absolute;
+    top: -999px;
+    left: 1.5rem;
+    z-index: 100000;
+    background: var(--primary);
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: var(--shadow-md);
+    transition: top 0.2s ease;
+    text-decoration: none;
+}
+
+.skip-to-content:focus {
+    top: 1.5rem;
+    outline: 2px solid var(--accent);
 }
 
 /* Custom Text Selection */
@@ -1170,6 +1199,72 @@ a.ns-domain-pill:hover {
     background: rgba(255, 255, 255, 0.02);
     font-size: 0.875rem;
     color: var(--secondary);
+}
+
+/* ==========================================================================
+   Philosophy / Pillars Section
+   ========================================================================== */
+
+.pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.pillar-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(14px);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 2.75rem 2.25rem;
+    transition: all 0.25s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.pillar-card:hover {
+    border-color: var(--border-highlight);
+    background: var(--bg-card-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(74, 93, 35, 0.08);
+}
+
+.pillar-icon {
+    width: 54px;
+    height: 54px;
+    border-radius: var(--radius-md);
+    background: rgba(74, 93, 35, 0.08);
+    border: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+}
+
+[data-theme="dark"] .pillar-icon {
+    background: rgba(148, 184, 88, 0.12);
+}
+
+.pillar-card h3 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 0.85rem;
+    letter-spacing: -0.01em;
+}
+
+.pillar-card p {
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: var(--text-dark);
+}
+
+@media (max-width: 900px) {
+    .pillars-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* ==========================================================================

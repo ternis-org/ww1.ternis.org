@@ -6,7 +6,7 @@ declare(strict_types=1);
  * Dynamic XML Sitemap Generator
  */
 
-$baseUrl = 'https://ternis.org';
+$baseUrl = rtrim((string) config('app_url', 'https://ternis.org'), '/');
 $lastmod = date('Y-m-d');
 
 $pages = [

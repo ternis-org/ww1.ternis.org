@@ -7,6 +7,29 @@
 // ── Helpers ────────────────────────────────────────────────────────────────
 require ROOT_PATH . '/src/helpers.php';
 
+// Send modern security headers across all responses
+send_security_headers();
+
+// ── Exception Handler ──────────────────────────────────────────────────────
+set_exception_handler(function (Throwable $e) {
+    error_log('[ternis.org exception] ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
+    if (http_response_code() === 200) {
+        http_response_code(500);
+    }
+    $lang = defined('LANG') ? LANG : (defined('DEFAULT_LANG') ? DEFAULT_LANG : 'en');
+    if (!defined('LANG')) {
+        define('LANG', $lang);
+    }
+    load_lang($lang);
+    render('error', [
+        'lang'    => $lang,
+        'code'    => 500,
+        'message' => 'Internal Server Error',
+        'title'   => '500 — Server Error — ternis.org',
+    ], 'main');
+    exit;
+});
+
 // ── Router ─────────────────────────────────────────────────────────────────
 require ROOT_PATH . '/src/router.php';
 
@@ -38,6 +61,21 @@ $router->get('/favicon.ico', function () {
     serve_static_file(PUBLIC_PATH . '/favicon.ico', PUBLIC_PATH);
 });
 
+// /favicon.svg — vector favicon served from public root
+$router->get('/favicon.svg', function () {
+    serve_static_file(PUBLIC_PATH . '/favicon.svg', PUBLIC_PATH);
+});
+
+// /apple-touch-icon.png — apple touch icon served from public root
+$router->get('/apple-touch-icon.png', function () {
+    serve_static_file(PUBLIC_PATH . '/apple-touch-icon.png', PUBLIC_PATH);
+});
+
+// /manifest.json — PWA manifest served from public root
+$router->get('/manifest.json', function () {
+    serve_static_file(PUBLIC_PATH . '/manifest.json', PUBLIC_PATH);
+});
+
 // ── Routes ─────────────────────────────────────────────────────────────────
 
 // Root: redirect to preferred language based on Accept-Language header
@@ -54,7 +92,10 @@ foreach (SUPPORTED_LANGS as $lang) {
             define('LANG', $lang);
         }
         load_lang($lang);
-        render('index', ['lang' => $lang], 'main');
+        render('index', [
+            'lang'         => $lang,
+            'canonicalUrl' => 'https://ternis.org/' . $lang,
+        ], 'main');
     });
 }
 
@@ -87,6 +128,7 @@ foreach (SUPPORTED_LANGS as $lang) {
 
         if (empty($slug) || !isset($langData['legal'][$slug]) || !is_array($langData['legal'][$slug])) {
             http_response_code(404);
+            header('X-Robots-Tag: noindex, nofollow');
             render('error', [
                 'lang'    => $lang,
                 'code'    => 404,
@@ -95,11 +137,14 @@ foreach (SUPPORTED_LANGS as $lang) {
             return;
         }
 
+        $canonicalUrl = 'https://ternis.org/' . $lang . '/legal/' . $slug;
+
         render('legal', [
-            'lang' => $lang,
-            'slug' => $slug,
-            'doc'  => $langData['legal'][$slug],
-            'title' => ($langData['legal'][$slug]['title'] ?? 'Legal') . ' — ternis.org',
+            'lang'         => $lang,
+            'slug'         => $slug,
+            'doc'          => $langData['legal'][$slug],
+            'title'        => ($langData['legal'][$slug]['title'] ?? 'Legal') . ' — ternis.org',
+            'canonicalUrl' => $canonicalUrl,
         ], 'main');
     });
 }
@@ -114,7 +159,7 @@ $router->get('/robots.txt', function () {
     if (file_exists($file)) {
         readfile($file);
     } else {
-        echo "User-agent: *\nAllow: /\nSitemap: https://ternis.dev/sitemap.xml\n";
+        echo "User-agent: *\nAllow: /\nSitemap: https://ternis.org/sitemap.xml\n";
     }
 });
 
@@ -192,6 +237,7 @@ $router->fallback(function () {
     }
     load_lang($lang);
     http_response_code(404);
+    header('X-Robots-Tag: noindex, nofollow');
     render('error', [
         'lang'    => $lang,
         'code'    => 404,

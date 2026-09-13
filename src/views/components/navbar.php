@@ -25,7 +25,9 @@ $homePrefix = (str_contains($currentPath, '/legal') || str_contains($currentPath
         <div class="nav-links">
             <a href="<?= e($homePrefix) ?>#projects"><?= e(t('nav.projects')) ?></a>
             <a href="<?= e($homePrefix) ?>#nameservers"><?= e(t('nav.nameservers')) ?></a>
-            <a href="<?= e($homePrefix) ?>#connect"><?= e(t('nav.ecosystem')) ?></a>
+            <a href="<?= e($homePrefix) ?>#playground"><?= e(t('nav.playground')) ?></a>
+            <a href="<?= e($homePrefix) ?>#philosophy"><?= e(t('nav.about')) ?></a>
+            <a href="<?= e($homePrefix) ?>#faq"><?= e(t('nav.faq')) ?></a>
         </div>
 
         <div class="nav-actions">
@@ -50,7 +52,7 @@ $homePrefix = (str_contains($currentPath, '/legal') || str_contains($currentPath
             </a>
 
             <!-- Mobile Hamburger Toggle -->
-            <button type="button" class="btn-icon mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+            <button type="button" class="btn-icon mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav-drawer">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
@@ -60,11 +62,18 @@ $homePrefix = (str_contains($currentPath, '/legal') || str_contains($currentPath
 </div>
 
 <!-- Mobile Drawer -->
-<div class="mobile-drawer" role="dialog" aria-label="Mobile Navigation">
+<div id="mobile-nav-drawer" class="mobile-drawer" role="dialog" aria-label="Mobile Navigation" aria-modal="true">
     <a href="<?= e($homePrefix) ?>#projects" class="nav-link"><?= e(t('nav.projects')) ?></a>
     <a href="<?= e($homePrefix) ?>#nameservers" class="nav-link"><?= e(t('nav.nameservers')) ?></a>
-    <a href="<?= e($homePrefix) ?>#connect" class="nav-link"><?= e(t('nav.ecosystem')) ?></a>
+    <a href="<?= e($homePrefix) ?>#playground" class="nav-link"><?= e(t('nav.playground')) ?></a>
+    <a href="<?= e($homePrefix) ?>#philosophy" class="nav-link"><?= e(t('nav.about')) ?></a>
+    <a href="<?= e($homePrefix) ?>#faq" class="nav-link"><?= e(t('nav.faq')) ?></a>
     <a href="/<?= e($lang) ?>/legal/imprint" class="nav-link"><?= e(t('nav.imprint')) ?></a>
     <a href="/<?= e($lang) ?>/legal/privacy" class="nav-link"><?= e(t('nav.privacy')) ?></a>
     <a href="/<?= e($lang) ?>/legal/license" class="nav-link"><?= e(t('nav.license')) ?></a>
+    
+    <div style="display:flex;gap:0.75rem;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border-subtle);justify-content:center;">
+        <a href="<?= e($enUrl) ?>" class="btn <?= $lang === 'en' ? '' : 'btn-secondary' ?> btn-sm">English (EN)</a>
+        <a href="<?= e($deUrl) ?>" class="btn <?= $lang === 'de' ? '' : 'btn-secondary' ?> btn-sm">Deutsch (DE)</a>
+    </div>
 </div>

@@ -21,7 +21,9 @@ $pageTitle       = $title ?? t('meta.title');
 $metaDescription = $metaDescription ?? t('meta.description');
 $metaKeywords    = $metaKeywords ?? t('meta.keywords');
 $canonical       = $canonicalUrl ?? ('https://ternis.org/' . $lang);
-$altUrl          = 'https://ternis.org/' . $altLang;
+$canonicalPath   = parse_url($canonical, PHP_URL_PATH) ?? '/' . $lang;
+$altUrl          = 'https://ternis.org' . lang_url($altLang, $canonicalPath);
+$xDefaultUrl     = 'https://ternis.org' . lang_url('en', $canonicalPath);
 $versionShort    = app_version_hash(true);
 $showNav         = $showNav ?? true;
 $showFooter      = $showFooter ?? true;
@@ -33,6 +35,24 @@ $showScrollTop   = $showScrollTop ?? true;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Instant Theme Initializer (Prevents FOUC) -->
+    <script>
+        (function() {
+            try {
+                var t = localStorage.getItem('ternis_theme');
+                if (!t) {
+                    t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                }
+                document.documentElement.setAttribute('data-theme', t);
+            } catch (e) {}
+        })();
+    </script>
+
+    <!-- Font Preconnect & Stylesheet -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
 
     <!-- Critical App Loader CSS -->
     <style id="loader-critical-css">
@@ -215,7 +235,7 @@ $showScrollTop   = $showScrollTop ?? true;
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="<?= e($canonical) ?>">
     <link rel="alternate" hreflang="<?= e($altLang) ?>" href="<?= e($altUrl) ?>">
-    <link rel="alternate" hreflang="x-default" href="https://ternis.org/en">
+    <link rel="alternate" hreflang="x-default" href="<?= e($xDefaultUrl) ?>">
 
     <!-- Open Graph / Twitter -->
     <meta property="og:type" content="website">
@@ -223,14 +243,19 @@ $showScrollTop   = $showScrollTop ?? true;
     <meta property="og:title" content="<?= e($pageTitle) ?>">
     <meta property="og:description" content="<?= e($metaDescription) ?>">
     <meta property="og:image" content="https://ternis.org/og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="<?= e($canonical) ?>">
     <meta property="twitter:title" content="<?= e($pageTitle) ?>">
     <meta property="twitter:description" content="<?= e($metaDescription) ?>">
+    <meta property="twitter:image" content="https://ternis.org/og.jpg">
 
     <!-- Theme & Icons -->
     <meta name="theme-color" content="#4a5d23">
-    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="32x32">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="manifest" href="/manifest.json">
 
     <!-- Stylesheet -->
@@ -244,6 +269,7 @@ $showScrollTop   = $showScrollTop ?? true;
         "name": "ternis.org",
         "url": "https://ternis.org",
         "description": "<?= e($metaDescription) ?>",
+        "logo": "https://ternis.org/favicon.svg",
         "parentOrganization": {
             "@type": "Organization",
             "name": "ternis.dev / ternis-edv.de",
@@ -266,6 +292,9 @@ $showScrollTop   = $showScrollTop ?? true;
 </head>
 <body>
 
+    <!-- Accessible Skip to Main Content Link -->
+    <a href="#main-content" class="skip-to-content"><?= $lang === 'de' ? 'Zum Hauptinhalt springen' : 'Skip to main content' ?></a>
+
     <!-- Initial App Loader -->
     <div id="app-loader" class="app-loader" aria-hidden="true">
         <div class="loader-inner">
@@ -286,7 +315,7 @@ $showScrollTop   = $showScrollTop ?? true;
 
     <!-- Main Sections Wrapper -->
     <div class="sections-wrapper">
-        <main>
+        <main id="main-content">
             <?= $slot ?>
         </main>
 

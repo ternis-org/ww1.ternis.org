@@ -50,7 +50,14 @@
         const drawer = document.querySelector('.mobile-drawer');
         if (!toggleBtn || !drawer) return;
 
-        toggleBtn.addEventListener('click', () => {
+        function closeDrawer() {
+            drawer.classList.remove('open');
+            toggleBtn.setAttribute('aria-expanded', 'false');
+            toggleBtn.innerHTML = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>`;
+        }
+
+        toggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
             const isOpen = drawer.classList.toggle('open');
             toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
             if (isOpen) {
@@ -60,13 +67,23 @@
             }
         });
 
-        // Close on clicking link
+        // Close on clicking link inside drawer
         drawer.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                drawer.classList.remove('open');
-                toggleBtn.setAttribute('aria-expanded', 'false');
-                toggleBtn.innerHTML = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>`;
-            });
+            link.addEventListener('click', closeDrawer);
+        });
+
+        // Close on Escape key press
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && drawer.classList.contains('open')) {
+                closeDrawer();
+            }
+        });
+
+        // Close when clicking outside drawer
+        document.addEventListener('click', (e) => {
+            if (drawer.classList.contains('open') && !drawer.contains(e.target) && !toggleBtn.contains(e.target)) {
+                closeDrawer();
+            }
         });
     }
 
@@ -242,9 +259,15 @@ echo "Developer Name: " . htmlspecialchars($profile['data']['name']);
 
             questionBtn.addEventListener('click', () => {
                 const isActive = item.classList.contains('active');
-                faqItems.forEach(i => i.classList.remove('active'));
+                faqItems.forEach(i => {
+                    i.classList.remove('active');
+                    const btn = i.querySelector('.faq-question');
+                    if (btn) btn.setAttribute('aria-expanded', 'false');
+                });
+
                 if (!isActive) {
                     item.classList.add('active');
+                    questionBtn.setAttribute('aria-expanded', 'true');
                 }
             });
         });

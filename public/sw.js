@@ -3,14 +3,16 @@
  * Provides offline caching and fast asset loading
  */
 
-const CACHE_NAME = 'ternis-org-v1';
+const CACHE_NAME = 'ternis-org-v2';
 const ASSETS_TO_CACHE = [
-    '/',
     '/en',
     '/de',
     '/assets/css/app.css',
     '/assets/js/app.js',
+    '/favicon.svg',
     '/favicon.ico',
+    '/apple-touch-icon.png',
+    '/manifest.json',
     '/robots.txt'
 ];
 
@@ -36,11 +38,11 @@ self.addEventListener('fetch', event => {
     // Only handle GET requests
     if (event.request.method !== 'GET') return;
 
-    // Do not cache API routes
+    // Do not cache API routes or POST requests
     if (event.request.url.includes('/api/')) return;
 
     event.respondWith(
-        caches.match(event.request).then(cachedResponse => {
+        caches.match(event.request, { ignoreSearch: true }).then(cachedResponse => {
             if (cachedResponse) {
                 // Fetch fresh copy in background (stale-while-revalidate)
                 fetch(event.request).then(networkResponse => {
@@ -63,7 +65,7 @@ self.addEventListener('fetch', event => {
                 return networkResponse;
             }).catch(() => {
                 // Fallback if offline
-                return caches.match('/en') || caches.match('/');
+                return caches.match('/en', { ignoreSearch: true });
             });
         })
     );

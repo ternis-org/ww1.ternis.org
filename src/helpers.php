@@ -7,6 +7,35 @@ declare(strict_types=1);
  */
 
 /**
+ * Sends standard modern security headers across all responses.
+ */
+function send_security_headers(): void
+{
+    if (headers_sent()) {
+        return;
+    }
+
+    header_remove('X-Powered-By');
+    header('X-Content-Type-Options: nosniff');
+    header('X-Frame-Options: SAMEORIGIN');
+    header('Referrer-Policy: strict-origin-when-cross-origin');
+    header('Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()');
+    header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://api.getmy.name; base-uri 'self'; form-action 'self'; frame-ancestors 'self';");
+}
+
+/**
+ * Returns full absolute canonical URL for a given relative path or current request.
+ */
+function canonical_url(?string $path = null): string
+{
+    $base = rtrim((string) config('app_url', 'https://ternis.org'), '/');
+    if ($path === null) {
+        $path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
+    }
+    return $base . '/' . ltrim($path, '/');
+}
+
+/**
  * Escapes HTML entities safely for strings, integers, floats or null.
  */
 function e(mixed $value): string
@@ -212,22 +241,23 @@ function serve_static_file(string $filePath, string $allowedDir): void
 
     $extension = strtolower(pathinfo($realPath, PATHINFO_EXTENSION));
     $mimeTypes = [
-        'css'   => 'text/css; charset=utf-8',
-        'js'    => 'application/javascript; charset=utf-8',
-        'mjs'   => 'application/javascript; charset=utf-8',
-        'json'  => 'application/json; charset=utf-8',
-        'xml'   => 'application/xml; charset=utf-8',
-        'txt'   => 'text/plain; charset=utf-8',
-        'svg'   => 'image/svg+xml',
-        'png'   => 'image/png',
-        'jpg'   => 'image/jpeg',
-        'jpeg'  => 'image/jpeg',
-        'webp'  => 'image/webp',
-        'gif'   => 'image/gif',
-        'ico'   => 'image/x-icon',
-        'woff2' => 'font/woff2',
-        'woff'  => 'font/woff',
-        'ttf'   => 'font/ttf',
+        'css'         => 'text/css; charset=utf-8',
+        'js'          => 'application/javascript; charset=utf-8',
+        'mjs'         => 'application/javascript; charset=utf-8',
+        'json'        => 'application/json; charset=utf-8',
+        'webmanifest' => 'application/manifest+json; charset=utf-8',
+        'xml'         => 'application/xml; charset=utf-8',
+        'txt'         => 'text/plain; charset=utf-8',
+        'svg'         => 'image/svg+xml',
+        'png'         => 'image/png',
+        'jpg'         => 'image/jpeg',
+        'jpeg'        => 'image/jpeg',
+        'webp'        => 'image/webp',
+        'gif'         => 'image/gif',
+        'ico'         => 'image/x-icon',
+        'woff2'       => 'font/woff2',
+        'woff'        => 'font/woff',
+        'ttf'         => 'font/ttf',
     ];
 
     $mime = $mimeTypes[$extension] ?? 'application/octet-stream';
@@ -235,11 +265,13 @@ function serve_static_file(string $filePath, string $allowedDir): void
     $lastModified = filemtime($realPath);
     $etag         = '"' . md5($lastModified . filesize($realPath)) . '"';
 
+    header_remove('X-Powered-By');
     header('Content-Type: ' . $mime);
     header('Cache-Control: public, max-age=31536000, immutable');
     header('ETag: ' . $etag);
     header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $lastModified) . ' GMT');
     header('X-Content-Type-Options: nosniff');
+    header('Access-Control-Allow-Origin: *');
 
     if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && trim($_SERVER['HTTP_IF_NONE_MATCH']) === $etag) {
         http_response_code(304);
@@ -248,6 +280,10 @@ function serve_static_file(string $filePath, string $allowedDir): void
 
     if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) >= $lastModified) {
         http_response_code(304);
+        exit;
+    }
+
+    if (strtoupper($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'HEAD') {
         exit;
     }
 

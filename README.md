@@ -151,10 +151,12 @@ ww1.ternis.org/
 │   └── en.php               # English translations
 ├── public/                  # Document root
 │   ├── .htaccess            # Apache/LiteSpeed rewrite rules
-│   ├── favicon.ico          # Favicon
+│   ├── apple-touch-icon.png # iOS/macOS icon
+│   ├── favicon.ico          # Binary multi-res favicon
 │   ├── favicon.svg          # Vector icon
 │   ├── index.php            # Primary HTTP entry point
 │   ├── manifest.json        # Web app manifest
+│   ├── og.jpg               # OpenGraph social card
 │   └── sw.js                # Service Worker
 ├── src/                     # Core PHP backend
 │   ├── helpers.php          # Global helpers (e, t, render, asset_url)

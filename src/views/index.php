@@ -30,7 +30,7 @@ $lang = $lang ?? current_lang();
                     <path d="M 1.5 6 L 32 6" stroke-width="1.5" stroke-linecap="round" class="line"/>
                 </svg>
             </a>
-            <a href="https://getmy.name/api-docs" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <a href="#playground" class="btn btn-secondary">
                 <span><?= e(t('hero.cta_playground')) ?></span>
             </a>
             <a href="https://github.com/ternis-org" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
@@ -417,3 +417,275 @@ ternis.org name server two.ns.ternis.net.</code></pre>
         </div>
     </div>
 </section>
+
+<!-- Interactive API Playground Section -->
+<section id="playground" style="padding-top: 5rem; padding-bottom: 5rem;">
+    <div class="container">
+        <div class="section-header" style="margin-bottom: 2.5rem;">
+            <span class="badge badge-primary section-badge"><?= e(t('playground.badge')) ?></span>
+            <h2><?= e(t('playground.title')) ?></h2>
+            <p class="section-subtitle"><?= e(t('playground.subtitle')) ?></p>
+        </div>
+
+        <div class="playground-wrapper">
+            <div class="terminal-header">
+                <div class="window-dots" aria-hidden="true">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+                <div class="terminal-tabs" role="tablist" aria-label="Programming Language">
+                    <button type="button" class="tab-btn active" data-lang="curl" role="tab" aria-selected="true"><?= e(t('playground.tab_curl')) ?></button>
+                    <button type="button" class="tab-btn" data-lang="js" role="tab" aria-selected="false"><?= e(t('playground.tab_js')) ?></button>
+                    <button type="button" class="tab-btn" data-lang="py" role="tab" aria-selected="false"><?= e(t('playground.tab_py')) ?></button>
+                    <button type="button" class="tab-btn" data-lang="php" role="tab" aria-selected="false"><?= e(t('playground.tab_php')) ?></button>
+                </div>
+                <span class="ns-terminal-title" style="margin-left: 0; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);"><?= e(t('playground.endpoint_label')) ?>: api.getmy.name/v1/profile/demo</span>
+            </div>
+
+            <div class="playground-body">
+                <div class="code-pane">
+                    <div class="pane-header">
+                        <span class="pane-title">Request Code</span>
+                        <button type="button" id="btn-copy-code" class="btn btn-secondary btn-sm" aria-label="Copy code snippet">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width:14px;height:14px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                            </svg>
+                            <span><?= e(t('playground.btn_copy')) ?></span>
+                        </button>
+                    </div>
+                    <pre><code id="playground-code" class="code-snippet"></code></pre>
+                </div>
+
+                <div class="response-pane">
+                    <div class="pane-header">
+                        <span class="pane-title"><?= e(t('playground.response_label')) ?></span>
+                        <div style="display:flex;align-items:center;gap:0.75rem;">
+                            <span id="api-latency-val" class="ns-spec-chip">~28ms</span>
+                            <span class="ns-spec-chip" style="color:var(--primary);font-weight:600;"><?= e(t('playground.status_label')) ?></span>
+                        </div>
+                    </div>
+                    <pre><code id="playground-json" class="response-json">{
+  "status": "success",
+  "meta": {
+    "api": "getmy.name",
+    "version": "v1.4.0",
+    "cluster": "eu-central-nbg",
+    "execution_time_ms": 28.4
+  },
+  "data": {
+    "username": "fabianternis",
+    "name": "Fabian Ternis",
+    "headline": "Lead Systems Architect & Full-Stack Engineer",
+    "location": "Germany, European Union"
+  }
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="playground-footer">
+                <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+                    <button type="button" id="btn-run-api" class="btn btn-sm">
+                        <span><?= e(t('playground.btn_send')) ?></span>
+                    </button>
+                    <span style="font-size:0.85rem;"><?= e(t('playground.tip')) ?></span>
+                </div>
+                <a href="https://getmy.name/api-docs" target="_blank" rel="noopener noreferrer" class="infra-link" style="font-size:0.85rem;">
+                    <span>getmy.name Docs</span>
+                    <svg class="arrow-svg arrow-svg-sm" viewBox="0 0 35 12" fill="none">
+                        <path d="M 28.833 1 L 33.244 5.411 C 33.57 5.736 33.57 6.264 33.244 6.589 L 28.833 11" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M 1.5 6 L 32 6" stroke-width="1.5" stroke-linecap="round" class="line"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Core Philosophy & Pillars Section -->
+<section id="philosophy" style="padding-top: 5rem; padding-bottom: 5rem;">
+    <div class="container">
+        <div class="section-header" style="margin-bottom: 2.5rem;">
+            <span class="badge badge-secondary section-badge"><?= e(t('mission.badge')) ?></span>
+            <h2><?= e(t('mission.title')) ?></h2>
+            <p class="section-subtitle"><?= e(t('mission.description')) ?></p>
+        </div>
+
+        <div class="pillars-grid">
+            <div class="pillar-card">
+                <div class="pillar-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width:26px;height:26px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                    </svg>
+                </div>
+                <h3><?= e(t('mission.card1_title')) ?></h3>
+                <p><?= e(t('mission.card1_desc')) ?></p>
+            </div>
+
+            <div class="pillar-card">
+                <div class="pillar-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width:26px;height:26px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                    </svg>
+                </div>
+                <h3><?= e(t('mission.card2_title')) ?></h3>
+                <p><?= e(t('mission.card2_desc')) ?></p>
+            </div>
+
+            <div class="pillar-card">
+                <div class="pillar-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width:26px;height:26px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                </div>
+                <h3><?= e(t('mission.card3_title')) ?></h3>
+                <p><?= e(t('mission.card3_desc')) ?></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Studio Stewardship & Maintainership Section -->
+<section id="stewardship" style="padding-top: 4rem; padding-bottom: 5rem;">
+    <div class="container">
+        <div class="maintainer-card">
+            <div class="maintainer-content">
+                <span class="badge badge-accent section-badge"><?= e(t('maintainer.badge')) ?></span>
+                <h2><?= e(t('maintainer.title')) ?></h2>
+                <p><?= e(t('maintainer.desc1')) ?></p>
+                <p><?= e(t('maintainer.desc2')) ?></p>
+
+                <div class="maintainer-links">
+                    <a href="https://ternis.dev" target="_blank" rel="noopener noreferrer" class="btn btn-sm">
+                        <span><?= e(t('maintainer.link_ternis_dev')) ?></span>
+                    </a>
+                    <a href="https://ternis-edv.de" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                        <span><?= e(t('maintainer.link_ternis_edv')) ?></span>
+                    </a>
+                    <a href="https://github.com/ternis-org" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                        <svg fill="currentColor" viewBox="0 0 24 24" style="width:14px;height:14px;">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
+                        </svg>
+                        <span><?= e(t('maintainer.link_github')) ?></span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="studio-showcase">
+                <div class="studio-item">
+                    <div class="studio-avatar">FT</div>
+                    <div class="studio-meta">
+                        <h4>Fabian Ternis</h4>
+                        <p>Founder &amp; Lead Systems Architect</p>
+                    </div>
+                </div>
+                <div class="studio-item">
+                    <div class="studio-avatar" style="background:var(--secondary);">EDV</div>
+                    <div class="studio-meta">
+                        <h4>ternis-edv.de</h4>
+                        <p>Web Development &amp; Cloud Studio</p>
+                    </div>
+                </div>
+                <div class="studio-item">
+                    <div class="studio-avatar" style="background:var(--accent);">ORG</div>
+                    <div class="studio-meta">
+                        <h4>ternis.org</h4>
+                        <p>FOSS Foundation &amp; MTEX.dev Stewardship</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Initiatives & Roadmap Section -->
+<section id="roadmap" style="padding-top: 4rem; padding-bottom: 5rem;">
+    <div class="container">
+        <div class="section-header" style="margin-bottom: 2.5rem;">
+            <span class="badge badge-primary section-badge"><?= e(t('roadmap.badge')) ?></span>
+            <h2><?= e(t('roadmap.title')) ?></h2>
+            <p class="section-subtitle"><?= e(t('roadmap.subtitle')) ?></p>
+        </div>
+
+        <div class="roadmap-grid">
+            <div class="roadmap-card">
+                <span class="badge badge-primary"><?= e(t('roadmap.q1_badge')) ?></span>
+                <h3><?= e(t('roadmap.q1_title')) ?></h3>
+                <p><?= e(t('roadmap.q1_desc')) ?></p>
+            </div>
+
+            <div class="roadmap-card">
+                <span class="badge badge-secondary"><?= e(t('roadmap.q2_badge')) ?></span>
+                <h3><?= e(t('roadmap.q2_title')) ?></h3>
+                <p><?= e(t('roadmap.q2_desc')) ?></p>
+            </div>
+
+            <div class="roadmap-card">
+                <span class="badge badge-secondary"><?= e(t('roadmap.q3_badge')) ?></span>
+                <h3><?= e(t('roadmap.q3_title')) ?></h3>
+                <p><?= e(t('roadmap.q3_desc')) ?></p>
+            </div>
+
+            <div class="roadmap-card">
+                <span class="badge badge-accent"><?= e(t('roadmap.q4_badge')) ?></span>
+                <h3><?= e(t('roadmap.q4_title')) ?></h3>
+                <p><?= e(t('roadmap.q4_desc')) ?></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Frequently Asked Questions Section -->
+<?php
+$faqItems = t_array('faq.items');
+?>
+<section id="faq" style="padding-top: 4rem; padding-bottom: 6rem;">
+    <div class="container">
+        <div class="section-header" style="margin-bottom: 2.5rem;">
+            <span class="badge badge-secondary section-badge"><?= e(t('faq.badge')) ?></span>
+            <h2><?= e(t('faq.title')) ?></h2>
+            <p class="section-subtitle"><?= e(t('faq.subtitle')) ?></p>
+        </div>
+
+        <div class="faq-list">
+            <?php foreach ($faqItems as $idx => $item): ?>
+                <div class="faq-item <?= $idx === 0 ? 'active' : '' ?>">
+                    <button type="button" class="faq-question" aria-expanded="<?= $idx === 0 ? 'true' : 'false' ?>">
+                        <span><?= e($item['q']) ?></span>
+                        <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><?= e($item['a']) ?></p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+<!-- Schema.org FAQPage Structured Data -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        <?php
+        $faqJson = [];
+        foreach ($faqItems as $item) {
+            $faqJson[] = json_encode([
+                '@type'          => 'Question',
+                'name'           => $item['q'],
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text'  => $item['a'],
+                ],
+            ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        }
+        echo implode(",\n        ", $faqJson);
+        ?>
+    ]
+}
+</script>
+

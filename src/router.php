@@ -66,12 +66,19 @@ class Router
      */
     public function dispatch(?string $uri = null, ?string $method = null): void
     {
-        $method = strtoupper($method ?? $_SERVER['REQUEST_METHOD'] ?? 'GET');
-        $rawUri = $uri ?? $_SERVER['REQUEST_URI'] ?? '/';
-        $path   = parse_url($rawUri, PHP_URL_PATH) ?? '/';
+        $rawMethod = strtoupper($method ?? $_SERVER['REQUEST_METHOD'] ?? 'GET');
+        $isHead    = ($rawMethod === 'HEAD');
+        $method    = $isHead ? 'GET' : $rawMethod;
+        $rawUri    = $uri ?? $_SERVER['REQUEST_URI'] ?? '/';
+        $path      = parse_url($rawUri, PHP_URL_PATH) ?? '/';
 
+        // 301 Permanent Redirect for trailing slashes (SEO best-practice)
         if ($path !== '/' && str_ends_with($path, '/')) {
-            $path = rtrim($path, '/');
+            $cleanPath = rtrim($path, '/');
+            $query = parse_url($rawUri, PHP_URL_QUERY);
+            $target = $cleanPath . ($query !== null && $query !== '' ? '?' . $query : '');
+            header('Location: ' . $target, true, 301);
+            exit;
         }
 
         $routesForMethod = $this->routes[$method] ?? [];
@@ -85,17 +92,31 @@ class Router
                     }
                 }
 
-                call_user_func($route['handler'], $params);
+                if ($isHead) {
+                    ob_start();
+                    call_user_func($route['handler'], $params);
+                    ob_end_clean();
+                } else {
+                    call_user_func($route['handler'], $params);
+                }
                 return;
             }
         }
 
         if ($this->fallbackHandler !== null) {
-            call_user_func($this->fallbackHandler);
+            if ($isHead) {
+                ob_start();
+                call_user_func($this->fallbackHandler);
+                ob_end_clean();
+            } else {
+                call_user_func($this->fallbackHandler);
+            }
             return;
         }
 
         http_response_code(404);
-        echo '404 Not Found';
+        if (!$isHead) {
+            echo '404 Not Found';
+        }
     }
 }

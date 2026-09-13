@@ -103,3 +103,31 @@ $doc = $doc ?? [];
         </div>
     </div>
 </section>
+
+<!-- Schema.org BreadcrumbList Structured Data -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://ternis.org/<?= e($lang) ?>"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "<?= e(t('nav.legal')) ?>",
+            "item": "https://ternis.org/<?= e($lang) ?>/legal/imprint"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "<?= e($doc['title'] ?? '') ?>",
+            "item": "https://ternis.org/<?= e($lang) ?>/legal/<?= e($slug) ?>"
+        }
+    ]
+}
+</script>

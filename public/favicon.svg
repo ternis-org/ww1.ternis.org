@@ -1,12 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <rect width="64" height="64" rx="16" fill="#08090d"/>
-  <rect x="4" y="4" width="56" height="56" rx="12" fill="url(#grad)" fill-opacity="0.15" stroke="url(#grad)" stroke-width="2"/>
-  <path d="M18 22h28M32 22v26M24 48h16" stroke="url(#grad)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="48" cy="18" r="4" fill="#10b981"/>
-  <defs>
-    <linearGradient id="grad" x1="10" y1="10" x2="54" y2="54" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#06b6d4"/>
-      <stop offset="1" stop-color="#6366f1"/>
-    </linearGradient>
-  </defs>
+  <style>
+    .bg { fill: #4a5d23; }
+    .seed { fill: #d4a373; }
+    .stem { stroke: #ffffff; }
+    .leaf { fill: #8c9c6f; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #171f14; }
+      .stem { stroke: #94b858; }
+      .leaf { fill: #94b858; }
+    }
+  </style>
+  <rect class="bg" width="64" height="64" rx="16"/>
+  <rect x="4" y="4" width="56" height="56" rx="12" stroke="#8c9c6f" stroke-width="1.5" stroke-opacity="0.3"/>
+  <!-- Stylized organic T with sprouting leaf -->
+  <path class="stem" d="M18 20h28M32 20v26M24 46h16" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Organic sprouting node -->
+  <circle class="seed" cx="44" cy="18" r="4.5"/>
+  <path class="leaf" d="M44 18c0-4 4-6 7-6 0 3-2 7-6 7-0.5 0-0.8-0.3-1-1z" opacity="0.95"/>
 </svg>
