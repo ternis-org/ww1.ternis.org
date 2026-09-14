@@ -354,55 +354,43 @@ body.drawer-open {
 
 /* Arrow svg in buttons (Standard / Default) */
 .arrow-svg {
-    width: 35px;
-    height: 12px;
+    width: 28px;
+    height: 10px;
     stroke: currentColor;
     stroke-width: 1.5;
     fill: none;
-    margin-left: -20px;
+    margin-left: 0;
     vertical-align: middle;
     display: inline-block;
     flex-shrink: 0;
-    transition: all 0.2s ease-out;
+    transition: opacity 0.2s ease;
 }
 
 .arrow-svg .line {
-    stroke-dasharray: 30;
-    stroke-dashoffset: 40;
-    transition: all 0.2s ease-out;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
 }
 
-.btn:focus-visible .arrow-svg,
-.btn:hover .arrow-svg,
-.btn-expanding:focus-visible .arrow-svg,
-.btn-expanding:hover .arrow-svg,
-a:hover .arrow-svg {
-    width: 40px;
-    margin-left: 4px;
-}
-
-.btn:focus-visible .arrow-svg .line,
-.btn:hover .arrow-svg .line,
-.btn-expanding:focus-visible .arrow-svg .line,
-.btn-expanding:hover .arrow-svg .line,
-a:hover .arrow-svg .line {
-    stroke-dashoffset: 58;
-}
-
-/* Length Variation: Small / Compact (Expands less for inline notices) */
+/* Length Variation: Small / Compact (for inline notices, small buttons) */
 .arrow-svg.arrow-svg-sm,
 .arrow-svg-sm {
-    width: 26px;
-    height: 10px;
-    margin-left: -13px;
+    width: 22px;
+    height: 8px;
+    margin-left: 0;
 }
 
 .arrow-svg.arrow-svg-sm .line,
 .arrow-svg-sm .line {
-    stroke-dasharray: 30;
-    stroke-dashoffset: 40;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
 }
 
+/* Keep arrow firmly anchored at constant distance on hover/focus */
+.btn:focus-visible .arrow-svg,
+.btn:hover .arrow-svg,
+.btn-expanding:focus-visible .arrow-svg,
+.btn-expanding:hover .arrow-svg,
+a:hover .arrow-svg,
 .btn:focus-visible .arrow-svg-sm,
 .btn:hover .arrow-svg-sm,
 .btn-expanding:focus-visible .arrow-svg-sm,
@@ -413,21 +401,7 @@ a:hover .arrow-svg-sm,
 .btn-expanding:focus-visible .arrow-svg.arrow-svg-sm,
 .btn-expanding:hover .arrow-svg.arrow-svg-sm,
 a:hover .arrow-svg.arrow-svg-sm {
-    width: 30px;
-    margin-left: 3px;
-}
-
-.btn:focus-visible .arrow-svg-sm .line,
-.btn:hover .arrow-svg-sm .line,
-.btn-expanding:focus-visible .arrow-svg-sm .line,
-.btn-expanding:hover .arrow-svg-sm .line,
-a:hover .arrow-svg-sm .line,
-.btn:focus-visible .arrow-svg.arrow-svg-sm .line,
-.btn:hover .arrow-svg.arrow-svg-sm .line,
-.btn-expanding:focus-visible .arrow-svg.arrow-svg-sm .line,
-.btn-expanding:hover .arrow-svg.arrow-svg-sm .line,
-a:hover .arrow-svg.arrow-svg-sm .line {
-    stroke-dashoffset: 49;
+    margin-left: 0;
 }
 
 .btn:active {
