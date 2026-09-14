@@ -38,24 +38,24 @@ $lang = $lang ?? current_lang();
             </a>
         </div>
 
-        <!-- Hero Stats Bar -->
+        <!-- Hero Stats Bar (Interactive Navigation Shortcuts) -->
         <div class="hero-stats scroll-reveal delay-3 stagger-children">
-            <div class="stat-item">
+            <a href="#projects" class="stat-item" aria-label="<?= e(t('hero.stat_projects_sub')) ?>">
                 <div class="stat-value"><?= e(t('hero.stat_projects')) ?></div>
                 <div class="stat-label"><?= e(t('hero.stat_projects_sub')) ?></div>
-            </div>
-            <div class="stat-item">
+            </a>
+            <a href="#about" class="stat-item" aria-label="<?= e(t('hero.stat_privacy_sub')) ?>">
                 <div class="stat-value"><?= e(t('hero.stat_privacy')) ?></div>
                 <div class="stat-label"><?= e(t('hero.stat_privacy_sub')) ?></div>
-            </div>
-            <div class="stat-item">
+            </a>
+            <a href="#nameservers" class="stat-item" aria-label="<?= e(t('hero.stat_nameservers_sub')) ?>">
                 <div class="stat-value"><?= e(t('hero.stat_nameservers')) ?></div>
                 <div class="stat-label"><?= e(t('hero.stat_nameservers_sub')) ?></div>
-            </div>
-            <div class="stat-item">
+            </a>
+            <a href="#about" class="stat-item" aria-label="<?= e(t('hero.stat_hosting_sub')) ?>">
                 <div class="stat-value"><?= e(t('hero.stat_hosting')) ?></div>
                 <div class="stat-label"><?= e(t('hero.stat_hosting_sub')) ?></div>
-            </div>
+            </a>
         </div>
     </div>
 </section>
@@ -94,10 +94,15 @@ $lang = $lang ?? current_lang();
 
         <div class="projects-grid">
             <!-- Project 1: httpclient.de -->
-            <div class="project-card">
+            <div class="project-card" data-href="<?= e(t('projects.httpclient.url')) ?>">
                 <div>
                     <div class="project-header">
-                        <h3><?= e(t('projects.httpclient.title')) ?></h3>
+                        <h3>
+                            <a href="<?= e(t('projects.httpclient.url')) ?>" target="_blank" rel="noopener noreferrer" class="project-title-link">
+                                <span><?= e(t('projects.httpclient.title')) ?></span>
+                                <svg class="project-external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                            </a>
+                        </h3>
                     </div>
                     <div class="project-tagline"><?= e(t('projects.httpclient.tagline')) ?></div>
                     <p class="project-desc"><?= e(t('projects.httpclient.description')) ?></p>
@@ -115,10 +120,15 @@ $lang = $lang ?? current_lang();
             </div>
 
             <!-- Project 2: api-sandbox.de -->
-            <div class="project-card">
+            <div class="project-card" data-href="<?= e(t('projects.apisandbox.url')) ?>">
                 <div>
                     <div class="project-header">
-                        <h3><?= e(t('projects.apisandbox.title')) ?></h3>
+                        <h3>
+                            <a href="<?= e(t('projects.apisandbox.url')) ?>" target="_blank" rel="noopener noreferrer" class="project-title-link">
+                                <span><?= e(t('projects.apisandbox.title')) ?></span>
+                                <svg class="project-external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                            </a>
+                        </h3>
                     </div>
                     <div class="project-tagline"><?= e(t('projects.apisandbox.tagline')) ?></div>
                     <p class="project-desc"><?= e(t('projects.apisandbox.description')) ?></p>
@@ -136,10 +146,15 @@ $lang = $lang ?? current_lang();
             </div>
 
             <!-- Project 3: MTEX.dev (e.g. getmy.name) -->
-            <div class="project-card">
+            <div class="project-card" data-href="<?= e(t('projects.mtex.url')) ?>">
                 <div>
                     <div class="project-header">
-                        <h3><?= e(t('projects.mtex.title')) ?></h3>
+                        <h3>
+                            <a href="<?= e(t('projects.mtex.url')) ?>" target="_blank" rel="noopener noreferrer" class="project-title-link">
+                                <span><?= e(t('projects.mtex.title')) ?></span>
+                                <svg class="project-external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                            </a>
+                        </h3>
                     </div>
                     <div class="project-tagline"><?= e(t('projects.mtex.tagline')) ?></div>
                     <p class="project-desc"><?= e(t('projects.mtex.description')) ?></p>
@@ -160,10 +175,15 @@ $lang = $lang ?? current_lang();
             </div>
 
             <!-- Project 4: web-search.org -->
-            <div class="project-card">
+            <div class="project-card" data-href="<?= e(t('projects.websearch.url')) ?>">
                 <div>
                     <div class="project-header">
-                        <h3><?= e(t('projects.websearch.title')) ?></h3>
+                        <h3>
+                            <a href="<?= e(t('projects.websearch.url')) ?>" target="_blank" rel="noopener noreferrer" class="project-title-link">
+                                <span><?= e(t('projects.websearch.title')) ?></span>
+                                <svg class="project-external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                            </a>
+                        </h3>
                     </div>
                     <div class="project-tagline"><?= e(t('projects.websearch.tagline')) ?></div>
                     <p class="project-desc"><?= e(t('projects.websearch.description')) ?></p>
@@ -181,10 +201,15 @@ $lang = $lang ?? current_lang();
             </div>
 
             <!-- Project 5: mail-free.eu + mail-free.uk -->
-            <div class="project-card">
+            <div class="project-card" data-href="<?= e(t('projects.mailfree.url_eu')) ?>">
                 <div>
                     <div class="project-header">
-                        <h3><?= e(t('projects.mailfree.title')) ?></h3>
+                        <h3>
+                            <a href="<?= e(t('projects.mailfree.url_eu')) ?>" target="_blank" rel="noopener noreferrer" class="project-title-link">
+                                <span><?= e(t('projects.mailfree.title')) ?></span>
+                                <svg class="project-external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                            </a>
+                        </h3>
                     </div>
                     <div class="project-tagline"><?= e(t('projects.mailfree.tagline')) ?></div>
                     <p class="project-desc"><?= e(t('projects.mailfree.description')) ?></p>
@@ -205,10 +230,15 @@ $lang = $lang ?? current_lang();
             </div>
 
             <!-- Project 6: static.re -->
-            <div class="project-card">
+            <div class="project-card" data-href="<?= e(t('projects.staticre.url')) ?>">
                 <div>
                     <div class="project-header">
-                        <h3><?= e(t('projects.staticre.title')) ?></h3>
+                        <h3>
+                            <a href="<?= e(t('projects.staticre.url')) ?>" target="_blank" rel="noopener noreferrer" class="project-title-link">
+                                <span><?= e(t('projects.staticre.title')) ?></span>
+                                <svg class="project-external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                            </a>
+                        </h3>
                     </div>
                     <div class="project-tagline"><?= e(t('projects.staticre.tagline')) ?></div>
                     <p class="project-desc"><?= e(t('projects.staticre.description')) ?></p>
@@ -226,10 +256,15 @@ $lang = $lang ?? current_lang();
             </div>
 
             <!-- Project 7: drophtml.de -->
-            <div class="project-card">
+            <div class="project-card" data-href="<?= e(t('projects.drophtml.url')) ?>">
                 <div>
                     <div class="project-header">
-                        <h3><?= e(t('projects.drophtml.title')) ?></h3>
+                        <h3>
+                            <a href="<?= e(t('projects.drophtml.url')) ?>" target="_blank" rel="noopener noreferrer" class="project-title-link">
+                                <span><?= e(t('projects.drophtml.title')) ?></span>
+                                <svg class="project-external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                            </a>
+                        </h3>
                     </div>
                     <div class="project-tagline"><?= e(t('projects.drophtml.tagline')) ?></div>
                     <p class="project-desc"><?= e(t('projects.drophtml.description')) ?></p>
@@ -247,10 +282,15 @@ $lang = $lang ?? current_lang();
             </div>
 
             <!-- Project 8: example-dns -->
-            <div class="project-card">
+            <div class="project-card" data-href="<?= e(t('projects.exampledns.url_web')) ?>">
                 <div>
                     <div class="project-header">
-                        <h3><?= e(t('projects.exampledns.title')) ?></h3>
+                        <h3>
+                            <a href="<?= e(t('projects.exampledns.url_web')) ?>" target="_blank" rel="noopener noreferrer" class="project-title-link">
+                                <span><?= e(t('projects.exampledns.title')) ?></span>
+                                <svg class="project-external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                            </a>
+                        </h3>
                     </div>
                     <div class="project-tagline"><?= e(t('projects.exampledns.tagline')) ?></div>
                     <p class="project-desc"><?= e(t('projects.exampledns.description')) ?></p>
@@ -298,10 +338,18 @@ $lang = $lang ?? current_lang();
                         </div>
                         <span class="ns-node-badge">NS1</span>
                     </div>
-                    <h3 class="ns-hostname"><?= e(t('nameservers.node1_host')) ?></h3>
+                    <h3 class="ns-hostname">
+                        <span><?= e(t('nameservers.node1_host')) ?></span>
+                        <button type="button" class="copy-chip-btn" data-copy="<?= e(t('nameservers.node1_host')) ?>" data-toast="<?= $lang === 'de' ? 'Nameserver one.ns.ternis.net kopiert!' : 'Nameserver one.ns.ternis.net copied!' ?>" aria-label="Copy hostname" title="Copy hostname">
+                            <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        </button>
+                    </h3>
                     <div class="ns-alias">
                         <span><?= e(t('nameservers.alias_label')) ?>:</span>
                         <code><?= e(t('nameservers.node1_alias')) ?></code>
+                        <button type="button" class="copy-inline-btn" data-copy="<?= e(t('nameservers.node1_alias')) ?>" data-toast="<?= $lang === 'de' ? 'Alias one.example-dns.com kopiert!' : 'Alias one.example-dns.com copied!' ?>" aria-label="Copy alias" title="Copy alias">
+                            <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        </button>
                     </div>
                     <p class="ns-desc"><?= e(t('nameservers.node1_desc')) ?></p>
                 </div>
@@ -323,10 +371,18 @@ $lang = $lang ?? current_lang();
                         </div>
                         <span class="ns-node-badge">NS2</span>
                     </div>
-                    <h3 class="ns-hostname"><?= e(t('nameservers.node2_host')) ?></h3>
+                    <h3 class="ns-hostname">
+                        <span><?= e(t('nameservers.node2_host')) ?></span>
+                        <button type="button" class="copy-chip-btn" data-copy="<?= e(t('nameservers.node2_host')) ?>" data-toast="<?= $lang === 'de' ? 'Nameserver two.ns.ternis.net kopiert!' : 'Nameserver two.ns.ternis.net copied!' ?>" aria-label="Copy hostname" title="Copy hostname">
+                            <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        </button>
+                    </h3>
                     <div class="ns-alias">
                         <span><?= e(t('nameservers.alias_label')) ?>:</span>
                         <code><?= e(t('nameservers.node2_alias')) ?></code>
+                        <button type="button" class="copy-inline-btn" data-copy="<?= e(t('nameservers.node2_alias')) ?>" data-toast="<?= $lang === 'de' ? 'Alias two.example-dns.com kopiert!' : 'Alias two.example-dns.com copied!' ?>" aria-label="Copy alias" title="Copy alias">
+                            <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        </button>
                     </div>
                     <p class="ns-desc"><?= e(t('nameservers.node2_desc')) ?></p>
                 </div>
@@ -362,6 +418,10 @@ $lang = $lang ?? current_lang();
                     <span class="dot yellow"></span>
                     <span class="dot green"></span>
                     <span class="ns-terminal-title"><?= e(t('nameservers.terminal_title')) ?></span>
+                    <button type="button" class="term-copy-btn" data-copy="dig @one.ns.ternis.net ternis.org +noall +answer" data-toast="<?= $lang === 'de' ? 'DNS-Befehl kopiert!' : 'DNS command copied!' ?>" title="<?= $lang === 'de' ? 'Befehl kopieren' : 'Copy command' ?>" aria-label="<?= $lang === 'de' ? 'Befehl kopieren' : 'Copy command' ?>">
+                        <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        <span class="copy-text"><?= $lang === 'de' ? 'Kopieren' : 'Copy' ?></span>
+                    </button>
                 </div>
                 <pre class="ns-terminal-code"><code><span class="term-prompt">$</span> dig @one.ns.ternis.net ternis.org +noall +answer
 ternis.org.  300  IN  A  &lt;sovereign-ip&gt;

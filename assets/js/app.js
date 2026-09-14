@@ -49,24 +49,37 @@
     function initMobileNav() {
         const toggleBtn = document.querySelector('.mobile-toggle');
         const drawer = document.querySelector('.mobile-drawer');
+        const backdrop = document.querySelector('#mobile-drawer-backdrop');
         if (!toggleBtn || !drawer) return;
+
+        function openDrawer() {
+            drawer.classList.add('open');
+            if (backdrop) backdrop.classList.add('open');
+            document.body.classList.add('drawer-open');
+            toggleBtn.setAttribute('aria-expanded', 'true');
+            toggleBtn.innerHTML = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+        }
 
         function closeDrawer() {
             drawer.classList.remove('open');
+            if (backdrop) backdrop.classList.remove('open');
+            document.body.classList.remove('drawer-open');
             toggleBtn.setAttribute('aria-expanded', 'false');
             toggleBtn.innerHTML = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>`;
         }
 
         toggleBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            const isOpen = drawer.classList.toggle('open');
-            toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-            if (isOpen) {
-                toggleBtn.innerHTML = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+            if (drawer.classList.contains('open')) {
+                closeDrawer();
             } else {
-                toggleBtn.innerHTML = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>`;
+                openDrawer();
             }
         });
+
+        if (backdrop) {
+            backdrop.addEventListener('click', closeDrawer);
+        }
 
         // Close on clicking link inside drawer
         drawer.querySelectorAll('a').forEach(link => {
@@ -80,12 +93,12 @@
             }
         });
 
-        // Close when clicking outside drawer
-        document.addEventListener('click', (e) => {
-            if (drawer.classList.contains('open') && !drawer.contains(e.target) && !toggleBtn.contains(e.target)) {
+        // Close when resizing above mobile breakpoint
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && drawer.classList.contains('open')) {
                 closeDrawer();
             }
-        });
+        }, { passive: true });
     }
 
     // ── FAQ Accordion ──────────────────────────────────────────────────────────
@@ -313,6 +326,106 @@
         }
     }
 
+    // ── Toast Notification System ─────────────────────────────────────────────
+    let toastTimer = null;
+    function showToast(message) {
+        let toast = document.querySelector('.ui-toast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.className = 'ui-toast';
+            toast.setAttribute('role', 'status');
+            toast.setAttribute('aria-live', 'polite');
+            toast.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span class="ui-toast-msg"></span>`;
+            document.body.appendChild(toast);
+        }
+
+        const msgEl = toast.querySelector('.ui-toast-msg');
+        if (msgEl) msgEl.textContent = message;
+        toast.classList.add('visible');
+
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+            toast.classList.remove('visible');
+        }, 2400);
+    }
+
+    // ── Copy to Clipboard with Visual & Toast Feedback ────────────────────────
+    function initCopyButtons() {
+        const copyBtns = document.querySelectorAll('[data-copy]');
+        copyBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                e.preventDefault();
+
+                const textToCopy = btn.getAttribute('data-copy');
+                if (!textToCopy) return;
+
+                const isDe = document.documentElement.lang === 'de';
+                const toastMsg = btn.getAttribute('data-toast') || (isDe ? 'In die Zwischenablage kopiert!' : 'Copied to clipboard!');
+
+                function onCopySuccess() {
+                    btn.classList.add('copied');
+                    const copyText = btn.querySelector('.copy-text');
+                    const originalText = copyText ? copyText.textContent : null;
+
+                    if (copyText) {
+                        copyText.textContent = isDe ? 'Kopiert!' : 'Copied!';
+                    }
+
+                    showToast(toastMsg);
+
+                    setTimeout(() => {
+                        btn.classList.remove('copied');
+                        if (copyText && originalText !== null) {
+                            copyText.textContent = originalText;
+                        }
+                    }, 2000);
+                }
+
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(textToCopy).then(onCopySuccess).catch(() => {
+                        fallbackCopy(textToCopy, onCopySuccess);
+                    });
+                } else {
+                    fallbackCopy(textToCopy, onCopySuccess);
+                }
+            });
+        });
+
+        function fallbackCopy(text, callback) {
+            try {
+                const tempInput = document.createElement('textarea');
+                tempInput.value = text;
+                tempInput.style.position = 'fixed';
+                tempInput.style.opacity = '0';
+                document.body.appendChild(tempInput);
+                tempInput.focus();
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+                if (callback) callback();
+            } catch (err) {
+                console.debug('Copy fallback error:', err);
+            }
+        }
+    }
+
+    // ── Full-Card Click for Project Cards ─────────────────────────────────────
+    function initProjectCards() {
+        const cards = document.querySelectorAll('.project-card[data-href]');
+        cards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                // If clicked directly on a link or button, let it handle its own navigation
+                if (e.target.closest('a, button')) return;
+
+                const href = card.getAttribute('data-href');
+                if (href) {
+                    window.open(href, '_blank', 'noopener,noreferrer');
+                }
+            });
+        });
+    }
+
     // ── Bootstrap on DOM Ready ─────────────────────────────────────────────────
     document.addEventListener('DOMContentLoaded', () => {
         initTheme();
@@ -321,6 +434,8 @@
         initScrollSpy();
         initScrollToTop();
         initScrollAnimations();
+        initCopyButtons();
+        initProjectCards();
         initServiceWorker();
 
         // Bind theme toggle buttons

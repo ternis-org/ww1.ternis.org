@@ -102,6 +102,7 @@ input:focus-visible {
 html {
     font-size: 16px;
     scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scrollbar-width: none; /* Firefox */
@@ -298,6 +299,27 @@ nav.floating-nav:hover {
 
 .mobile-toggle {
     display: none;
+}
+
+body.drawer-open {
+    overflow: hidden;
+}
+
+.drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 20, 13, 0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.drawer-backdrop.open {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .mobile-drawer {
@@ -616,6 +638,29 @@ h2 strong {
 .stat-item {
     text-align: center;
     position: relative;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.65rem 0.5rem;
+    border-radius: var(--radius-sm);
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.stat-item:hover {
+    transform: translateY(-3px);
+    background: rgba(74, 93, 35, 0.06);
+}
+
+[data-theme="dark"] .stat-item:hover {
+    background: rgba(148, 184, 88, 0.1);
+}
+
+.stat-item:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
 }
 
 .stat-item:not(:last-child)::after {
@@ -634,12 +679,22 @@ h2 strong {
     font-family: var(--font-mono);
     color: var(--primary);
     margin-bottom: 0.25rem;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.stat-item:hover .stat-value {
+    transform: scale(1.04);
 }
 
 .stat-label {
     font-size: 0.85rem;
     color: var(--text-muted);
     font-weight: 400;
+    transition: color 0.2s ease;
+}
+
+.stat-item:hover .stat-label {
+    color: var(--primary);
 }
 
 /* ==========================================================================
@@ -723,6 +778,7 @@ h2 strong {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    cursor: pointer;
     transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -743,6 +799,34 @@ h2 strong {
     color: var(--primary);
     letter-spacing: -0.01em;
     margin: 0;
+}
+
+.project-title-link {
+    color: var(--primary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    transition: color 0.2s ease;
+}
+
+.project-title-link:hover {
+    color: var(--primary-hover);
+}
+
+.project-external-icon {
+    width: 17px;
+    height: 17px;
+    stroke: currentColor;
+    opacity: 0.4;
+    flex-shrink: 0;
+    transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+}
+
+.project-card:hover .project-external-icon,
+.project-title-link:hover .project-external-icon {
+    transform: translate(2px, -2px);
+    opacity: 1;
 }
 
 .project-tagline {
@@ -905,6 +989,54 @@ h2 strong {
     color: var(--primary);
     margin: 0 0 0.4rem 0;
     letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.copy-chip-btn,
+.copy-inline-btn {
+    background: rgba(74, 93, 35, 0.08);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    color: var(--primary);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem 0.45rem;
+    transition: all 0.2s ease;
+    vertical-align: middle;
+}
+
+[data-theme="dark"] .copy-chip-btn,
+[data-theme="dark"] .copy-inline-btn {
+    background: rgba(148, 184, 88, 0.12);
+}
+
+.copy-chip-btn:hover,
+.copy-inline-btn:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #ffffff;
+    transform: scale(1.05);
+}
+
+.copy-inline-btn {
+    padding: 0.15rem 0.35rem;
+    margin-left: 0.35rem;
+}
+
+.copy-icon,
+.check-icon {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    display: block;
+}
+
+.check-icon {
+    stroke: #52b788;
 }
 
 .ns-alias {
@@ -1039,7 +1171,72 @@ a.ns-domain-pill:hover {
     font-family: var(--font-mono);
     font-size: 0.75rem;
     color: var(--text-muted);
+    margin-left: 0.5rem;
+}
+
+.term-copy-btn {
     margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 0.25rem 0.65rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 4px;
+    color: #c9d1d9;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.term-copy-btn:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+}
+
+.term-copy-btn.copied {
+    color: #98c379;
+    border-color: rgba(152, 195, 121, 0.5);
+    background: rgba(152, 195, 121, 0.12);
+}
+
+/* Floating UI Toast Notification */
+.ui-toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translate(-50%, 25px);
+    background: var(--bg-surface);
+    color: var(--text-dark);
+    font-family: var(--font-mono);
+    font-size: 0.825rem;
+    font-weight: 500;
+    padding: 0.65rem 1.25rem;
+    border-radius: 50px;
+    border: 1px solid var(--border-highlight);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.16);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    z-index: 100000;
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+}
+
+.ui-toast.visible {
+    transform: translate(-50%, 0);
+    opacity: 1;
+}
+
+.ui-toast svg {
+    width: 16px;
+    height: 16px;
+    stroke: #52b788;
+    flex-shrink: 0;
 }
 
 .ns-terminal-code {

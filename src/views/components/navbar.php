@@ -59,7 +59,8 @@ $homePrefix = (str_contains($currentPath, '/legal') || str_contains($currentPath
     </nav>
 </div>
 
-<!-- Mobile Drawer -->
+<!-- Mobile Drawer Backdrop & Drawer -->
+<div id="mobile-drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
 <div id="mobile-nav-drawer" class="mobile-drawer" role="dialog" aria-label="Mobile Navigation" aria-modal="true">
     <a href="<?= e($homePrefix) ?>#projects" class="nav-link"><?= e(t('nav.projects')) ?></a>
     <a href="<?= e($homePrefix) ?>#nameservers" class="nav-link"><?= e(t('nav.nameservers')) ?></a>
