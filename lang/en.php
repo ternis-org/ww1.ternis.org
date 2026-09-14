@@ -39,7 +39,7 @@ return [
         'stat_privacy'         => '0 Trackers',
         'stat_privacy_sub'     => 'GDPR & EU Hosted',
         'stat_latency'         => '< 40ms',
-        'stat_latency_sub'     => 'Edge Response',
+        'stat_latency_sub'     => 'Response Time',
         'stat_uptime'          => '99.9%',
         'stat_uptime_sub'      => 'Infrastructure SLA',
     ],

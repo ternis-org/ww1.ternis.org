@@ -39,7 +39,7 @@ return [
         'stat_privacy'         => '0 Tracker',
         'stat_privacy_sub'     => 'DSGVO & EU-Hosting',
         'stat_latency'         => '< 40ms',
-        'stat_latency_sub'     => 'Edge-Antwortzeit',
+        'stat_latency_sub'     => 'Antwortzeit',
         'stat_uptime'          => '99.9%',
         'stat_uptime_sub'      => 'Infrastruktur-SLA',
     ],

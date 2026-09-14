@@ -23,7 +23,7 @@
 
 **ternis.org** is the official open-source organization and digital sovereignty hub operated by **[ternis.dev](https://ternis.dev)** (the engineering portal of Fabian Ternis) and supported by **[ternis-edv.de](https://ternis-edv.de)** (a German web engineering and digital solutions studio).
 
-ternis.org is dedicated to stewarding and scaling open-source developer tooling by **[MTEX.dev](https://mtex.dev)**, sovereign European communications platforms, and edge-first web infrastructure.
+ternis.org is dedicated to stewarding and scaling open-source developer tooling by **[MTEX.dev](https://mtex.dev)**, sovereign European communications platforms, and independent web infrastructure.
 
 ### Core Values
 - 🛡️ **100% Free & Open Source (FOSS):** Everything we build is open for inspection, contribution, and self-hosting under permissive licenses.
