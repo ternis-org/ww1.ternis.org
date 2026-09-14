@@ -293,7 +293,12 @@ $showScrollTop   = $showScrollTop ?? true;
 <body>
 
     <!-- Top Scroll Progress Indicator -->
-    <div id="scroll-progress" class="scroll-progress-bar" aria-hidden="true"></div>
+    <div id="scroll-progress" class="scroll-progress-bar" aria-hidden="true">
+        <div class="scroll-progress-track">
+            <div class="scroll-progress-fill"></div>
+            <div class="scroll-progress-head"></div>
+        </div>
+    </div>
 
     <!-- Initial App Loader -->
     <div id="app-loader" class="app-loader" aria-hidden="true">

@@ -218,6 +218,8 @@
         document.documentElement.classList.add('has-scroll-anim');
 
         const progressBar = document.getElementById('scroll-progress');
+        const progressFill = progressBar ? (progressBar.querySelector('.scroll-progress-fill') || progressBar) : null;
+        const progressHead = progressBar ? progressBar.querySelector('.scroll-progress-head') : null;
         const navContainer = document.querySelector('.nav-container-fixed');
         const heroContainer = document.querySelector('#hero .container');
 
@@ -229,7 +231,18 @@
             const progress = docHeight > 0 ? Math.min(1, Math.max(0, scrollTop / docHeight)) : 0;
 
             if (progressBar) {
-                progressBar.style.transform = `scaleX(${progress})`;
+                if (scrollTop > 12) {
+                    progressBar.classList.add('is-active');
+                } else {
+                    progressBar.classList.remove('is-active');
+                }
+
+                if (progressFill) {
+                    progressFill.style.transform = `scaleX(${progress})`;
+                }
+                if (progressHead) {
+                    progressHead.style.left = `${(progress * 100).toFixed(2)}%`;
+                }
             }
 
             if (navContainer) {
