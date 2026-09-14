@@ -44,20 +44,20 @@ $lang = $lang ?? current_lang();
         <!-- Hero Stats Bar -->
         <div class="hero-stats scroll-reveal delay-3 stagger-children">
             <div class="stat-item">
-                <div class="stat-value"><?= e(t('hero.stat_open_source')) ?></div>
-                <div class="stat-label"><?= e(t('hero.stat_open_source_sub')) ?></div>
+                <div class="stat-value"><?= e(t('hero.stat_projects')) ?></div>
+                <div class="stat-label"><?= e(t('hero.stat_projects_sub')) ?></div>
             </div>
             <div class="stat-item">
                 <div class="stat-value"><?= e(t('hero.stat_privacy')) ?></div>
                 <div class="stat-label"><?= e(t('hero.stat_privacy_sub')) ?></div>
             </div>
             <div class="stat-item">
-                <div class="stat-value"><?= e(t('hero.stat_latency')) ?></div>
-                <div class="stat-label"><?= e(t('hero.stat_latency_sub')) ?></div>
+                <div class="stat-value"><?= e(t('hero.stat_nameservers')) ?></div>
+                <div class="stat-label"><?= e(t('hero.stat_nameservers_sub')) ?></div>
             </div>
             <div class="stat-item">
-                <div class="stat-value"><?= e(t('hero.stat_uptime')) ?></div>
-                <div class="stat-label"><?= e(t('hero.stat_uptime_sub')) ?></div>
+                <div class="stat-value"><?= e(t('hero.stat_hosting')) ?></div>
+                <div class="stat-label"><?= e(t('hero.stat_hosting_sub')) ?></div>
             </div>
         </div>
     </div>

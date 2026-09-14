@@ -26,9 +26,9 @@
 ternis.org is dedicated to stewarding and scaling open-source developer tooling by **[MTEX.dev](https://mtex.dev)**, sovereign European communications platforms, and independent web infrastructure.
 
 ### Core Values
-- 🛡️ **100% Free & Open Source (FOSS):** Everything we build is open for inspection, contribution, and self-hosting under permissive licenses.
-- 🇪🇺 **European Digital Sovereignty:** Strictly zero non-consensual telemetry, zero advertising trackers, and 100% GDPR-compliant infrastructure hosted on European soil.
-- ⚡ **Developer Ergonomics:** Sub-50ms response times, predictable REST APIs, minimal runtime dependencies, and instant copy-paste developer tooling.
+- 🛡️ **Free & Open-Source Tools:** We actively maintain and publish open-source developer tooling and public utilities under permissive licenses.
+- 🇪🇺 **European Digital Sovereignty:** Strictly zero non-consensual telemetry, zero advertising trackers, and GDPR-compliant infrastructure hosted on European soil.
+- ⚡ **Developer Ergonomics:** Predictable APIs, minimal runtime dependencies, and instant copy-paste developer tooling.
 
 ---
 
