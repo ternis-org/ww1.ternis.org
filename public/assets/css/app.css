@@ -354,8 +354,8 @@ body.drawer-open {
 
 /* Arrow svg in buttons (Standard / Default) */
 .arrow-svg {
-    width: 28px;
-    height: 10px;
+    width: 32px;
+    height: 12px;
     stroke: currentColor;
     stroke-width: 1.5;
     fill: none;
@@ -366,7 +366,17 @@ body.drawer-open {
     transition: opacity 0.2s ease;
 }
 
+/* Base state: arrow is short, left end is pinned at constant position */
+.arrow-svg path:first-child {
+    transform: translateX(-14px);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 .arrow-svg .line {
+    transform-origin: 0% 50%;
+    transform-box: fill-box;
+    transform: scaleX(0.52);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     stroke-dasharray: none;
     stroke-dashoffset: 0;
 }
@@ -374,34 +384,26 @@ body.drawer-open {
 /* Length Variation: Small / Compact (for inline notices, small buttons) */
 .arrow-svg.arrow-svg-sm,
 .arrow-svg-sm {
-    width: 22px;
-    height: 8px;
+    width: 26px;
+    height: 10px;
     margin-left: 0;
 }
 
-.arrow-svg.arrow-svg-sm .line,
-.arrow-svg-sm .line {
-    stroke-dasharray: none;
-    stroke-dashoffset: 0;
+/* Hover / Focus-visible: arrow gets longer, extending forward to the right */
+.btn:focus-visible .arrow-svg path:first-child,
+.btn:hover .arrow-svg path:first-child,
+.btn-expanding:focus-visible .arrow-svg path:first-child,
+.btn-expanding:hover .arrow-svg path:first-child,
+a:hover .arrow-svg path:first-child {
+    transform: translateX(0);
 }
 
-/* Keep arrow firmly anchored at constant distance on hover/focus */
-.btn:focus-visible .arrow-svg,
-.btn:hover .arrow-svg,
-.btn-expanding:focus-visible .arrow-svg,
-.btn-expanding:hover .arrow-svg,
-a:hover .arrow-svg,
-.btn:focus-visible .arrow-svg-sm,
-.btn:hover .arrow-svg-sm,
-.btn-expanding:focus-visible .arrow-svg-sm,
-.btn-expanding:hover .arrow-svg-sm,
-a:hover .arrow-svg-sm,
-.btn:focus-visible .arrow-svg.arrow-svg-sm,
-.btn:hover .arrow-svg.arrow-svg-sm,
-.btn-expanding:focus-visible .arrow-svg.arrow-svg-sm,
-.btn-expanding:hover .arrow-svg.arrow-svg-sm,
-a:hover .arrow-svg.arrow-svg-sm {
-    margin-left: 0;
+.btn:focus-visible .arrow-svg .line,
+.btn:hover .arrow-svg .line,
+.btn-expanding:focus-visible .arrow-svg .line,
+.btn-expanding:hover .arrow-svg .line,
+a:hover .arrow-svg .line {
+    transform: scaleX(1);
 }
 
 .btn:active {
