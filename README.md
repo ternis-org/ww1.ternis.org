@@ -122,7 +122,7 @@ This website is designed for maximum speed, digital sustainability, and develope
   - Morphing SVG ambient blobs and noise grain texture overlay.
   - Initial micro-loader animation with `sessionStorage` caching.
   - Sculpted curved organic footer.
-- ⚡ **Interactive API Playground:** Real-time test console for `getmy.name` with code generation for cURL, JavaScript (Fetch), Python (Requests), and PHP.
+- ⚡ **Dynamic Scroll & Motion System:** Fluid step-by-step project card side entrance, bidirectional reversible animations on scroll-up, and native IntersectionObserver tracking.
 - 🔒 **Security & Privacy by Default:**
   - Strict Content Security Headers (`X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`).
   - Traversal-protected static file delivery engine.
@@ -143,7 +143,7 @@ ww1.ternis.org/
 │   ├── css/
 │   │   └── app.css          # Organic tech design system
 │   └── js/
-│       └── app.js           # Interactive engine & playground
+│       └── app.js           # Motion engine, theme switcher & interactions
 ├── bootstrap.php            # Core application bootstrap & route definitions
 ├── index.php                # Root front-controller delegate
 ├── lang/                    # Localization dictionaries

@@ -1,6 +1,7 @@
 /**
- * ternis.org — Modern Interactive Frontend Engine
- * Handles Theme Management, API Playground, Navigation & Interactivity
+ * ternis.org — Client-Side Application Script
+ * Handles Theme Management, Navigation, Scroll Animations & Interactivity
+ * Zero external JS dependencies. Pure Vanilla ES6+.
  */
 
 (function () {
@@ -85,169 +86,6 @@
                 closeDrawer();
             }
         });
-    }
-
-    // ── Interactive API Playground for getmy.name ──────────────────────────────
-    const CODE_SNIPPETS = {
-        curl: `curl -X GET "https://api.getmy.name/v1/profile/demo" \\
-  -H "Accept: application/json" \\
-  -H "User-Agent: ternis-org-app/1.0"`,
-
-        js: `// Fetch profile from getmy.name API
-const res = await fetch("https://api.getmy.name/v1/profile/demo", {
-  headers: { "Accept": "application/json" }
-});
-const profile = await res.json();
-console.log("Developer Profile:", profile.data);`,
-
-        py: `import requests
-
-# Query developer profile via getmy.name API
-response = requests.get(
-    "https://api.getmy.name/v1/profile/demo",
-    headers={"Accept": "application/json"}
-)
-profile_data = response.json()
-print("Developer:", profile_data["data"]["name"])`,
-
-        php: `<?php
-// Query getmy.name API in PHP
-$json = file_get_contents('https://api.getmy.name/v1/profile/demo');
-$profile = json_decode($json, true);
-
-echo "Developer Name: " . htmlspecialchars($profile['data']['name']);
-`
-    };
-
-    const SAMPLE_RESPONSES = {
-        demo: {
-            "status": "success",
-            "meta": {
-                "api": "getmy.name",
-                "version": "v1.4.0",
-                "cluster": "eu-central-nbg",
-                "execution_time_ms": 28.4
-            },
-            "data": {
-                "username": "fabianternis",
-                "name": "Fabian Ternis",
-                "headline": "Lead Systems Architect & Full-Stack Engineer",
-                "location": "Germany, European Union",
-                "bio": "Building sovereign, privacy-centric developer tools and open-source infrastructure under ternis.org & MTEX.dev.",
-                "organization": "ternis-edv.de / ternis.dev",
-                "skills": [
-                    "PHP 8.3 / Laravel",
-                    "TypeScript / React / Vue",
-                    "Go & Cloud Infrastructure",
-                    "REST & Headless APIs",
-                    "Docker & Bare-Metal Linux"
-                ],
-                "projects": [
-                    { "name": "getmy.name", "type": "Headless Portfolio API", "status": "active" },
-                    { "name": "MTEX.dev", "type": "Developer Tools Suite", "status": "active" },
-                    { "name": "mail-free.eu", "type": "Sovereign EU Mail Relay", "status": "in_dev" },
-                    { "name": "static.re", "type": "Edge Static Delivery", "status": "in_dev" }
-                ],
-                "contact": {
-                    "website": "https://ternis.dev",
-                    "studio": "https://ternis-edv.de",
-                    "github": "https://github.com/ternis-org",
-                    "email": "contact@ternis.dev"
-                }
-            }
-        }
-    };
-
-    function initPlayground() {
-        const codeDisplay = document.getElementById('playground-code');
-        const jsonDisplay = document.getElementById('playground-json');
-        const runBtn = document.getElementById('btn-run-api');
-        const copyBtn = document.getElementById('btn-copy-code');
-        const latencyEl = document.getElementById('api-latency-val');
-        const tabBtns = document.querySelectorAll('.tab-btn');
-
-        if (!codeDisplay || !jsonDisplay) return;
-
-        let activeTab = 'curl';
-
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                tabBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                activeTab = btn.getAttribute('data-lang') || 'curl';
-                codeDisplay.textContent = CODE_SNIPPETS[activeTab] || CODE_SNIPPETS.curl;
-            });
-        });
-
-        // Set initial code snippet
-        codeDisplay.textContent = CODE_SNIPPETS.curl;
-
-        // Copy Code Button
-        if (copyBtn) {
-            copyBtn.addEventListener('click', async () => {
-                const textToCopy = CODE_SNIPPETS[activeTab] || CODE_SNIPPETS.curl;
-                try {
-                    await navigator.clipboard.writeText(textToCopy);
-                    const originalText = copyBtn.innerHTML;
-                    copyBtn.innerHTML = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width:16px;height:16px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> <span>Copied!</span>`;
-                    copyBtn.classList.add('btn-copied');
-                    setTimeout(() => {
-                        copyBtn.innerHTML = originalText;
-                        copyBtn.classList.remove('btn-copied');
-                    }, 2200);
-                } catch (e) {
-                    console.error('Clipboard copy failed:', e);
-                }
-            });
-        }
-
-        // Run API Request Button
-        if (runBtn) {
-            runBtn.addEventListener('click', async () => {
-                runBtn.disabled = true;
-                const originalHtml = runBtn.innerHTML;
-                runBtn.innerHTML = `<svg class="animate-spin" fill="none" viewBox="0 0 24 24" style="width:16px;height:16px;animation:spin 1s linear infinite;"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" style="opacity:0.25"></circle><path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" style="opacity:0.75"></path></svg> <span>Executing...</span>`;
-
-                const startTime = performance.now();
-
-                try {
-                    // Try real live fetch with a short fallback timeout
-                    const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), 1200);
-
-                    const res = await fetch('https://api.getmy.name/v1/profile/demo', {
-                        signal: controller.signal,
-                        headers: { 'Accept': 'application/json' }
-                    }).catch(() => null);
-
-                    clearTimeout(timeoutId);
-
-                    let data = null;
-                    if (res && res.ok) {
-                        data = await res.json();
-                    }
-
-                    if (!data) {
-                        // Fallback to rich sample response
-                        data = SAMPLE_RESPONSES.demo;
-                    }
-
-                    const elapsed = Math.round(performance.now() - startTime);
-                    if (latencyEl) {
-                        latencyEl.textContent = `${elapsed}ms`;
-                    }
-
-                    jsonDisplay.textContent = JSON.stringify(data, null, 2);
-                    jsonDisplay.classList.add('highlight-pulse');
-                    setTimeout(() => jsonDisplay.classList.remove('highlight-pulse'), 600);
-                } catch (err) {
-                    jsonDisplay.textContent = JSON.stringify(SAMPLE_RESPONSES.demo, null, 2);
-                } finally {
-                    runBtn.disabled = false;
-                    runBtn.innerHTML = originalHtml;
-                }
-            });
-        }
     }
 
     // ── FAQ Accordion ──────────────────────────────────────────────────────────
@@ -469,7 +307,6 @@ echo "Developer Name: " . htmlspecialchars($profile['data']['name']);
     document.addEventListener('DOMContentLoaded', () => {
         initTheme();
         initMobileNav();
-        initPlayground();
         initFAQ();
         initScrollSpy();
         initScrollToTop();

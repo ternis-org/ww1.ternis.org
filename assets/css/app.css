@@ -1047,6 +1047,16 @@ a.ns-domain-pill:hover {
     gap: 6px;
 }
 
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.dot.red { background: #e06c75; }
+.dot.yellow { background: #e5c07b; }
+.dot.green { background: #98c379; }
+
 .ns-terminal-title {
     font-family: var(--font-mono);
     font-size: 0.75rem;
@@ -1090,129 +1100,6 @@ a.ns-domain-pill:hover {
     }
 }
 
-/* ==========================================================================
-   Interactive API Playground
-   ========================================================================== */
-
-.playground-wrapper {
-    background: var(--code-bg);
-    border: 1px solid var(--code-border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-}
-
-.terminal-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 1.75rem;
-    background: rgba(255, 255, 255, 0.04);
-    border-bottom: 1px solid var(--code-border);
-}
-
-.window-dots {
-    display: flex;
-    gap: 6px;
-}
-
-.dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-}
-
-.dot.red { background: #e06c75; }
-.dot.yellow { background: #e5c07b; }
-.dot.green { background: #98c379; }
-
-.terminal-tabs {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.tab-btn {
-    padding: 0.35rem 0.85rem;
-    font-size: 0.8rem;
-    font-family: var(--font-mono);
-    font-weight: 500;
-    color: var(--text-muted);
-    background: transparent;
-    border: 1px solid transparent;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.tab-btn.active {
-    color: #ffffff;
-    background: var(--primary);
-}
-
-.playground-body {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    border-bottom: 1px solid var(--code-border);
-}
-
-.code-pane, .response-pane {
-    padding: 1.75rem;
-    display: flex;
-    flex-direction: column;
-}
-
-.code-pane {
-    border-right: 1px solid var(--code-border);
-    background: rgba(0, 0, 0, 0.2);
-}
-
-.pane-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-}
-
-.pane-title {
-    font-size: 0.775rem;
-    font-family: var(--font-mono);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--secondary);
-}
-
-.code-snippet {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    line-height: 1.65;
-    color: var(--code-text);
-    white-space: pre-wrap;
-    word-break: break-word;
-    flex-grow: 1;
-}
-
-.response-json {
-    font-family: var(--font-mono);
-    font-size: 0.825rem;
-    line-height: 1.65;
-    color: #c5d9a5;
-    max-height: 320px;
-    overflow-y: auto;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 1.25rem;
-    border-radius: var(--radius-sm);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.playground-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.1rem 1.75rem;
-    background: rgba(255, 255, 255, 0.02);
-    font-size: 0.875rem;
-    color: var(--secondary);
-}
 
 /* ==========================================================================
    Philosophy / Pillars Section
@@ -1952,9 +1839,6 @@ html.has-scroll-anim .pillar-card:not(.is-revealed) {
 
     .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; padding: 1.5rem; }
     .stat-item:nth-child(2)::after { display: none; }
-
-    .playground-body { grid-template-columns: 1fr; }
-    .code-pane { border-right: none; border-bottom: 1px solid var(--code-border); }
 
     .roadmap-grid { grid-template-columns: 1fr; }
     .footer-links-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }

@@ -30,8 +30,8 @@ $lang = $lang ?? current_lang();
                     <path d="M 1.5 6 L 32 6" stroke-width="1.5" stroke-linecap="round" class="line"/>
                 </svg>
             </a>
-            <a href="#playground" class="btn btn-secondary">
-                <span><?= e(t('hero.cta_playground')) ?></span>
+            <a href="#nameservers" class="btn btn-secondary">
+                <span><?= e(t('hero.cta_infrastructure')) ?></span>
             </a>
             <a href="https://github.com/ternis-org" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
                 <svg fill="currentColor" viewBox="0 0 24 24" style="width:16px;height:16px;" aria-hidden="true">
@@ -400,89 +400,6 @@ ternis.org name server two.ns.ternis.net.</code></pre>
     </div>
 </section>
 
-<!-- Interactive API Playground Section -->
-<section id="playground" style="padding-top: 5rem; padding-bottom: 5rem;">
-    <div class="container">
-        <div class="section-header scroll-reveal" style="margin-bottom: 2.5rem;">
-            <span class="badge badge-primary section-badge"><?= e(t('playground.badge')) ?></span>
-            <h2><?= e(t('playground.title')) ?></h2>
-            <p class="section-subtitle"><?= e(t('playground.subtitle')) ?></p>
-        </div>
-
-        <div class="playground-wrapper scroll-reveal scroll-reveal-scale delay-1">
-            <div class="terminal-header">
-                <div class="window-dots" aria-hidden="true">
-                    <span class="dot red"></span>
-                    <span class="dot yellow"></span>
-                    <span class="dot green"></span>
-                </div>
-                <div class="terminal-tabs" role="tablist" aria-label="Programming Language">
-                    <button type="button" class="tab-btn active" data-lang="curl" role="tab" aria-selected="true"><?= e(t('playground.tab_curl')) ?></button>
-                    <button type="button" class="tab-btn" data-lang="js" role="tab" aria-selected="false"><?= e(t('playground.tab_js')) ?></button>
-                    <button type="button" class="tab-btn" data-lang="py" role="tab" aria-selected="false"><?= e(t('playground.tab_py')) ?></button>
-                    <button type="button" class="tab-btn" data-lang="php" role="tab" aria-selected="false"><?= e(t('playground.tab_php')) ?></button>
-                </div>
-                <span class="ns-terminal-title" style="margin-left: 0; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);"><?= e(t('playground.endpoint_label')) ?>: api.getmy.name/v1/profile/demo</span>
-            </div>
-
-            <div class="playground-body">
-                <div class="code-pane">
-                    <div class="pane-header">
-                        <span class="pane-title">Request Code</span>
-                        <button type="button" id="btn-copy-code" class="btn btn-secondary btn-sm" aria-label="Copy code snippet">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width:14px;height:14px;" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-                            </svg>
-                            <span><?= e(t('playground.btn_copy')) ?></span>
-                        </button>
-                    </div>
-                    <pre><code id="playground-code" class="code-snippet"></code></pre>
-                </div>
-
-                <div class="response-pane">
-                    <div class="pane-header">
-                        <span class="pane-title"><?= e(t('playground.response_label')) ?></span>
-                        <div style="display:flex;align-items:center;gap:0.75rem;">
-                            <span id="api-latency-val" class="ns-spec-chip">~28ms</span>
-                            <span class="ns-spec-chip" style="color:var(--primary);font-weight:600;"><?= e(t('playground.status_label')) ?></span>
-                        </div>
-                    </div>
-                    <pre><code id="playground-json" class="response-json">{
-  "status": "success",
-  "meta": {
-    "api": "getmy.name",
-    "version": "v1.4.0",
-    "cluster": "eu-central-nbg",
-    "execution_time_ms": 28.4
-  },
-  "data": {
-    "username": "fabianternis",
-    "name": "Fabian Ternis",
-    "headline": "Lead Systems Architect & Full-Stack Engineer",
-    "location": "Germany, European Union"
-  }
-}</code></pre>
-                </div>
-            </div>
-
-            <div class="playground-footer">
-                <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
-                    <button type="button" id="btn-run-api" class="btn btn-sm">
-                        <span><?= e(t('playground.btn_send')) ?></span>
-                    </button>
-                    <span style="font-size:0.85rem;color:var(--text-muted);"><?= e(t('playground.tip')) ?></span>
-                </div>
-                <a href="https://getmy.name/api-docs" target="_blank" rel="noopener noreferrer" class="infra-link" style="font-size:0.85rem;">
-                    <span>getmy.name Docs</span>
-                    <svg class="arrow-svg arrow-svg-sm" viewBox="0 0 35 12" fill="none" aria-hidden="true">
-                        <path d="M 28.833 1 L 33.244 5.411 C 33.57 5.736 33.57 6.264 33.244 6.589 L 28.833 11" stroke-width="1.5" stroke-linecap="round"/>
-                        <path d="M 1.5 6 L 32 6" stroke-width="1.5" stroke-linecap="round" class="line"/>
-                    </svg>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- About & Principles Section -->
 <section id="about" style="padding-top: 4rem; padding-bottom: 6rem;">
