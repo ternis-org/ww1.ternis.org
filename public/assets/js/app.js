@@ -271,17 +271,27 @@
                             children.forEach((child, idx) => {
                                 child.style.transitionDelay = `${(idx + 1) * 0.08}s`;
                                 child.classList.add('is-revealed');
+                                // Once entrance completes, clear inline delay so hover is immediate
+                                setTimeout(() => {
+                                    child.style.transitionDelay = '';
+                                    child.classList.add('is-settled');
+                                }, 900);
                             });
+                        } else {
+                            setTimeout(() => {
+                                target.classList.add('is-settled');
+                            }, 900);
                         }
                     } else {
                         // Reverse transformation when scrolling up (element is below viewport)
                         if (entry.boundingClientRect.top > 0) {
-                            target.classList.remove('is-revealed');
+                            target.classList.remove('is-revealed', 'is-settled');
 
                             if (target.classList.contains('stagger-children')) {
                                 const children = Array.from(target.children);
                                 children.forEach(child => {
-                                    child.classList.remove('is-revealed');
+                                    child.style.transitionDelay = '';
+                                    child.classList.remove('is-revealed', 'is-settled');
                                 });
                             }
                         }
