@@ -32,7 +32,6 @@ return [
         'title_line2'       => 'Souveränität & Speed.',
         'description'       => 'Souveräne Entwicklertools, autonome Nameserver und schlanke Webdienste.',
         'cta_projects'      => 'Projekte erkunden',
-        'cta_infrastructure'=> 'Infrastruktur',
         'cta_github'        => 'GitHub',
         'stat_projects'        => '8+',
         'stat_projects_sub'    => 'Aktive Projekte',

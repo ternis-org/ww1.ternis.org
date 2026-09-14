@@ -32,7 +32,6 @@ return [
         'title_line2'       => 'breathes freedom.',
         'description'       => 'Sovereign developer tooling, autonomous nameservers, and lightweight web services.',
         'cta_projects'      => 'Explore Projects',
-        'cta_infrastructure'=> 'Infrastructure',
         'cta_github'        => 'GitHub',
         'stat_projects'        => '8+',
         'stat_projects_sub'    => 'Active Projects',
