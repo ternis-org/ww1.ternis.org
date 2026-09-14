@@ -88,28 +88,6 @@ input:focus-visible {
     outline-offset: 3px;
 }
 
-/* Accessibility: Skip to Main Content link */
-.skip-to-content {
-    position: absolute;
-    top: -999px;
-    left: 1.5rem;
-    z-index: 100000;
-    background: var(--primary);
-    color: #ffffff;
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--radius-sm);
-    font-weight: 600;
-    font-size: 0.9rem;
-    box-shadow: var(--shadow-md);
-    transition: top 0.2s ease;
-    text-decoration: none;
-}
-
-.skip-to-content:focus {
-    top: 1.5rem;
-    outline: 2px solid var(--accent);
-}
-
 /* Custom Text Selection */
 ::selection {
     background: var(--primary);

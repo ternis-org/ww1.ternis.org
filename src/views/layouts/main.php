@@ -295,9 +295,6 @@ $showScrollTop   = $showScrollTop ?? true;
     <!-- Top Scroll Progress Indicator -->
     <div id="scroll-progress" class="scroll-progress-bar" aria-hidden="true"></div>
 
-    <!-- Accessible Skip to Main Content Link -->
-    <a href="#main-content" class="skip-to-content"><?= $lang === 'de' ? 'Zum Hauptinhalt springen' : 'Skip to main content' ?></a>
-
     <!-- Initial App Loader -->
     <div id="app-loader" class="app-loader" aria-hidden="true">
         <div class="loader-inner">
