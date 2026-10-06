@@ -5,12 +5,12 @@ category: domains
 order: 30
 tags: [domains, transfer, migration, registrar, dnssec, sysadmin]
 updated: 2026-10-06
-related: [domains/how-domains-work, domains/register-manage-dnbx, domains/nameserver-glue-delegation]
+related: [domains/how-domains-work, domains/register-manage-ternisdomains, domains/nameserver-glue-delegation]
 ---
 
 ## What happens during a domain transfer?
 
-A **domain transfer** moves the sponsorship and retail management of a domain from one registrar (e.g. GoDaddy, Namecheap) to another (e.g. [dnbx.de](https://dnbx.de)).
+A **domain transfer** moves the sponsorship and retail management of a domain from one registrar (e.g. GoDaddy, Namecheap) to another (e.g. [ternisdomains.de](https://ternisdomains.de)).
 
 Transferring does **not** automatically shut down your website or email. If performed in the correct sequence, a transfer completes with **zero seconds of downtime**.
 
@@ -31,7 +31,7 @@ Complete these 5 checks before initiating the transfer:
 ## Step-by-Step Migration Process
 
 ```text
-[ Current Registrar ]                         [ New Registrar (dnbx.de) ]
+[ Current Registrar ]                         [ New Registrar (ternisdomains.de) ]
         │                                                  │
  1. Unlock domain & get Auth-Code                          │
         │                                                  │
@@ -45,7 +45,7 @@ Complete these 5 checks before initiating the transfer:
 ```
 
 ### 1. Initiate transfer at the new registrar
-Log into your new registrar account (e.g. dnbx.de), select **Transfer Domain**, enter your domain name, and paste the EPP Auth-Code.
+Log into your new registrar account (e.g. ternisdomains.de), select **Transfer Domain**, enter your domain name, and paste the EPP Auth-Code.
 
 ### 2. Approve authorization requests
 Check your email. Depending on the TLD, the registry or gaining registrar sends an authorization link. Click to confirm.

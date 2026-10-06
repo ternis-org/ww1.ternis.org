@@ -3,7 +3,7 @@ title: How Domains Work — Registry, Registrar, Registrant, and Lifecycle
 description: A complete beginner-friendly overview of how internet domain names work, the three key roles, domain hierarchy, the full lifecycle, and nameserver delegation.
 category: domains
 order: 10
-tags: [domains, dns, registry, registrar, dnbx, fundamentals, web]
+tags: [domains, dns, registry, registrar, ternisdomains, fundamentals, web]
 updated: 2026-10-06
 related: [domains/nameserver-glue-delegation, dns/dns-records-overview, domains/choosing-tld]
 ---
@@ -24,7 +24,7 @@ Behind every domain name are three distinct entities:
 [ ICANN / Registry ]  (Maintains Top-Level Domain zone, e.g. .de, .com)
          │
          ▼  (Accreditation & Wholesale)
-  [ Registrar ]       (Retailer where you purchase domains, e.g. dnbx.de)
+  [ Registrar ]       (Retailer where you purchase domains, e.g. ternisdomains.de)
          │
          ▼  (Retail purchase & management)
   [ Registrant ]      (You — the owner with the legal right to use the domain)
@@ -33,7 +33,7 @@ Behind every domain name are three distinct entities:
 | Entity | Real-World Example | Role & Responsibility |
 |--------|--------------------|-----------------------|
 | **Registry** | DENIC (`.de`), Verisign (`.com`), Public Interest Registry (`.org`) | The central organization operating the master database (zone) for a specific Top-Level Domain (TLD). Sets official wholesale pricing and TLD-level policies. |
-| **Registrar** | **dnbx.de**, Namecheap, Porkbun | ICANN-accredited retail provider. Sells domain registrations to end customers, manages WHOIS/RDAP contact records, and coordinates with registries. |
+| **Registrar** | **ternisdomains.de**, Namecheap, Porkbun | ICANN-accredited retail provider. Sells domain registrations to end customers, manages WHOIS/RDAP contact records, and coordinates with registries. |
 | **Registrant** | You or your organization | The person or legal company who holds the licensed right to use the domain name for the duration of the paid registration period. |
 
 ---

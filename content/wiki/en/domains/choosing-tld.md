@@ -3,14 +3,14 @@ title: Choosing a TLD — .de vs .eu vs .com vs New gTLDs
 description: Complete beginner guide to selecting the right Top-Level Domain, pricing traps, renewal math, HSTS preloading, trust signals, and SEO implications.
 category: domains
 order: 15
-tags: [domains, tld, pricing, seo, dnbx, web]
+tags: [domains, tld, pricing, seo, ternisdomains, web]
 updated: 2026-10-06
-related: [domains/how-domains-work, domains/whois-rdaps-privacy, domains/register-manage-dnbx]
+related: [domains/how-domains-work, domains/whois-rdaps-privacy, domains/register-manage-ternisdomains]
 ---
 
 ## What is a TLD?
 
-A **TLD (Top-Level Domain)** is the final segment of a domain name that comes after the last dot (e.g., `.org` in `ternis.org`, `.de` in `dnbx.de`).
+A **TLD (Top-Level Domain)** is the final segment of a domain name that comes after the last dot (e.g., `.org` in `ternis.org`, `.de` in `ternisdomains.de`).
 
 Choosing the right TLD influences user trust, long-term operational costs, technical security policies, and local search visibility.
 
@@ -47,7 +47,7 @@ Years 2–5: 4 × €24.00 = €96.00
 ---------------------------------
 Total 5-Year Cost: €97.99
 
-Registrar B (Fair Flat Pricing, like dnbx.de):
+Registrar B (Fair Flat Pricing, like ternisdomains.de):
 Year 1: €9.90
 Years 2–5: 4 × €9.90 = €39.60
 ---------------------------------

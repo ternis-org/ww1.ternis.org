@@ -59,11 +59,13 @@ $allCategories   = wiki_categories_with_counts($lang);
     <meta name="author" content="ternis.org">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="<?= e($canonical) ?>">
+    <link rel="alternate" hreflang="<?= e($lang) ?>" href="<?= e($canonical) ?>">
     <link rel="alternate" hreflang="<?= e($altLang) ?>" href="<?= e($altUrl) ?>">
     <link rel="alternate" hreflang="x-default" href="<?= e($xDefaultUrl) ?>">
+    <link rel="alternate" type="application/atom+xml" title="ternis.org Wiki Feed" href="/wiki/feed.xml">
 
     <!-- Open Graph / Twitter -->
-    <meta property="og:type" content="article">
+    <meta property="og:type" content="<?= !empty($slug) ? 'article' : 'website' ?>">
     <meta property="og:url" content="<?= e($canonical) ?>">
     <meta property="og:title" content="<?= e($pageTitle) ?>">
     <meta property="og:description" content="<?= e($metaDescription) ?>">
@@ -82,6 +84,101 @@ $allCategories   = wiki_categories_with_counts($lang);
     <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="32x32">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="manifest" href="/manifest.json">
+
+    <!-- Structured Data (Schema.org JSON-LD) -->
+<?php
+    $breadcrumbItems = [
+        [
+            '@type' => 'ListItem',
+            'position' => 1,
+            'name' => 'Home',
+            'item' => 'https://ternis.org/' . $lang,
+        ],
+        [
+            '@type' => 'ListItem',
+            'position' => 2,
+            'name' => 'Wiki',
+            'item' => 'https://ternis.org/' . $lang . '/wiki',
+        ],
+    ];
+
+    if (!empty($category)) {
+        $categoryData = wiki_categories()[$category] ?? [];
+        $categoryLabel = $categoryData[$lang] ?? $categoryData['en'] ?? ucfirst((string) $category);
+        $breadcrumbItems[] = [
+            '@type' => 'ListItem',
+            'position' => count($breadcrumbItems) + 1,
+            'name' => $categoryLabel,
+            'item' => 'https://ternis.org/' . $lang . '/wiki/' . $category,
+        ];
+    }
+
+    if (!empty($slug) && !empty($article)) {
+        $breadcrumbItems[] = [
+            '@type' => 'ListItem',
+            'position' => count($breadcrumbItems) + 1,
+            'name' => $article['title'] ?? $slug,
+            'item' => $canonical,
+        ];
+    }
+
+    $breadcrumbSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => $breadcrumbItems,
+    ];
+
+    $articleSchema = null;
+    if (!empty($article)) {
+        $articleSchema = [
+            '@context' => 'https://schema.org',
+            '@type' => 'TechArticle',
+            'headline' => $article['title'],
+            'description' => $article['description'],
+            'inLanguage' => $lang,
+            'mainEntityOfPage' => $canonical,
+            'dateModified' => $article['updated'] ?? date('Y-m-d'),
+            'author' => [
+                '@type' => 'Organization',
+                'name' => 'ternis.org',
+                'url' => 'https://ternis.org',
+            ],
+            'publisher' => [
+                '@type' => 'Organization',
+                'name' => 'ternis.org',
+                'url' => 'https://ternis.org',
+                'logo' => [
+                    '@type' => 'ImageObject',
+                    'url' => 'https://ternis.org/favicon.svg',
+                ],
+            ],
+            'keywords' => $article['tags'] ?? [],
+        ];
+    }
+
+    $websiteSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'WebSite',
+        'name' => 'ternis.org Technical Wiki',
+        'url' => 'https://ternis.org/' . $lang . '/wiki',
+        'potentialAction' => [
+            '@type' => 'SearchAction',
+            'target' => 'https://ternis.org/' . $lang . '/wiki/search?q={search_term_string}',
+            'query-input' => 'required name=search_term_string',
+        ],
+    ];
+?>
+    <script type="application/ld+json">
+    <?= json_encode($breadcrumbSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>
+    </script>
+<?php if ($articleSchema): ?>
+    <script type="application/ld+json">
+    <?= json_encode($articleSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>
+    </script>
+<?php endif; ?>
+    <script type="application/ld+json">
+    <?= json_encode($websiteSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>
+    </script>
 
     <!-- Dedicated Wiki Stylesheet -->
     <link rel="stylesheet" href="<?= e(asset_url('/assets/css/wiki.css')) ?>">

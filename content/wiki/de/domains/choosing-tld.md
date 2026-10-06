@@ -3,14 +3,14 @@ title: Die richtige TLD wählen — .de vs .eu vs .com vs Neue gTLDs
 description: Umfassender Ratgeber zur Wahl der passenden Top-Level-Domain, Preisfallen bei Verlängerungen, HSTS-Preload, Vertrauenssignale und SEO-Fakten.
 category: domains
 order: 15
-tags: [domains, tld, preise, seo, dnbx, web]
+tags: [domains, tld, preise, seo, ternisdomains, web]
 updated: 2026-10-06
-related: [domains/how-domains-work, domains/whois-rdaps-privacy, domains/register-manage-dnbx]
+related: [domains/how-domains-work, domains/whois-rdaps-privacy, domains/register-manage-ternisdomains]
 ---
 
 ## Was ist eine TLD?
 
-Eine **TLD (Top-Level-Domain)** ist der letzte Namensabschnitt einer Domain nach dem letzten Punkt (z. B. `.de` bei `dnbx.de` oder `.org` bei `ternis.org`).
+Eine **TLD (Top-Level-Domain)** ist der letzte Namensabschnitt einer Domain nach dem letzten Punkt (z. B. `.de` bei `ternisdomains.de` oder `.org` bei `ternis.org`).
 
 Die Wahl der Endung beeinflusst das Vertrauen deiner Besucher, laufende Betriebskosten, technische Sicherheitsanforderungen und die geografische Auffindbarkeit in Suchmaschinen.
 
@@ -46,7 +46,7 @@ Jahre 2–5: 4 × 24,00 € = 96,00 €
 ----------------------------------
 Gesamtkosten nach 5 Jahren: 97,99 €
 
-Anbieter B (Transparente Flat-Preise wie dnbx.de):
+Anbieter B (Transparente Flat-Preise wie ternisdomains.de):
 Jahr 1: 9,90 €
 Jahre 2–5: 4 × 9,90 € = 39,60 €
 ----------------------------------

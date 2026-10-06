@@ -66,6 +66,7 @@ $extraJs         = $extraJs ?? [];
     <meta name="author" content="ternis.org">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="<?= e($canonical) ?>">
+    <link rel="alternate" hreflang="<?= e($lang) ?>" href="<?= e($canonical) ?>">
     <link rel="alternate" hreflang="<?= e($altLang) ?>" href="<?= e($altUrl) ?>">
     <link rel="alternate" hreflang="x-default" href="<?= e($xDefaultUrl) ?>">
 

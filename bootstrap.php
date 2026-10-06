@@ -162,6 +162,14 @@ $router->get('/wiki/search', function () {
     $target = '/' . detect_preferred_lang(SUPPORTED_LANGS, DEFAULT_LANG) . '/wiki/search';
     redirect($target . ($q !== '' ? '?' . $q : ''), 302);
 });
+// /wiki/feed.xml — Atom syndication feed for search engines and RSS readers
+$router->get('/wiki/feed.xml', function () {
+    header('Content-Type: application/atom+xml; charset=utf-8');
+    header('X-Content-Type-Options: nosniff');
+    header('Cache-Control: public, max-age=3600, stale-while-revalidate=86400');
+    header('Access-Control-Allow-Origin: *');
+    render('wiki/feed');
+});
 $router->get('/wiki/{category}', function (array $p) {
     header('Vary: Accept-Language');
     redirect('/' . detect_preferred_lang(SUPPORTED_LANGS, DEFAULT_LANG) . '/wiki/' . $p['category'], 302);
@@ -221,6 +229,15 @@ foreach (SUPPORTED_LANGS as $lang) {
         ] + $wikiAssets, 'wiki');
     });
 
+    // Wiki Feed
+    $router->get('/' . $lang . '/wiki/feed.xml', function () {
+        header('Content-Type: application/atom+xml; charset=utf-8');
+        header('X-Content-Type-Options: nosniff');
+        header('Cache-Control: public, max-age=3600, stale-while-revalidate=86400');
+        header('Access-Control-Allow-Origin: *');
+        render('wiki/feed');
+    });
+
     // Wiki category
     $router->get('/' . $lang . '/wiki/{category}', function (array $p) use ($lang, $wikiAssets) {
         if (!defined('LANG')) {
@@ -250,7 +267,12 @@ foreach (SUPPORTED_LANGS as $lang) {
         if (!defined('LANG')) {
             define('LANG', $lang);
         }
-        load_lang($lang);
+        // 301 Redirect for renamed article
+        if ($p['category'] === 'domains' && $p['slug'] === 'register-manage-dnbx') {
+            header('Location: /' . $lang . '/wiki/domains/register-manage-ternisdomains', true, 301);
+            exit;
+        }
+
         $article = wiki_get_article($lang, $p['category'], $p['slug']);
         if ($article === null) {
             wiki_404($lang);
