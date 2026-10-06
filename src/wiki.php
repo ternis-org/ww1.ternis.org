@@ -261,23 +261,20 @@ function wiki_markdown_to_html(string $md): string
             $html .= "<hr>\n";
             continue;
         }
-        // Tables
-        if (str_contains($t, '|') && preg_match('/^\|?[\s\w`.*\-\|:?.()@\/]+\|?$/', $t)) {
-            $next = true;
-            if (preg_match('/^\|?[\s:\-|]+\|?$/', $t)) {
+        // Tables: any row starting with `|` (separator rows are skipped).
+        // Detection is intentionally content-agnostic so umlauts, €, → etc. work.
+        if (str_starts_with($t, '|') && str_contains(substr($t, 1), '|')) {
+            if (preg_match('/^\|[\s:\-|]+\|$/', $t)) {
                 $inTable = true;
                 continue;
             }
-            if ($next) {
-                $flushParagraph();
-                $closeList();
-                $inTable = true;
-                $tableRows[] = $t;
-                continue;
-            }
-        } else {
-            $flushTable();
+            $flushParagraph();
+            $closeList();
+            $inTable = true;
+            $tableRows[] = $t;
+            continue;
         }
+        $flushTable();
         // Headings
         if (preg_match('/^(#{1,4})\s+(.+)$/', $t, $m)) {
             $flushParagraph();

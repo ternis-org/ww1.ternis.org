@@ -55,3 +55,15 @@ $desc = $lang === 'de' ? ($meta['desc_de'] ?? '') : ($meta['desc_en'] ?? '');
         <?php endif; ?>
     </div>
 </section>
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://ternis.org/<?= e($lang) ?>" },
+        { "@type": "ListItem", "position": 2, "name": "<?= e(t('nav.wiki')) ?>", "item": "https://ternis.org/<?= e($lang) ?>/wiki" },
+        { "@type": "ListItem", "position": 3, "name": "<?= e($title) ?>", "item": "https://ternis.org/<?= e($lang) ?>/wiki/<?= e($category) ?>" }
+    ]
+}
+</script>

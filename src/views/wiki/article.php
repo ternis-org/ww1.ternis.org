@@ -122,6 +122,18 @@ $editUrl = rtrim(app_repo_url(), '/') . '/blob/master/content/wiki/'
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://ternis.org/<?= e($lang) ?>" },
+        { "@type": "ListItem", "position": 2, "name": "<?= e(t('nav.wiki')) ?>", "item": "https://ternis.org/<?= e($lang) ?>/wiki" },
+        { "@type": "ListItem", "position": 3, "name": "<?= e($catTitle) ?>", "item": "https://ternis.org/<?= e($lang) ?>/wiki/<?= e($category) ?>" },
+        { "@type": "ListItem", "position": 4, "name": <?= json_encode($article['title'], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>, "item": "https://ternis.org/<?= e($lang) ?>/wiki/<?= e($category) ?>/<?= e($article['slug']) ?>" }
+    ]
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
     "@type": "Article",
     "headline": <?= json_encode($article['title'], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>,
     "description": <?= json_encode($article['description'], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>,

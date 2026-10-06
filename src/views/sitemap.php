@@ -17,14 +17,20 @@ $pages = [
     '/wiki'         => ['changefreq' => 'weekly',  'priority' => '0.8'],
 ];
 
-// Wiki pages (generated from flat-file index when available)
+// Wiki pages (generated from flat-file index when available).
+// Per-article <lastmod> comes from the Markdown file mtime, so crawlers
+// only refetch what actually changed.
 if (file_exists(ROOT_PATH . '/src/wiki.php')) {
     require_once ROOT_PATH . '/src/wiki.php';
     foreach (array_keys(wiki_categories()) as $wikiCategory) {
         $pages['/wiki/' . $wikiCategory] = ['changefreq' => 'weekly', 'priority' => '0.7'];
         foreach (['en', 'de'] as $wikiLang) {
             foreach (wiki_list_articles($wikiLang, $wikiCategory) as $wikiArticle) {
-                $pages['/wiki/' . $wikiCategory . '/' . $wikiArticle['slug']] = ['changefreq' => 'weekly', 'priority' => '0.7'];
+                $key = '/wiki/' . $wikiCategory . '/' . $wikiArticle['slug'];
+                $articleDate = date('Y-m-d', $wikiArticle['source_mtime']);
+                if (!isset($pages[$key]['lastmod']) || $articleDate > $pages[$key]['lastmod']) {
+                    $pages[$key] = ['changefreq' => 'weekly', 'priority' => '0.7', 'lastmod' => $articleDate];
+                }
             }
         }
     }
@@ -41,7 +47,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
         <xhtml:link rel="alternate" hreflang="en" href="<?= e($baseUrl . '/en' . $path) ?>" />
         <xhtml:link rel="alternate" hreflang="de" href="<?= e($baseUrl . '/de' . $path) ?>" />
         <xhtml:link rel="alternate" hreflang="x-default" href="<?= e($baseUrl . '/en' . $path) ?>" />
-        <lastmod><?= e($lastmod) ?></lastmod>
+        <lastmod><?= e($meta['lastmod'] ?? $lastmod) ?></lastmod>
         <changefreq><?= e($meta['changefreq']) ?></changefreq>
         <priority><?= e($meta['priority']) ?></priority>
     </url>

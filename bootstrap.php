@@ -293,6 +293,7 @@ foreach (SUPPORTED_LANGS as $lang) {
             'categoryMeta' => wiki_categories()[$p['category']],
             'title' => $article['title'] . ' — ternis.org Wiki',
             'metaDescription' => $article['description'] !== '' ? $article['description'] : null,
+            'metaKeywords' => $article['tags'] !== [] ? implode(', ', $article['tags']) . ', ternis.org wiki' : null,
             'canonicalUrl' => 'https://ternis.org/' . $lang . '/wiki/' . $p['category'] . '/' . $p['slug'],
         ] + $wikiAssets, 'main');
     });
