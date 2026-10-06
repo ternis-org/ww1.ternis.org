@@ -133,6 +133,32 @@ body.wiki-body {
 .wiki-ico-lg { width: 1.6rem; height: 1.6rem; }
 .wiki-ico-xl { width: 2.2rem; height: 2.2rem; }
 
+.wiki-inline-arrow {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  margin: 0 0.25rem;
+  color: var(--wiki-accent);
+}
+
+.wiki-inline-arrow .wiki-ico {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+.wiki-sep-dot {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  margin: 0 0.35rem;
+  color: var(--wiki-text-subtle);
+}
+
+.wiki-sep-dot .wiki-ico {
+  width: 0.45rem;
+  height: 0.45rem;
+}
+
 /* Wrapper */
 .wiki-wrap {
   width: 100%;

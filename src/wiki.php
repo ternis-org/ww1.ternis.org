@@ -419,6 +419,23 @@ function wiki_inline(string $text): string
         $attrs = $external ? ' target="_blank" rel="noopener noreferrer"' : '';
         return '<a href="' . htmlspecialchars($url, ENT_QUOTES, 'UTF-8') . '"' . $attrs . '>' . $m[1] . '</a>';
     }, $text);
+
+    // Convert unicode arrows outside <code> to inline SVGs
+    $parts = preg_split('/(<code>.*?<\/code>)/s', $text, -1, PREG_SPLIT_DELIM_CAPTURE);
+    if ($parts !== false) {
+        $arrowRight = '<span class="wiki-inline-arrow" aria-hidden="true">' . wiki_icon('arrow-right', 'wiki-ico-xs') . '</span>';
+        $arrowLeft = '<span class="wiki-inline-arrow" aria-hidden="true">' . wiki_icon('arrow-left', 'wiki-ico-xs') . '</span>';
+        foreach ($parts as $idx => $part) {
+            if (!str_starts_with($part, '<code>')) {
+                $part = str_replace('→', $arrowRight, $part);
+                $part = str_replace('←', $arrowLeft, $part);
+                $part = str_replace('↔', $arrowLeft . ' ' . $arrowRight, $part);
+                $parts[$idx] = $part;
+            }
+        }
+        $text = implode('', $parts);
+    }
+
     return $text;
 }
 
