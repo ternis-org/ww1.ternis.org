@@ -171,7 +171,7 @@ $router->get('/wiki/{category}/{slug}', function (array $p) {
     redirect('/' . detect_preferred_lang(SUPPORTED_LANGS, DEFAULT_LANG) . '/wiki/' . $p['category'] . '/' . $p['slug'], 302);
 });
 
-$wikiAssets = ['extraCss' => ['/assets/css/wiki.css'], 'extraJs' => ['/assets/js/wiki.js']];
+$wikiAssets = [];
 
 foreach (SUPPORTED_LANGS as $lang) {
     // Wiki home
@@ -180,16 +180,8 @@ foreach (SUPPORTED_LANGS as $lang) {
             define('LANG', $lang);
         }
         load_lang($lang);
-        $cats = wiki_categories();
-        $counts = [];
-        foreach (array_keys($cats) as $slug) {
-            $counts[$slug] = count(wiki_list_articles($lang, $slug));
-        }
-        $featured = array_slice(wiki_build_index($lang), 0, 6);
-        $catsWithCounts = [];
-        foreach ($cats as $slug => $meta) {
-            $catsWithCounts[$slug] = $meta + ['count' => $counts[$slug] ?? 0];
-        }
+        $catsWithCounts = wiki_categories_with_counts($lang);
+        $featured = array_slice(wiki_build_index($lang), 0, 8);
         render('wiki/home', [
             'lang' => $lang,
             'categories' => $catsWithCounts,
@@ -197,7 +189,7 @@ foreach (SUPPORTED_LANGS as $lang) {
             'title' => t('wiki.meta_title'),
             'metaDescription' => t('wiki.meta_description'),
             'canonicalUrl' => 'https://ternis.org/' . $lang . '/wiki',
-        ] + $wikiAssets, 'main');
+        ] + $wikiAssets, 'wiki');
     });
 
     // Wiki JSON index (powers instant client-side search)
@@ -217,14 +209,16 @@ foreach (SUPPORTED_LANGS as $lang) {
         }
         load_lang($lang);
         $q = mb_substr(trim((string) ($_GET['q'] ?? '')), 0, 200);
+        $catsWithCounts = wiki_categories_with_counts($lang);
         header('X-Robots-Tag: noindex, follow');
         render('wiki/search', [
             'lang' => $lang,
             'query' => $q,
             'results' => wiki_search($lang, $q),
+            'categories' => $catsWithCounts,
             'title' => t('wiki.search_title') . ' — ternis.org Wiki',
             'canonicalUrl' => 'https://ternis.org/' . $lang . '/wiki/search',
-        ] + $wikiAssets, 'main');
+        ] + $wikiAssets, 'wiki');
     });
 
     // Wiki category
@@ -238,15 +232,17 @@ foreach (SUPPORTED_LANGS as $lang) {
             wiki_404($lang);
             return;
         }
+        $catsWithCounts = wiki_categories_with_counts($lang);
         $catTitle = $lang === 'de' ? $cats[$p['category']]['de'] : $cats[$p['category']]['en'];
         render('wiki/category', [
             'lang' => $lang,
             'category' => $p['category'],
             'meta' => $cats[$p['category']],
             'articles' => wiki_list_articles($lang, $p['category']),
+            'categories' => $catsWithCounts,
             'title' => $catTitle . ' — ternis.org Wiki',
             'canonicalUrl' => 'https://ternis.org/' . $lang . '/wiki/' . $p['category'],
-        ] + $wikiAssets, 'main');
+        ] + $wikiAssets, 'wiki');
     });
 
     // Wiki article
@@ -281,21 +277,25 @@ foreach (SUPPORTED_LANGS as $lang) {
                 $relatedArticles[] = $rel;
             }
         }
+        $catsWithCounts = wiki_categories_with_counts($lang);
         header('Cache-Control: public, max-age=3600, stale-while-revalidate=86400');
         header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $article['source_mtime']) . ' GMT');
         render('wiki/article', [
             'lang' => $lang,
             'category' => $p['category'],
+            'slug' => $p['slug'],
             'article' => $article,
             'prev' => $prev,
             'next' => $next,
             'relatedArticles' => $relatedArticles,
             'categoryMeta' => wiki_categories()[$p['category']],
+            'categoryArticles' => $articles,
+            'categories' => $catsWithCounts,
             'title' => $article['title'] . ' — ternis.org Wiki',
             'metaDescription' => $article['description'] !== '' ? $article['description'] : null,
             'metaKeywords' => $article['tags'] !== [] ? implode(', ', $article['tags']) . ', ternis.org wiki' : null,
             'canonicalUrl' => 'https://ternis.org/' . $lang . '/wiki/' . $p['category'] . '/' . $p['slug'],
-        ] + $wikiAssets, 'main');
+        ] + $wikiAssets, 'wiki');
     });
 }
 
