@@ -95,6 +95,7 @@ function wiki_icon(string $name, string $extraClass = ''): string
         'sparkles'     => '<path d="M12 3l1.91 5.09L19 10l-5.09 1.91L12 17l-1.91-5.09L5 10l5.09-1.91L12 3z"/><path d="M5 3l.8 2.2L8 6l-2.2.8L5 9l-.8-2.2L2 6l2.2-.8L5 3z"/>',
         'github'       => '<path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>',
         'dot'          => '<circle cx="12" cy="12" r="3" fill="currentColor"/>',
+        'wrap'         => '<polyline points="9 10 4 15 9 20"/><path d="M20 4v7a4 4 0 0 1-4 4H4"/>',
     ];
     $inner = $icons[$name] ?? $icons['globe'];
     $classes = 'wiki-ico' . ($extraClass !== '' ? ' ' . $extraClass : '');
@@ -256,12 +257,12 @@ function wiki_markdown_to_html(string $md): string
 
     foreach ($lines as $line) {
         // Fenced code blocks
-        if (preg_match('/^```(\w[\w+-]*)\s*$/', trim($line), $m) && !$inCode) {
+        if (preg_match('/^```([\w+-]*)\s*$/', trim($line), $m) && !$inCode) {
             $flushParagraph();
             $closeList();
             $flushTable();
             $inCode = true;
-            $codeLang = $m[1];
+            $codeLang = strtolower(trim($m[1] ?? ''));
             $codeBuf = [];
             continue;
         }
@@ -270,15 +271,35 @@ function wiki_markdown_to_html(string $md): string
             $copy = htmlspecialchars(implode("\n", $codeBuf), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
             $copyIcon = wiki_icon('copy');
             $checkIcon = wiki_icon('check');
-            $html .= '<div class="wiki-codeblock"><div class="wiki-codeblock-bar"><span class="wiki-codeblock-lang">'
-                . e($codeLang !== '' ? $codeLang : 'code')
-                . '</span><button type="button" class="wiki-copy-btn" data-copy="' . $copy
-                . '" aria-label="Copy code">'
+            $wrapIcon = wiki_icon('wrap', 'wiki-ico-xs');
+            $displayLang = $codeLang !== '' ? $codeLang : 'code';
+            $lineCount = count($codeBuf);
+            $linesLabel = $lineCount === 1 ? '1 line' : $lineCount . ' lines';
+
+            $html .= '<div class="wiki-codeblock">'
+                . '<div class="wiki-codeblock-bar">'
+                . '<div class="wiki-codeblock-meta">'
+                . '<div class="wiki-codeblock-dots" aria-hidden="true">'
+                . '<span class="wiki-codeblock-dot wiki-dot-red"></span>'
+                . '<span class="wiki-codeblock-dot wiki-dot-yellow"></span>'
+                . '<span class="wiki-codeblock-dot wiki-dot-green"></span>'
+                . '</div>'
+                . '<span class="wiki-codeblock-lang">' . e($displayLang) . '</span>'
+                . '<span class="wiki-codeblock-lines">' . e($linesLabel) . '</span>'
+                . '</div>'
+                . '<div class="wiki-codeblock-actions">'
+                . '<button type="button" class="wiki-code-btn wiki-wrap-btn" aria-label="Toggle line wrap" title="Toggle line wrap" data-wiki-toggle-wrap>'
+                . $wrapIcon
+                . '</button>'
+                . '<button type="button" class="wiki-copy-btn" data-copy="' . $copy . '" data-lang="' . e($displayLang) . '" data-lines="' . $lineCount . '" aria-label="Copy code block" title="Copy code">'
                 . '<span class="wiki-copy-icon">' . $copyIcon . '</span>'
                 . '<span class="wiki-copy-check">' . $checkIcon . '</span>'
                 . '<span class="wiki-copy-label">Copy</span>'
-                . '</button></div><pre><code class="language-'
-                . e($codeLang !== '' ? $codeLang : 'text') . '">' . $code . "</code></pre></div>\n";
+                . '</button>'
+                . '</div>'
+                . '</div>'
+                . '<pre><code class="language-' . e($codeLang !== '' ? $codeLang : 'text') . '">' . $code . '</code></pre>'
+                . "</div>\n";
             $inCode = false;
             $codeLang = '';
             $codeBuf = [];

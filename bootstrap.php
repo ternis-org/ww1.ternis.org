@@ -543,6 +543,7 @@ foreach (SUPPORTED_LANGS as $lang) {
         if (!defined('LANG')) {
             define('LANG', $lang);
         }
+        load_lang($lang);
         // 301 Redirect for renamed article
         if ($p['category'] === 'domains' && $p['slug'] === 'register-manage-dnbx') {
             header('Location: /' . $lang . '/wiki/domains/register-manage-ternisdomains', true, 301);

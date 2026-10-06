@@ -190,6 +190,9 @@ $allCategories   = wiki_categories_with_counts($lang);
 </head>
 <body class="wiki-body">
 
+    <!-- Accessible Skip to Main Content Link -->
+    <a href="#wiki-main" class="wiki-skip-link"><?= e(t('wiki.skip_to_content')) ?></a>
+
     <!-- Top Reading Progress Bar -->
     <div id="wiki-progress" class="wiki-progress-bar" aria-hidden="true">
         <div class="wiki-progress-fill"></div>
@@ -199,7 +202,7 @@ $allCategories   = wiki_categories_with_counts($lang);
     <header class="wiki-topbar">
         <div class="wiki-topbar-inner">
             <div class="wiki-topbar-left">
-                <button type="button" class="wiki-icon-btn wiki-menu-toggle" aria-label="Open documentation menu" data-wiki-drawer-toggle>
+                <button type="button" class="wiki-icon-btn wiki-menu-toggle" aria-label="Open documentation menu" aria-expanded="false" aria-controls="wiki-mobile-drawer" data-wiki-drawer-toggle>
                     <?= wiki_icon('menu') ?>
                 </button>
                 <a href="/<?= e($lang) ?>/wiki" class="wiki-brand" aria-label="ternis.org Wiki">
@@ -340,18 +343,21 @@ $allCategories   = wiki_categories_with_counts($lang);
     </button>
 
     <!-- Global Command Palette / Search Modal -->
-    <div id="wiki-search-modal" class="wiki-modal" role="dialog" aria-modal="true" aria-label="<?= e(t('wiki.search_modal_placeholder')) ?>" hidden>
+    <div id="wiki-search-modal" class="wiki-modal" role="dialog" aria-modal="true" aria-labelledby="wiki-modal-title" hidden>
         <div class="wiki-modal-backdrop" data-wiki-modal-close></div>
         <div class="wiki-modal-card">
+            <h2 id="wiki-modal-title" class="sr-only"><?= e(t('wiki.search_title')) ?></h2>
             <div class="wiki-modal-head">
                 <span class="wiki-modal-search-ico"><?= wiki_icon('search') ?></span>
                 <input type="search" class="wiki-modal-input" placeholder="<?= e(t('wiki.search_modal_placeholder')) ?>"
-                    aria-label="<?= e(t('wiki.search_modal_placeholder')) ?>" autocomplete="off" spellcheck="false" data-wiki-modal-input>
+                    aria-label="<?= e(t('wiki.search_modal_placeholder')) ?>" autocomplete="off" spellcheck="false"
+                    role="combobox" aria-autocomplete="list" aria-expanded="true" aria-controls="wiki-search-results-list"
+                    data-wiki-modal-input>
                 <button type="button" class="wiki-modal-close-btn" data-wiki-modal-close aria-label="Close search">
                     <?= wiki_icon('x') ?>
                 </button>
             </div>
-            <div class="wiki-modal-body" data-wiki-modal-results>
+            <div id="wiki-search-results-list" class="wiki-modal-body" role="listbox" aria-label="Search results" data-wiki-modal-results>
                 <div class="wiki-modal-empty">
                     <p class="wiki-modal-hint"><?= e(t('wiki.search_hint')) ?></p>
                 </div>
@@ -413,6 +419,9 @@ $allCategories   = wiki_categories_with_counts($lang);
             </div>
         </div>
     </aside>
+
+    <!-- Live Accessible Toast Notification Region -->
+    <div id="wiki-toast-container" class="wiki-toast-container" role="region" aria-label="Notifications" aria-live="polite" aria-atomic="true"></div>
 
     <!-- Wiki Script -->
     <script src="<?= e(asset_url('/assets/js/wiki.js')) ?>" defer></script>
