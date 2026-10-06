@@ -8,154 +8,12 @@ declare(strict_types=1);
  * @var string $lang
  */
 
+require_once ROOT_PATH . '/src/projects.php';
+
 $lang = $lang ?? current_lang();
 $isDe = $lang === 'de';
-
-$projects = [
-    [
-        'id'          => 'httpclient',
-        'title'       => 'httpclient.de',
-        'category'    => 'tools',
-        'cat_label'   => $isDe ? 'Web & APIs' : 'Web & APIs',
-        'tagline'     => $isDe ? 'Kostenloser Online-HTTP-Client & API-Debugger' : 'Fast Online HTTP Client & REST API Debugger',
-        'description' => $isDe
-            ? 'Moderner, privatsphärefreundlicher Web-Client für HTTP-Header, REST-Anfragen und Payload-Inspektion. Läuft vollständig ohne Tracking oder Datenspeicherung.'
-            : 'Privacy-first online REST client to test endpoints, craft headers, inspect payload responses, and debug webhooks with zero telemetry or tracking.',
-        'tags'        => ['REST API', 'HTTP Client', 'Zero Telemetry', 'Developer Tool'],
-        'url'         => 'https://httpclient.de',
-        'repo_url'    => null,
-        'status'      => 'Active • Production',
-    ],
-    [
-        'id'          => 'example-dns',
-        'title'       => 'example-dns (ternis.net)',
-        'category'    => 'infra',
-        'cat_label'   => $isDe ? 'Infrastruktur & DNS' : 'Infrastructure & DNS',
-        'tagline'     => $isDe ? 'Autonome Anycast-Nameserver (one & two.ns.ternis.net)' : 'Authoritative Anycast Nameserver Backbone',
-        'description' => $isDe
-            ? 'Geografisch redundantes autoritatives Anycast-DNS-Netzwerk auf one.ns.ternis.net und two.ns.ternis.net mit DNSSEC ECDSA P-256 Validierung.'
-            : 'Geographically dispersed Anycast authoritative nameservers running on one.ns.ternis.net and two.ns.ternis.net with full DNSSEC signing.',
-        'tags'        => ['one.ns.ternis.net', 'two.ns.ternis.net', 'Anycast DNS', 'DNSSEC Alg 13'],
-        'url'         => 'https://example-dns.com',
-        'repo_url'    => 'https://github.com/example-dns/example-dns',
-        'codeberg'    => 'https://codeberg.org/example-dns/example-dns',
-        'status'      => 'Active • Production',
-    ],
-    [
-        'id'          => 'mtex',
-        'title'       => 'MTEX.dev',
-        'category'    => 'tools',
-        'cat_label'   => $isDe ? 'Entwickler-Tools' : 'Developer Tools',
-        'tagline'     => $isDe ? 'Developer-Utilities & UI-Komponenten' : 'Developer Utilities & UI Components',
-        'description' => $isDe
-            ? 'Moderne UI-Toolsets, Webkomponenten und Bibliotheken, die Entwicklerprojekte im gesamten Ökosystem antreiben.'
-            : 'Modular developer toolsets, lightweight UI components, and software libraries empowering ecosystem applications.',
-        'tags'        => ['Developer Suite', 'UI Tools', 'Open Source', 'FOSS'],
-        'url'         => 'https://mtex.dev',
-        'repo_url'    => null,
-        'status'      => 'Active • Production',
-    ],
-    [
-        'id'          => 'getmyname',
-        'title'       => 'getmy.name',
-        'category'    => 'tools',
-        'cat_label'   => $isDe ? 'Web & APIs' : 'Web & APIs',
-        'tagline'     => $isDe ? 'Kostenlose Entwickler-Portfolio-API' : 'Free Developer Portfolio & Profile API',
-        'description' => $isDe
-            ? 'Schlanke JSON/REST API zur Pflege und Bereitstellung strukturierter Entwicklerprofile, Lebensläufe und Projekte.'
-            : 'Lightweight headless REST API to query and render developer profiles, public keys, and project portfolios in clean JSON.',
-        'tags'        => ['JSON API', 'Developer Profiles', 'Portfolio API', 'Headless'],
-        'url'         => 'https://getmy.name',
-        'docs_url'    => 'https://getmy.name/api-docs',
-        'repo_url'    => null,
-        'status'      => 'Active • Production',
-    ],
-    [
-        'id'          => 'websearch',
-        'title'       => 'web-search.org',
-        'category'    => 'privacy',
-        'cat_label'   => $isDe ? 'Privatsphäre & Suche' : 'Privacy & Search',
-        'tagline'     => $isDe ? 'Selbst-hostbare, privatsphärefreundliche Suchmaschine' : 'Self-Hostable Privacy Search Engine',
-        'description' => $isDe
-            ? 'Schnelle Metasuchmaschine ohne Profiling, ohne Werbetracking und ohne Datenweitergabe an Werbenetzwerke.'
-            : 'High-speed, privacy-first meta search engine with zero user profiling, no cookie tracking, and zero advertising pixels.',
-        'tags'        => ['Search Engine', 'Privacy First', 'Self-Hostable', 'No Tracking'],
-        'url'         => 'https://web-search.org',
-        'repo_url'    => null,
-        'status'      => 'Active • Production',
-    ],
-    [
-        'id'          => 'mailfree',
-        'title'       => 'mail-free.eu & mail-free.uk',
-        'category'    => 'privacy',
-        'cat_label'   => $isDe ? 'Privatsphäre & E-Mail' : 'Privacy & Email',
-        'tagline'     => $isDe ? 'Wegwerf-E-Mail-Adressen & Souveräne Relays' : 'Disposable Email Inboxes & European Mail Relays',
-        'description' => $isDe
-            ? 'Automatisch generierte E-Mail-Aliasse und souveräne europäische Mail-Gateways zum Schutz des persönlichen Postfachs vor Spam.'
-            : 'Instantly generated disposable mail aliases and sovereign European mail relays keeping your primary inbox spam-free.',
-        'tags'        => ['Email Privacy', 'Spam Defense', 'EU Sovereign', 'Free'],
-        'url'         => 'https://mail-free.eu',
-        'url_alt'     => 'https://mail-free.uk',
-        'repo_url'    => null,
-        'status'      => 'Active • Production',
-    ],
-    [
-        'id'          => 'staticre',
-        'title'       => 'static.re',
-        'category'    => 'hosting',
-        'cat_label'   => $isDe ? 'Hosting & Storage' : 'Hosting & Storage',
-        'tagline'     => $isDe ? 'S3 & Cloudflare R2 Speicherplattform' : 'S3 & Cloudflare R2 Object Storage Platform',
-        'description' => $isDe
-            ? 'Verwaltete Bereitstellungs- und Speicherplattform für S3-kompatible Backends und Cloudflare R2 Object Storage.'
-            : 'Software platform and management delivery service for S3-compatible endpoints and Cloudflare R2 object storage.',
-        'tags'        => ['S3 Compatible', 'Cloudflare R2', 'Object Storage', 'Asset CDN'],
-        'url'         => 'https://static.re',
-        'repo_url'    => null,
-        'status'      => 'Active • Production',
-    ],
-    [
-        'id'          => 'drophtml',
-        'title'       => 'drophtml.de',
-        'category'    => 'hosting',
-        'cat_label'   => $isDe ? 'Hosting & Storage' : 'Hosting & Storage',
-        'tagline'     => $isDe ? 'Kostenloses Drag-and-Drop Webhosting' : 'Zero-Config Drag-and-Drop HTML Web Hosting',
-        'description' => $isDe
-            ? 'Statische HTML-, CSS- und JS-Seiten einfach per Drag-and-Drop im Browser hochladen und sofort weltweit online stellen.'
-            : 'Instant static web hosting: drop an HTML file or ZIP archive into your browser to deploy a live, secure website in seconds.',
-        'tags'        => ['HTML Hosting', 'Drag & Drop', 'Static Sites', 'Instant Deploy'],
-        'url'         => 'https://drophtml.de',
-        'repo_url'    => null,
-        'status'      => 'Active • Production',
-    ],
-    [
-        'id'          => 'ternisdomains',
-        'title'       => 'ternisdomains.de',
-        'category'    => 'infra',
-        'cat_label'   => $isDe ? 'Infrastruktur & DNS' : 'Infrastructure & DNS',
-        'tagline'     => $isDe ? 'Transparente Domain-Registrierung & DNS-Zonen' : 'Transparent Flat-Rate Domain Registration',
-        'description' => $isDe
-            ? 'Faire Domain-Registrierungen ohne Lockpreise und ohne Preisfallen bei Verlängerungen, mit nativer Unterstützung für ternis.net Nameserver.'
-            : 'Fair flat-rate domain registration and DNS zone management without first-year promo traps or renewal price hikes.',
-        'tags'        => ['Domain Registrar', 'DNS Control', 'DNSSEC Ready', 'Flat Pricing'],
-        'url'         => 'https://ternisdomains.de',
-        'repo_url'    => null,
-        'status'      => 'Active • Production',
-    ],
-    [
-        'id'          => 'ternisorg',
-        'title'       => 'ternis.org & Technical Wiki',
-        'category'    => 'infra',
-        'cat_label'   => $isDe ? 'Infrastruktur & Doku' : 'Infrastructure & Docs',
-        'tagline'     => $isDe ? 'Open-Source-Hub & 60+ Artikel Tech-Wiki' : 'Official Open Source Hub & 60+ Article Wiki',
-        'description' => $isDe
-            ? 'Das zentrale Open-Source-Repository und praxisorientierte Technik-Wiki für Linux, DNS, DevOps, MySQL und Homelab-Architektur.'
-            : 'The official open-source website and comprehensive technical knowledge base covering Linux, DNS, DevOps, and networking.',
-        'tags'        => ['Open Source', 'Technical Wiki', 'Atom Feed', '100% SVG'],
-        'url'         => 'https://ternis.org/' . $lang,
-        'repo_url'    => 'https://github.com/ternis-org/ww1.ternis.org',
-        'status'      => 'Active • Production',
-    ],
-];
+$projects = projects_all($lang);
+$categories = project_categories();
 ?>
 <div class="projects-index-page">
     <div class="container" style="padding-top: 2rem; padding-bottom: 5rem;">
@@ -206,13 +64,17 @@ $projects = [
 
         <!-- Projects Grid -->
         <div id="projects-container" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(340px, 1fr));gap:1.5rem;">
-            <?php foreach ($projects as $proj): ?>
+            <?php foreach ($projects as $slug => $proj): ?>
+                <?php
+                    $catMeta = $categories[$proj['category']] ?? ['en' => 'Service', 'de' => 'Dienst'];
+                    $catLabel = $isDe ? $catMeta['de'] : $catMeta['en'];
+                ?>
                 <div class="project-item-card" data-category="<?= e($proj['category']) ?>" data-search="<?= e(strtolower($proj['title'] . ' ' . $proj['tagline'] . ' ' . $proj['description'] . ' ' . implode(' ', $proj['tags']))) ?>" style="background:var(--surface);border:1px solid var(--border-subtle);border-radius:16px;padding:1.75rem;display:flex;flex-direction:column;justify-content:space-between;transition:border-color 0.15s ease, transform 0.15s ease;">
                     <div>
                         <!-- Card Header -->
                         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;">
                             <span style="font-family:var(--font-mono);font-size:0.75rem;padding:0.25rem 0.6rem;background:rgba(234,88,12,0.1);color:var(--primary);border-radius:6px;font-weight:600;">
-                                <?= e($proj['cat_label']) ?>
+                                <?= e($catLabel) ?>
                             </span>
                             <span style="display:inline-flex;align-items:center;gap:0.35rem;font-size:0.75rem;color:#22c55e;font-weight:500;">
                                 <span style="width:6px;height:6px;border-radius:50%;background:#22c55e;"></span>
@@ -222,7 +84,7 @@ $projects = [
 
                         <!-- Title & Tagline -->
                         <h3 style="font-size:1.35rem;font-weight:700;margin:0 0 0.35rem;letter-spacing:-0.01em;">
-                            <a href="<?= e($proj['url']) ?>" target="_blank" rel="noopener noreferrer" style="color:var(--text-main);text-decoration:none;">
+                            <a href="/<?= e($lang) ?>/projects/<?= e($slug) ?>" style="color:var(--text-main);text-decoration:none;">
                                 <?= e($proj['title']) ?>
                             </a>
                         </h3>
@@ -245,8 +107,11 @@ $projects = [
 
                     <!-- Action Links -->
                     <div style="display:flex;flex-wrap:wrap;gap:0.5rem;padding-top:1rem;border-top:1px solid var(--border-subtle);">
-                        <a href="<?= e($proj['url']) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;font-size:0.8125rem;">
-                            <span><?= $isDe ? 'Website öffnen' : 'Launch Service' ?></span>
+                        <a href="/<?= e($lang) ?>/projects/<?= e($slug) ?>" class="btn btn-outline btn-sm" style="flex:1;justify-content:center;font-size:0.8125rem;">
+                            <span><?= $isDe ? 'Details & Architektur' : 'Specs & Details' ?> &rarr;</span>
+                        </a>
+                        <a href="<?= e($proj['url']) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" style="justify-content:center;font-size:0.8125rem;" title="<?= $isDe ? 'Dienst aufrufen' : 'Open Service' ?>">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                         </a>
                         <?php if (!empty($proj['repo_url'])): ?>
                             <a href="<?= e($proj['repo_url']) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" title="Source Code">

@@ -136,6 +136,63 @@ foreach (SUPPORTED_LANGS as $lang) {
             'canonicalUrl'    => 'https://ternis.org/' . $lang . '/projects',
         ], 'main');
     });
+
+    // Project Detail Page
+    $router->get('/' . $lang . '/projects/{slug}', function (array $p) use ($lang) {
+        if (!defined('LANG')) {
+            define('LANG', $lang);
+        }
+        load_lang($lang);
+        require_once ROOT_PATH . '/src/projects.php';
+        $slug = (string) ($p['slug'] ?? '');
+        $project = project_find($slug, $lang);
+
+        if ($project === null) {
+            http_response_code(404);
+            header('X-Robots-Tag: noindex, nofollow');
+            render('error', [
+                'lang'    => $lang,
+                'code'    => 404,
+                'message' => t('error.not_found'),
+            ], 'main');
+            return;
+        }
+
+        // Resolve related wiki articles if any
+        $relatedWikiArticles = [];
+        if (!empty($project['related_wiki']) && file_exists(ROOT_PATH . '/src/wiki.php')) {
+            require_once ROOT_PATH . '/src/wiki.php';
+            foreach ($project['related_wiki'] as $ref) {
+                if (!str_contains($ref, '/')) continue;
+                [$cat, $artSlug] = explode('/', $ref, 2);
+                $art = wiki_get_article($lang, $cat, $artSlug);
+                if ($art !== null) {
+                    $relatedWikiArticles[] = $art;
+                }
+            }
+        }
+
+        // Pick 3 other projects
+        $all = projects_all($lang);
+        unset($all[$slug]);
+        $otherProjects = array_slice($all, 0, 3);
+
+        $categoryMeta = project_categories()[$project['category']] ?? ['en' => 'Service', 'de' => 'Dienst'];
+        $title = $project['title'] . ' — ' . $project['tagline'] . ' — ternis.org';
+
+        render('project_detail', [
+            'lang'                => $lang,
+            'slug'                => $slug,
+            'project'             => $project,
+            'categoryMeta'        => $categoryMeta,
+            'relatedWikiArticles' => $relatedWikiArticles,
+            'otherProjects'       => $otherProjects,
+            'title'               => $title,
+            'metaDescription'     => $project['description'],
+            'metaKeywords'        => implode(', ', $project['tags']) . ', open source, ternis.org',
+            'canonicalUrl'        => 'https://ternis.org/' . $lang . '/projects/' . $slug,
+        ], 'main');
+    });
 }
 
 // Redirects without locale
@@ -150,6 +207,11 @@ $router->get('/ternis.net', function () {
 $router->get('/projects', function () {
     header('Vary: Accept-Language');
     redirect('/' . detect_preferred_lang(SUPPORTED_LANGS, DEFAULT_LANG) . '/projects', 302);
+});
+$router->get('/projects/{slug}', function (array $p) {
+    header('Vary: Accept-Language');
+    $targetLang = detect_preferred_lang(SUPPORTED_LANGS, DEFAULT_LANG);
+    redirect('/' . $targetLang . '/projects/' . $p['slug'], 302);
 });
 
 // Legal routes without locale: /legal and /legal/{slug}

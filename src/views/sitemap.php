@@ -22,6 +22,13 @@ $pages = [
 // Wiki pages (generated from flat-file index when available).
 // Per-article <lastmod> comes from the Markdown file mtime, so crawlers
 // only refetch what actually changed.
+if (file_exists(ROOT_PATH . '/src/projects.php')) {
+    require_once ROOT_PATH . '/src/projects.php';
+    foreach (array_keys(projects_all('en')) as $projectSlug) {
+        $pages['/projects/' . $projectSlug] = ['changefreq' => 'weekly', 'priority' => '0.85'];
+    }
+}
+
 if (file_exists(ROOT_PATH . '/src/wiki.php')) {
     require_once ROOT_PATH . '/src/wiki.php';
     foreach (array_keys(wiki_categories()) as $wikiCategory) {
