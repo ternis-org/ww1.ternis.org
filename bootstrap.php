@@ -98,7 +98,59 @@ foreach (SUPPORTED_LANGS as $lang) {
             'canonicalUrl' => 'https://ternis.org/' . $lang,
         ], 'main');
     });
+
+    // Infrastructure Index (ternis.net backbone)
+    $router->get('/' . $lang . '/infrastructure', function () use ($lang) {
+        if (!defined('LANG')) {
+            define('LANG', $lang);
+        }
+        load_lang($lang);
+        $title = ($lang === 'de' ? 'Infrastruktur (ternis.net) — Autonome Anycast Nameserver' : 'Infrastructure (ternis.net) — Autonomous Anycast Nameservers') . ' — ternis.org';
+        $metaDescription = $lang === 'de'
+            ? 'Übersicht der ternis.net Infrastruktur: Autonome autoritative Anycast-Nameserver (one.ns.ternis.net & two.ns.ternis.net), DNSSEC ECDSA Validierung, Stratum NTP und Mail-Relays.'
+            : 'Explore the ternis.net infrastructure backbone: Autonomous Anycast authoritative nameservers (one & two.ns.ternis.net), DNSSEC validation, Stratum NTP, and sovereign mail gateways.';
+
+        render('infrastructure', [
+            'lang'            => $lang,
+            'title'           => $title,
+            'metaDescription' => $metaDescription,
+            'canonicalUrl'    => 'https://ternis.org/' . $lang . '/infrastructure',
+        ], 'main');
+    });
+
+    // Projects Index
+    $router->get('/' . $lang . '/projects', function () use ($lang) {
+        if (!defined('LANG')) {
+            define('LANG', $lang);
+        }
+        load_lang($lang);
+        $title = ($lang === 'de' ? 'Alle Projekte & Open-Source-Dienste' : 'All Projects & Open Source Services') . ' — ternis.org';
+        $metaDescription = $lang === 'de'
+            ? 'Durchsuchbares Verzeichnis aller Open-Source-Projekte, Entwickler-Werkzeuge, Anycast-DNS-Dienste und datensouveränen Web-Apps von ternis.org.'
+            : 'Searchable directory of all open-source projects, developer utilities, Anycast DNS systems, and privacy web applications maintained by ternis.org.';
+
+        render('projects', [
+            'lang'            => $lang,
+            'title'           => $title,
+            'metaDescription' => $metaDescription,
+            'canonicalUrl'    => 'https://ternis.org/' . $lang . '/projects',
+        ], 'main');
+    });
 }
+
+// Redirects without locale
+$router->get('/infrastructure', function () {
+    header('Vary: Accept-Language');
+    redirect('/' . detect_preferred_lang(SUPPORTED_LANGS, DEFAULT_LANG) . '/infrastructure', 302);
+});
+$router->get('/ternis.net', function () {
+    header('Vary: Accept-Language');
+    redirect('/' . detect_preferred_lang(SUPPORTED_LANGS, DEFAULT_LANG) . '/infrastructure', 302);
+});
+$router->get('/projects', function () {
+    header('Vary: Accept-Language');
+    redirect('/' . detect_preferred_lang(SUPPORTED_LANGS, DEFAULT_LANG) . '/projects', 302);
+});
 
 // Legal routes without locale: /legal and /legal/{slug}
 $router->get('/legal', function () {

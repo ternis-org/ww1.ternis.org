@@ -13,11 +13,12 @@ return [
     ],
 
     'nav' => [
-        'brand'         => 'ternis.org',
-        'projects'      => 'Projects',
-        'nameservers'   => 'Nameservers',
-        'about'         => 'About',
-        'wiki'          => 'Wiki',
+        'brand'          => 'ternis.org',
+        'projects'       => 'Projects',
+        'infrastructure' => 'Infrastructure',
+        'nameservers'    => 'Nameservers',
+        'about'          => 'About',
+        'wiki'           => 'Wiki',
         'legal'         => 'Legal',
         'imprint'       => 'Imprint',
         'privacy'       => 'Privacy Policy',

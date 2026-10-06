@@ -10,11 +10,13 @@ $baseUrl = rtrim((string) config('app_url', 'https://ternis.org'), '/');
 $lastmod = date('Y-m-d');
 
 $pages = [
-    ''              => ['changefreq' => 'weekly',  'priority' => '1.0'],
-    '/legal/imprint'=> ['changefreq' => 'monthly', 'priority' => '0.5'],
-    '/legal/privacy'=> ['changefreq' => 'monthly', 'priority' => '0.5'],
-    '/legal/license'=> ['changefreq' => 'monthly', 'priority' => '0.5'],
-    '/wiki'         => ['changefreq' => 'weekly',  'priority' => '0.8'],
+    ''               => ['changefreq' => 'weekly',  'priority' => '1.0'],
+    '/projects'      => ['changefreq' => 'weekly',  'priority' => '0.9'],
+    '/infrastructure'=> ['changefreq' => 'weekly',  'priority' => '0.9'],
+    '/legal/imprint' => ['changefreq' => 'monthly', 'priority' => '0.5'],
+    '/legal/privacy' => ['changefreq' => 'monthly', 'priority' => '0.5'],
+    '/legal/license' => ['changefreq' => 'monthly', 'priority' => '0.5'],
+    '/wiki'          => ['changefreq' => 'weekly',  'priority' => '0.8'],
 ];
 
 // Wiki pages (generated from flat-file index when available).

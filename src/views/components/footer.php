@@ -34,6 +34,7 @@ $commitUrl = app_repo_commit_url($versionShort);
                 <div class="footer-col">
                     <h4><?= e(t('footer.col_projects')) ?></h4>
                     <ul>
+                        <li><a href="/<?= e($lang) ?>/projects" style="font-weight:600;color:var(--primary);">&rarr; <?= $lang === 'de' ? 'Alle Projekte' : 'All Projects' ?></a></li>
                         <li><a href="https://httpclient.de" target="_blank" rel="noopener noreferrer">httpclient.de</a></li>
                         <li><a href="https://api-sandbox.de" target="_blank" rel="noopener noreferrer">api-sandbox.de</a></li>
                         <li><a href="https://mtex.dev" target="_blank" rel="noopener noreferrer">MTEX.dev</a></li>
@@ -49,7 +50,8 @@ $commitUrl = app_repo_commit_url($versionShort);
                 <div class="footer-col">
                     <h4><?= e(t('footer.col_ecosystem')) ?></h4>
                     <ul>
-                        <li><a href="https://dnbx.de" target="_blank" rel="noopener noreferrer">dnbx.de (DNS)</a></li>
+                        <li><a href="/<?= e($lang) ?>/infrastructure" style="font-weight:600;color:var(--primary);">&rarr; <?= $lang === 'de' ? 'Infrastruktur (ternis.net)' : 'Infrastructure (ternis.net)' ?></a></li>
+                        <li><a href="https://ternisdomains.de" target="_blank" rel="noopener noreferrer">ternisdomains.de</a></li>
                         <li><a href="https://github.com/example-dns/example-dns" target="_blank" rel="noopener noreferrer">example-dns (GitHub)</a></li>
                         <li><a href="https://codeberg.org/example-dns/example-dns" target="_blank" rel="noopener noreferrer">example-dns (Codeberg)</a></li>
                         <li><a href="https://ternis.dev" target="_blank" rel="noopener noreferrer">ternis.dev</a></li>
