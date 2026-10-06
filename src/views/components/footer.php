@@ -62,6 +62,7 @@ $commitUrl = app_repo_commit_url($versionShort);
                 <div class="footer-col">
                     <h4><?= e(t('footer.col_legal')) ?></h4>
                     <ul>
+                        <li><a href="/<?= e($lang) ?>/wiki"><?= e(t('nav.wiki')) ?></a></li>
                         <li><a href="/<?= e($lang) ?>/legal/imprint"><?= e(t('nav.imprint')) ?></a></li>
                         <li><a href="/<?= e($lang) ?>/legal/privacy"><?= e(t('nav.privacy')) ?></a></li>
                         <li><a href="/<?= e($lang) ?>/legal/license"><?= e(t('nav.license')) ?></a></li>

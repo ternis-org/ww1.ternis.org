@@ -13,6 +13,8 @@ declare(strict_types=1);
  * @var bool|null $showNav
  * @var bool|null $showFooter
  * @var bool|null $showScrollTop
+ * @var array|null $extraCss  additional stylesheet URLs (e.g. wiki.css, loaded after app.css)
+ * @var array|null $extraJs   additional script URLs (e.g. wiki.js, loaded after app.js)
  */
 
 $lang            = $lang ?? current_lang();
@@ -28,6 +30,8 @@ $versionShort    = app_version_hash(true);
 $showNav         = $showNav ?? true;
 $showFooter      = $showFooter ?? true;
 $showScrollTop   = $showScrollTop ?? true;
+$extraCss        = $extraCss ?? [];
+$extraJs         = $extraJs ?? [];
 ?>
 <!DOCTYPE html>
 <html lang="<?= e($lang) ?>" data-theme="light">
@@ -88,6 +92,9 @@ $showScrollTop   = $showScrollTop ?? true;
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="<?= e(asset_url('/assets/css/app.css')) ?>">
+    <?php foreach ($extraCss as $css): ?>
+    <link rel="stylesheet" href="<?= e(asset_url(ltrim($css, '/'))) ?>">
+    <?php endforeach; ?>
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -149,5 +156,8 @@ $showScrollTop   = $showScrollTop ?? true;
 
     <!-- Scripts -->
     <script src="<?= e(asset_url('/assets/js/app.js')) ?>" defer></script>
+    <?php foreach ($extraJs as $js): ?>
+    <script src="<?= e(asset_url(ltrim($js, '/'))) ?>" defer></script>
+    <?php endforeach; ?>
 </body>
 </html>

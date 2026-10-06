@@ -6,6 +6,7 @@
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 require ROOT_PATH . '/src/helpers.php';
+require ROOT_PATH . '/src/wiki.php';
 
 // Send modern security headers across all responses
 send_security_headers();
@@ -146,6 +147,154 @@ foreach (SUPPORTED_LANGS as $lang) {
             'title'        => ($langData['legal'][$slug]['title'] ?? 'Legal') . ' — ternis.org',
             'canonicalUrl' => $canonicalUrl,
         ], 'main');
+    });
+}
+
+// ── Wiki ───────────────────────────────────────────────────────────────────
+// Canonical home: /wiki → /{preferred-lang}/wiki
+$router->get('/wiki', function () {
+    header('Vary: Accept-Language');
+    redirect('/' . detect_preferred_lang(SUPPORTED_LANGS, DEFAULT_LANG) . '/wiki', 302);
+});
+$router->get('/wiki/search', function () {
+    header('Vary: Accept-Language');
+    $q = $_SERVER['QUERY_STRING'] ?? '';
+    $target = '/' . detect_preferred_lang(SUPPORTED_LANGS, DEFAULT_LANG) . '/wiki/search';
+    redirect($target . ($q !== '' ? '?' . $q : ''), 302);
+});
+$router->get('/wiki/{category}', function (array $p) {
+    header('Vary: Accept-Language');
+    redirect('/' . detect_preferred_lang(SUPPORTED_LANGS, DEFAULT_LANG) . '/wiki/' . $p['category'], 302);
+});
+$router->get('/wiki/{category}/{slug}', function (array $p) {
+    header('Vary: Accept-Language');
+    redirect('/' . detect_preferred_lang(SUPPORTED_LANGS, DEFAULT_LANG) . '/wiki/' . $p['category'] . '/' . $p['slug'], 302);
+});
+
+$wikiAssets = ['extraCss' => ['/assets/css/wiki.css'], 'extraJs' => ['/assets/js/wiki.js']];
+
+foreach (SUPPORTED_LANGS as $lang) {
+    // Wiki home
+    $router->get('/' . $lang . '/wiki', function () use ($lang, $wikiAssets) {
+        if (!defined('LANG')) {
+            define('LANG', $lang);
+        }
+        load_lang($lang);
+        $cats = wiki_categories();
+        $counts = [];
+        foreach (array_keys($cats) as $slug) {
+            $counts[$slug] = count(wiki_list_articles($lang, $slug));
+        }
+        $featured = array_slice(wiki_build_index($lang), 0, 6);
+        $catsWithCounts = [];
+        foreach ($cats as $slug => $meta) {
+            $catsWithCounts[$slug] = $meta + ['count' => $counts[$slug] ?? 0];
+        }
+        render('wiki/home', [
+            'lang' => $lang,
+            'categories' => $catsWithCounts,
+            'featured' => $featured,
+            'title' => t('wiki.meta_title'),
+            'metaDescription' => t('wiki.meta_description'),
+            'canonicalUrl' => 'https://ternis.org/' . $lang . '/wiki',
+        ] + $wikiAssets, 'main');
+    });
+
+    // Wiki JSON index (powers instant client-side search)
+    $router->get('/' . $lang . '/wiki/index.json', function () use ($lang) {
+        header('Content-Type: application/json; charset=utf-8');
+        header('Cache-Control: public, max-age=3600, stale-while-revalidate=86400');
+        header('Access-Control-Allow-Origin: *');
+        header('X-Content-Type-Options: nosniff');
+        echo json_encode(wiki_build_index($lang), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        exit;
+    });
+
+    // Wiki search
+    $router->get('/' . $lang . '/wiki/search', function () use ($lang, $wikiAssets) {
+        if (!defined('LANG')) {
+            define('LANG', $lang);
+        }
+        load_lang($lang);
+        $q = mb_substr(trim((string) ($_GET['q'] ?? '')), 0, 200);
+        header('X-Robots-Tag: noindex, follow');
+        render('wiki/search', [
+            'lang' => $lang,
+            'query' => $q,
+            'results' => wiki_search($lang, $q),
+            'title' => t('wiki.search_title') . ' — ternis.org Wiki',
+            'canonicalUrl' => 'https://ternis.org/' . $lang . '/wiki/search',
+        ] + $wikiAssets, 'main');
+    });
+
+    // Wiki category
+    $router->get('/' . $lang . '/wiki/{category}', function (array $p) use ($lang, $wikiAssets) {
+        if (!defined('LANG')) {
+            define('LANG', $lang);
+        }
+        load_lang($lang);
+        $cats = wiki_categories();
+        if (!isset($cats[$p['category']])) {
+            wiki_404($lang);
+            return;
+        }
+        $catTitle = $lang === 'de' ? $cats[$p['category']]['de'] : $cats[$p['category']]['en'];
+        render('wiki/category', [
+            'lang' => $lang,
+            'category' => $p['category'],
+            'meta' => $cats[$p['category']],
+            'articles' => wiki_list_articles($lang, $p['category']),
+            'title' => $catTitle . ' — ternis.org Wiki',
+            'canonicalUrl' => 'https://ternis.org/' . $lang . '/wiki/' . $p['category'],
+        ] + $wikiAssets, 'main');
+    });
+
+    // Wiki article
+    $router->get('/' . $lang . '/wiki/{category}/{slug}', function (array $p) use ($lang, $wikiAssets) {
+        if (!defined('LANG')) {
+            define('LANG', $lang);
+        }
+        load_lang($lang);
+        $article = wiki_get_article($lang, $p['category'], $p['slug']);
+        if ($article === null) {
+            wiki_404($lang);
+            return;
+        }
+        $articles = wiki_list_articles($lang, $p['category']);
+        $prev = null;
+        $next = null;
+        foreach ($articles as $i => $a) {
+            if ($a['slug'] === $p['slug']) {
+                $prev = $articles[$i - 1] ?? null;
+                $next = $articles[$i + 1] ?? null;
+                break;
+            }
+        }
+        $relatedArticles = [];
+        foreach (array_slice($article['related'], 0, 4) as $ref) {
+            if (!str_contains($ref, '/')) {
+                continue;
+            }
+            [$rc, $rs] = explode('/', $ref, 2);
+            $rel = wiki_get_article($lang, $rc, $rs);
+            if ($rel !== null) {
+                $relatedArticles[] = $rel;
+            }
+        }
+        header('Cache-Control: public, max-age=3600, stale-while-revalidate=86400');
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $article['source_mtime']) . ' GMT');
+        render('wiki/article', [
+            'lang' => $lang,
+            'category' => $p['category'],
+            'article' => $article,
+            'prev' => $prev,
+            'next' => $next,
+            'relatedArticles' => $relatedArticles,
+            'categoryMeta' => wiki_categories()[$p['category']],
+            'title' => $article['title'] . ' — ternis.org Wiki',
+            'metaDescription' => $article['description'] !== '' ? $article['description'] : null,
+            'canonicalUrl' => 'https://ternis.org/' . $lang . '/wiki/' . $p['category'] . '/' . $p['slug'],
+        ] + $wikiAssets, 'main');
     });
 }
 

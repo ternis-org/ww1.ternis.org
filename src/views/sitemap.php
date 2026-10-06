@@ -14,7 +14,21 @@ $pages = [
     '/legal/imprint'=> ['changefreq' => 'monthly', 'priority' => '0.5'],
     '/legal/privacy'=> ['changefreq' => 'monthly', 'priority' => '0.5'],
     '/legal/license'=> ['changefreq' => 'monthly', 'priority' => '0.5'],
+    '/wiki'         => ['changefreq' => 'weekly',  'priority' => '0.8'],
 ];
+
+// Wiki pages (generated from flat-file index when available)
+if (file_exists(ROOT_PATH . '/src/wiki.php')) {
+    require_once ROOT_PATH . '/src/wiki.php';
+    foreach (array_keys(wiki_categories()) as $wikiCategory) {
+        $pages['/wiki/' . $wikiCategory] = ['changefreq' => 'weekly', 'priority' => '0.7'];
+        foreach (['en', 'de'] as $wikiLang) {
+            foreach (wiki_list_articles($wikiLang, $wikiCategory) as $wikiArticle) {
+                $pages['/wiki/' . $wikiCategory . '/' . $wikiArticle['slug']] = ['changefreq' => 'weekly', 'priority' => '0.7'];
+            }
+        }
+    }
+}
 
 echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
 ?>

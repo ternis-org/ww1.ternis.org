@@ -3,12 +3,16 @@
  * Provides offline caching and fast asset loading
  */
 
-const CACHE_NAME = 'ternis-org-v2';
+const CACHE_NAME = 'ternis-org-v3';
 const ASSETS_TO_CACHE = [
     '/en',
     '/de',
+    '/en/wiki',
+    '/de/wiki',
     '/assets/css/app.css',
     '/assets/js/app.js',
+    '/assets/css/wiki.css',
+    '/assets/js/wiki.js',
     '/favicon.svg',
     '/favicon.ico',
     '/apple-touch-icon.png',

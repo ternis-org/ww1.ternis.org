@@ -141,9 +141,11 @@ This website is designed for maximum speed, digital sustainability, and develope
 ww1.ternis.org/
 ├── assets/                  # Static assets (CSS, JS)
 │   ├── css/
-│   │   └── app.css          # Organic tech design system
+│   │   ├── app.css          # Organic tech design system
+│   │   └── wiki.css         # Fully separated wiki stylesheet (wiki pages only)
 │   └── js/
-│       └── app.js           # Motion engine, theme switcher & interactions
+│       ├── app.js           # Motion engine, theme switcher & interactions
+│       └── wiki.js          # Fully separated wiki script: search + copy (wiki pages only)
 ├── bootstrap.php            # Core application bootstrap & route definitions
 ├── index.php                # Root front-controller delegate
 ├── lang/                    # Localization dictionaries
@@ -161,11 +163,17 @@ ww1.ternis.org/
 ├── src/                     # Core PHP backend
 │   ├── helpers.php          # Global helpers (e, t, render, asset_url)
 │   ├── router.php           # Lightweight URL router
+│   ├── wiki.php             # Wiki engine (flat-file Markdown, search, index)
 │   └── views/               # View templates
 │       ├── error.php        # 404 / 500 error page
 │       ├── index.php        # Main homepage view
 │       ├── legal.php        # Impressum, Privacy & License view
-│       └── sitemap.php      # Dynamic XML sitemap
+│       ├── sitemap.php      # Dynamic XML sitemap (incl. wiki URLs)
+│       └── wiki/            # Wiki views (home, category, article, search)
+├── content/
+│   └── wiki/                # Wiki articles (Markdown + frontmatter)
+│       ├── en/{category}/{slug}.md
+│       └── de/{category}/{slug}.md
 ├── static/
 │   └── robots.txt           # Robots exclusion standard
 └── README.md                # Project documentation
