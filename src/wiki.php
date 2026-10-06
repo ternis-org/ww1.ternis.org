@@ -21,22 +21,53 @@ const WIKI_SLUG_RE = '/^[a-z0-9-]+$/';
 function wiki_categories(): array
 {
     return [
-        'networking'     => ['icon' => '🌐', 'en' => 'Networking', 'de' => 'Netzwerke', 'desc_en' => 'OSI, TCP/IP, subnetting, VLANs, NAT, firewalls, reverse proxies.', 'desc_de' => 'OSI, TCP/IP, Subnetting, VLANs, NAT, Firewalls, Reverse-Proxys.', 'order' => 10],
-        'homelab'        => ['icon' => '🖥️', 'en' => 'Homelab', 'de' => 'Homelab', 'desc_en' => 'Proxmox, Docker, NAS, backups, UPS, remote access, monitoring.', 'desc_de' => 'Proxmox, Docker, NAS, Backups, USV, Fernzugriff, Monitoring.', 'order' => 20],
-        'domains'        => ['icon' => '🔗', 'en' => 'Domains', 'de' => 'Domains', 'desc_en' => 'How domains work, TLDs, dnbx.de, WHOIS, transfers, delegation.', 'desc_de' => 'Wie Domains funktionieren, TLDs, dnbx.de, WHOIS, Transfers, Delegierung.', 'order' => 30],
-        'dns'            => ['icon' => '📡', 'en' => 'DNS', 'de' => 'DNS', 'desc_en' => 'Records, DNSSEC, dig/host debugging, authoritative DNS with example-dns.', 'desc_de' => 'Records, DNSSEC, Debugging mit dig/host, autoritatives DNS mit example-dns.', 'order' => 40],
-        'sql'            => ['icon' => '🗄️', 'en' => 'SQL', 'de' => 'SQL', 'desc_en' => 'SELECT, JOINs, indexes, transactions, backups.', 'desc_de' => 'SELECT, JOINs, Indizes, Transaktionen, Backups.', 'order' => 50],
-        'linux'          => ['icon' => '🐧', 'en' => 'Linux', 'de' => 'Linux', 'desc_en' => 'Filesystem, permissions, SSH, systemd, logs.', 'desc_de' => 'Dateisystem, Rechte, SSH, systemd, Logs.', 'order' => 60],
-        'ubuntu'         => ['icon' => '🟠', 'en' => 'Ubuntu', 'de' => 'Ubuntu', 'desc_en' => 'APT, UFW, users and sudo on Ubuntu.', 'desc_de' => 'APT, UFW, Benutzer und sudo unter Ubuntu.', 'order' => 70],
-        'mysql-mariadb'  => ['icon' => '🐬', 'en' => 'MySQL & MariaDB', 'de' => 'MySQL & MariaDB', 'desc_en' => 'Choosing, installing, users, backups, small-VPS tuning.', 'desc_de' => 'Auswahl, Installation, Benutzer, Backups, Tuning für kleine VPS.', 'order' => 80],
-        'phpmyadmin'     => ['icon' => '🛠️', 'en' => 'phpMyAdmin', 'de' => 'phpMyAdmin', 'desc_en' => 'Install, daily workflows, hardening checklist.', 'desc_de' => 'Installation, Arbeitsabläufe, Hardening-Checkliste.', 'order' => 90],
-        'php'            => ['icon' => '🐘', 'en' => 'PHP', 'de' => 'PHP', 'desc_en' => 'Getting started, forms security, PDO with MySQL.', 'desc_de' => 'Einstieg, Formular-Sicherheit, PDO mit MySQL.', 'order' => 100],
-        'javascript'     => ['icon' => '📜', 'en' => 'JavaScript', 'de' => 'JavaScript', 'desc_en' => 'fetch, framework-free DOM, theme-toggle pattern.', 'desc_de' => 'fetch, DOM ohne Framework, Theme-Toggle-Muster.', 'order' => 110],
-        'css'            => ['icon' => '🎨', 'en' => 'CSS', 'de' => 'CSS', 'desc_en' => 'Grid vs flexbox, variables & dark mode, responsive basics.', 'desc_de' => 'Grid vs Flexbox, Variablen & Dark Mode, Responsive-Grundlagen.', 'order' => 120],
-        'selfhosting'    => ['icon' => '📦', 'en' => 'Self-Hosting', 'de' => 'Self-Hosting', 'desc_en' => 'Nginx reverse proxy, TLS, Docker Compose patterns.', 'desc_de' => 'Nginx Reverse-Proxy, TLS, Docker-Compose-Muster.', 'order' => 130],
-        'security'       => ['icon' => '🔒', 'en' => 'Security', 'de' => 'Sicherheit', 'desc_en' => "Let's Encrypt, TLS, the 3-2-1 backup rule.", 'desc_de' => "Let's Encrypt, TLS, die 3-2-1-Backup-Regel.", 'order' => 140],
-        'git-devops'     => ['icon' => '🔧', 'en' => 'Git & DevOps', 'de' => 'Git & DevOps', 'desc_en' => 'Git crash course, contributing to this wiki.', 'desc_de' => 'Git-Crashkurs, zu diesem Wiki beitragen.', 'order' => 150],
+        'networking'     => ['icon' => 'globe', 'en' => 'Networking', 'de' => 'Netzwerke', 'desc_en' => 'OSI, TCP/IP, subnetting, VLANs, NAT, firewalls, reverse proxies.', 'desc_de' => 'OSI, TCP/IP, Subnetting, VLANs, NAT, Firewalls, Reverse-Proxys.', 'order' => 10],
+        'homelab'        => ['icon' => 'server', 'en' => 'Homelab', 'de' => 'Homelab', 'desc_en' => 'Proxmox, Docker, NAS, backups, UPS, remote access, monitoring.', 'desc_de' => 'Proxmox, Docker, NAS, Backups, USV, Fernzugriff, Monitoring.', 'order' => 20],
+        'domains'        => ['icon' => 'link', 'en' => 'Domains', 'de' => 'Domains', 'desc_en' => 'How domains work, TLDs, dnbx.de, WHOIS, transfers, delegation.', 'desc_de' => 'Wie Domains funktionieren, TLDs, dnbx.de, WHOIS, Transfers, Delegierung.', 'order' => 30],
+        'dns'            => ['icon' => 'signal', 'en' => 'DNS', 'de' => 'DNS', 'desc_en' => 'Records, DNSSEC, dig/host debugging, authoritative DNS with example-dns.', 'desc_de' => 'Records, DNSSEC, Debugging mit dig/host, autoritatives DNS mit example-dns.', 'order' => 40],
+        'sql'            => ['icon' => 'table', 'en' => 'SQL', 'de' => 'SQL', 'desc_en' => 'SELECT, JOINs, indexes, transactions, backups.', 'desc_de' => 'SELECT, JOINs, Indizes, Transaktionen, Backups.', 'order' => 50],
+        'linux'          => ['icon' => 'terminal', 'en' => 'Linux', 'de' => 'Linux', 'desc_en' => 'Filesystem, permissions, SSH, systemd, logs.', 'desc_de' => 'Dateisystem, Rechte, SSH, systemd, Logs.', 'order' => 60],
+        'ubuntu'         => ['icon' => 'orbit', 'en' => 'Ubuntu', 'de' => 'Ubuntu', 'desc_en' => 'APT, UFW, users and sudo on Ubuntu.', 'desc_de' => 'APT, UFW, Benutzer und sudo unter Ubuntu.', 'order' => 70],
+        'mysql-mariadb'  => ['icon' => 'database', 'en' => 'MySQL & MariaDB', 'de' => 'MySQL & MariaDB', 'desc_en' => 'Choosing, installing, users, backups, small-VPS tuning.', 'desc_de' => 'Auswahl, Installation, Benutzer, Backups, Tuning für kleine VPS.', 'order' => 80],
+        'phpmyadmin'     => ['icon' => 'sliders', 'en' => 'phpMyAdmin', 'de' => 'phpMyAdmin', 'desc_en' => 'Install, daily workflows, hardening checklist.', 'desc_de' => 'Installation, Arbeitsabläufe, Hardening-Checkliste.', 'order' => 90],
+        'php'            => ['icon' => 'code', 'en' => 'PHP', 'de' => 'PHP', 'desc_en' => 'Getting started, forms security, PDO with MySQL.', 'desc_de' => 'Einstieg, Formular-Sicherheit, PDO mit MySQL.', 'order' => 100],
+        'javascript'     => ['icon' => 'bolt', 'en' => 'JavaScript', 'de' => 'JavaScript', 'desc_en' => 'fetch, framework-free DOM, theme-toggle pattern.', 'desc_de' => 'fetch, DOM ohne Framework, Theme-Toggle-Muster.', 'order' => 110],
+        'css'            => ['icon' => 'brush', 'en' => 'CSS', 'de' => 'CSS', 'desc_en' => 'Grid vs flexbox, variables & dark mode, responsive basics.', 'desc_de' => 'Grid vs Flexbox, Variablen & Dark Mode, Responsive-Grundlagen.', 'order' => 120],
+        'selfhosting'    => ['icon' => 'cube', 'en' => 'Self-Hosting', 'de' => 'Self-Hosting', 'desc_en' => 'Nginx reverse proxy, TLS, Docker Compose patterns.', 'desc_de' => 'Nginx Reverse-Proxy, TLS, Docker-Compose-Muster.', 'order' => 130],
+        'security'       => ['icon' => 'lock', 'en' => 'Security', 'de' => 'Sicherheit', 'desc_en' => "Let's Encrypt, TLS, the 3-2-1 backup rule.", 'desc_de' => "Let's Encrypt, TLS, die 3-2-1-Backup-Regel.", 'order' => 140],
+        'git-devops'     => ['icon' => 'branch', 'en' => 'Git & DevOps', 'de' => 'Git & DevOps', 'desc_en' => 'Git crash course, contributing to this wiki.', 'desc_de' => 'Git-Crashkurs, zu diesem Wiki beitragen.', 'order' => 150],
     ];
+}
+
+/**
+ * Inline SVG icon set for the wiki (no emoji, no external assets).
+ * 24×24 outline icons, currentColor. Returns an <svg> string.
+ */
+function wiki_icon(string $name): string
+{
+    static $icons = [
+        'globe'    => '<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c3.2 3.6 3.2 13.4 0 17M12 3.5c-3.2 3.6-3.2 13.4 0 17"/>',
+        'server'   => '<rect x="3" y="4" width="18" height="7" rx="1.5"/><rect x="3" y="13" width="18" height="7" rx="1.5"/><path d="M6.5 7.5h.01M6.5 16.5h.01"/>',
+        'link'     => '<path d="M10 14a5 5 0 0 0 7.1 0l2.8-2.8a5 5 0 0 0-7-7.1l-1.6 1.6M14 10a5 5 0 0 0-7.1 0l-2.8 2.8a5 5 0 0 0 7 7.1l1.6-1.6"/>',
+        'signal'   => '<path d="M5 10a10 10 0 0 1 14 0M8 13a6 6 0 0 1 8 0"/><path d="M12 17.2h.01"/>',
+        'table'    => '<rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M3 9.5h18M9.5 9.5V20"/>',
+        'terminal' => '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9.5l2.8 2.8L7 15M12.5 15H17"/>',
+        'orbit'    => '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="1.3"/><circle cx="12" cy="5.8" r="1.1"/><circle cx="17.4" cy="15.1" r="1.1"/><circle cx="6.6" cy="15.1" r="1.1"/>',
+        'database' => '<ellipse cx="12" cy="5.5" rx="8" ry="2.8"/><path d="M4 5.5v13c0 1.6 3.6 2.9 8 2.9s8-1.3 8-2.9v-13M4 12c0 1.6 3.6 2.9 8 2.9s8-1.3 8-2.9"/>',
+        'sliders'  => '<path d="M4 8h9M17.5 8H20M4 16h3.5M12 16h8"/><circle cx="15.5" cy="8" r="2"/><circle cx="10" cy="16" r="2"/>',
+        'code'     => '<path d="M8.5 7L3.5 12l5 5M15.5 7l5 5-5 5M13.2 4.5l-2.4 15"/>',
+        'bolt'     => '<path d="M13 2.5L4.5 13.5H11l-1 8 8.5-11H12l1-8z"/>',
+        'brush'    => '<path d="M12 3.5a8.5 8.5 0 1 0 .01 17c1.4 0 1.9-.9 1.4-1.9-.5-1.2.3-2.4 1.6-2.4h1.6a3.9 3.9 0 0 0 3.9-3.9C20.5 7.4 16.6 3.5 12 3.5z"/><path d="M7.6 11.4h.01M11 7.6h.01"/>',
+        'cube'     => '<path d="M12 2.5l8.5 4.8v9.4L12 21.5l-8.5-4.8V7.3L12 2.5zM3.5 7.3L12 12l8.5-4.7M12 12v9.5"/>',
+        'lock'     => '<rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/>',
+        'branch'   => '<circle cx="6" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="7" r="2"/><path d="M6 7v10M18 9c0 4.5-6.5 3-9.5 5.5"/>',
+        'search'   => '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/>',
+        'arrow'    => '<path d="M4 12h15M13 6l6 6-6 6"/>',
+    ];
+    $inner = $icons[$name] ?? $icons['globe'];
+    return '<svg class="wiki-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+        . 'stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+        . $inner . '</svg>';
 }
 
 /**

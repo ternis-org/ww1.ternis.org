@@ -241,6 +241,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         'meta_description' => 'Practical guides on networking, homelabbing, domains, DNS, SQL, Linux, Ubuntu, MySQL/MariaDB, phpMyAdmin, PHP, JavaScript and CSS.',
         'home_title'       => 'ternis.org Wiki',
         'home_subtitle'    => 'Practical guides on networking, homelabbing, domains, DNS, SQL, Linux, Ubuntu, MySQL & MariaDB, phpMyAdmin, PHP, JavaScript, CSS and more.',
+        'kicker'           => 'Docs · Guides · References',
         'articles'         => 'articles',
         'featured'         => 'Featured articles',
         'search_placeholder' => 'Search the wiki…',

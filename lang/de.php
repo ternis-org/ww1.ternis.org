@@ -241,6 +241,7 @@ DIE SOFTWARE WIRD OHNE JEDE AUSDRÜCKLICHE ODER STILLSCHWEIGENDE GEWÄHRLEISTUNG
         'meta_description' => 'Praxis-Guides zu Netzwerken, Homelab, Domains, DNS, SQL, Linux, Ubuntu, MySQL/MariaDB, phpMyAdmin, PHP, JavaScript und CSS.',
         'home_title'       => 'ternis.org Wiki',
         'home_subtitle'    => 'Praxis-Guides zu Netzwerken, Homelab, Domains, DNS, SQL, Linux, Ubuntu, MySQL & MariaDB, phpMyAdmin, PHP, JavaScript, CSS und mehr.',
+        'kicker'           => 'Doku · Anleitungen · Referenzen',
         'articles'         => 'Artikel',
         'featured'         => 'Empfohlene Artikel',
         'search_placeholder' => 'Wiki durchsuchen…',
