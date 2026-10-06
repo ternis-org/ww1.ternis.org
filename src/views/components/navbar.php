@@ -24,6 +24,7 @@ $homePrefix = (str_contains($currentPath, '/legal') || str_contains($currentPath
 
         <div class="nav-links">
             <a href="/<?= e($lang) ?>/projects"><?= e(t('nav.projects')) ?></a>
+            <a href="/<?= e($lang) ?>/tools"><?= e(t('nav.tools')) ?></a>
             <a href="/<?= e($lang) ?>/infrastructure"><?= e(t('nav.infrastructure')) ?></a>
             <a href="/<?= e($lang) ?>/wiki"><?= e(t('nav.wiki')) ?></a>
             <a href="<?= e($homePrefix) ?>#about"><?= e(t('nav.about')) ?></a>
@@ -64,6 +65,7 @@ $homePrefix = (str_contains($currentPath, '/legal') || str_contains($currentPath
 <div id="mobile-drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
 <div id="mobile-nav-drawer" class="mobile-drawer" role="dialog" aria-label="Mobile Navigation" aria-modal="true">
     <a href="/<?= e($lang) ?>/projects" class="nav-link"><?= e(t('nav.projects')) ?></a>
+    <a href="/<?= e($lang) ?>/tools" class="nav-link"><?= e(t('nav.tools')) ?></a>
     <a href="/<?= e($lang) ?>/infrastructure" class="nav-link"><?= e(t('nav.infrastructure')) ?> (ternis.net)</a>
     <a href="/<?= e($lang) ?>/wiki" class="nav-link"><?= e(t('nav.wiki')) ?></a>
     <a href="<?= e($homePrefix) ?>#about" class="nav-link"><?= e(t('nav.about')) ?></a>

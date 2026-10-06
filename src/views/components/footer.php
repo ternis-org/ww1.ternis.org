@@ -48,6 +48,17 @@ $commitUrl = app_repo_commit_url($versionShort);
                 </div>
 
                 <div class="footer-col">
+                    <h4><?= $lang === 'de' ? 'Werkzeuge' : 'Tools' ?></h4>
+                    <ul>
+                        <li><a href="/<?= e($lang) ?>/tools" style="font-weight:600;color:var(--primary);">&rarr; <?= $lang === 'de' ? 'Alle Werkzeuge' : 'All Tools' ?></a></li>
+                        <li><a href="/<?= e($lang) ?>/tools/shortlink">Shortlink &amp; QR Studio</a></li>
+                        <li><a href="/<?= e($lang) ?>/tools/dns">DNS Looking Glass</a></li>
+                        <li><a href="/<?= e($lang) ?>/tools/secret-generator"><?= $lang === 'de' ? 'Token &amp; Secret Generator' : 'Token &amp; Secret Generator' ?></a></li>
+                        <li><a href="/<?= e($lang) ?>/tools/shortlink/api"><?= $lang === 'de' ? 'Shortlink API Leitfaden' : 'Shortlink API Guide' ?></a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
                     <h4><?= e(t('footer.col_ecosystem')) ?></h4>
                     <ul>
                         <li><a href="/<?= e($lang) ?>/infrastructure" style="font-weight:600;color:var(--primary);">&rarr; <?= $lang === 'de' ? 'Infrastruktur (ternis.net)' : 'Infrastructure (ternis.net)' ?></a></li>

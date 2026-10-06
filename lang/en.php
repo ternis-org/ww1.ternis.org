@@ -15,6 +15,7 @@ return [
     'nav' => [
         'brand'          => 'ternis.org',
         'projects'       => 'Projects',
+        'tools'          => 'Tools',
         'infrastructure' => 'Infrastructure',
         'nameservers'    => 'Nameservers',
         'about'          => 'About',

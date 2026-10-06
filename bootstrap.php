@@ -4,6 +4,13 @@
  * Application bootstrap — loads helpers, wires up the router, and registers routes.
  */
 
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', __DIR__);
+}
+if (!defined('PUBLIC_PATH')) {
+    define('PUBLIC_PATH', __DIR__ . '/public');
+}
+
 // ── Helpers ────────────────────────────────────────────────────────────────
 require ROOT_PATH . '/src/helpers.php';
 require ROOT_PATH . '/src/wiki.php';
@@ -193,6 +200,106 @@ foreach (SUPPORTED_LANGS as $lang) {
             'canonicalUrl'        => 'https://ternis.org/' . $lang . '/projects/' . $slug,
         ], 'main');
     });
+
+    // Tools Hub: /{lang}/tools
+    $router->get('/' . $lang . '/tools', function () use ($lang) {
+        if (!defined('LANG')) {
+            define('LANG', $lang);
+        }
+        load_lang($lang);
+        $title = ($lang === 'de' ? 'Entwickler- & Netzwerk-Werkzeuge' : 'Developer & Network Tools') . ' — ternis.org';
+        $metaDescription = $lang === 'de'
+            ? 'Kostenlose Entwickler-Werkzeuge: Shortlink & QR Studio (links.t-api.de), Live DNS Looking Glass mit DNSSEC und sicherer Token-Generator.'
+            : 'Free developer utilities: Shortlink & QR Code studio (links.t-api.de), real-time DNS Looking Glass with DNSSEC, and token generator.';
+
+        render('tools/index', [
+            'lang'            => $lang,
+            'title'           => $title,
+            'metaDescription' => $metaDescription,
+            'canonicalUrl'    => 'https://ternis.org/' . $lang . '/tools',
+            'extraCss'        => ['/assets/css/tools.css'],
+        ], 'main');
+    });
+
+    // Tools: Shortlink & QR Studio: /{lang}/tools/shortlink
+    $router->get('/' . $lang . '/tools/shortlink', function () use ($lang) {
+        if (!defined('LANG')) {
+            define('LANG', $lang);
+        }
+        load_lang($lang);
+        $title = ($lang === 'de' ? 'Shortlink & QR Code Studio' : 'Shortlink & QR Code Studio') . ' — ternis.org';
+        $metaDescription = $lang === 'de'
+            ? 'Erstelle kostenlose Kurzlinks über t-api.de und generiere hochauflösende SVG/PNG-QR-Codes für URLs, WLAN-Netzwerke und Visitenkarten.'
+            : 'Create fast shortlinks powered by links.t-api.de and craft high-res SVG & PNG QR codes for URLs, Wi-Fi networks, and contacts.';
+
+        render('tools/shortlink', [
+            'lang'            => $lang,
+            'title'           => $title,
+            'metaDescription' => $metaDescription,
+            'canonicalUrl'    => 'https://ternis.org/' . $lang . '/tools/shortlink',
+            'extraCss'        => ['/assets/css/tools.css'],
+        ], 'main');
+    });
+
+    // Tools: Shortlink API Guide: /{lang}/tools/shortlink/api
+    $router->get('/' . $lang . '/tools/shortlink/api', function () use ($lang) {
+        if (!defined('LANG')) {
+            define('LANG', $lang);
+        }
+        load_lang($lang);
+        $title = ($lang === 'de' ? 'Shortlink REST API Entwickler-Leitfaden' : 'Shortlink REST API Developer Guide') . ' — ternis.org';
+        $metaDescription = $lang === 'de'
+            ? 'Vollständige HTTP-Referenz für die t-api.de API: Kurzlinks, Dynamic Tracking, Privatsphäre-Filter, QR-Codes, Domains und Bio Pages.'
+            : 'Complete HTTPS reference for links.t-api.de/v1: link creation, dynamic click tags, privacy analytics, QR engine, and bio pages.';
+
+        render('tools/shortlink_api', [
+            'lang'            => $lang,
+            'title'           => $title,
+            'metaDescription' => $metaDescription,
+            'canonicalUrl'    => 'https://ternis.org/' . $lang . '/tools/shortlink/api',
+            'extraCss'        => ['/assets/css/wiki.css', '/assets/css/tools.css'],
+        ], 'main');
+    });
+
+    // Tools: Live DNS Looking Glass: /{lang}/tools/dns
+    $router->get('/' . $lang . '/tools/dns', function () use ($lang) {
+        if (!defined('LANG')) {
+            define('LANG', $lang);
+        }
+        load_lang($lang);
+        $title = ($lang === 'de' ? 'Live DNS Looking Glass & Inspektor' : 'Live DNS Looking Glass & Inspector') . ' — ternis.org';
+        $metaDescription = $lang === 'de'
+            ? 'Echtzeit-DNS-Resolver mit DNSSEC-Validierung: Frage A, AAAA, MX, TXT, NS, SOA und CAA Records über Cloudflare und Google DoH ab.'
+            : 'Real-time DNS looking glass with DNSSEC validation: Query A, AAAA, MX, TXT, NS, SOA, and CAA records via Cloudflare & Google DoH.';
+
+        render('tools/dns', [
+            'lang'            => $lang,
+            'title'           => $title,
+            'metaDescription' => $metaDescription,
+            'canonicalUrl'    => 'https://ternis.org/' . $lang . '/tools/dns',
+            'extraCss'        => ['/assets/css/tools.css'],
+        ], 'main');
+    });
+
+    // Tools: Token & Secret Generator: /{lang}/tools/secret-generator
+    $router->get('/' . $lang . '/tools/secret-generator', function () use ($lang) {
+        if (!defined('LANG')) {
+            define('LANG', $lang);
+        }
+        load_lang($lang);
+        $title = ($lang === 'de' ? 'Kryptografischer Token- & Passwort-Generator' : 'Cryptographic Token & Secret Generator') . ' — ternis.org';
+        $metaDescription = $lang === 'de'
+            ? '100% browserbasierte Generierung von sicheren API-Tokens (tl_...), Passwörtern, Hex-Secrets und UUIDv4 mit der Web Crypto API.'
+            : '100% client-side cryptographic token and password generator using the Web Crypto API. Generates API keys (tl_...), UUIDs, and hex secrets.';
+
+        render('tools/secret_generator', [
+            'lang'            => $lang,
+            'title'           => $title,
+            'metaDescription' => $metaDescription,
+            'canonicalUrl'    => 'https://ternis.org/' . $lang . '/tools/secret-generator',
+            'extraCss'        => ['/assets/css/tools.css'],
+        ], 'main');
+    });
 }
 
 // Redirects without locale
@@ -212,6 +319,26 @@ $router->get('/projects/{slug}', function (array $p) {
     header('Vary: Accept-Language');
     $targetLang = detect_preferred_lang(SUPPORTED_LANGS, DEFAULT_LANG);
     redirect('/' . $targetLang . '/projects/' . $p['slug'], 302);
+});
+$router->get('/tools', function () {
+    header('Vary: Accept-Language');
+    redirect('/' . detect_preferred_lang(SUPPORTED_LANGS, DEFAULT_LANG) . '/tools', 302);
+});
+$router->get('/tools/shortlink', function () {
+    header('Vary: Accept-Language');
+    redirect('/' . detect_preferred_lang(SUPPORTED_LANGS, DEFAULT_LANG) . '/tools/shortlink', 302);
+});
+$router->get('/tools/shortlink/api', function () {
+    header('Vary: Accept-Language');
+    redirect('/' . detect_preferred_lang(SUPPORTED_LANGS, DEFAULT_LANG) . '/tools/shortlink/api', 302);
+});
+$router->get('/tools/dns', function () {
+    header('Vary: Accept-Language');
+    redirect('/' . detect_preferred_lang(SUPPORTED_LANGS, DEFAULT_LANG) . '/tools/dns', 302);
+});
+$router->get('/tools/secret-generator', function () {
+    header('Vary: Accept-Language');
+    redirect('/' . detect_preferred_lang(SUPPORTED_LANGS, DEFAULT_LANG) . '/tools/secret-generator', 302);
 });
 
 // Legal routes without locale: /legal and /legal/{slug}
@@ -523,6 +650,80 @@ $router->get('/og.jpg', function () {
         'Redundant Authoritative Anycast DNS, Technical Wiki, and Open Infrastructure by Fabian Ternis.',
         'INFRASTRUCTURE'
     );
+});
+
+// /api/tools/shortlink — Public shortlink creator proxy (bypasses browser CORS)
+$router->post('/api/tools/shortlink', function () {
+    header('Content-Type: application/json; charset=utf-8');
+    header('Access-Control-Allow-Origin: *');
+    $raw = file_get_contents('php://input');
+    $data = json_decode((string) $raw, true);
+    $url = trim((string) ($data['destination_url'] ?? ''));
+
+    if ($url === '' || !filter_var($url, FILTER_VALIDATE_URL)) {
+        http_response_code(422);
+        echo json_encode(['message' => 'Please provide a valid destination URL with http:// or https://.']) . "\n";
+        exit;
+    }
+
+    $ch = curl_init('https://links.t-api.de/v1/links/public');
+    curl_setopt_array($ch, [
+        CURLOPT_POST           => true,
+        CURLOPT_POSTFIELDS     => json_encode(['destination_url' => $url]),
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_HTTPHEADER     => [
+            'Content-Type: application/json',
+            'Accept: application/json',
+            'User-Agent: ternis-org-tools/1.0',
+        ],
+        CURLOPT_TIMEOUT        => 8,
+    ]);
+    $response = curl_exec($ch);
+    $httpCode = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($response === false || $httpCode < 200 || $httpCode >= 500) {
+        http_response_code(502);
+        echo json_encode(['message' => 'Upstream service links.t-api.de is temporarily unreachable.']) . "\n";
+        exit;
+    }
+
+    http_response_code($httpCode);
+    echo $response . "\n";
+    exit;
+});
+
+// /api/tools/dns — DNS query proxy fallback
+$router->get('/api/tools/dns', function () {
+    header('Content-Type: application/json; charset=utf-8');
+    header('Access-Control-Allow-Origin: *');
+    $name = trim((string) ($_GET['name'] ?? ''));
+    $type = strtoupper(trim((string) ($_GET['type'] ?? 'A')));
+
+    if ($name === '' || !preg_match('/^[a-z0-9._-]+$/i', $name)) {
+        http_response_code(422);
+        echo json_encode(['message' => 'Invalid domain name.']) . "\n";
+        exit;
+    }
+
+    $ch = curl_init('https://cloudflare-dns.com/dns-query?name=' . urlencode($name) . '&type=' . urlencode($type) . '&do=1');
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_HTTPHEADER     => ['Accept: application/dns-json'],
+        CURLOPT_TIMEOUT        => 5,
+    ]);
+    $res = curl_exec($ch);
+    $code = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($res !== false && $code === 200) {
+        echo $res . "\n";
+        exit;
+    }
+
+    http_response_code(502);
+    echo json_encode(['message' => 'Upstream DNS query timeout.']) . "\n";
+    exit;
 });
 
 // /api/ver — Version hash API
