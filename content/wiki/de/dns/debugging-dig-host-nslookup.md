@@ -1,51 +1,73 @@
 ---
-title: DNS-Debugging mit dig, host und nslookup
-description: Auflösung mit +trace verfolgen, negative Antworten lesen und die fünf Befehle für 90 % aller DNS-Probleme.
+title: DNS-Debugging mit dig, host und nslookup — Das Toolkit für Administratoren
+description: DNS-Probleme systematisch beheben mit dig, host und nslookup, Auflösungsketten mit +trace analysieren, Status-Codes (NXDOMAIN, SERVFAIL) und Caching verstehen.
 category: dns
 order: 35
-tags: [dns, dig, host, debugging]
+tags: [dns, dig, host, nslookup, debugging, troubleshooting, sysadmin]
 updated: 2026-10-06
-related: [dns/a-aaaa-records, dns/txt-spf-dkim-dmarc]
+related: [dns/a-aaaa-records, dns/txt-spf-dkim-dmarc, dns/dnssec-basics]
 ---
 
-## Einen bestimmten Server fragen
+## Warum DNS-Debugging essenziell ist
 
-Gecachte Resolver umgehen und direkt die Authority befragen:
+Wenn eine Website nicht erreichbar ist, E-Mails abgewiesen werden oder TLS-Zertifikate fehlschlagen, liegt die Ursache fast immer im DNS.
+
+Das Terminal-Tool **`dig` (Domain Information Groper)** ist der weltweite Standard, um DNS-Einträge präzise und ohne Verfälschung durch Zwischenspeicher zu prüfen.
+
+---
+
+## Die wichtigsten Befehle & Flags im Überblick
 
 ```bash
-dig @one.ns.ternis.net example.com +noall +answer
-host -t NS example.com one.ns.ternis.net
-```
+# 1. Autoritativen Server direkt abfragen (Caches umgehen)
+dig @one.ns.ternis.net example.com A +noall +answer
 
-## Die komplette Kette verfolgen
-
-```bash
+# 2. Die gesamte Auflösungskette von den Root-Servern an tracen
 dig example.com +trace
+
+# 3. Nur die reine IP-Adresse ausgeben (ideal für Skripte)
+dig example.com +short
+
+# 4. Mailserver-Einträge (MX) prüfen
+dig example.com MX +noall +answer
+
+# 5. TXT-Einträge (SPF, DMARC) einsehen
+dig example.com TXT +short
 ```
 
-Das läuft Root → TLD → autoritative Server ab. Der Hop, an dem die Spur
-stirbt, ist das Problem (meist ein fehlender Glue-Record oder falsches NS-Set).
+### Erklärung der Flags
 
-## Negative Antworten lesen
+- `@<server>`: Sendet die Anfrage gezielt an diesen Nameserver (z. B. `@1.1.1.1` für Cloudflare oder `@one.ns.ternis.net` für unsere autoritativen Server).
+- `+trace`: Simuliert die vollständige Abfragekette: Beginnend bei den Root-Servern (`.`), über die TLD-Registry (`.de` / `.org`) bis hin zum autoritativen Server. So siehst du sofort, an welchem Knotenpunkt die Kette abreißt.
+- `+noall`: Entfernt alle standardmäßigen Kommentarblöcke aus der Ausgabe.
+- `+answer`: Aktiviert ausschließlich den Ergebnisblock (`ANSWER SECTION`).
+- `+short`: Gibt nur den reinen Ergebniswert ohne Tabellenformatierung zurück.
+
+---
+
+## DNS-Statuscodes (RCODEs) verstehen
+
+In der Kopfzeile von `dig` gibt das Feld `status:` Auskunft über das Ergebnis:
+
+| Status | Bedeutung | Häufige Ursache |
+|:------:|-----------|-----------------|
+| **`NOERROR`** | Erfolgreich | Anfrage war erfolgreich. Fehlen Antworten, existiert die Domain, hat aber keinen Eintrag des angefragten Typs. |
+| **`NXDOMAIN`** | Nicht gefunden | Domain oder Subdomain existiert nicht in der Zone (Tippfehler oder fehlender Zoneneintrag). |
+| **`SERVFAIL`** | Server-Fehler | Der Server konnte nicht antworten. Häufigste Ursachen: **Fehlgeschlagene DNSSEC-Validierung** oder fehlerhafte Nameserver-Delegierung. |
+| **`REFUSED`** | Verweigert | Der Nameserver verweigert die Antwort (z. B. keine Berechtigung für rekursive Abfragen). |
+
+---
+
+## Caching-Probleme diagnostizieren
+
+Wenn Änderungen bei dir funktionieren, aber bei Kunden oder Kollegen nicht:
+
+Vergleiche verschiedene öffentliche DNS-Resolver:
 
 ```bash
-dig nichtexistent.example.com
+dig @1.1.1.1 example.com +noall +answer
+dig @8.8.8.8 example.com +noall +answer
+dig @one.ns.ternis.net example.com +noall +answer
 ```
 
-- `NXDOMAIN` — Name existiert nicht. Schreibweise und Zoneninhalt prüfen.
-- `NOERROR` ohne Antworten — Name existiert, hat aber keine Records dieses
-  Typs (z. B. AAAA angefragt, nur A vorhanden).
-- `SERVFAIL` — oft DNSSEC-Validierungsfehler oder lahme Delegierung.
-
-## TTL- und Cache-Prüfung
-
-```bash
-dig example.com +noall +answer   # herunterzählende TTL = gecacht
-dig +short example.com
-```
-
-:::tip
-Wenn „bei mir geht's, bei anderen nicht": `dig @8.8.8.8` vs `dig @1.1.1.1` vs
-autoritativer Server vergleichen. Unterschiedliche gecachte TTLs erklären die
-Abweichung fast immer.
-:::
+Die Zahl in der Ausgabe (z. B. `example.com. 240 IN A ...`) zeigt die **verbleibenden TTL-Sekunden** im Cache des jeweiligen Resolvers. Erst wenn dieser Zähler auf `0` fällt, wird der neue Eintrag abgefragt.

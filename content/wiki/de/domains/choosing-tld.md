@@ -1,42 +1,66 @@
 ---
-title: TLD wählen — .de vs .eu vs .com
-description: Preisfallen, Renewal-Mathematik, Vertrauenssignale und die richtige Endung für dein Projekt.
+title: Die richtige TLD wählen — .de vs .eu vs .com vs Neue gTLDs
+description: Umfassender Ratgeber zur Wahl der passenden Top-Level-Domain, Preisfallen bei Verlängerungen, HSTS-Preload, Vertrauenssignale und SEO-Fakten.
 category: domains
 order: 15
-tags: [domains, tld, preise]
+tags: [domains, tld, preise, seo, dnbx, web]
 updated: 2026-10-06
-related: [domains/how-domains-work, domains/whois-rdaps-privacy]
+related: [domains/how-domains-work, domains/whois-rdaps-privacy, domains/register-manage-dnbx]
 ---
 
-## Was wirklich zählt
+## Was ist eine TLD?
 
-| Faktor | Anmerkung |
-|--------|-----------|
-| Vertrauen | `.de` gewinnt in Deutschland, `.eu` signalisiert Europa, `.com` ist globaler Standard |
-| Preis im 1. Jahr | Oft €1–3 Promo — irrelevant, siehe nächste Zeile |
-| Renewal-Preis | **Das ist der echte Preis.** Exotische TLDs erneuern sich für €40+/Jahr |
-| Transfer-Regeln | Länder-TLDs (`.de`) haben eigene Eigenheiten vs gTLDs |
-| SEO | Kein Ranking-Bonus pro TLD; exakte Keywords zählen weit mehr |
+Eine **TLD (Top-Level-Domain)** ist der letzte Namensabschnitt einer Domain nach dem letzten Punkt (z. B. `.de` bei `dnbx.de` oder `.org` bei `ternis.org`).
 
-## Die Renewal-Mathematik
+Die Wahl der Endung beeinflusst das Vertrauen deiner Besucher, laufende Betriebskosten, technische Sicherheitsanforderungen und die geografische Auffindbarkeit in Suchmaschinen.
 
-Immer **5-Jahres-Gesamtkosten** vergleichen, nicht den Promo-Sticker:
+---
+
+## Die drei Hauptkategorien von TLDs
+
+### 1. ccTLDs (Länderspezifische Top-Level-Domains)
+- **Beispiele**: `.de` (Deutschland), `.at` (Österreich), `.ch` (Schweiz), `.eu` (Europäische Union).
+- **Vertrauen**: Vermitteln im deutschsprachigen Raum höchstes Vertrauen. Deutsche Internetnutzer klicken instinktiv bevorzugt auf `.de`-Domains.
+- **Geotargeting**: Suchmaschinen ordnen ccTLDs automatisch bevorzugt den Suchergebnissen des jeweiligen Landes zu.
+
+### 2. Klassische gTLDs (Generische Top-Level-Domains)
+- **Beispiele**: `.com`, `.net`, `.org`.
+- **Vertrauen**: Weltweiter Standard. `.com` gilt global als Standard für Unternehmen, `.org` steht traditionell für Open-Source-Projekte, Stiftungen und Bildungseinrichtungen.
+
+### 3. Neue gTLDs (nTLDs)
+- **Beispiele**: `.dev`, `.app`, `.cloud`, `.io`, `.tech`.
+- **Besonderheit**: Endungen wie `.dev` und `.app` stehen standardmäßig auf der **HSTS-Preload-Liste**. Browser erzwingen zwingend eine verschlüsselte HTTPS-Verbindung mit gültigem TLS-Zertifikat.
+
+---
+
+## Die Rabattfalle: Die 5-Jahres-Kostenrechnung
+
+Viele Anbieter locken mit extrem günstigen Preisen für das erste Jahr (z. B. 0,99 € oder 1,99 €). Die **jährliche Verlängerungsgebühr** ist ab dem zweiten Jahr jedoch oft um ein Vielfaches höher.
+
+Vergleiche daher immer die Gesamtkosten über 5 Jahre:
 
 ```text
-Promo €2 + 4 × €14 Renewal = €58 über 5 Jahre
-pauschal €12 × 5 Jahre    = €60 über 5 Jahre
+Anbieter A (Aggressive Lockangebote):
+Jahr 1: 1,99 €
+Jahre 2–5: 4 × 24,00 € = 96,00 €
+----------------------------------
+Gesamtkosten nach 5 Jahren: 97,99 €
+
+Anbieter B (Transparente Flat-Preise wie dnbx.de):
+Jahr 1: 9,90 €
+Jahre 2–5: 4 × 9,90 € = 39,60 €
+----------------------------------
+Gesamtkosten nach 5 Jahren: 49,50 € (Über 50% günstiger!)
 ```
 
-Fast identisch — also die TLD wählen, der die Zielgruppe vertraut, nicht den
-billigsten Warenkorb.
-
-## Der ternis.org-Ansatz
-
-Souveräne Projekte nutzen bewusst passende TLD-Familien: `mail-free.eu` +
-`mail-free.uk` für regionale Mail-Relays, `example-dns.com/.net/.org` für
-Infrastruktur. Eine Marke, mehrere Endungen, null Zweifel am Besitz.
-
-:::tip
-Die offensichtlichen Tippfehler der Hauptdomain registrieren, wenn etwas
-Vertrauenssensibles läuft (Mail, Login-Seiten). Billiger als ein Phishing-Vorfall.
+:::warn
+Wähle eine wichtige Domain niemals rein nach dem Aktionspreis des ersten Jahres aus. Die laufenden Folgekosten bestimmen deine langfristige Rechnung.
 :::
+
+---
+
+## SEO-Mythen vs. Realität
+
+- **Mythos**: *"Eine `.com`-Domain rankt bei Google automatisch besser als eine `.de`-Domain."*
+- **Fakt**: Google behandelt generische TLDs gleichwertig. Ausschlaggebend für das Ranking sind hochwertige Inhalte, Ladezeiten, Mobiloptimierung und Backlinks.
+- **Lokaler Vorteil**: Für Nutzer in Deutschland signalisiert `.de` sofortige regionale Relevanz.

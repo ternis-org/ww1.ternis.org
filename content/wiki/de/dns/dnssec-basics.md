@@ -1,48 +1,63 @@
 ---
-title: DNSSEC-Grundlagen — Vertrauenskette
-description: Was DNSSEC signiert, wie DS-Records Parent und Child verbinden und warum example-dns seine Zonen signiert.
+title: DNSSEC Grundlagen — Die kryptografische Vertrauenskette im DNS
+description: Einsteigerfreundlicher Leitfaden zu DNSSEC, Schutz vor Cache-Poisoning und Spoofing, Erklärung von DS, DNSKEY, RRSIG und Prüfung mit dig.
 category: dns
 order: 30
-tags: [dns, dnssec, sicherheit]
+tags: [dns, dnssec, security, kryptografie, sysadmin, netzwerk]
 updated: 2026-10-06
-related: [dns/dns-records-overview, domains/nameserver-glue-delegation]
+related: [dns/dns-records-overview, domains/nameserver-glue-delegation, dns/debugging-dig-host-nslookup]
 ---
 
-## Das Problem, das DNSSEC löst
+## Warum unverschlüsseltes DNS angreifbar ist
 
-Normale DNS-Antworten lassen sich fälschen — ein Resolver kann einen gefälschten
-A-Record nicht vom echten unterscheiden. **DNSSEC** fügt kryptografische
-Signaturen (RRSIG-Records) hinzu, sodass Resolver die Echtheit prüfen können.
+Klassisches DNS überträgt Anfragen unverschlüsselt und ohne kryptografische Signaturen über UDP-Port 53.
 
-## Die Vertrauenskette
+Ein Angreifer auf der Netzwerkstrecke kann gefälschte Antworten einschleusen (**DNS Cache Poisoning**). Gelingt es einem Angreifer, einen fremden Server in den Cache eines Resolvers einzuschleusen, werden alle Nutzer dieses Resolvers unbemerkt auf gefälschte Server umgeleitet.
 
-1. Die **Parent-Zone** (z. B. `.com`) veröffentlicht einen **DS-Record** mit
-   einem Hash deines Key-Signing-Keys.
-2. Deine Zone signiert alle Records mit dem **ZSK**, den ZSK mit dem **KSK**.
-3. Validatoren laufen die Kette ab: Root → TLD → deine Zone.
+**DNSSEC (Domain Name System Security Extensions)** schließt diese Sicherheitslücke durch digitale Signaturen für alle DNS-Einträge.
+
+---
+
+## Die kryptografischen Records
+
+DNSSEC verschlüsselt die Daten nicht, sondern garantiert die **Authentizität und Integrität**: Resolver können mathematisch beweisen, dass eine Antwort unverändert vom echten Zoneninhaber stammt.
+
+| Record | Bezeichnung | Aufgabe |
+|:------:|-------------|---------|
+| **`RRSIG`** | Resource Record Signature | Die digitale Signatur für ein Set von DNS-Einträgen. |
+| **`DNSKEY`** | DNS Public Key | Die öffentlichen Schlüssel zur Überprüfung der Signaturen. |
+| **`DS`** | Delegation Signer | Der in der **übergeordneten Registry-Zone** hinterlegte kryptografische Fingerabdruck (Hash) des Zonenschlüssels. |
+| **`NSEC` / `NSEC3`** | Next Secure Record | Beweist kryptografisch, dass eine Subdomain oder ein Record **nicht** existiert. |
+
+---
+
+## Die Vertrauenskette (Chain of Trust)
+
+DNSSEC baut eine lückenlose Kette von den Internet-Root-Servern bis zu deiner Domain auf:
+
+1. **Root-Zone (`.`)**: Validierende Resolver kennen den öffentlichen Trust-Anchor der Root-Server.
+2. **Top-Level-Domain (`.org` / `.de`)**: Die Root-Zone beglaubigt den DS-Eintrag der Registry.
+3. **Deine Domain**: Die Registry beglaubigt den DS-Eintrag deiner Zone.
+4. **Deine Records**: Dein autoritativer Nameserver liefert A/AAAA-Records zusammen mit `RRSIG`-Signaturen aus.
+
+---
+
+## Überprüfung im Terminal mit dig
 
 ```bash
-dig example.com DNSKEY +short
-dig example.com DS +short
-dig +dnssec example.com A
+# 1. Öffentliche Schlüssel der Zone abfragen
+dig ternis.org DNSKEY +short
+
+# 2. DS-Record bei der übergeordneten Registry prüfen
+dig ternis.org DS +short
+
+# 3. DNSSEC-validierte A-Abfrage durchführen
+dig +dnssec ternis.org A
 ```
 
-Bei validierenden Resolvern auf das `ad`-Flag (Authenticated Data) achten.
-
-## Key-Rotation in der Praxis
-
-- **ZSK**: vierteljährlich rotieren — die meisten Signer automatisieren das.
-- **KSK**: jährlich rotieren und den DS-Record beim Registrar **vor** dem
-  Entfernen des alten Keys aktualisieren, sonst wird die Domain dunkel.
-
-:::warn
-Kaputtes DNSSEC ist schlimmer als keins: Validierende Resolver beantworten
-deine gesamte Domain mit SERVFAIL. Nach jedem Key-Event mit einem DNSSEC-Check
-prüfen.
-:::
-
-## example-dns
-
-ternis.org-Zonen auf `one.ns.ternis.net` / `two.ns.ternis.net` sind
-DNSSEC-signiert — DS-Records werden für jede `example-dns.*`-Domain beim
-Registrar veröffentlicht.
+### Worauf man in der Ausgabe achten muss:
+In den Header-Flags von `dig`:
+```text
+;; flags: qr rd ra ad; ...
+```
+Das Flag **`ad` (Authenticated Data)** bestätigt, dass der Resolver die gesamte kryptografische Vertrauenskette bis zu den Root-Servern erfolgreich validiert hat.

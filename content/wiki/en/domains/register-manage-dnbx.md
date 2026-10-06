@@ -1,38 +1,78 @@
 ---
 title: Register and Manage Domains with dnbx.de
-description: Buying, configuring nameservers, and managing the ternis.org domain portfolio via dnbx.de.
+description: Practical beginner guide to domain registration, nameserver delegation, DNS record management, and security settings on dnbx.de.
 category: domains
 order: 20
-tags: [domains, dnbx, registrar]
+tags: [domains, dnbx, registrar, dns, nameserver, security]
 updated: 2026-10-06
-related: [domains/how-domains-work, domains/nameserver-glue-delegation]
+related: [domains/how-domains-work, domains/nameserver-glue-delegation, dns/dnssec-basics]
 ---
 
-## The ternis.org flow
+## Managing domains on dnbx.de
 
-All ternis.org domains are managed through [dnbx.de](https://dnbx.de):
+**[dnbx.de](https://dnbx.de)** is the domain management and registrar platform used across the `ternis.org` infrastructure ecosystem. It provides registration, automated zone management, DNSSEC signing, and nameserver delegation.
 
-1. Search and register the domain in dnbx.de.
-2. Point its NS set at the authoritative pair:
-   `one.ns.ternis.net` + `two.ns.ternis.net`.
-3. Edit the zone (A/AAAA/MX/TXT) — changes propagate after the old TTL expires.
-4. Enable DNSSEC: publish the DS record dnbx.de generates for your zone.
+Whether you are purchasing your first domain or managing an enterprise portfolio, this guide covers the standard operational workflow.
 
-## Nameserver checklist per domain
+---
 
-- [ ] Both `one.` and `two.ns.ternis.net` listed (redundancy is the point).
-- [ ] Glue records present if a nameserver lives inside the domain itself.
-- [ ] `host -t NS yourdomain.example` returns exactly your two servers.
-- [ ] DS record published if the zone is signed.
+## 1. Domain Registration Workflow
 
-## Housekeeping that prevents outages
+1. **Search availability**: Enter your desired domain name on dnbx.de to confirm availability and review regular renewal pricing.
+2. **Contact information (Registrant Handle)**: Ensure your registrant contact details (name, email address, physical address) are accurate. Important renewal and transfer authorizations are delivered to this address.
+3. **Nameserver assignment**: Choose whether to use:
+   - **Custom authoritative nameservers**: For all ternis.org domains, point to our redundant nameserver cluster:
+     - `one.ns.ternis.net`
+     - `two.ns.ternis.net`
+   - **Registrar DNS management**: Use dnbx.de's built-in web DNS zone editor to manage individual records.
 
-- Auto-renew **on**, registrant email current, payment method valid.
-- Registrar lock enabled against unauthorized transfers.
-- Calendar reminder 30 days before any manual-renewal domain expires.
+---
+
+## 2. Managing DNS Records
+
+When managing records directly in the dnbx.de zone editor:
+
+| Record Type | What it points to | Example Value |
+|:-----------:|-------------------|---------------|
+| **`A`** | IPv4 Server Address | `203.0.113.19` |
+| **`AAAA`** | IPv6 Server Address | `2001:db8::19` |
+| **`CNAME`** | Domain alias (subdomains only!) | `app.example.com.` |
+| **`MX`** | Mail exchange server + priority | `10 mail.ternis.org.` |
+| **`TXT`** | SPF, DKIM, DMARC, or site verification | `"v=spf1 include:_spf.ternis.net ~all"` |
 
 :::tip
-After any NS change, verify from three vantage points: your authoritative
-server, Google (`@8.8.8.8`), and Cloudflare (`@1.1.1.1`). Propagation is just
-TTL expiry wearing a trench coat.
+Always terminate fully qualified domain names (FQDN) in zone records with a trailing dot (`.`) if supported by the zone format, preventing the nameserver from appending your root domain twice.
 :::
+
+---
+
+## 3. Understanding TTL and Propagation
+
+When you update an `A` record or `MX` record in your DNS control panel, the change does not always take effect across the world immediately.
+
+This delay is controlled by the **TTL (Time to Live)** parameter:
+- If your old record had a TTL of `3600` (1 hour), public recursive DNS resolvers (like Google `8.8.8.8` or Cloudflare `1.1.1.1`) cache the old value for up to 60 minutes.
+- **Best Practice for Planned Migrations**: 24 to 48 hours before migrating servers, reduce your DNS record TTL to `300` (5 minutes). Once the TTL expires, make the IP switch. The change will take effect within 5 minutes globally. Once verified, raise the TTL back to `3600` or `86400`.
+
+---
+
+## 4. Security & Maintenance Checklist
+
+To protect domains against unauthorized takeover and accidental expiration:
+
+- [ ] **Registrar Transfer Lock**: Ensure the transfer lock (`clientTransferProhibited`) is enabled to prevent unauthorized domain transfers.
+- [ ] **Two-Factor Authentication (2FA)**: Enforce hardware security key (FIDO2/WebAuthn) or TOTP authenticator app on your dnbx.de account.
+- [ ] **Auto-Renewal Enabled**: Never rely on manual reminders for mission-critical domain renewals.
+- [ ] **DNSSEC Activation**: Enable DNSSEC signing in the control panel to cryptographically protect against DNS cache poisoning.
+
+---
+
+## Verifying your configuration in the terminal
+
+```bash
+# Check the registered nameservers
+host -t NS yourdomain.de
+
+# Query the primary nameserver directly for your web server IP
+dig @one.ns.ternis.net yourdomain.de A +short
+```

@@ -1,55 +1,87 @@
 ---
 title: screenfetch — System Information & ASCII Art Tool
-description: Display distribution logos, kernel version, uptime, memory, and hardware stats in your terminal or SSH MOTD banners.
+description: Complete beginner guide to screenfetch, displaying Linux distribution ASCII logos, hardware specifications, uptime, and configuring SSH MOTD welcome banners.
 category: linux-packages
 order: 70
-tags: [screenfetch, terminal, sysadmin, linux, motd]
+tags: [screenfetch, terminal, sysadmin, linux, motd, cli, hardware]
 updated: 2026-10-06
-related: [linux-packages/btop, linux/filesystem-permissions]
+related: [linux-packages/btop, linux/filesystem-permissions, linux/ssh-hardening]
 ---
 
 ## What is screenfetch?
 
-`screenfetch` is a popular "Bash Screenshot Information Tool". It automatically detects your Linux distribution, renders the official distribution logo in ASCII art, and prints key system statistics like kernel version, uptime, package count, shell, CPU, and memory usage.
+**`screenfetch`** is the classic "Bash Screenshot Information Tool" for Linux and Unix systems.
+
+When executed, it automatically detects your operating system, renders the official distribution logo in vibrant ASCII art on the left, and prints detailed hardware and system metrics on the right:
+- User and Hostname (`user@hostname`)
+- Operating System & Distribution version (e.g. Ubuntu 24.04 LTS, Debian 12)
+- Linux Kernel version (`uname -r`)
+- System Uptime (days, hours, minutes since last boot)
+- Installed Package count (APT, DNF, Pacman, Snap)
+- Active Shell (`bash`, `zsh`)
+- Screen Resolution / Desktop Environment (or server TTY)
+- CPU model and core count
+- GPU model
+- RAM utilization (Used / Total MB)
+
+---
 
 ## Installation
+
+Install screenfetch via your package manager:
 
 ```bash
 # Ubuntu / Debian
 sudo apt update
 sudo apt install -y screenfetch
 
-# Fedora
+# Fedora / RHEL
 sudo dnf install -y screenfetch
 
 # Arch Linux
 sudo pacman -S screenfetch
 ```
 
-## Usage
+---
 
-Simply run:
+## Usage & Command Flags Breakdown
 
 ```bash
+# 1. Standard execution
 screenfetch
+
+# 2. Strip colors (clean monochrome output for plain logs)
+screenfetch -N
+
+# 3. Force a specific distribution logo (e.g. Debian or Arch)
+screenfetch -D 'Debian'
+
+# 4. Verbose mode showing hardware detection steps
+screenfetch -v
+
+# 5. Take an automated desktop screenshot after printing specs
+screenfetch -s
 ```
 
-Useful command flags:
+### Flag breakdown
 
-| Flag | Description |
-| --- | --- |
-| `-v` | Verbose output with detailed detection steps |
-| `-N` | Strip ANSI color escape codes |
-| `-D 'Debian'` | Force display of a specific distribution logo |
-| `-s` | Take a screenshot after printing info |
+- `-N` (no color): Strips ANSI color escape codes from output, useful when piping into plain text log files or emails.
+- `-D '<Distro>'`: Overrides automatic distribution detection and forces the ASCII art of another distribution (e.g. `Debian`, `Ubuntu`, `Arch Linux`, `Fedora`, `FreeBSD`).
+- `-v` (verbose): Prints debugging output showing which sysfs files and binaries screenfetch queries to gather system information.
+- `-s` (screenshot): Automatically captures a PNG screenshot of your terminal window.
 
-## Use as an SSH MOTD Welcome Banner
+---
 
-To greet yourself with your server's specs every time you log in via SSH, add it to `/etc/profile.d/motd-specs.sh`:
+## Adding screenfetch as an SSH MOTD Welcome Banner
+
+A classic sysadmin touch is displaying system specs automatically whenever you log into your server over SSH:
 
 ```bash
-echo "screenfetch" | sudo tee /etc/profile.d/motd-specs.sh
-sudo chmod +x /etc/profile.d/motd-specs.sh
+# Create an executable profile script
+echo "screenfetch" | sudo tee /etc/profile.d/motd-screenfetch.sh
+sudo chmod 755 /etc/profile.d/motd-screenfetch.sh
 ```
 
-Next time you open an SSH connection, your distribution logo and hardware stats will greet you in color.
+### How it works
+
+Scripts located in `/etc/profile.d/` with execute permissions (`755`) run automatically whenever an interactive login shell starts. The next time you log in via `ssh user@server`, your distribution logo and hardware stats greet you immediately in the terminal.
