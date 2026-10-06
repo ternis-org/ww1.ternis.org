@@ -317,14 +317,23 @@ $router->get('/robots.txt', function () {
 $router->get('/sitemap.xml', function () {
     header('Content-Type: application/xml; charset=utf-8');
     header('X-Content-Type-Options: nosniff');
-    header('X-Robots-Tag: noindex, follow');
-    header('X-Sitemap: true');
-    header('X-Sitemap-Format: XML');
-    header('X-Sitemap-Type: urlset');
-    header('X-Sitemap-Version: 0.9');
     header('Cache-Control: public, max-age=3600, stale-while-revalidate=86400');
     header('Access-Control-Allow-Origin: *');
     render('sitemap');
+});
+
+// sitemap.xsl — browser stylesheet for human-friendly viewing
+$router->get('/sitemap.xsl', function () {
+    $xslPath = PUBLIC_PATH . '/sitemap.xsl';
+    if (file_exists($xslPath)) {
+        header('Content-Type: text/xsl; charset=utf-8');
+        header('X-Content-Type-Options: nosniff');
+        header('Cache-Control: public, max-age=86400, stale-while-revalidate=604800');
+        header('Access-Control-Allow-Origin: *');
+        readfile($xslPath);
+        exit;
+    }
+    http_response_code(404);
 });
 
 // /api/ver — Version hash API
