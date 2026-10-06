@@ -213,7 +213,7 @@
       }
       return;
     }
-    if (e.key === '/' && !searchModal || (searchModal && searchModal.hidden)) {
+    if (e.key === '/' && searchModal && searchModal.hidden) {
       var activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
       if (activeTag !== 'input' && activeTag !== 'textarea') {
         e.preventDefault();
