@@ -2,7 +2,7 @@
  * ternis.org Wiki — Dedicated Interactive Script (wiki.js)
  * Pure vanilla JavaScript. Zero external dependencies. Zero trackers.
  * Features:
- *  - Command Palette Search Modal (⌘K / Ctrl+K / /)
+ *  - Command Palette Search Modal (Ctrl+K / Cmd+K / /)
  *  - In-Page Instant Search & Category Article Filtering
  *  - Code Block Copy with Animated SVG Feedback
  *  - Article URL Sharing / Copy Link Feedback
@@ -135,7 +135,7 @@
         + '<div class="wiki-modal-item-ico"><svg class="wiki-ico wiki-ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c3.2 3.6 3.2 13.4 0 17M12 3.5c-3.2 3.6-3.2 13.4 0 17"/></svg></div>'
         + '<div class="wiki-modal-item-info">'
         + '<span class="wiki-modal-item-title">' + esc(r.title) + '</span>'
-        + '<span class="wiki-modal-item-meta">' + esc(r.category) + ' &bull; ' + esc(r.description || '') + '</span>'
+        + '<span class="wiki-modal-item-meta">' + esc(r.category) + '<span class="wiki-sep-dot"><svg class="wiki-ico wiki-ico-xs" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="3"/></svg></span>' + esc(r.description || '') + '</span>'
         + '</div>'
         + '<svg class="wiki-ico wiki-ico-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>'
         + '</a>';
@@ -202,7 +202,7 @@
     }
   });
 
-  // Global Keyboard Shortcuts (⌘K, Ctrl+K, /)
+  // Global Keyboard Shortcuts (Ctrl+K, Cmd+K, /)
   document.addEventListener('keydown', function (e) {
     if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
       e.preventDefault();
@@ -271,7 +271,7 @@
     homeResults.innerHTML = results.map(function (r) {
       return '<a href="' + esc(r.url) + '">'
         + '<strong>' + esc(r.title) + '</strong>'
-        + '<small>' + esc(r.category) + ' &bull; ' + esc(r.description || '') + '</small>'
+        + '<small>' + esc(r.category) + '<span class="wiki-sep-dot"><svg class="wiki-ico wiki-ico-xs" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="3"/></svg></span>' + esc(r.description || '') + '</small>'
         + '</a>';
     }).join('');
   }
