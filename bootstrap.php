@@ -170,6 +170,36 @@ $router->get('/wiki/feed.xml', function () {
     header('Access-Control-Allow-Origin: *');
     render('wiki/feed');
 });
+
+// OpenGraph dynamic preview cards generator
+$ogWikiHandler = function (array $p, string $lang = 'en') {
+    require_once ROOT_PATH . '/src/helpers/og_image.php';
+    $slug = preg_replace('/\.png$/i', '', (string) ($p['slug'] ?? ''));
+    $cat = (string) ($p['category'] ?? '');
+    $article = wiki_get_article($lang, $cat, $slug);
+    if ($article === null && $lang !== 'en') {
+        $article = wiki_get_article('en', $cat, $slug);
+    }
+    if ($article !== null) {
+        generate_og_image(
+            $article['title'],
+            $article['description'],
+            $cat,
+            $article['updated'] ?? ''
+        );
+    } else {
+        generate_og_image(
+            ucwords(str_replace('-', ' ', $slug)),
+            'Technical documentation and guides on ternis.org',
+            $cat
+        );
+    }
+};
+
+$router->get('/wiki/og/{category}/{slug}', function (array $p) use ($ogWikiHandler) {
+    $ogWikiHandler($p, 'en');
+});
+
 $router->get('/wiki/{category}', function (array $p) {
     header('Vary: Accept-Language');
     redirect('/' . detect_preferred_lang(SUPPORTED_LANGS, DEFAULT_LANG) . '/wiki/' . $p['category'], 302);
@@ -236,6 +266,11 @@ foreach (SUPPORTED_LANGS as $lang) {
         header('Cache-Control: public, max-age=3600, stale-while-revalidate=86400');
         header('Access-Control-Allow-Origin: *');
         render('wiki/feed');
+    });
+
+    // Wiki dynamic OpenGraph image
+    $router->get('/' . $lang . '/wiki/og/{category}/{slug}', function (array $p) use ($lang, $ogWikiHandler) {
+        $ogWikiHandler($p, $lang);
     });
 
     // Wiki category
@@ -356,6 +391,24 @@ $router->get('/sitemap.xsl', function () {
         exit;
     }
     http_response_code(404);
+});
+
+// /og.png and /og.jpg — Root OpenGraph branding card
+$router->get('/og.png', function () {
+    require_once ROOT_PATH . '/src/helpers/og_image.php';
+    generate_og_image(
+        'ternis.org — Infrastructure, DNS & Systems Hub',
+        'Redundant Authoritative Anycast DNS, Technical Wiki, and Open Infrastructure by Fabian Ternis.',
+        'INFRASTRUCTURE'
+    );
+});
+$router->get('/og.jpg', function () {
+    require_once ROOT_PATH . '/src/helpers/og_image.php';
+    generate_og_image(
+        'ternis.org — Infrastructure, DNS & Systems Hub',
+        'Redundant Authoritative Anycast DNS, Technical Wiki, and Open Infrastructure by Fabian Ternis.',
+        'INFRASTRUCTURE'
+    );
 });
 
 // /api/ver — Version hash API

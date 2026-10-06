@@ -65,18 +65,23 @@ $allCategories   = wiki_categories_with_counts($lang);
     <link rel="alternate" type="application/atom+xml" title="ternis.org Wiki Feed" href="/wiki/feed.xml">
 
     <!-- Open Graph / Twitter -->
+<?php
+    $ogImageUrl = (!empty($slug) && !empty($category))
+        ? 'https://ternis.org/' . $lang . '/wiki/og/' . urlencode($category) . '/' . urlencode($slug) . '.png'
+        : 'https://ternis.org/og.png';
+?>
     <meta property="og:type" content="<?= !empty($slug) ? 'article' : 'website' ?>">
     <meta property="og:url" content="<?= e($canonical) ?>">
     <meta property="og:title" content="<?= e($pageTitle) ?>">
     <meta property="og:description" content="<?= e($metaDescription) ?>">
-    <meta property="og:image" content="https://ternis.org/og.jpg">
+    <meta property="og:image" content="<?= e($ogImageUrl) ?>">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="<?= e($canonical) ?>">
     <meta property="twitter:title" content="<?= e($pageTitle) ?>">
     <meta property="twitter:description" content="<?= e($metaDescription) ?>">
-    <meta property="twitter:image" content="https://ternis.org/og.jpg">
+    <meta property="twitter:image" content="<?= e($ogImageUrl) ?>">
 
     <!-- Theme & Icons -->
     <meta name="theme-color" content="#c2410c">

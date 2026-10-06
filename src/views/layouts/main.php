@@ -75,14 +75,14 @@ $extraJs         = $extraJs ?? [];
     <meta property="og:url" content="<?= e($canonical) ?>">
     <meta property="og:title" content="<?= e($pageTitle) ?>">
     <meta property="og:description" content="<?= e($metaDescription) ?>">
-    <meta property="og:image" content="https://ternis.org/og.jpg">
+    <meta property="og:image" content="https://ternis.org/og.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="<?= e($canonical) ?>">
     <meta property="twitter:title" content="<?= e($pageTitle) ?>">
     <meta property="twitter:description" content="<?= e($metaDescription) ?>">
-    <meta property="twitter:image" content="https://ternis.org/og.jpg">
+    <meta property="twitter:image" content="https://ternis.org/og.png">
 
     <!-- Theme & Icons -->
     <meta name="theme-color" content="#4a5d23">
@@ -116,13 +116,26 @@ $extraJs         = $extraJs ?? [];
             "<?= e(config('org_github')) ?>",
             "https://ternis.dev",
             "https://ternis-edv.de",
+            "https://ternisdomains.de",
             "https://mtex.dev",
             "https://getmy.name",
-            "https://dnbx.de",
             "https://drophtml.de",
             "https://example-dns.com",
             "https://github.com/example-dns/example-dns"
         ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ternis.org",
+        "url": "https://ternis.org/",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://ternis.org/<?= e($lang) ?>/wiki?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
     }
     </script>
 </head>
