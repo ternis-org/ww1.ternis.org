@@ -300,6 +300,26 @@ foreach (SUPPORTED_LANGS as $lang) {
             'extraCss'        => ['/assets/css/tools.css'],
         ], 'main');
     });
+
+    // Tools: WHOIS & RDAP Domain Explorer: /{lang}/tools/whois
+    $router->get('/' . $lang . '/tools/whois', function () use ($lang) {
+        if (!defined('LANG')) {
+            define('LANG', $lang);
+        }
+        load_lang($lang);
+        $title = ($lang === 'de' ? 'WHOIS & RDAP Domain-Explorer' : 'WHOIS & RDAP Domain Explorer') . ' — ternis.org';
+        $metaDescription = $lang === 'de'
+            ? 'Datensouveräne WHOIS- & RDAP-Domainabfrage in Echtzeit (RFC 9083). Prüfe Inhaberstatus, Registrar, DNSSEC und Nameserver ohne Tracking oder Frontrunning.'
+            : 'Privacy-first real-time WHOIS & RDAP domain explorer (RFC 9083). Inspect domain registration, registrar, DNSSEC validation, and nameservers with zero tracking.';
+
+        render('tools/whois', [
+            'lang'            => $lang,
+            'title'           => $title,
+            'metaDescription' => $metaDescription,
+            'canonicalUrl'    => 'https://ternis.org/' . $lang . '/tools/whois',
+            'extraCss'        => ['/assets/css/tools.css'],
+        ], 'main');
+    });
 }
 
 // Redirects without locale
@@ -339,6 +359,10 @@ $router->get('/tools/dns', function () {
 $router->get('/tools/secret-generator', function () {
     header('Vary: Accept-Language');
     redirect('/' . detect_preferred_lang(SUPPORTED_LANGS, DEFAULT_LANG) . '/tools/secret-generator', 302);
+});
+$router->get('/tools/whois', function () {
+    header('Vary: Accept-Language');
+    redirect('/' . detect_preferred_lang(SUPPORTED_LANGS, DEFAULT_LANG) . '/tools/whois', 302);
 });
 
 // Legal routes without locale: /legal and /legal/{slug}
@@ -724,6 +748,140 @@ $router->get('/api/tools/dns', function () {
 
     http_response_code(502);
     echo json_encode(['message' => 'Upstream DNS query timeout.']) . "\n";
+    exit;
+});
+
+// /api/tools/whois — Privacy-first RDAP Domain query proxy
+$router->get('/api/tools/whois', function () {
+    header('Content-Type: application/json; charset=utf-8');
+    header('Access-Control-Allow-Origin: *');
+    header('Cache-Control: public, max-age=300');
+
+    $domain = trim(strtolower((string) ($_GET['domain'] ?? '')));
+    $domain = preg_replace('#^https?://#i', '', $domain);
+    $domain = preg_replace('#/.*$#', '', $domain);
+    $domain = preg_replace('#:\d+$#', '', $domain);
+    $domain = trim($domain, '.');
+
+    if ($domain === '' || !preg_match('/^([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,}$/i', $domain)) {
+        http_response_code(422);
+        echo json_encode(['message' => 'Invalid domain name format. Please enter a valid domain (e.g. example.com).']) . "\n";
+        exit;
+    }
+
+    $parts = explode('.', $domain);
+    $tld = end($parts);
+
+    $url = match ($tld) {
+        'de' => 'https://rdap.denic.de/domain/' . urlencode($domain),
+        'eu' => 'https://rdap.eurid.eu/domain/' . urlencode($domain),
+        'com', 'net' => 'https://rdap.verisign.com/com/v1/domain/' . urlencode($domain),
+        default => 'https://rdap.org/domain/' . urlencode($domain),
+    };
+
+    $ch = curl_init($url);
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTPHEADER     => ['Accept: application/rdap+json, application/json'],
+        CURLOPT_USERAGENT      => 'ternis-org-tools/1.0',
+        CURLOPT_TIMEOUT        => 6,
+    ]);
+    $res = curl_exec($ch);
+    $httpCode = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    if ($httpCode === 404) {
+        http_response_code(200);
+        echo json_encode([
+            'status'     => 'available',
+            'registered' => false,
+            'domain'     => $domain,
+            'message'    => 'Domain is not registered or not found in authoritative RDAP registry.',
+        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . "\n";
+        exit;
+    }
+
+    if ($res === false || $httpCode < 200 || $httpCode >= 400) {
+        http_response_code(502);
+        echo json_encode(['message' => 'Upstream RDAP registry query failed or timed out.']) . "\n";
+        exit;
+    }
+
+    $json = json_decode((string) $res, true);
+    if (!is_array($json)) {
+        http_response_code(502);
+        echo json_encode(['message' => 'Invalid JSON from upstream RDAP registry.']) . "\n";
+        exit;
+    }
+
+    $events = [];
+    foreach ($json['events'] ?? [] as $ev) {
+        $action = strtolower(trim((string) ($ev['eventAction'] ?? '')));
+        $date = trim((string) ($ev['eventDate'] ?? ''));
+        if ($action !== '' && $date !== '') {
+            $events[$action] = $date;
+        }
+    }
+
+    $registrarName = '';
+    $registrarIana = '';
+    $abuseEmail = '';
+    $registrarUrl = '';
+
+    foreach ($json['entities'] ?? [] as $ent) {
+        $roles = $ent['roles'] ?? [];
+        if (in_array('registrar', $roles, true)) {
+            foreach ($ent['vcardArray'][1] ?? [] as $vc) {
+                if ($vc[0] === 'fn') $registrarName = (string) $vc[3];
+                if ($vc[0] === 'url') $registrarUrl = (string) $vc[3];
+            }
+            foreach ($ent['publicIds'] ?? [] as $pid) {
+                if (stripos((string) ($pid['type'] ?? ''), 'IANA') !== false) {
+                    $registrarIana = (string) ($pid['identifier'] ?? '');
+                }
+            }
+            foreach ($ent['entities'] ?? [] as $subEnt) {
+                if (in_array('abuse', $subEnt['roles'] ?? [], true)) {
+                    foreach ($subEnt['vcardArray'][1] ?? [] as $vc) {
+                        if ($vc[0] === 'email') $abuseEmail = (string) $vc[3];
+                    }
+                }
+            }
+        }
+    }
+
+    $nameservers = [];
+    foreach ($json['nameservers'] ?? [] as $ns) {
+        $nsName = strtolower(rtrim((string) ($ns['ldhName'] ?? ''), '.'));
+        if ($nsName !== '') $nameservers[] = $nsName;
+    }
+
+    $dnssec = !empty($json['secureDNS']['delegationSigned'])
+        || !empty($json['secureDNS']['dsData'])
+        || !empty($json['secureDNS']['keyData']);
+
+    $statuses = [];
+    foreach ($json['status'] ?? [] as $st) {
+        $statuses[] = strtolower(trim((string) $st));
+    }
+
+    echo json_encode([
+        'status'      => 'registered',
+        'registered'  => true,
+        'domain'      => $domain,
+        'handle'      => (string) ($json['handle'] ?? ''),
+        'registrar'   => [
+            'name'    => $registrarName ?: 'Registry Authoritative',
+            'iana_id' => $registrarIana,
+            'url'     => $registrarUrl,
+            'abuse'   => $abuseEmail,
+        ],
+        'events'      => $events,
+        'nameservers' => $nameservers,
+        'dnssec'      => $dnssec,
+        'statuses'    => $statuses,
+        'raw'         => $json,
+    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . "\n";
     exit;
 });
 

@@ -299,6 +299,18 @@ $allCategories   = wiki_categories_with_counts($lang);
                         </a>
                     </li>
                     <li>
+                        <a href="/<?= e($lang) ?>/projects">
+                            <?= wiki_icon('package', 'wiki-ico-sm') ?>
+                            <span><?= e(t('nav.projects')) ?></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/<?= e($lang) ?>/tools">
+                            <?= wiki_icon('sliders', 'wiki-ico-sm') ?>
+                            <span><?= e(t('nav.tools')) ?></span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="<?= e(config('repo_url')) ?>" target="_blank" rel="noopener noreferrer">
                             <?= wiki_icon('github', 'wiki-ico-sm') ?>
                             <span>GitHub</span>
@@ -391,6 +403,14 @@ $allCategories   = wiki_categories_with_counts($lang);
                 <a href="/<?= e($lang) ?>" class="wiki-drawer-link">
                     <?= wiki_icon('home') ?>
                     <span><?= e(t('wiki.back_to_site')) ?></span>
+                </a>
+                <a href="/<?= e($lang) ?>/projects" class="wiki-drawer-link">
+                    <?= wiki_icon('package') ?>
+                    <span><?= e(t('nav.projects')) ?></span>
+                </a>
+                <a href="/<?= e($lang) ?>/tools" class="wiki-drawer-link">
+                    <?= wiki_icon('sliders') ?>
+                    <span><?= e(t('nav.tools')) ?></span>
                 </a>
                 <a href="/<?= e($lang) ?>/wiki" class="wiki-drawer-link">
                     <?= wiki_icon('book') ?>

@@ -60,6 +60,18 @@ $toolsList = [
         'tags'        => ['Crypto API', 'UUIDv4', 'API Tokens', 'Zero Network'],
         'icon'        => '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>',
     ],
+    [
+        'id'          => 'whois',
+        'url'         => '/' . $lang . '/tools/whois',
+        'title'       => $isDe ? 'WHOIS & RDAP Domain Explorer' : 'WHOIS & RDAP Domain Explorer',
+        'tagline'     => 'RFC 9083 RDAP • Zero Frontrunning',
+        'description' => $isDe
+            ? 'Datensouveräne Domain- und Inhaberabfrage in Echtzeit. Prüfe Registrierungsstatus, Registrar, DNSSEC und Nameserver ohne Datenspeicherung.'
+            : 'Inspect domain lifecycle, sponsoring registrar, DNSSEC delegation, and nameservers in real time via modern RDAP with zero query tracking.',
+        'badge'       => 'RDAP RFC 9083',
+        'tags'        => ['WHOIS', 'RDAP', 'DNSSEC', 'Domain Lifecycle'],
+        'icon'        => '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>',
+    ],
 ];
 ?>
 <div class="tools-index-page">

@@ -17,6 +17,7 @@ $pages = [
     '/tools/shortlink/api'   => ['changefreq' => 'weekly',  'priority' => '0.85'],
     '/tools/dns'             => ['changefreq' => 'weekly',  'priority' => '0.85'],
     '/tools/secret-generator'=> ['changefreq' => 'weekly',  'priority' => '0.85'],
+    '/tools/whois'           => ['changefreq' => 'weekly',  'priority' => '0.85'],
     '/infrastructure'        => ['changefreq' => 'weekly',  'priority' => '0.9'],
     '/legal/imprint'         => ['changefreq' => 'monthly', 'priority' => '0.5'],
     '/legal/privacy'         => ['changefreq' => 'monthly', 'priority' => '0.5'],

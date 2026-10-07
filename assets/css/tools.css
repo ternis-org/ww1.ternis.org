@@ -426,3 +426,127 @@
   color: var(--text-main);
   font-weight: 500;
 }
+
+/* ==========================================================================
+   WHOIS & RDAP Domain Explorer Styles
+   ========================================================================== */
+
+.whois-status-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.whois-status-card.registered {
+  border-left: 5px solid #3b82f6;
+}
+.whois-status-card.available {
+  border-left: 5px solid #22c55e;
+  background: rgba(34, 197, 94, 0.05);
+}
+.whois-status-card.error {
+  border-left: 5px solid #ef4444;
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.whois-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.whois-box {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.whois-box-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.whois-meta-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.whois-meta-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.875rem;
+  gap: 1rem;
+}
+
+.whois-meta-label {
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+}
+
+.whois-meta-val {
+  font-family: var(--font-mono);
+  color: var(--text-main);
+  font-weight: 500;
+  text-align: right;
+  word-break: break-all;
+}
+
+.whois-pill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+.whois-pill-tag.secure {
+  background: rgba(34, 197, 94, 0.12);
+  color: #16a34a;
+  border: 1px solid rgba(34, 197, 94, 0.25);
+}
+.whois-pill-tag.insecure {
+  background: rgba(100, 116, 139, 0.12);
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+}
+.whois-pill-tag.warning {
+  background: rgba(245, 158, 11, 0.12);
+  color: #d97706;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.epp-badge {
+  display: inline-block;
+  padding: 0.2rem 0.45rem;
+  margin: 0.15rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  background: var(--bg-color);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+}
