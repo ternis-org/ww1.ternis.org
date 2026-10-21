@@ -162,45 +162,6 @@
         updateActiveNav();
     }
 
-    // ── Scroll To Top with Dynamic Circular Border Progress ───────────────────
-    function initScrollToTop() {
-        const btn = document.getElementById('scroll-to-top');
-        const progressCircle = document.querySelector('.progress-ring-circle');
-        if (!btn || !progressCircle) return;
-
-        const radius = progressCircle.r.baseVal.value || 20;
-        const circumference = 2 * Math.PI * radius; // approx 125.66
-        progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
-        progressCircle.style.strokeDashoffset = `${circumference}`;
-
-        function updateProgress() {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrollPercent = docHeight > 0 ? Math.min(1, Math.max(0, scrollTop / docHeight)) : 0;
-
-            const offset = circumference - (scrollPercent * circumference);
-            progressCircle.style.strokeDashoffset = `${offset}`;
-
-            if (scrollTop > 180) {
-                btn.classList.add('visible');
-            } else {
-                btn.classList.remove('visible');
-            }
-        }
-
-        window.addEventListener('scroll', updateProgress, { passive: true });
-        window.addEventListener('resize', updateProgress, { passive: true });
-        updateProgress();
-
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    }
-
     // ── Service Worker Registration ────────────────────────────────────────────
     function initServiceWorker() {
         if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
@@ -218,8 +179,8 @@
         document.documentElement.classList.add('has-scroll-anim');
 
         const progressBar = document.getElementById('scroll-progress');
-        const progressFill = progressBar ? (progressBar.querySelector('.scroll-progress-fill') || progressBar) : null;
-        const progressHead = progressBar ? progressBar.querySelector('.scroll-progress-head') : null;
+        const topButton = document.getElementById('scroll-to-top');
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
         const navContainer = document.querySelector('.nav-container-fixed');
         const heroContainer = document.querySelector('#hero .container');
 
@@ -230,20 +191,8 @@
             const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const progress = docHeight > 0 ? Math.min(1, Math.max(0, scrollTop / docHeight)) : 0;
 
-            if (progressBar) {
-                if (scrollTop > 12) {
-                    progressBar.classList.add('is-active');
-                } else {
-                    progressBar.classList.remove('is-active');
-                }
-
-                if (progressFill) {
-                    progressFill.style.transform = `scaleX(${progress})`;
-                }
-                if (progressHead) {
-                    progressHead.style.left = `${(progress * 100).toFixed(2)}%`;
-                }
-            }
+            if (progressBar) progressBar.style.transform = `scaleX(${progress})`;
+            if (topButton) topButton.classList.toggle('visible', scrollTop > 180);
 
             if (navContainer) {
                 if (scrollTop > 40) {
@@ -254,12 +203,12 @@
             }
 
             // Subtle Hero Parallax & Depth on Desktop
-            if (heroContainer && scrollTop < 600 && window.innerWidth > 768) {
+            if (heroContainer && scrollTop < 600 && window.innerWidth > 768 && !reducedMotion.matches) {
                 const yOffset = scrollTop * 0.16;
                 const opacity = Math.max(0.1, 1 - (scrollTop / 500));
                 heroContainer.style.transform = `translate3d(0, ${yOffset}px, 0)`;
                 heroContainer.style.opacity = opacity.toFixed(2);
-            } else if (heroContainer && scrollTop === 0) {
+            } else if (heroContainer) {
                 heroContainer.style.transform = 'translate3d(0, 0, 0)';
                 heroContainer.style.opacity = '1';
             }
@@ -267,14 +216,23 @@
             ticking = false;
         }
 
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(onScrollTick);
-                ticking = true;
-            }
-        }, { passive: true });
+        function scheduleScrollUpdate() {
+            if (ticking) return;
+            ticking = true;
+            window.requestAnimationFrame(onScrollTick);
+        }
 
-        // Run once on load
+        window.addEventListener('scroll', scheduleScrollUpdate, { passive: true });
+        window.addEventListener('resize', scheduleScrollUpdate, { passive: true });
+        // Account for late-loading images, fonts, and expanding page content.
+        if ('ResizeObserver' in window) {
+            new ResizeObserver(scheduleScrollUpdate).observe(document.body);
+        }
+        if (topButton) {
+            topButton.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'instant' : 'smooth' });
+            });
+        }
         onScrollTick();
 
         // Reversible Scroll-Driven Reveal Observer
@@ -445,7 +403,6 @@
         initMobileNav();
         initFAQ();
         initScrollSpy();
-        initScrollToTop();
         initScrollAnimations();
         initCopyButtons();
         initProjectCards();

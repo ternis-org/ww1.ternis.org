@@ -115,6 +115,7 @@ $extraJs         = $extraJs ?? [];
         "sameAs": [
             "<?= e(config('repo_url')) ?>",
             "<?= e(config('org_github')) ?>",
+            "https://codeberg.org/ternis",
             "https://ternis.dev",
             "https://ternis-edv.de",
             "https://ternisdomains.de",
@@ -143,12 +144,7 @@ $extraJs         = $extraJs ?? [];
 <body>
 
     <!-- Top Scroll Progress Indicator -->
-    <div id="scroll-progress" class="scroll-progress-bar" aria-hidden="true">
-        <div class="scroll-progress-track">
-            <div class="scroll-progress-fill"></div>
-            <div class="scroll-progress-head"></div>
-        </div>
-    </div>
+    <div id="scroll-progress" class="scroll-progress-bar" aria-hidden="true"></div>
 
     <?php if ($showNav): ?>
         <?php component('navbar', ['lang' => $lang]); ?>

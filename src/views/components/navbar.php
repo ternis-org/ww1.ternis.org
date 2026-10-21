@@ -20,6 +20,7 @@ $homePrefix = rtrim($currentPath, '/') === '/' . $lang ? '' : '/' . $lang;
     <nav class="floating-nav" aria-label="Main Navigation">
         <a href="/<?= e($lang) ?>" class="logo" aria-label="ternis.org Homepage">
             <?php component('brand'); ?>
+            <?php component('brand', ['variant' => 'icon']); ?>
         </a>
 
         <div class="nav-links">
@@ -44,6 +45,10 @@ $homePrefix = rtrim($currentPath, '/') === '/' . $lang ? '' : '/' . $lang;
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
                 </svg>
             </button>
+
+            <a href="https://codeberg.org/ternis" target="_blank" rel="noopener noreferrer" class="btn-icon" aria-label="Codeberg — <?= $lang === 'de' ? 'Souveränes Code-Hosting' : 'Sovereign code hosting' ?>" title="ternis on Codeberg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 19 12 4l9 15H3Z"/><path d="m12 4 3 15-5-6-7 6"/></svg>
+            </a>
 
             <!-- GitHub Org Link -->
             <a href="https://github.com/ternis-org" target="_blank" rel="noopener noreferrer" class="btn-icon" aria-label="GitHub Organization" title="ternis-org on GitHub">

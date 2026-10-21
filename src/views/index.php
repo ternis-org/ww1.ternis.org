@@ -530,7 +530,10 @@ ternis.org name server two.ns.ternis.net.</code></pre>
             <p class="brand-eyebrow">ternis.org / Branding</p>
             <h2><?= $lang === 'de' ? 'Ein gemeinsames Zeichen.' : 'A shared identity.' ?></h2>
             <p class="brand-copy"><?= $lang === 'de' ? 'Unser Zeichen für offene Werkzeuge und unabhängige Infrastruktur. Hier findest du Logos, Farben und Hinweise zur Verwendung.' : 'Our mark for open tools and independent infrastructure. Find our logos, colors, and guidance for using them.' ?></p>
-            <a class="btn btn-outline" href="/<?= e($lang) ?>/branding"><?= $lang === 'de' ? 'Branding entdecken' : 'Explore the brand' ?> &rarr;</a>
+            <a class="btn btn-outline brand-explore t-learn" href="/<?= e($lang) ?>/branding">
+                <span><?= $lang === 'de' ? 'Branding entdecken' : 'Explore the brand' ?></span>
+                <svg class="t-learn-chevron" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
         </div>
     </div>
 </section>

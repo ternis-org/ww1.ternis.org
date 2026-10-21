@@ -17,7 +17,6 @@ $commitUrl = app_repo_commit_url($versionShort);
     <div class="container">
         <div class="footer-content">
             <div class="footer-cta scroll-reveal scroll-reveal-left">
-                <a class="footer-brand" href="/<?= e($lang) ?>" aria-label="ternis.org Homepage"><?php component('brand'); ?></a>
                 Let's grow<br>
                 <strong>something beautiful.</strong>
                 <div style="margin-top:2.5rem;">
@@ -35,7 +34,7 @@ $commitUrl = app_repo_commit_url($versionShort);
                 <div class="footer-col">
                     <h4><?= e(t('footer.col_projects')) ?></h4>
                     <ul>
-                        <li><a href="/<?= e($lang) ?>/projects" style="font-weight:600;color:var(--primary);">&rarr; <?= $lang === 'de' ? 'Alle Projekte' : 'All Projects' ?></a></li>
+                        <li><a href="/<?= e($lang) ?>/projects" style="font-weight:600;">&rarr; <?= $lang === 'de' ? 'Alle Projekte' : 'All Projects' ?></a></li>
                         <li><a href="https://httpclient.de" target="_blank" rel="noopener noreferrer">httpclient.de</a></li>
                         <li><a href="https://api-sandbox.de" target="_blank" rel="noopener noreferrer">api-sandbox.de</a></li>
                         <li><a href="https://mtex.dev" target="_blank" rel="noopener noreferrer">MTEX.dev</a></li>
@@ -51,7 +50,7 @@ $commitUrl = app_repo_commit_url($versionShort);
                 <div class="footer-col">
                     <h4><?= $lang === 'de' ? 'Werkzeuge' : 'Tools' ?></h4>
                     <ul>
-                        <li><a href="/<?= e($lang) ?>/tools" style="font-weight:600;color:var(--primary);">&rarr; <?= $lang === 'de' ? 'Alle Werkzeuge' : 'All Tools' ?></a></li>
+                        <li><a href="/<?= e($lang) ?>/tools" style="font-weight:600;">&rarr; <?= $lang === 'de' ? 'Alle Werkzeuge' : 'All Tools' ?></a></li>
                         <li><a href="/<?= e($lang) ?>/tools/shortlink">Shortlink &amp; QR Studio</a></li>
                         <li><a href="/<?= e($lang) ?>/tools/dns">DNS Looking Glass</a></li>
                         <li><a href="/<?= e($lang) ?>/tools/secret-generator"><?= $lang === 'de' ? 'Token &amp; Secret Generator' : 'Token &amp; Secret Generator' ?></a></li>
@@ -62,12 +61,13 @@ $commitUrl = app_repo_commit_url($versionShort);
                 <div class="footer-col">
                     <h4><?= e(t('footer.col_ecosystem')) ?></h4>
                     <ul>
-                        <li><a href="/<?= e($lang) ?>/infrastructure" style="font-weight:600;color:var(--primary);">&rarr; <?= $lang === 'de' ? 'Infrastruktur (ternis.net)' : 'Infrastructure (ternis.net)' ?></a></li>
+                        <li><a href="/<?= e($lang) ?>/infrastructure" style="font-weight:600;">&rarr; <?= $lang === 'de' ? 'Infrastruktur (ternis.net)' : 'Infrastructure (ternis.net)' ?></a></li>
                         <li><a href="https://ternisdomains.de" target="_blank" rel="noopener noreferrer">ternisdomains.de</a></li>
                         <li><a href="https://github.com/example-dns/example-dns" target="_blank" rel="noopener noreferrer">example-dns (GitHub)</a></li>
                         <li><a href="https://codeberg.org/example-dns/example-dns" target="_blank" rel="noopener noreferrer">example-dns (Codeberg)</a></li>
                         <li><a href="https://ternis.dev" target="_blank" rel="noopener noreferrer">ternis.dev</a></li>
                         <li><a href="https://ternis-edv.de" target="_blank" rel="noopener noreferrer">ternis-edv.de</a></li>
+                        <li><a href="https://codeberg.org/ternis" target="_blank" rel="noopener noreferrer">Codeberg · <?= $lang === 'de' ? 'Souveränes Code-Hosting' : 'Sovereign code hosting' ?></a></li>
                         <li><a href="https://github.com/ternis-org" target="_blank" rel="noopener noreferrer">GitHub Org</a></li>
                         <li><a href="/api/ver" target="_blank">Version Hash</a></li>
                     </ul>
@@ -95,5 +95,10 @@ $commitUrl = app_repo_commit_url($versionShort);
                 <?= e(t('footer.version')) ?>: <a href="<?= e($commitUrl) ?>" target="_blank" rel="noopener noreferrer" class="footer-version-link" title="<?= e(t('footer.version')) ?> <?= e($versionShort) ?> on GitHub"><strong style="font-family:var(--font-mono);">v<?= e($versionShort) ?></strong></a>
             </div>
         </div>
+        <div class="footer-signature">
+            <a class="footer-brand" href="/<?= e($lang) ?>" aria-label="ternis.org Homepage"><?php component('brand', ['inverted' => true, 'monochrome' => true]); ?></a>
+            <span class="footer-brand-icon" aria-hidden="true"><?php component('brand', ['variant' => 'icon', 'inverted' => true, 'monochrome' => true]); ?></span>
+        </div>
+
     </div>
 </footer>

@@ -9,7 +9,19 @@
 .nav-links { gap: 0.1rem; }
 .nav-links a { padding-inline: 0.65rem; }
 .hero-brand { width: clamp(210px, 30vw, 340px); margin: 0 auto 2.5rem; }
-.footer-brand { display: block; width: 220px; max-width: 100%; margin-bottom: 2.5rem; }
+.footer-signature { display: flex; justify-content: space-between; align-items: flex-end; gap: 3rem; margin-top: 4rem; }
+.footer-brand { display: block; width: clamp(280px, 36vw, 460px); max-width: 100%; }
+.footer-brand-icon { display: block; width: 84px; flex-shrink: 0; }
+.logo > .brand-art-icon { display: none; }
+.brand-explore { --learn-shift: 4px; --learn-in: 350ms; --learn-out: 250ms; --learn-ease: cubic-bezier(0.22, 1, 0.36, 1); gap: 0.75rem; }
+.t-learn-chevron { flex-shrink: 0; transform: translateX(0); transition: transform var(--learn-out) var(--learn-ease); }
+@media (hover: hover) {
+    .t-learn:hover .t-learn-chevron { transform: translateX(var(--learn-shift)); transition-duration: var(--learn-in); }
+}
+.t-learn:focus-visible .t-learn-chevron { transform: translateX(var(--learn-shift)); }
+@media (prefers-reduced-motion: reduce) {
+    .t-learn-chevron { transition: none; transform: none !important; }
+}
 .error-brand { display: block; width: 100px; margin: 0 auto 2.5rem; }
 .brand-eyebrow { color: var(--primary); font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1.25rem; }
 .brand-copy { color: var(--text-muted); font-size: 1.1rem; line-height: 1.8; max-width: 640px; margin: 1.25rem 0 2rem; }
@@ -56,10 +68,15 @@
     .brand-palette { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .brand-page-section { margin-top: 3.5rem; }
     .brand-preview { min-height: 190px; padding: 2rem; }
-    .logo { width: 112px; }
+    .logo { width: 40px; }
+    .logo > .brand-art-wordmark { display: none; }
+    .logo > .brand-art-icon { display: block; }
+    .footer-signature { margin-top: 2.5rem; }
+    .footer-brand { width: 250px; }
+    .footer-brand-icon { display: none; }
 }
 @media (max-width: 380px) {
     .nav-actions { gap: 0.25rem; }
     nav.floating-nav { padding-inline: 0.8rem; }
-    .logo { width: 96px; }
+    .logo { width: 36px; }
 }

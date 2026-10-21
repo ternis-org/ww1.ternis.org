@@ -3,7 +3,7 @@
  * Provides offline caching and fast asset loading
  */
 
-const CACHE_NAME = 'ternis-org-v4-brand';
+const CACHE_NAME = 'ternis-org-v5-brand';
 const ASSETS_TO_CACHE = [
     '/en',
     '/de',
