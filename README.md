@@ -1,7 +1,19 @@
 # ternis.org — Modern Open-Source Developer Ecosystem
 
 <p align="center">
-  <img src="public/favicon.svg" width="96" height="96" alt="ternis.org Logo" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="public/assets/brand/ternis-icon-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="public/assets/brand/ternis-icon-light.svg">
+    <img src="public/assets/brand/ternis-icon-light.svg" width="110" height="79" alt="ternis.org Logo" />
+  </picture>
+</p>
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="public/assets/brand/ternis-wordmark-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="public/assets/brand/ternis-wordmark-light.svg">
+    <img src="public/assets/brand/ternis-wordmark-light.svg" width="300" height="75" alt="ternis.org wordmark" />
+  </picture>
 </p>
 
 <p align="center">
@@ -118,15 +130,17 @@ This website is designed for maximum speed, digital sustainability, and develope
 - 🌍 **Full Bilingual i18n:** Built-in English (`/en`) and German (`/de`) language matrices with automatic browser `Accept-Language` detection.
 - 🌿 **Organic Green Tech Design System:**
   - Distinctive organic olive & sage palette (`#4a5d23`, `#8c9c6f`, `#f7f6f2`, `#d4a373`) + dark mode companion.
-  - Floating pill navigation bar (`backdrop-filter: blur(16px)`).
+  - Floating pill navigation bar (`backdrop-filter: blur(16px)`) with sticky breadcrumb pills pinned beneath it.
   - Morphing SVG ambient blobs and noise grain texture overlay.
   - Initial micro-loader animation with `sessionStorage` caching.
-  - Sculpted curved organic footer.
-- ⚡ **Dynamic Scroll & Motion System:** Fluid step-by-step project card side entrance, bidirectional reversible animations on scroll-up, and native IntersectionObserver tracking.
+  - Sculpted curved organic footer with a four-column link grid.
+- ⚡ **Dynamic Scroll & Motion System:** Fluid step-by-step project card side entrance, bidirectional reversible animations on scroll-up, and native IntersectionObserver tracking — reveal targets are pre-hidden before first paint (with a fail-open timer), so content never flashes and headers can never vanish on load.
+- 🌱 **Brand Load-in:** The inline SVG logo "unfolds" on first visit — stem grows, leaves pop, and the wordmark letters cascade in; fully skipped when `prefers-reduced-motion` is set.
 - 🔒 **Security & Privacy by Default:**
-  - Strict Content Security Headers (`X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`).
+  - Strict Content Security Policy and security headers (`X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`).
   - Traversal-protected static file delivery engine.
   - Zero cookies, zero tracking scripts, zero third-party analytics.
+  - Browser-facing tools query through same-origin API proxies instead of third-party endpoints.
 - 📲 **Progressive Web App (PWA):** Service Worker (`/sw.js`) with stale-while-revalidate caching.
 - 🤖 **Developer & Crawler Endpoints:**
   - `/api/ver` — JSON & Plaintext version hash endpoint.
@@ -135,48 +149,76 @@ This website is designed for maximum speed, digital sustainability, and develope
 
 ---
 
+## 🧰 Built-in Developer Tools
+
+Free, one-page utilities at `/en/tools` (also available in German). No signup, no storage — most results never leave your browser:
+
+| Tool | Route | Description |
+| ---- | ----- | ----------- |
+| **Shortlink & QR Studio** | [`/en/tools/shortlink`](https://ternis.org/en/tools/shortlink) | Design short URLs and QR codes with a full [API guide](https://ternis.org/en/tools/shortlink/api). |
+| **Live DNS Looking Glass** | [`/en/tools/dns`](https://ternis.org/en/tools/dns) | Query A/AAAA/MX/TXT/NS/SOA/CNAME records via DoH, with a privacy-first server proxy fallback. |
+| **Token & Secret Generator** | [`/en/tools/secret-generator`](https://ternis.org/en/tools/secret-generator) | Cryptographically secure API keys, passwords and tokens from refreshed `random_bytes()` entropy. |
+| **One-Shot UUID Generator** | [`/en/tools/uuid`](https://ternis.org/en/tools/uuid) | Copy-to-burn UUIDv4: each value can be copied exactly once, then it is gone. |
+| **WHOIS & RDAP Explorer** | [`/en/tools/whois`](https://ternis.org/en/tools/whois) | Privacy-first RDAP domain lookups proxied server-side, so your IP never touches the registry. |
+
+The same tools are also exposed programmatically: `POST /api/tools/shortlink`, `GET /api/tools/dns` and `GET /api/tools/whois`.
+
+---
+
 ## 📁 Repository Structure
 
 ```
 ww1.ternis.org/
-├── assets/                  # Static assets (CSS, JS)
+├── assets/                    # Static assets (CSS, JS) — synced copies for tooling
 │   ├── css/
-│   │   ├── app.css          # Organic tech design system
-│   │   └── wiki.css         # Fully separated wiki stylesheet (wiki pages only)
+│   │   ├── app.css            # Organic tech design system
+│   │   └── wiki.css           # Fully separated wiki stylesheet (wiki pages only)
 │   └── js/
-│       ├── app.js           # Motion engine, theme switcher & interactions
-│       └── wiki.js          # Fully separated wiki script: search + copy (wiki pages only)
-├── bootstrap.php            # Core application bootstrap & route definitions
-├── index.php                # Root front-controller delegate
-├── lang/                    # Localization dictionaries
-│   ├── de.php               # German translations
-│   └── en.php               # English translations
-├── public/                  # Document root
-│   ├── .htaccess            # Apache/LiteSpeed rewrite rules
-│   ├── apple-touch-icon.png # iOS/macOS icon
-│   ├── favicon.ico          # Binary multi-res favicon
-│   ├── favicon.svg          # Vector icon
-│   ├── index.php            # Primary HTTP entry point
-│   ├── manifest.json        # Web app manifest
-│   ├── og.jpg               # OpenGraph social card
-│   └── sw.js                # Service Worker
-├── src/                     # Core PHP backend
-│   ├── helpers.php          # Global helpers (e, t, render, asset_url)
-│   ├── router.php           # Lightweight URL router
-│   ├── wiki.php             # Wiki engine (flat-file Markdown, search, index)
-│   └── views/               # View templates
-│       ├── error.php        # 404 / 500 error page
-│       ├── index.php        # Main homepage view
-│       ├── legal.php        # Impressum, Privacy & License view
-│       ├── sitemap.php      # Dynamic XML sitemap (incl. wiki URLs)
-│       └── wiki/            # Wiki views (home, category, article, search)
+│       ├── app.js             # Motion engine, theme switcher & interactions
+│       └── wiki.js            # Fully separated wiki script: search + copy (wiki pages only)
+├── bootstrap.php              # Core application bootstrap & route definitions (incl. tools & API proxies)
+├── index.php                  # Root front-controller delegate
+├── lang/                      # Localization dictionaries
+│   ├── de.php                 # German translations
+│   └── en.php                 # English translations
+├── public/                    # Document root
+│   ├── .htaccess              # Apache/LiteSpeed rewrite rules
+│   ├── apple-touch-icon.png   # iOS/macOS icon
+│   ├── favicon.ico            # Binary multi-res favicon
+│   ├── favicon.svg            # Vector icon
+│   ├── index.php              # Primary HTTP entry point
+│   ├── manifest.json          # Web app manifest
+│   ├── og.jpg / og.png        # OpenGraph social cards
+│   ├── sitemap.xsl            # Stylesheet for the XML sitemap
+│   ├── sw.js                  # Service Worker
+│   └── assets/                # Served assets (canonical versions of assets/)
+│       ├── brand/             # Official brand kit: logos, one-color variants, editable wordmarks, ZIP
+│       ├── css/               # app.css, brand.css, tools.css, wiki.css
+│       └── js/                # app.js, wiki.js
+├── src/                       # Core PHP backend
+│   ├── helpers.php            # Global helpers (e, t, render, asset_url)
+│   ├── router.php             # Lightweight URL router
+│   ├── wiki.php               # Wiki engine (flat-file Markdown, search, index)
+│   └── views/                 # View templates
+│       ├── branding.php       # Brand kit showcase page (/en/branding)
+│       ├── components/        # Reusable pieces (brand SVG, navbar, footer, scroll-to-top)
+│       ├── error.php          # 404 / 500 error page
+│       ├── index.php          # Main homepage view
+│       ├── infrastructure.php # Sovereign infrastructure overview
+│       ├── legal.php          # Impressum, Privacy & License view
+│       ├── project_detail.php # Single-project page
+│       ├── projects.php       # Maintained projects overview
+│       ├── sitemap.php        # Dynamic XML sitemap (incl. wiki URLs)
+│       ├── tools/             # Developer tool views (shortlink, dns, secret_generator, uuid, whois)
+│       ├── wiki/              # Wiki views (home, category, article, search, feed)
+│       └── layouts/           # main.php (site) & wiki.php (wiki) base layouts
 ├── content/
-│   └── wiki/                # Wiki articles (Markdown + frontmatter)
+│   └── wiki/                  # Wiki articles (Markdown + frontmatter)
 │       ├── en/{category}/{slug}.md
 │       └── de/{category}/{slug}.md
 ├── static/
-│   └── robots.txt           # Robots exclusion standard
-└── README.md                # Project documentation
+│   └── robots.txt             # Robots exclusion standard
+└── README.md                  # Project documentation
 ```
 
 ---
@@ -247,9 +289,12 @@ Contributions to `ternis.org` and any of our maintained ecosystem projects are w
 - **Maintained By:** **[Fabian Ternis](https://ternis.dev)** ([ternis-edv.de](https://ternis-edv.de))
 - **Ecosystem:** [ternis.org](https://ternis.org) • [mtex.dev](https://mtex.dev) • [getmy.name](https://getmy.name) • [mail-free.eu](https://mail-free.eu) • [static.re](https://static.re)
 
-## Brand assets
+## 🎨 Ternis.org Logo & Brand assets
 
-The non-wiki layout uses the official theme-aware logos in `public/assets/brand/`.
+The logo shown at the top of this README is the official icon + wordmark from
+the brand kit, switching light/dark with GitHub's color scheme via
+`prefers-color-scheme`. The full kit lives in `public/assets/brand/`.
+
 Visit `/en/branding` or `/de/branding` for logo previews, SVG downloads, colors,
 and usage guidance. The full source kit is available as
 `public/assets/brand/ternis-brand.zip`; editable wordmarks require Inter Display
