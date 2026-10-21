@@ -317,6 +317,26 @@ foreach (SUPPORTED_LANGS as $lang) {
         ], 'main');
     });
 
+    // Tools: One-Shot UUID Displayer: /{lang}/tools/uuid
+    $router->get('/' . $lang . '/tools/uuid', function () use ($lang) {
+        if (!defined('LANG')) {
+            define('LANG', $lang);
+        }
+        load_lang($lang);
+        $title = ($lang === 'de' ? 'Einweg-UUID-Generator' : 'One-Shot UUID Generator') . ' — ternis.org';
+        $metaDescription = $lang === 'de'
+            ? 'Eine einzige, kryptografisch zufällige UUIDv4 (Web Crypto API). Jede Kopie verbrennt sie und erzeugt sofort eine frische — 100% clientseitig, ohne Netzwerk.'
+            : 'A single cryptographically random UUIDv4 (Web Crypto API). Every copy burns it and instantly replaces it with a fresh one — 100% client-side, zero network.';
+
+        render('tools/uuid', [
+            'lang'            => $lang,
+            'title'           => $title,
+            'metaDescription' => $metaDescription,
+            'canonicalUrl'    => 'https://ternis.org/' . $lang . '/tools/uuid',
+            'extraCss'        => ['/assets/css/tools.css'],
+        ], 'main');
+    });
+
     // Tools: WHOIS & RDAP Domain Explorer: /{lang}/tools/whois
     $router->get('/' . $lang . '/tools/whois', function () use ($lang) {
         if (!defined('LANG')) {
@@ -383,6 +403,10 @@ $router->get('/tools/secret-generator', function () {
 $router->get('/tools/whois', function () {
     header('Vary: Accept-Language');
     redirect('/' . detect_preferred_lang(SUPPORTED_LANGS, DEFAULT_LANG) . '/tools/whois', 302);
+});
+$router->get('/tools/uuid', function () {
+    header('Vary: Accept-Language');
+    redirect('/' . detect_preferred_lang(SUPPORTED_LANGS, DEFAULT_LANG) . '/tools/uuid', 302);
 });
 
 // Legal routes without locale: /legal and /legal/{slug}

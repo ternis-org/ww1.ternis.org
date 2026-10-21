@@ -19,6 +19,7 @@ $pages = [
     '/tools/dns'             => ['changefreq' => 'weekly',  'priority' => '0.85'],
     '/tools/secret-generator'=> ['changefreq' => 'weekly',  'priority' => '0.85'],
     '/tools/whois'           => ['changefreq' => 'weekly',  'priority' => '0.85'],
+    '/tools/uuid'            => ['changefreq' => 'weekly',  'priority' => '0.8'],
     '/infrastructure'        => ['changefreq' => 'weekly',  'priority' => '0.9'],
     '/legal/imprint'         => ['changefreq' => 'monthly', 'priority' => '0.5'],
     '/legal/privacy'         => ['changefreq' => 'monthly', 'priority' => '0.5'],
