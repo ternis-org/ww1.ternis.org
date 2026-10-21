@@ -172,6 +172,7 @@ return [
         'description'    => 'Maintained by ternis.dev (ternis-edv.de) • Built with passion for open software, developer ergonomics, and digital sovereignty.',
         'col_projects'   => 'Projects',
         'col_ecosystem'  => 'Ecosystem',
+        'col_resources'  => 'Resources',
         'col_legal'      => 'Legal & Compliance',
         'rights'         => 'All rights reserved. Released under the MIT Open Source License.',
         'version'        => 'Version',

@@ -1,17 +1,102 @@
 /* Official artwork shared by the main site; the wiki keeps its own design. */
 .brand-art { display: inline-block; vertical-align: middle; width: 100%; }
 .brand-art img { display: block; width: 100%; height: auto; }
+.brand-art svg { display: block; width: 100%; height: auto; }
+.brand-inline { display: block; width: 100%; }
 .brand-art .brand-dark { display: none; }
 [data-theme="dark"] .brand-art .brand-light { display: none; }
 [data-theme="dark"] .brand-art .brand-dark { display: block; }
+
+/* ==========================================================================
+   Brand load-in reveal — "the tern unfolds"
+   The mark's stem grows first, then both leaves pop out of the junction with
+   a soft spring, and the wordmark letters settle in one by one afterwards.
+   ========================================================================== */
+
+@keyframes brand-stem-in {
+    from { opacity: 0; transform: translateY(16%) scaleY(0.4); }
+    to   { opacity: 1; transform: none; }
+}
+
+@keyframes brand-leaf-in {
+    from { opacity: 0; transform: scale(0.5) rotate(var(--brand-leaf-rotate, -7deg)); }
+    to   { opacity: 1; transform: none; }
+}
+
+@keyframes brand-letter-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.brand-inline .brand-stem {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: brand-stem-in 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) 0.05s both;
+}
+
+.brand-inline .brand-leaf-1 {
+    transform-box: fill-box;
+    transform-origin: 88% 60%;
+    --brand-leaf-rotate: -8deg;
+    animation: brand-leaf-in 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.26s both;
+}
+
+.brand-inline .brand-leaf-2 {
+    transform-box: fill-box;
+    transform-origin: 12% 40%;
+    --brand-leaf-rotate: 9deg;
+    animation: brand-leaf-in 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.42s both;
+}
+
+/* The letter paths position themselves via SVG transform attributes, so the
+   reveal fades them in sequence instead of moving them. */
+.brand-inline .brand-letters path {
+    animation: brand-letter-in 0.4s cubic-bezier(0.25, 0.9, 0.3, 1) both;
+}
+
+.brand-inline .brand-letters path:nth-child(1) { animation-delay: 0.56s; }
+.brand-inline .brand-letters path:nth-child(2) { animation-delay: 0.59s; }
+.brand-inline .brand-letters path:nth-child(3) { animation-delay: 0.62s; }
+.brand-inline .brand-letters path:nth-child(4) { animation-delay: 0.65s; }
+.brand-inline .brand-letters path:nth-child(5) { animation-delay: 0.68s; }
+.brand-inline .brand-letters path:nth-child(6) { animation-delay: 0.72s; }
+.brand-inline .brand-letters path:nth-child(7) { animation-delay: 0.76s; }
+.brand-inline .brand-letters path:nth-child(8) { animation-delay: 0.80s; }
+.brand-inline .brand-letters path:nth-child(9) { animation-delay: 0.83s; }
+.brand-inline .brand-letters path:nth-child(10) { animation-delay: 0.86s; }
+
+@media (prefers-reduced-motion: reduce) {
+    .brand-inline .brand-stem,
+    .brand-inline .brand-leaf-1,
+    .brand-inline .brand-leaf-2,
+    .brand-inline .brand-letters path {
+        animation: none;
+    }
+}
+
+/* Gentle one-time entrance for the floating navbar brand. */
+@keyframes brand-nav-in {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: none; }
+}
+
+.nav-container-fixed .logo {
+    animation: brand-nav-in 0.55s cubic-bezier(0.25, 0.9, 0.3, 1) 0.3s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nav-container-fixed .logo { animation: none; }
+}
 .logo { width: 132px; flex-shrink: 0; letter-spacing: normal; }
 .nav-container-fixed { max-width: 1140px; }
 .nav-links { gap: 0.1rem; }
 .nav-links a { padding-inline: 0.65rem; }
 .hero-brand { width: clamp(210px, 30vw, 340px); margin: 0 auto 2.5rem; }
-.footer-signature { display: flex; justify-content: space-between; align-items: flex-end; gap: 3rem; margin-top: 4rem; }
-.footer-brand { display: block; width: clamp(280px, 36vw, 460px); max-width: 100%; }
-.footer-brand-icon { display: block; width: 84px; flex-shrink: 0; }
+/* Social & repository chips in the footer bottom bar. */
+.footer-social-strip { display: flex; align-items: center; gap: 0.5rem; }
+.footer-social-btn { width: 30px; height: 30px; border-radius: 50%; background: rgba(247, 246, 242, 0.1); border: 1px solid rgba(247, 246, 242, 0.22); display: inline-flex; align-items: center; justify-content: center; color: var(--bg-color); transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease; }
+.footer-social-btn:hover { background: var(--bg-color); border-color: var(--bg-color); color: var(--primary); transform: translateY(-2px); }
+.footer-social-btn svg { width: 15px; height: 15px; }
 .logo > .brand-art-icon { display: none; }
 .brand-explore { --learn-shift: 4px; --learn-in: 350ms; --learn-out: 250ms; --learn-ease: cubic-bezier(0.22, 1, 0.36, 1); gap: 0.75rem; }
 .t-learn-chevron { flex-shrink: 0; transform: translateX(0); transition: transform var(--learn-out) var(--learn-ease); }
@@ -71,9 +156,7 @@
     .logo { width: 40px; }
     .logo > .brand-art-wordmark { display: none; }
     .logo > .brand-art-icon { display: block; }
-    .footer-signature { margin-top: 2.5rem; }
-    .footer-brand { width: 250px; }
-    .footer-brand-icon { display: none; }
+    .footer-brand { width: 200px; }
 }
 @media (max-width: 380px) {
     .nav-actions { gap: 0.25rem; }

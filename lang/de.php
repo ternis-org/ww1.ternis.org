@@ -172,6 +172,7 @@ return [
         'description'    => 'Betreut von ternis.dev (ternis-edv.de) • Entwickelt mit Leidenschaft für freie Software, Entwickler-Ergonomie und digitale Souveränität.',
         'col_projects'   => 'Projekte',
         'col_ecosystem'  => 'Ökosystem',
+        'col_resources'  => 'Ressourcen',
         'col_legal'      => 'Rechtliches',
         'rights'         => 'Alle Rechte vorbehalten. Veröffentlicht unter der MIT Open-Source-Lizenz.',
         'version'        => 'Version',

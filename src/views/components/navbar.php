@@ -14,6 +14,15 @@ $currentPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/' . 
 $enUrl = lang_url('en', $currentPath);
 $deUrl = lang_url('de', $currentPath);
 $homePrefix = rtrim($currentPath, '/') === '/' . $lang ? '' : '/' . $lang;
+
+// Mark the section link matching the current page (incl. sub pages) as active.
+$navActive = [
+    'projects'      => $currentPath === "/{$lang}/projects" || str_starts_with($currentPath, "/{$lang}/projects/"),
+    'tools'         => $currentPath === "/{$lang}/tools" || str_starts_with($currentPath, "/{$lang}/tools/"),
+    'infrastructure' => $currentPath === "/{$lang}/infrastructure" || str_starts_with($currentPath, "/{$lang}/infrastructure/"),
+    'wiki'          => $currentPath === "/{$lang}/wiki" || str_starts_with($currentPath, "/{$lang}/wiki/"),
+    'branding'      => $currentPath === "/{$lang}/branding",
+];
 ?>
 <!-- Floating Pill Navigation -->
 <div class="nav-container-fixed">
@@ -24,12 +33,12 @@ $homePrefix = rtrim($currentPath, '/') === '/' . $lang ? '' : '/' . $lang;
         </a>
 
         <div class="nav-links">
-            <a href="/<?= e($lang) ?>/projects"><?= e(t('nav.projects')) ?></a>
-            <a href="/<?= e($lang) ?>/tools"><?= e(t('nav.tools')) ?></a>
-            <a href="/<?= e($lang) ?>/infrastructure"><?= e(t('nav.infrastructure')) ?></a>
-            <a href="/<?= e($lang) ?>/wiki"><?= e(t('nav.wiki')) ?></a>
+            <a href="/<?= e($lang) ?>/projects" <?= $navActive['projects'] ? 'aria-current="page" class="active"' : '' ?>><?= e(t('nav.projects')) ?></a>
+            <a href="/<?= e($lang) ?>/tools" <?= $navActive['tools'] ? 'aria-current="page" class="active"' : '' ?>><?= e(t('nav.tools')) ?></a>
+            <a href="/<?= e($lang) ?>/infrastructure" <?= $navActive['infrastructure'] ? 'aria-current="page" class="active"' : '' ?>><?= e(t('nav.infrastructure')) ?></a>
+            <a href="/<?= e($lang) ?>/wiki" <?= $navActive['wiki'] ? 'aria-current="page" class="active"' : '' ?>><?= e(t('nav.wiki')) ?></a>
             <a href="<?= e($homePrefix) ?>#about"><?= e(t('nav.about')) ?></a>
-            <a href="/<?= e($lang) ?>/branding">Branding</a>
+            <a href="/<?= e($lang) ?>/branding" <?= $navActive['branding'] ? 'aria-current="page" class="active"' : '' ?>>Branding</a>
         </div>
 
         <div class="nav-actions">
@@ -46,8 +55,9 @@ $homePrefix = rtrim($currentPath, '/') === '/' . $lang ? '' : '/' . $lang;
                 </svg>
             </button>
 
+            <!-- Codeberg Org Link -->
             <a href="https://codeberg.org/ternis" target="_blank" rel="noopener noreferrer" class="btn-icon" aria-label="Codeberg — <?= $lang === 'de' ? 'Souveränes Code-Hosting' : 'Sovereign code hosting' ?>" title="ternis on Codeberg">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 19 12 4l9 15H3Z"/><path d="m12 4 3 15-5-6-7 6"/></svg>
+                <?php component('codeberg_icon', ['size' => 17]); ?>
             </a>
 
             <!-- GitHub Org Link -->
@@ -70,12 +80,12 @@ $homePrefix = rtrim($currentPath, '/') === '/' . $lang ? '' : '/' . $lang;
 <!-- Mobile Drawer Backdrop & Drawer -->
 <div id="mobile-drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
 <div id="mobile-nav-drawer" class="mobile-drawer" role="dialog" aria-label="Mobile Navigation" aria-modal="true">
-    <a href="/<?= e($lang) ?>/projects" class="nav-link"><?= e(t('nav.projects')) ?></a>
-    <a href="/<?= e($lang) ?>/tools" class="nav-link"><?= e(t('nav.tools')) ?></a>
-    <a href="/<?= e($lang) ?>/infrastructure" class="nav-link"><?= e(t('nav.infrastructure')) ?> (ternis.net)</a>
-    <a href="/<?= e($lang) ?>/wiki" class="nav-link"><?= e(t('nav.wiki')) ?></a>
+    <a href="/<?= e($lang) ?>/projects" class="nav-link <?= $navActive['projects'] ? 'active' : '' ?>"><?= e(t('nav.projects')) ?></a>
+    <a href="/<?= e($lang) ?>/tools" class="nav-link <?= $navActive['tools'] ? 'active' : '' ?>"><?= e(t('nav.tools')) ?></a>
+    <a href="/<?= e($lang) ?>/infrastructure" class="nav-link <?= $navActive['infrastructure'] ? 'active' : '' ?>"><?= e(t('nav.infrastructure')) ?> (ternis.net)</a>
+    <a href="/<?= e($lang) ?>/wiki" class="nav-link <?= $navActive['wiki'] ? 'active' : '' ?>"><?= e(t('nav.wiki')) ?></a>
     <a href="<?= e($homePrefix) ?>#about" class="nav-link"><?= e(t('nav.about')) ?></a>
-    <a href="/<?= e($lang) ?>/branding" class="nav-link">Branding</a>
+    <a href="/<?= e($lang) ?>/branding" class="nav-link <?= $navActive['branding'] ? 'active' : '' ?>>Branding</a>
     <a href="/<?= e($lang) ?>/legal/imprint" class="nav-link"><?= e(t('nav.imprint')) ?></a>
     <a href="/<?= e($lang) ?>/legal/privacy" class="nav-link"><?= e(t('nav.privacy')) ?></a>
     <a href="/<?= e($lang) ?>/legal/license" class="nav-link"><?= e(t('nav.license')) ?></a>

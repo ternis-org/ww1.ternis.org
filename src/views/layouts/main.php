@@ -143,6 +143,9 @@ $extraJs         = $extraJs ?? [];
 </head>
 <body>
 
+    <!-- Keyboard-Friendly Skip Link -->
+    <a class="skip-link" href="#main-content"><?= $lang === 'de' ? 'Zum Inhalt springen' : 'Skip to content' ?></a>
+
     <!-- Top Scroll Progress Indicator -->
     <div id="scroll-progress" class="scroll-progress-bar" aria-hidden="true"></div>
 

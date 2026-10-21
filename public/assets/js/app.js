@@ -202,15 +202,20 @@
                 }
             }
 
-            // Subtle Hero Parallax & Depth on Desktop
-            if (heroContainer && scrollTop < 600 && window.innerWidth > 768 && !reducedMotion.matches) {
-                const yOffset = scrollTop * 0.16;
-                const opacity = Math.max(0.1, 1 - (scrollTop / 500));
-                heroContainer.style.transform = `translate3d(0, ${yOffset}px, 0)`;
-                heroContainer.style.opacity = opacity.toFixed(2);
-            } else if (heroContainer) {
-                heroContainer.style.transform = 'translate3d(0, 0, 0)';
-                heroContainer.style.opacity = '1';
+            // Subtle Hero Parallax & Depth on Desktop. The fade is monotonic:
+            // past the fade zone the hero stays hidden instead of snapping back.
+            const heroFadeEnabled = heroContainer && window.innerWidth > 768 && !reducedMotion.matches;
+            if (heroFadeEnabled && scrollTop < 500) {
+                const t = scrollTop / 500;
+                heroContainer.style.opacity = (1 - t).toFixed(3);
+                heroContainer.style.transform = `translate3d(0, ${(scrollTop * 0.16).toFixed(1)}px, 0)`;
+            } else if (heroFadeEnabled && heroContainer.style.opacity !== '0') {
+                heroContainer.style.opacity = '0';
+            } else if (!heroFadeEnabled && (heroContainer?.style.opacity !== '' || heroContainer?.style.transform !== '')) {
+                // Disabled (mobile / reduced motion): clear inline styles so the
+                // stylesheet state applies again, without forcing a fake reset.
+                heroContainer.style.opacity = '';
+                heroContainer.style.transform = '';
             }
 
             ticking = false;

@@ -12,7 +12,7 @@ $lang = $lang ?? current_lang();
 <!-- Hero Section -->
 <section id="hero">
     <div class="container">
-        <div class="hero-brand"><?php component('brand'); ?></div>
+        <div class="hero-brand"><?php component('brand', ['inline' => true]); ?></div>
         <h1 class="scroll-reveal">
             <?= e(t('hero.title_line1')) ?><br>
             <strong><?= e(t('hero.title_line2')) ?></strong>

@@ -30,7 +30,7 @@ $colors = [
                 <a href="#colors"><?= $de ? 'Farben' : 'Colors' ?></a>
                 <a href="#usage"><?= $de ? 'Verwendung' : 'Usage' ?></a>
             </nav>
-            <div class="brand-page-hero"><?php component('brand'); ?></div>
+            <div class="brand-page-hero"><?php component('brand', ['inline' => true]); ?></div>
         </header>
 
         <section id="logos" class="brand-page-section" aria-labelledby="brand-logos-title">

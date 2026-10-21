@@ -15,7 +15,7 @@ $message = $message ?? t('error.not_found');
 ?>
 <section style="padding: 10rem 0 6rem; text-align: center; display: flex; align-items: center; justify-content: center;">
     <div class="container" style="max-width: 640px;">
-        <a class="error-brand" href="/<?= e($lang) ?>" aria-label="ternis.org Homepage"><?php component('brand', ['variant' => 'icon']); ?></a>
+        <a class="error-brand" href="/<?= e($lang) ?>" aria-label="ternis.org Homepage"><?php component('brand', ['variant' => 'icon', 'inline' => true]); ?></a>
         <div style="font-size: clamp(4.5rem, 12vw, 8rem); font-weight: 300; font-family: var(--font-mono); color: var(--primary); line-height: 1; margin-bottom: 1.5rem;" aria-hidden="true">
             <?= e($code) ?>
         </div>
