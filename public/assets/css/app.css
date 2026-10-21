@@ -1842,6 +1842,24 @@ footer.sculpted-footer {
     z-index: 1001;
 }
 
+/* Persistent breadcrumbs — pinned below the floating nav while scrolling so the
+   current location is always visible (tools pages, projects, infrastructure). */
+.tools-breadcrumb,
+.infra-crumbs {
+    position: sticky;
+    top: 5.5rem;
+    z-index: 60;
+    width: fit-content;
+    max-width: 100%;
+    padding: 0.45rem 1rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--surface) 82%, transparent);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
 /* Base Scroll Reveal Classes - Only animated when html has .has-scroll-anim */
 html.has-scroll-anim .scroll-reveal {
     opacity: 0;

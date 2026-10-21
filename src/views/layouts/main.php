@@ -53,6 +53,18 @@ $extraJs         = $extraJs ?? [];
         })();
     </script>
 
+    <!-- Scroll-reveal pre-state. Added before first paint so reveal targets never
+         flash visible -> invisible while the deferred bundle loads. If the main
+         script fails to boot within 2.5s, undo the hiding (fail open to static view). -->
+    <script>
+        if ('IntersectionObserver' in window) {
+            document.documentElement.classList.add('has-scroll-anim');
+            window.__revealSafetyTimer = setTimeout(function () {
+                document.documentElement.classList.remove('has-scroll-anim');
+            }, 2500);
+        }
+    </script>
+
     <!-- Font Preconnect & Stylesheet -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

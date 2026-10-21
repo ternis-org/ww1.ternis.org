@@ -175,7 +175,13 @@
 
     // ── Scroll Motion & Animations Engine ──────────────────────────────────────
     function initScrollAnimations() {
-        // Mark document as animation-ready
+        // The hiding state is applied pre-paint by the inline head script; the
+        // dead-man timer in that script is Armed for a server/JS failure case.
+        if (window.__revealSafetyTimer) {
+            clearTimeout(window.__revealSafetyTimer);
+            window.__revealSafetyTimer = null;
+        }
+        // Idempotent safety for cached pages that render without the inline script.
         document.documentElement.classList.add('has-scroll-anim');
 
         const progressBar = document.getElementById('scroll-progress');
@@ -211,7 +217,7 @@
                 heroContainer.style.transform = `translate3d(0, ${(scrollTop * 0.16).toFixed(1)}px, 0)`;
             } else if (heroFadeEnabled && heroContainer.style.opacity !== '0') {
                 heroContainer.style.opacity = '0';
-            } else if (!heroFadeEnabled && (heroContainer?.style.opacity !== '' || heroContainer?.style.transform !== '')) {
+            } else if (!heroFadeEnabled && heroContainer && (heroContainer.style.opacity !== '' || heroContainer.style.transform !== '')) {
                 // Disabled (mobile / reduced motion): clear inline styles so the
                 // stylesheet state applies again, without forcing a fake reset.
                 heroContainer.style.opacity = '';
@@ -291,7 +297,23 @@
             const animTargets = document.querySelectorAll(
                 '.scroll-reveal, .stagger-children, .project-card, .pillar-card, .ns-card'
             );
-            animTargets.forEach(el => revealObserver.observe(el));
+
+            // Synchronous first pass: anything at or above the viewport on load
+            // (anchor links, restored scroll positions) must be visible at once —
+            // waiting for the observer would leave it permanently invisible.
+            const vh = window.innerHeight;
+            animTargets.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.bottom <= 0) {
+                    // Scrolled past: keep it settled, never re-animate on scroll-up.
+                    el.classList.add('is-revealed', 'is-settled');
+                    if (el.classList.contains('stagger-children')) {
+                        Array.from(el.children).forEach(child => child.classList.add('is-revealed', 'is-settled'));
+                    }
+                } else {
+                    revealObserver.observe(el);
+                }
+            });
         } else {
             // Fallback for older browsers
             document.querySelectorAll(
