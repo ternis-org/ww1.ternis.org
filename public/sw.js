@@ -3,7 +3,7 @@
  * Provides offline caching and fast asset loading
  */
 
-const CACHE_NAME = 'ternis-org-v3';
+const CACHE_NAME = 'ternis-org-v4-brand';
 const ASSETS_TO_CACHE = [
     '/en',
     '/de',
@@ -11,12 +11,20 @@ const ASSETS_TO_CACHE = [
     '/de/wiki',
     '/assets/css/app.css',
     '/assets/js/app.js',
+    '/assets/css/brand.css',
+    '/assets/brand/ternis-wordmark-light.svg',
+    '/assets/brand/ternis-wordmark-dark.svg',
+    '/assets/brand/ternis-icon-light.svg',
+    '/assets/brand/ternis-icon-dark.svg',
     '/assets/css/wiki.css',
     '/assets/js/wiki.js',
     '/favicon.svg',
     '/favicon.ico',
     '/apple-touch-icon.png',
     '/manifest.json',
+    '/icon-192.png',
+    '/icon-512.png',
+    '/icon-maskable-512.png',
     '/robots.txt'
 ];
 

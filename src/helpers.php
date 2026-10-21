@@ -255,6 +255,7 @@ function serve_static_file(string $filePath, string $allowedDir): void
         'webp'        => 'image/webp',
         'gif'         => 'image/gif',
         'ico'         => 'image/x-icon',
+        'zip'         => 'application/zip',
         'woff2'       => 'font/woff2',
         'woff'        => 'font/woff',
         'ttf'         => 'font/ttf',

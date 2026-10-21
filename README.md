@@ -246,3 +246,18 @@ Contributions to `ternis.org` and any of our maintained ecosystem projects are w
 - **Software License:** Distributed under the permissive **[MIT License](LICENSE)**.
 - **Maintained By:** **[Fabian Ternis](https://ternis.dev)** ([ternis-edv.de](https://ternis-edv.de))
 - **Ecosystem:** [ternis.org](https://ternis.org) • [mtex.dev](https://mtex.dev) • [getmy.name](https://getmy.name) • [mail-free.eu](https://mail-free.eu) • [static.re](https://static.re)
+
+## Brand assets
+
+The non-wiki layout uses the official theme-aware logos in `public/assets/brand/`.
+Visit `/en/branding` or `/de/branding` for logo previews, SVG downloads, colors,
+and usage guidance. The full source kit is available as
+`public/assets/brand/ternis-brand.zip`; editable wordmarks require Inter Display
+ExtraBold, while outlined SVGs need no fonts.
+
+Brand sources are supplied locally in `.local/ternis-brand-final/` (ignored by
+Git). When refreshing the brand, copy the updated SVGs to `public/assets/brand/`,
+rebuild the ZIP, and regenerate the root favicon, touch/PWA icons, and social
+cards from those sources. Raster icons use a cream background with padding;
+the maskable icon keeps the mark within the central safe area. The separate
+wiki layout and article card generator retain their existing design.

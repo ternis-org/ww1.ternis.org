@@ -12,6 +12,7 @@ $lang = $lang ?? current_lang();
 <!-- Hero Section -->
 <section id="hero">
     <div class="container">
+        <div class="hero-brand"><?php component('brand'); ?></div>
         <h1 class="scroll-reveal">
             <?= e(t('hero.title_line1')) ?><br>
             <strong><?= e(t('hero.title_line2')) ?></strong>
@@ -518,6 +519,18 @@ ternis.org name server two.ns.ternis.net.</code></pre>
                 </svg>
                 <span><?= e(t('about.link_github')) ?></span>
             </a>
+        </div>
+    </div>
+</section>
+
+<section id="branding" class="brand-intro">
+    <div class="container brand-intro-grid">
+        <div class="brand-intro-art" aria-hidden="true"><?php component('brand', ['variant' => 'icon']); ?></div>
+        <div>
+            <p class="brand-eyebrow">ternis.org / Branding</p>
+            <h2><?= $lang === 'de' ? 'Ein gemeinsames Zeichen.' : 'A shared identity.' ?></h2>
+            <p class="brand-copy"><?= $lang === 'de' ? 'Unser Zeichen für offene Werkzeuge und unabhängige Infrastruktur. Hier findest du Logos, Farben und Hinweise zur Verwendung.' : 'Our mark for open tools and independent infrastructure. Find our logos, colors, and guidance for using them.' ?></p>
+            <a class="btn btn-outline" href="/<?= e($lang) ?>/branding"><?= $lang === 'de' ? 'Branding entdecken' : 'Explore the brand' ?> &rarr;</a>
         </div>
     </div>
 </section>

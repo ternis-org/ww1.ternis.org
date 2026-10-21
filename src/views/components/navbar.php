@@ -13,13 +13,13 @@ $altLang = $lang === 'en' ? 'de' : 'en';
 $currentPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/' . $lang;
 $enUrl = lang_url('en', $currentPath);
 $deUrl = lang_url('de', $currentPath);
-$homePrefix = (str_contains($currentPath, '/legal') || str_contains($currentPath, '/error')) ? '/' . $lang : '';
+$homePrefix = rtrim($currentPath, '/') === '/' . $lang ? '' : '/' . $lang;
 ?>
 <!-- Floating Pill Navigation -->
 <div class="nav-container-fixed">
     <nav class="floating-nav" aria-label="Main Navigation">
         <a href="/<?= e($lang) ?>" class="logo" aria-label="ternis.org Homepage">
-            <span>ternis.org</span>
+            <?php component('brand'); ?>
         </a>
 
         <div class="nav-links">
@@ -28,6 +28,7 @@ $homePrefix = (str_contains($currentPath, '/legal') || str_contains($currentPath
             <a href="/<?= e($lang) ?>/infrastructure"><?= e(t('nav.infrastructure')) ?></a>
             <a href="/<?= e($lang) ?>/wiki"><?= e(t('nav.wiki')) ?></a>
             <a href="<?= e($homePrefix) ?>#about"><?= e(t('nav.about')) ?></a>
+            <a href="/<?= e($lang) ?>/branding">Branding</a>
         </div>
 
         <div class="nav-actions">
@@ -69,6 +70,7 @@ $homePrefix = (str_contains($currentPath, '/legal') || str_contains($currentPath
     <a href="/<?= e($lang) ?>/infrastructure" class="nav-link"><?= e(t('nav.infrastructure')) ?> (ternis.net)</a>
     <a href="/<?= e($lang) ?>/wiki" class="nav-link"><?= e(t('nav.wiki')) ?></a>
     <a href="<?= e($homePrefix) ?>#about" class="nav-link"><?= e(t('nav.about')) ?></a>
+    <a href="/<?= e($lang) ?>/branding" class="nav-link">Branding</a>
     <a href="/<?= e($lang) ?>/legal/imprint" class="nav-link"><?= e(t('nav.imprint')) ?></a>
     <a href="/<?= e($lang) ?>/legal/privacy" class="nav-link"><?= e(t('nav.privacy')) ?></a>
     <a href="/<?= e($lang) ?>/legal/license" class="nav-link"><?= e(t('nav.license')) ?></a>

@@ -17,6 +17,7 @@ $commitUrl = app_repo_commit_url($versionShort);
     <div class="container">
         <div class="footer-content">
             <div class="footer-cta scroll-reveal scroll-reveal-left">
+                <a class="footer-brand" href="/<?= e($lang) ?>" aria-label="ternis.org Homepage"><?php component('brand'); ?></a>
                 Let's grow<br>
                 <strong>something beautiful.</strong>
                 <div style="margin-top:2.5rem;">
@@ -79,6 +80,7 @@ $commitUrl = app_repo_commit_url($versionShort);
                         <li><a href="/<?= e($lang) ?>/legal/imprint"><?= e(t('nav.imprint')) ?></a></li>
                         <li><a href="/<?= e($lang) ?>/legal/privacy"><?= e(t('nav.privacy')) ?></a></li>
                         <li><a href="/<?= e($lang) ?>/legal/license"><?= e(t('nav.license')) ?></a></li>
+                        <li><a href="/<?= e($lang) ?>/branding">Branding</a></li>
                         <li><a href="/sitemap.xml">Sitemap.xml</a></li>
                     </ul>
                 </div>

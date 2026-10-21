@@ -11,6 +11,7 @@ $lastmod = date('Y-m-d');
 
 $pages = [
     ''                       => ['changefreq' => 'weekly',  'priority' => '1.0'],
+    '/branding'              => ['changefreq' => 'monthly', 'priority' => '0.6'],
     '/projects'              => ['changefreq' => 'weekly',  'priority' => '0.9'],
     '/tools'                 => ['changefreq' => 'weekly',  'priority' => '0.9'],
     '/tools/shortlink'       => ['changefreq' => 'weekly',  'priority' => '0.85'],

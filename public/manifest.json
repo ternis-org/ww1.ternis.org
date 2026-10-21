@@ -1,5 +1,5 @@
 {
-  "name": "ternis.org — Modern Open-Source Developer Ecosystem",
+  "name": "ternis.org \u2014 Modern Open-Source Developer Ecosystem",
   "short_name": "ternis.org",
   "description": "Open-source developer tooling, sovereign infrastructure, and privacy ecosystem by ternis.dev / ternis-edv.de",
   "start_url": "/en",
@@ -13,18 +13,25 @@
       "src": "/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "/apple-touch-icon.png",
-      "sizes": "180x180",
+      "src": "/icon-192.png",
+      "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/favicon.ico",
-      "sizes": "32x32 16x16",
-      "type": "image/x-icon"
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }

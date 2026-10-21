@@ -106,6 +106,22 @@ foreach (SUPPORTED_LANGS as $lang) {
         ], 'main');
     });
 
+    // Official brand assets and usage guidance.
+    $router->get('/' . $lang . '/branding', function () use ($lang) {
+        if (!defined('LANG')) {
+            define('LANG', $lang);
+        }
+        load_lang($lang);
+        render('branding', [
+            'lang' => $lang,
+            'title' => 'Branding — ternis.org',
+            'metaDescription' => $lang === 'de'
+                ? 'Offizielle ternis.org Logos, SVG-Downloads, Markenfarben und Hinweise zur Verwendung.'
+                : 'Official ternis.org logos, SVG downloads, brand colors, and usage guidance.',
+            'canonicalUrl' => 'https://ternis.org/' . $lang . '/branding',
+        ], 'main');
+    });
+
     // Infrastructure Index (ternis.net backbone)
     $router->get('/' . $lang . '/infrastructure', function () use ($lang) {
         if (!defined('LANG')) {
@@ -323,6 +339,10 @@ foreach (SUPPORTED_LANGS as $lang) {
 }
 
 // Redirects without locale
+$router->get('/branding', function () {
+    header('Vary: Accept-Language');
+    redirect('/' . detect_preferred_lang(SUPPORTED_LANGS, DEFAULT_LANG) . '/branding', 302);
+});
 $router->get('/infrastructure', function () {
     header('Vary: Accept-Language');
     redirect('/' . detect_preferred_lang(SUPPORTED_LANGS, DEFAULT_LANG) . '/infrastructure', 302);
@@ -659,23 +679,17 @@ $router->get('/sitemap.xsl', function () {
     http_response_code(404);
 });
 
-// /og.png and /og.jpg — Root OpenGraph branding card
+// Root social card uses the official artwork; wiki article cards remain dynamic.
 $router->get('/og.png', function () {
-    require_once ROOT_PATH . '/src/helpers/og_image.php';
-    generate_og_image(
-        'ternis.org — Infrastructure, DNS & Systems Hub',
-        'Redundant Authoritative Anycast DNS, Technical Wiki, and Open Infrastructure by Fabian Ternis.',
-        'INFRASTRUCTURE'
-    );
+    serve_static_file(PUBLIC_PATH . '/og.png', PUBLIC_PATH);
 });
-$router->get('/og.jpg', function () {
-    require_once ROOT_PATH . '/src/helpers/og_image.php';
-    generate_og_image(
-        'ternis.org — Infrastructure, DNS & Systems Hub',
-        'Redundant Authoritative Anycast DNS, Technical Wiki, and Open Infrastructure by Fabian Ternis.',
-        'INFRASTRUCTURE'
-    );
-});
+
+// PWA raster icons.
+foreach (['icon-192.png', 'icon-512.png', 'icon-maskable-512.png'] as $iconFile) {
+    $router->get('/' . $iconFile, function () use ($iconFile) {
+        serve_static_file(PUBLIC_PATH . '/' . $iconFile, PUBLIC_PATH);
+    });
+}
 
 // /api/tools/shortlink — Public shortlink creator proxy (bypasses browser CORS)
 $router->post('/api/tools/shortlink', function () {

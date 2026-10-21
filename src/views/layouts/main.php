@@ -93,6 +93,7 @@ $extraJs         = $extraJs ?? [];
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="<?= e(asset_url('/assets/css/app.css')) ?>">
+    <link rel="stylesheet" href="<?= e(asset_url('/assets/css/brand.css')) ?>">
     <?php foreach ($extraCss as $css): ?>
     <link rel="stylesheet" href="<?= e(asset_url(ltrim($css, '/'))) ?>">
     <?php endforeach; ?>
